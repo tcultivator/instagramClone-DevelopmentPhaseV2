@@ -181,7 +181,7 @@ app.post('/likeThisPost', (req, res) => {
     console.log(postId)
     console.log(userId)
     let alreadyLike = true;
-    const query = 'INSERT INTO postthatlike (postId,userId,alreadyLike) VALUES (?,?,?)'
+    const query = 'INSERT INTO postthatlikee (postId,userId,alreadyLike) VALUES (?,?,?)'
 
     db.query(query, [postId, userId, alreadyLike], (err, result) => {
         if (err) {
