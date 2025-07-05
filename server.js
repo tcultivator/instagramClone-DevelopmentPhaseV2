@@ -96,10 +96,10 @@ app.post('/upload', upload.single('image'), (req, res) => {
             console.log('error upload')
             res.status(400).json({ message: 'error uploading' })
         } else {
-            const query = 'INSERT INTO images (username,caption,secure_url,public_id,userId) VALUES (?,?,?,?,?)'
+            const query = 'INSERT INTO images (username,caption,secure_url,public_id,userId,likeCount) VALUES (?,?,?,?,?,?)'
             console.log(result.secure_url)
             console.log(result.public_id)
-            db.query(query, [username, caption, result.secure_url, result.public_id, userId], (err, result) => {
+            db.query(query, [username, caption, result.secure_url, result.public_id, userId,0], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error uploading' })
                 } else {
