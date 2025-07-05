@@ -9,16 +9,17 @@ const cloudinary = require('./util/cloudinary')
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: 'http://127.0.0.1:5500',
+    origin: 'https://tcultivator.github.io',
     credentials: true
 }))
 app.use(cookieparser())
 let port = 8080
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'mydb'
+     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 })
 const secret = 'test'
 db.connect((err) => {
@@ -38,7 +39,7 @@ app.post('/loginReq', (req, res) => {
             res.status(401).json({ message: 'Error Login' })
         } else {
             const returnData = result[0]
-            const token = jwt.sign({ userID: returnData.id, username: returnData.username }, secret, { expiresIn: '1h' })
+            const token = jwt.sign({ userID: returnData.id, username: returnData.username }, process.env.JWT_TOKEN_SECRET_KEY, { expiresIn: '1h' })
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: true,
@@ -60,7 +61,7 @@ function authenticate(req, res, next) {
 
         res.status(401).json({ message: 'unauthorize user! hhahaha' })
     } else {
-        const verifiedToken = jwt.verify(token, secret)
+        const verifiedToken = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY)
         req.userId = verifiedToken.userID;
         req.username = verifiedToken.username;
         next()
@@ -208,7 +209,7 @@ app.post('/verifyIfAlreadyLike', (req, res) => {
     const postId = req.body.postId
     const userId = req.body.userId
     console.log('eto ung post id ', postId)
-    const query = 'SELECT postId FROM postthatlike WHERE postId = ? && userId = ? && alreadyLike = ? ORDER BY postId DESC'
+    const query = 'SELECT postId FROM postthatlikee WHERE postId = ? && userId = ? && alreadyLike = ? ORDER BY postId DESC'
     db.query(query, [postId, userId, true], (err, result) => {
         if (result.length) {
             res.status(200).json({ postId: result[0], alreadyLike: true })
