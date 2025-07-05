@@ -200,6 +200,32 @@ app.post('/likeThisPost', (req, res) => {
 })
 
 
+app.post('/unlikeThisPost', (req, res) => {
+    console.log('test')
+    const postId = req.body.postId
+    const userId = req.body.userId
+    console.log(postId)
+    console.log(userId)
+    let alreadyLike = false;
+    const query = 'UPDATE postthatlikee SET alreadyLike = ? WHERE postId =? && userId = ? '
+
+    db.query(query, [alreadyLike, postId, userId], (err, result) => {
+        if (err) {
+            res.status(401).json({ message: 'error sa like' })
+        } else {
+            const query2 = 'UPDATE images SET likeCount = likeCount - 1 WHERE id = ?'
+            db.query(query2, [postId], (err, result) => {
+                if (err) {
+                    res.status(401).json({ messag: 'error unliking' })
+                } else {
+                    res.status(200).json({ message: 'success unliking' })
+                }
+            })
+        }
+    })
+})
+
+
 
 
 
