@@ -17,7 +17,7 @@ let loginUserId;
         console.log('eto ung userid', loginUserId)
         document.getElementById('profileName').textContent = userData.username
         document.getElementById('changeProfile').src = userData.profileImage
-        const getAlldataForWall = await fetch('http://localhost:8080/getAll', {
+        const getAlldataForWall = await fetch('https://instagramclone-developmentphasev2.onrender.com/getAll', {
             method: 'POST'
         })
         const data = await getAlldataForWall.json()
@@ -77,7 +77,7 @@ let loginUserId;
         console.log('hindi gumana')
         document.getElementById('loadingBody').style = 'display:flex'
         setTimeout(() => {
-            window.location.replace('login.html')
+            window.location.replace('index.html')
         }, 1500);
     }
 })();
@@ -196,7 +196,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     formData.append('userId', loginUserId)
 
     try {
-        const upload = await fetch('http://localhost:8080/upload', {
+        const upload = await fetch('https://instagramclone-developmentphasev2.onrender.com/upload', {
             method: 'POST',
             credentials: 'include',
             body: formData
@@ -247,7 +247,7 @@ document.getElementById('updateProfilePicForm').addEventListener('submit', async
     formData.append('image', profilePicUpload.files[0])
     formData.append('userId', loginUserId)
     try {
-        const uploadProfilePicture = await fetch('http://localhost:8080/uploadProfilePic', {
+        const uploadProfilePicture = await fetch('https://instagramclone-developmentphasev2.onrender.com/uploadProfilePic', {
             method: 'PUT',
             body: formData
         })
