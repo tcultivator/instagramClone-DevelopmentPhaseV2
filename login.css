@@ -1,0 +1,254 @@
+:root {
+    --bg-color: #FFFFFF;
+    --primary-text-color: rgb(70, 70, 70);
+    --btn-text-color: white;
+    --btn-bg-color-secondary: #4E73C2;
+    --btntoggle-color: rgb(218, 173, 29);
+}
+
+
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Righteous';
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+#loginForm {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+
+}
+
+#loginForm .logo {
+    font-size: 60px;
+    font-family: 'Sacramento';
+    color: var(--primary-text-color);
+}
+
+#loginForm #useFB {
+    padding: 40px 0px 0px 0px;
+    border-bottom: 1px solid rgb(141, 141, 141);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 300px;
+    margin: 0 auto;
+
+
+}
+
+#loginForm #useFB label {
+    bottom: 0;
+    position: inherit;
+    background-color: var(--bg-color);
+    padding: 0px 5px;
+    text-align: center;
+    margin-bottom: -8px;
+    color: var(--primary-text-color);
+    font-size: 12px;
+
+}
+
+#loginForm #useFB button {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 10px 40px;
+    border: none;
+    background-color: var(--btn-bg-color-secondary);
+    color: white;
+    gap: 5px;
+    border-radius: 8px;
+    width: 300px;
+    font-family: 'Righteous';
+    cursor: pointer;
+    box-shadow: 0px 0px 4px var(--btn-bg-color-secondary);
+}
+
+#loginForm #useFB button i {
+    color: var(--btn-bg-color-secondary);
+    background-color: rgb(255, 255, 255);
+    width: 20px;
+    height: 20px;
+    font-size: 21px;
+    border-radius: 48%;
+    padding: 5px 5px 0px 5px;
+}
+
+#usernameBody,
+#passwordBody {
+    display: flex;
+    width: 300px;
+    margin: auto;
+    align-items: center;
+}
+
+#usernameBody label,
+#passwordBody label {
+    position: absolute;
+    margin-left: 10px;
+    font-size: 12px;
+    cursor: text;
+    transition: .1s;
+    color: var(--primary-text-color);
+}
+
+#usernameBody input,
+#passwordBody input {
+    padding: 20px 10px 10px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgb(78, 78, 78);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--primary-text-color);
+}
+
+
+
+#usernameBody input:not(:placeholder-shown)~label,
+#passwordBody input:not(:placeholder-shown)~label {
+    transform: translate(0px, -12px);
+    font-size: 11px;
+
+    color: rgb(105, 105, 105);
+}
+
+#forgotPassword {
+    justify-content: right;
+    width: 300px;
+    text-align: right;
+    margin: -15px auto auto auto;
+    font-size: 13px;
+}
+
+#btnBody {
+    display: flex;
+    width: 300px;
+    margin: auto;
+    align-items: center;
+}
+
+#btnBody button {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 13px 40px;
+    border: none;
+    background-color: #365899;
+    color: white;
+    gap: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 300px;
+    font-family: 'Righteous';
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #5580d1;
+}
+
+#btnBody button:disabled {
+    background-color: #365899;
+    color: #999999;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#loadingBody {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#loading {
+    margin: auto;
+    background: -webkit-linear-gradient(#dd2697, #e2c12b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 90px;
+}
+
+
+
+
+
+
+
+
+#nightmodeToggle {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#nightmodeToggle button {
+    border: none;
+    background-color: transparent;
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--btntoggle-color);
+}

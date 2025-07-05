@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/2820820f6e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script defer src="login.js" type="module"></script>
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet'>
+    <title>InstagramClone</title>
+</head>
+
+<body>
+    <form id="loginForm">
+        <label class="logo">Instagram</label>
+        <div id="useFB">
+            <button type="button" onclick="alert('This feature is not ready yet!')"><i
+                    class="fa-brands fa-facebook-f"></i> Continue with facebook</button>
+            <label>OR</label>
+        </div>
+        <div id="usernameBody">
+            <input type="text" id="username" required placeholder="">
+            <label for="username">Username or Email address</label>
+        </div>
+        <div id="passwordBody">
+            <input type="password" id="password" required placeholder="">
+            <label for="password">Password</label>
+        </div>
+        <div id="forgotPassword">
+            <a href="">Forgot password</a>
+        </div>
+        <div id="btnBody">
+            <button id="submitBtn" disabled>Login</button>
+        </div>
+    </form>
+
+    <div id="nightmodeToggle">
+        <button id="btnToggle"><i class="fa-solid fa-sun"></i></button>
+
+    </div>
+
+    <div id="loadingBody" style="display: none;">
+        <div id="loading">
+            <i class="fa fa-instagram"></i>
+        </div>
+    </div>
+</body>
+
+</html>

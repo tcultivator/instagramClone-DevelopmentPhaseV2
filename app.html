@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/2820820f6e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="app.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script defer src="app.js" type="module"></script>
+    <link href='https://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet'>
+    <title>InstagramClone</title>
+</head>
+
+<body>
+    <div id="header">
+        <h1>Instagram</h1>
+        <button><i class="fab fa-facebook-messenger"></i></button>
+    </div>
+
+
+    <div id="userPost">
+        <div id="storyBody">
+            <div id="storyhead">
+                <label>Stories</label>
+            </div>
+            <div id="stories">
+                <div id="addStories">
+                    <div id="storyImage"></div>
+                    <label>Your Story</label>
+                </div>
+                <div id="addStories">
+                    <div id="storyImage"></div>
+                    <label>Your Story</label>
+                </div>
+                <div id="addStories">
+                    <div id="storyImage"></div>
+                    <label>Your Story</label>
+                </div>
+                <div id="addStories">
+                    <div id="storyImage"></div>
+                    <label>Your Story</label>
+                </div>
+                <div id="addStories">
+                    <div id="storyImage"></div>
+                    <label>Your Story</label>
+                </div>
+                <div id="addStories">
+                    <div id="storyImage"></div>
+                    <label>Your Story</label>
+                </div>
+                <div id="addStories">
+                    <div id="storyImage"></div>
+                    <label>Your Story</label>
+                </div>
+                <div id="addStories">
+                    <div id="storyImage"></div>
+                    <label>Your Story</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footerNav" >
+        <button id="home"><i class="fa-solid fa-house"></i></button>
+        <button id="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button id="create"><i class="fa-solid fa-circle-plus"></i></button>
+        <button id="notif"><i class="fa-solid fa-heart"></i></button>
+        <button id="profile"><i class="fa-solid fa-user"></i></button>
+    </div>
+    <div id="sidebar">
+        <div class="topbar">
+            <label>Instagram</label>
+        </div>
+        <div class="botbar">
+            <button id="homeS"><i class="fa-solid fa-house"></i> Home</button>
+            <button id="searchS"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button id="createS"><i class="fa-solid fa-circle-plus"></i> Create</button>
+            <button id="notifS"><i class="fa-solid fa-heart"></i> Notification</button>
+            <button id="profileS"><i class="fa-solid fa-user"></i> Profile</button>
+        </div>
+
+    </div>
+
+    <div id="profileBody" style="display: none;">
+        <div id="headProfile">
+            <button type="button" id="backBtnonProfile"><i class="fa-solid fa-chevron-left"></i></button>
+            <label>Profile</label>
+        </div>
+        <div id="profileiconBody">
+            <div id="icon">
+                <img src="assets/default.png" alt="" id="changeProfile">
+            </div>
+            <div id="profileControl">
+                <label id="profileName"></label>
+                <button type="button" id="editProfile">Edit Profile</button>
+            </div>
+
+        </div>
+        <div id="profileDetails">
+            <div id="postBody">
+                <label id="postsCount">0</label>
+                <label>posts</label>
+            </div>
+            <div id="followerBody">
+                <label>0</label>
+                <label>follower</label>
+            </div>
+            <div id="followingBody">
+                <label>0</label>
+                <label>following</label>
+            </div>
+        </div>
+        <div id="profileContent">
+            <div id="imgGrid">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="visitprofileBody" style="display: none;">
+        <div id="visitheadProfile">
+            <button type="button" id="visitbackBtnonProfile"><i class="fa-solid fa-chevron-left"></i></button>
+            <label>Profile</label>
+        </div>
+        <div id="visitprofileiconBody">
+            <div id="icon">
+                <img src="assets/default.png" alt="" id="visitchangeProfile">
+            </div>
+            <div id="visitprofileControl">
+                <label id="visitprofileName"></label>
+            </div>
+
+        </div>
+        <div id="visitprofileDetails">
+            <div id="visitpostBody">
+                <label id="visitPostCount">0</label>
+                <label>posts</label>
+            </div>
+            <div id="visitfollowerBody">
+                <label>0</label>
+                <label>follower</label>
+            </div>
+            <div id="visitfollowingBody">
+                <label>0</label>
+                <label>following</label>
+            </div>
+        </div>
+        <div id="visitprofileContent">
+            <div id="visitimgGrid">
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div id="createPost" style="display: none;">
+        <button id="closeCreatePost"><i class="fa-solid fa-xmark"></i></button>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <h2>Create new Post</h2>
+            <input id="fileUp" type="file" name="media" accept="image/*,video/*" required>
+            <div id="preview"></div>
+            <input id="caption" type="text" placeholder="Enter caption">
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <div id="updateProfilePic" style="display: none;">
+        <button type="button" id="closeUpdateProfile"><i class="fa-solid fa-xmark"></i></button>
+        <form id="updateProfilePicForm" enctype="multipart/form-data">
+            <h2>Update Profile Picture</h2>
+            <input type="file" id="profilefile" accept="image/*">
+            <div id="previewProfile"></div>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+    <div id="previewofImageInPost" style="display: none;">
+        <button id="closepreviewofImageInPost"><i class="fa-solid fa-xmark"></i></button>
+        <div id="previewOfPost">
+            <img src="" alt="" id="imageOnPostPreview">
+        </div>
+    </div>
+
+
+
+
+    <div id="loadingBody" style="display: none;">
+        <div id="loading">
+            <i class="fa fa-instagram"></i>
+        </div>
+    </div>
+
+    <div id="loadingCircle" style="display: none;">
+        <div id="circle"></div>
+    </div>
+
+
+</body>
+
+</html>
