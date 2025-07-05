@@ -180,8 +180,8 @@ fileUploaded.addEventListener('change', () => {
     const fileUrl = URL.createObjectURL(file)
     const img = document.createElement('img')
     img.src = fileUrl
-    img.style.maxHeight = "100%"
-    img.style.maxWidth = "100%"
+     img.style.maxHeight = "90%"
+    img.style.maxWidth = "90%"
     preview.append(img)
 
 })
@@ -234,8 +234,8 @@ profilePicUpload.addEventListener('change', () => {
     const fileUrl = URL.createObjectURL(file)
     const img = document.createElement('img')
     img.src = fileUrl
-    img.style.Height = "300px"
-    img.style.Width = "100%"
+     img.style.maxHeight = "90%"
+    img.style.maxWidth = "90%"
     previewProfile.append(img)
 
 })
