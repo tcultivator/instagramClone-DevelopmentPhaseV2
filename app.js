@@ -180,7 +180,7 @@ fileUploaded.addEventListener('change', () => {
     const fileUrl = URL.createObjectURL(file)
     const img = document.createElement('img')
     img.src = fileUrl
-     img.style.maxHeight = "90%"
+    img.style.maxHeight = "90%"
     img.style.maxWidth = "90%"
     preview.append(img)
 
@@ -234,7 +234,7 @@ profilePicUpload.addEventListener('change', () => {
     const fileUrl = URL.createObjectURL(file)
     const img = document.createElement('img')
     img.src = fileUrl
-     img.style.maxHeight = "90%"
+    img.style.maxHeight = "90%"
     img.style.maxWidth = "90%"
     previewProfile.append(img)
 
