@@ -378,25 +378,50 @@ document.getElementById('closepreviewofImageInPost').addEventListener('click', (
 
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#likethisPost')) {
-        const likeCountLabel = e.target.closest('#postcontent').querySelector('#likeCount')
-        let likeCount = Number(likeCountLabel.dataset.likecount)
-        likeCount += 1
-        likeCountLabel.dataset.likecount = likeCount
-        likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
         const likeIcon = e.target.closest('#postcontent').querySelector('#likethisPost')
-        likeIcon.style = 'color:red'
-        const postId = e.target.dataset.id
-        console.log(loginUserId)
-        console.log(postId)
-        const likeThisPost = await apiReq('/likeThisPost', { postId: postId, userId: loginUserId })
-        if (likeThisPost.ok) {
-            console.log('you like this post that id is ', postId)
+        if (likeIcon.style.color == 'red') {
+            console.log('na like mo nato')
+            const likeCountLabel = e.target.closest('#postcontent').querySelector('#likeCount')
+            let likeCount = Number(likeCountLabel.dataset.likecount)
+            likeCount -= 1
+            likeCountLabel.dataset.likecount = likeCount
+            likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
 
+            likeIcon.style = 'color:white'
+            const postId = e.target.dataset.id
+            console.log(loginUserId)
+            console.log(postId)
+            const unlikeThisPost = await apiReq('/unlikeThisPost', { postId: postId, userId: loginUserId })
+            if (unlikeThisPost.ok) {
+                console.log('you like this post that id is ', postId)
+                console.log(likeIcon.style.color)
 
+            } else {
+
+                console.log('error sa like')
+            }
         } else {
+            const likeCountLabel = e.target.closest('#postcontent').querySelector('#likeCount')
+            let likeCount = Number(likeCountLabel.dataset.likecount)
+            likeCount += 1
+            likeCountLabel.dataset.likecount = likeCount
+            likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
 
-            console.log('error sa like')
+            likeIcon.style = 'color:red'
+            const postId = e.target.dataset.id
+            console.log(loginUserId)
+            console.log(postId)
+            const likeThisPost = await apiReq('/likeThisPost', { postId: postId, userId: loginUserId })
+            if (likeThisPost.ok) {
+                console.log('you like this post that id is ', postId)
+                console.log(likeIcon.style.color)
+
+            } else {
+
+                console.log('error sa like')
+            }
         }
+
 
     }
 })
