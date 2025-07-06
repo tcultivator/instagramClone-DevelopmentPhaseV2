@@ -42,7 +42,7 @@ let loginProfileimage;
            </video>`
                     : `<img src="${element.secure_url}" alt="User post">`;
                 document.getElementById('userPost').innerHTML += `
-                        <div id="postcontent">
+                        <div id="postcontent">  
                             <div id="userProfilePost">
                             <div>
 
@@ -60,7 +60,8 @@ let loginProfileimage;
                             <button id="share"><i class="fa-solid fa-paper-plane"></i></button>
                         </div>
                         <div id="valueoflikecommentshare">
-                            <label id="likeCount" data-likecount="${element.likeCount}">${element.likeCount}<span>Likes</span></label>
+                            <label id="likeCount" data-likecount="${element.likeCount}">${element.likeCount} <span>Likes</span></label>
+                            <label id="commentCount" data-commentcount="${element.commentCount}">${element.commentCount} <span>Comments</span></label>
                         </div>
                          <div id="postlabel">
 
@@ -427,11 +428,15 @@ document.addEventListener('click', async (e) => {
     }
 })
 let postIdOfyouwantToComment;
+let commentTarget;
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#commentthispost')) {
-
         postIdOfyouwantToComment = e.target.dataset.id
         console.log(postIdOfyouwantToComment)
+        commentTarget = e
+        const likeCountLabel = e.target.closest('#postcontent').querySelector('#likeCount')
+        const likeCount = Number(likeCountLabel.dataset.likecount)
+        document.getElementById('likeCountsInComments').innerHTML = `${likeCount} <span>Likes</span>`
         document.getElementById('viewPostBody').style.display = 'block'
         document.getElementById('commentsBody').style.bottom = 0
         viewComments(postIdOfyouwantToComment)
@@ -439,6 +444,7 @@ document.addEventListener('click', async (e) => {
 })
 
 async function viewComments(postIdOfyouwantToComment) {
+    document.getElementById('loadingBarInComment').style.display = 'block'
     document.getElementById('commentsContents').innerHTML = ''
     const viewCommentInPost = await apiReq('/viewCommentInPost', { postId: postIdOfyouwantToComment })
     if (viewCommentInPost.ok) {
@@ -446,16 +452,32 @@ async function viewComments(postIdOfyouwantToComment) {
         console.log(viewCommentInPost.data.result)
         const userComments = viewCommentInPost.data.result
         userComments.forEach(element => {
-            document.getElementById('commentsContents').innerHTML += `
-                <div id="commentsOnPost">
-                    <img src="${element.profileImage}" alt="">
+            const labelComments = element.username == loginUsername ? (
+                `
+                    <div id="commentDetails" style="background-color:#ade8f4">
+                        <label id="userThatComment">${element.username}</label>
+                        <label for="">${element.comment}</label>
+                    </div>
+                `
+            ) :
+                (
+                    `
+                   
                     <div id="commentDetails">
                         <label id="userThatComment">${element.username}</label>
                         <label for="">${element.comment}</label>
                     </div>
+                
+                    `
+                )
+            document.getElementById('commentsContents').innerHTML += `
+                <div id="commentsOnPost">
+                <img src="${element.profileImage}" alt="">
+                    ${labelComments}
                 </div>
                 `
         })
+        document.getElementById('loadingBarInComment').style.display = 'none'
     } else {
         console.log('error sa pagkuha')
     }
@@ -479,6 +501,12 @@ async function verifyIfAlreadyLike(postId) {
 }
 const inputComment = document.getElementById('inputComment')
 document.getElementById('submitComment').addEventListener('click', async () => {
+    const commentCountLabel = commentTarget.target.closest('#postcontent').querySelector('#commentCount')
+    let commentCount = Number(commentCountLabel.dataset.commentcount)
+    console.log('eto ung count ng comment dito ', commentCount)
+    commentCount += 1
+    commentCountLabel.dataset.commentcount = commentCount
+    commentCountLabel.innerHTML = `${commentCount} <span>Comments</span>`
     console.log('eto ung sa comment')
     console.log(inputComment.value)
     console.log(postIdOfyouwantToComment)
@@ -486,6 +514,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
     if (!inputComment.value) {
         console.log('please type something')
     } else {
+        document.getElementById('loadingBarInComment').style.display = 'block'
         const submitComment = await apiReq('/addComment', { postId: postIdOfyouwantToComment, comment: inputComment.value, username: loginUsername, profileImage: loginProfileimage })
         if (submitComment.ok) {
             viewComments(postIdOfyouwantToComment)
@@ -497,3 +526,5 @@ document.getElementById('submitComment').addEventListener('click', async () => {
     }
 
 })
+
+
