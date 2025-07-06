@@ -3,7 +3,7 @@ let userData;
 let filename;
 let loginUsername;
 let loginUserId;
-
+let loginProfileimage;
 
 
 (async () => {
@@ -12,6 +12,7 @@ let loginUserId;
         console.log('gumana')
         userData = authenticate.data.result
         console.log(userData)
+        loginProfileimage = userData.profileImage
         loginUsername = userData.username
         loginUserId = userData.id
         console.log('eto ung userid', loginUserId)
@@ -55,7 +56,7 @@ let loginUserId;
                         </div>
                         <div id="likecommentshare">
                             ${likeBtn}
-                            <button id="comment"><i class="fa-solid fa-comment"></i></button>
+                            <button id="comment"><i id="commentthispost" data-id="${element.id}" class="fa-solid fa-comment"></i></button>
                             <button id="share"><i class="fa-solid fa-paper-plane"></i></button>
                         </div>
                         <div id="valueoflikecommentshare">
@@ -425,7 +426,45 @@ document.addEventListener('click', async (e) => {
 
     }
 })
+let postIdOfyouwantToComment;
+document.addEventListener('click', async (e) => {
+    if (e.target.matches('#commentthispost')) {
 
+        postIdOfyouwantToComment = e.target.dataset.id
+        console.log(postIdOfyouwantToComment)
+        document.getElementById('viewPostBody').style.display = 'block'
+        document.getElementById('commentsBody').style.bottom = 0
+        viewComments(postIdOfyouwantToComment)
+    }
+})
+
+async function viewComments(postIdOfyouwantToComment) {
+    document.getElementById('commentsContents').innerHTML = ''
+    const viewCommentInPost = await apiReq('/viewCommentInPost', { postId: postIdOfyouwantToComment })
+    if (viewCommentInPost.ok) {
+        console.log('success sa pagkuha sa comment')
+        console.log(viewCommentInPost.data.result)
+        const userComments = viewCommentInPost.data.result
+        userComments.forEach(element => {
+            document.getElementById('commentsContents').innerHTML += `
+                <div id="commentsOnPost">
+                    <img src="${element.profileImage}" alt="">
+                    <div id="commentDetails">
+                        <label id="userThatComment">${element.username}</label>
+                        <label for="">${element.comment}</label>
+                    </div>
+                </div>
+                `
+        })
+    } else {
+        console.log('error sa pagkuha')
+    }
+}
+
+document.getElementById('closeComment').addEventListener('click', () => {
+    document.getElementById('viewPostBody').style.display = 'none'
+
+})
 
 async function verifyIfAlreadyLike(postId) {
     const verifyLike = await apiReq('/verifyIfAlreadyLike', { postId: postId, userId: loginUserId })
@@ -438,3 +477,23 @@ async function verifyIfAlreadyLike(postId) {
     }
 
 }
+const inputComment = document.getElementById('inputComment')
+document.getElementById('submitComment').addEventListener('click', async () => {
+    console.log('eto ung sa comment')
+    console.log(inputComment.value)
+    console.log(postIdOfyouwantToComment)
+    console.log('may laman ba? ', userData)
+    if (!inputComment.value) {
+        console.log('please type something')
+    } else {
+        const submitComment = await apiReq('/addComment', { postId: postIdOfyouwantToComment, comment: inputComment.value, username: loginUsername, profileImage: loginProfileimage })
+        if (submitComment.ok) {
+            viewComments(postIdOfyouwantToComment)
+            console.log('success ung comment')
+            inputComment.value = ''
+        } else {
+            console.log('error sa comment')
+        }
+    }
+
+})
