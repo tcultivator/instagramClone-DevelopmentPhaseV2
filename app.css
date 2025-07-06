@@ -27,6 +27,8 @@ body {
     width: 100%;
     box-sizing: border-box;
     height: 60px;
+
+
 }
 
 #header h1 {
@@ -114,7 +116,7 @@ body {
 #userPost {
     position: absolute;
     width: 100%;
-    height: calc(100% - 115px);
+    height: calc(100% - 20%);
     box-sizing: border-box;
     background-color: rgb(255, 255, 255);
     top: 60px;
@@ -123,6 +125,7 @@ body {
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+
 }
 
 #userPost::-webkit-scrollbar {
@@ -312,7 +315,7 @@ body {
 }
 
 #headProfile {
-    border-bottom: 1px solid rgb(90, 90, 90);
+    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -340,7 +343,7 @@ body {
     align-items: center;
     padding: 30px;
     gap: 10px;
-    border-bottom: 1px solid rgb(90, 90, 90);
+    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
 }
 
 #profileiconBody #profileControl {
@@ -357,7 +360,7 @@ body {
 }
 
 #profileControl button {
-    background-color: rgb(104, 104, 104);
+    background-color: var(--btn-bg-color-secondary);
     padding: 7px 10px;
     border: none;
     border-radius: 8px;
@@ -374,7 +377,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
-    border-bottom: 1px solid rgb(90, 90, 90);
+    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
 }
 
 #profileDetails div {
@@ -420,7 +423,7 @@ body {
 }
 
 #visitheadProfile {
-    border-bottom: 1px solid rgb(90, 90, 90);
+    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -448,7 +451,7 @@ body {
     align-items: center;
     padding: 30px;
     gap: 10px;
-    border-bottom: 1px solid rgb(90, 90, 90);
+    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
 }
 
 #visitprofileiconBody #profileControl {
@@ -475,7 +478,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
-    border-bottom: 1px solid rgb(90, 90, 90);
+    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
 }
 
 #visitprofileDetails div {
@@ -502,7 +505,7 @@ body {
 #createPost {
     background-color: rgb(255, 255, 255);
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
     width: 100%;
     height: 100%;
@@ -566,7 +569,7 @@ body {
 #updateProfilePic {
     background-color: rgb(255, 255, 255);
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
     width: 100%;
     height: 100%;
@@ -642,7 +645,7 @@ body {
 }
 
 #profileContent #imgGrid div {
-    border: 1px solid rgb(58, 58, 58);
+    border: 1px solid rgba(197, 197, 197, 0.788);
     border-radius: 5px;
     box-sizing: border-box;
     display: flex;
@@ -679,7 +682,7 @@ body {
 }
 
 #visitprofileContent #visitimgGrid div {
-    border: 1px solid rgb(58, 58, 58);
+    border: 1px solid rgba(197, 197, 197, 0.788);
     border-radius: 5px;
     box-sizing: border-box;
     display: flex;
@@ -740,13 +743,14 @@ body {
 
 #viewPostBody {
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.527);
     overflow: hidden;
-    
+    box-sizing: border-box;
+
 }
 
 #commentsBody {
@@ -758,13 +762,15 @@ body {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     animation: up .2s linear;
+
 }
 
 @keyframes up {
-    0%{
+    0% {
         bottom: -75%;
     }
-    100%{
+
+    100% {
         bottom: 0%;
     }
 }
@@ -774,7 +780,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 5px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
     gap: 10px;
 }
 
@@ -803,7 +809,7 @@ body {
 
     width: 100%;
     height: 100%;
-    max-height: 345px;
+    max-height: 80%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -811,14 +817,14 @@ body {
     gap: 10px;
     overflow: auto;
     background-color: white;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
     margin-top: 2px;
     scrollbar-width: none;
     -ms-overflow-style: none;
 
 }
 
-#commentsContents::-webkit-scrollbar{
+#commentsContents::-webkit-scrollbar {
     display: none;
 }
 
@@ -877,7 +883,7 @@ body {
     box-sizing: border-box;
     border-radius: 10px;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid rgba(197, 197, 197, 0.788);
 }
 
 #addControl button {
@@ -1020,7 +1026,7 @@ body {
 
 @media (min-width:930px) {
     body {
-        background-color: #000000;
+        background-color: #ffffff;
     }
 
     #header {
@@ -1030,16 +1036,16 @@ body {
     #sidebar {
         position: fixed;
         left: 0;
-        background-color: #000000;
+        background-color: #ffffff;
         display: flex;
         flex-direction: column;
         gap: 60px;
         align-items: left;
         text-align: left;
-        padding: 25px;
-        width: 17%;
+
+        width: 20%;
         height: 100%;
-        border-right: 1px solid rgb(54, 54, 54);
+        border-right: 1px solid rgba(197, 197, 197, 0.788);
 
     }
 
@@ -1047,11 +1053,12 @@ body {
         padding: 15px;
         border-radius: 6px;
         background-color: transparent;
-        color: white;
+        color: rgb(0, 0, 0);
         border: none;
         text-align: left;
         font-size: 17px;
         cursor: pointer;
+        margin: 0 8%;
     }
 
     #sidebar button:hover {
@@ -1060,8 +1067,9 @@ body {
 
     .topbar {
         font-size: 50px;
-        color: white;
+        color: rgb(0, 0, 0);
         font-family: 'Sacramento';
+        margin: 0 8%;
     }
 
     .botbar {
@@ -1076,48 +1084,49 @@ body {
     }
 
     #userPost {
-        width: calc(90% - 30%);
-        right: 10%;
+        width: calc(100% - 20%);
+        right: 0;
         height: calc(100%);
         top: 0;
-        background-color: #000000;
-
+        background-color: #ffffff;
+        padding: 0px 15%;
 
     }
 
     #postcontent {
-        border: 1px solid rgb(43, 43, 43);
+
         border-radius: 5px;
-        background-color: #1d1d1d;
-        color: white;
+        background-color: #ececec;
+        color: rgb(0, 0, 0);
+        padding-bottom: 15px;
     }
 
     #userProfilePost {
-        color: white;
+        color: rgb(0, 0, 0);
         background-color: transparent;
     }
 
     #userProfilePost label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #postcontent div {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #postcontent div button {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #userProfilePost img {
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        border: 2px solid rgb(255, 255, 255);
+        border: 2px solid rgb(0, 0, 0);
     }
 
     #storyBody {
-        background-color: #2C2C2C;
+        background-color: #ffffff;
 
 
         top: 0;
@@ -1128,84 +1137,84 @@ body {
         padding: 5px 20px;
         border-bottom: 1px solid rgba(197, 197, 197, 0.788);
         border-top: 1px solid rgba(197, 197, 197, 0.788);
-        color: rgb(97, 97, 97);
+        color: rgb(0, 0, 0);
         box-sizing: border-box;
     }
 
     #postlabel label {
-        color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
         font-weight: bold;
     }
 
 
     #visitprofileBody {
-        background-color: black;
+        background-color: rgb(255, 255, 255);
         z-index: 0;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgb(54, 54, 54);
+        border-left: 1px solid rgba(197, 197, 197, 0.788);
     }
 
     #visitprofileBody #visitheadProfile label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #visitprofileBody #visitheadProfile button {
-        color: white;
+        color: rgb(0, 0, 0);
         cursor: pointer;
     }
 
     #visitprofileiconBody label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #visitprofileDetails #visitpostBody label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #visitprofileDetails #visitfollowerBody label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #visitprofileDetails #visitfollowingBody label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #profileBody {
-        background-color: black;
+        background-color: rgb(255, 255, 255);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgb(54, 54, 54);
+        border-left: 1px solid rgba(197, 197, 197, 0.788);
     }
 
     #profileBody #headProfile label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #profileBody #headProfile button {
-        color: white;
+        color: rgb(0, 0, 0);
         cursor: pointer;
     }
 
     #profileiconBody label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #profileDetails #postBody label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #profileDetails #followerBody label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     #profileDetails #followingBody label {
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
 
@@ -1214,19 +1223,22 @@ body {
 
     #profileContent {
         padding: 5px;
+        color: black;
     }
 
     #profileContent #imgGrid {
         gap: 5px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        color: black;
     }
 
     #profileContent #imgGrid div {
-        border: 1px solid rgb(58, 58, 58);
+        border: 1px solid rgba(197, 197, 197, 0.788);
         border-radius: 5px;
         box-sizing: border-box;
         display: flex;
+        color: black;
     }
 
     #profileContent #imgGrid div img {
@@ -1234,20 +1246,20 @@ body {
         width: 100%;
         height: auto;
         background-size: contain;
+        color: black;
     }
 
 
 
 
     #createPost {
-        background-color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+        z-index: 1;
         height: 100%;
-        width: calc(100% - 17%);
+        width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        transform: translate(20%);
-        border-left: 1px solid rgb(54, 54, 54);
-        color: white;
+        border-left: 1px solid rgba(197, 197, 197, 0.788);
     }
 
     #createPost form {
@@ -1262,14 +1274,13 @@ body {
 
 
     #updateProfilePic {
-        background-color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+        z-index: 1;
         height: 100%;
-        width: calc(100% - 17%);
+        width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        transform: translate(20%);
-        border-left: 1px solid rgb(54, 54, 54);
-        color: white;
+        border-left: 1px solid rgba(197, 197, 197, 0.788);
 
     }
 
@@ -1315,6 +1326,178 @@ body {
         cursor: pointer;
     }
 
+
+
+
+
+
+
+
+
+
+    #viewPostBody {
+        background-color: rgba(0, 0, 0, 0.158);
+        z-index: 1;
+        height: 100%;
+        width: calc(100% - 20%);
+        position: absolute;
+        right: 0;
+        border-left: 1px solid rgba(197, 197, 197, 0.788);
+        display: flex;
+        padding: 0 14%;
+
+    }
+
+    #commentsBody {
+        background-color: white;
+        position: absolute;
+        bottom: -75%;
+        width: 65%;
+        height: calc(100% - 30%);
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        animation: up .2s linear;
+        border: 1px solid rgba(197, 197, 197, 0.788);
+
+
+    }
+
+    @keyframes up {
+        0% {
+            bottom: -75%;
+        }
+
+        100% {
+            bottom: 0%;
+        }
+    }
+
+    #commentHead {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5px;
+        border-bottom: 1px solid rgba(197, 197, 197, 0.788);
+        gap: 10px;
+    }
+
+    #commentHead #closeComment {
+        border-radius: 5px;
+        width: 70px;
+        padding: 2px;
+    }
+
+    #likesAndControls {
+        display: flex;
+
+        width: 90%;
+        justify-content: space-between;
+
+    }
+
+    #likesAndControls button {
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    #commentsContents {
+
+        width: 100%;
+        height: 100%;
+        max-height: 80%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        padding: 5px 10px;
+        gap: 10px;
+        overflow: auto;
+        background-color: white;
+        border-bottom: 1px solid rgba(197, 197, 197, 0.788);
+        margin-top: 2px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+    }
+
+    #commentsContents::-webkit-scrollbar {
+        display: none;
+    }
+
+    #commentsOnPost {
+        background-color: white;
+        display: flex;
+        gap: 10px;
+        align-items: top;
+    }
+
+    #commentsOnPost img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    #commentDetails {
+        background-color: #D9D9D9;
+        width: auto;
+        padding: 5px 10px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    #commentDetails label {
+        word-break: break-all;
+    }
+
+    #commentDetails #userThatComment {
+        color: black;
+        font-weight: bold;
+    }
+
+    #addCommentToPost {
+
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        height: auto;
+        box-sizing: border-box;
+        background-color: white;
+    }
+
+    #addControl {
+        display: flex;
+        gap: 5px;
+        background-color: white;
+
+    }
+
+    #addControl input {
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        width: 100%;
+        border: 1px solid rgba(197, 197, 197, 0.788);
+    }
+
+    #addControl button {
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        font-weight: bold;
+        background-color: var(--btn-bg-color-secondary);
+        font-size: 20px;
+        width: 60px;
+        cursor: pointer;
+    }
+
+    #addControl button i {
+        transform: rotate(20deg);
+    }
 
 
 
@@ -1380,6 +1563,39 @@ body {
     }
 
     100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+#loadingBarInComment {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.26);
+    width: 100%;
+    height: 100%;
+    top: 48px;
+    z-index: 1;
+}
+
+#loadingBarInComment #loadingComment {
+    width: 30px;
+    height: 30px;
+    border: 5px solid white;
+    position: absolute;
+    top: 35%;
+    left: 47%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border-bottom: 5px solid transparent;
+    animation: spinLoadingComment .5s linear infinite;
+    
+}
+
+@keyframes spinLoadingComment {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
         transform: rotate(360deg);
     }
 }
