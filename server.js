@@ -246,6 +246,38 @@ app.post('/verifyIfAlreadyLike', (req, res) => {
 })
 
 
+
+
+app.post('/addComment', authenticate, (req, res) => {
+    const verifiedUserId = req.userId
+    const postId = req.body.postId
+    const comment = req.body.comment
+    const username = req.body.username
+    const profileImage = req.body.profileImage
+    const query = 'INSERT INTO comments (postId,userId,username,comment,profileImage) VALUES (?,?,?,?,?)'
+    db.query(query, [postId, verifiedUserId, username, comment, profileImage], (err, result) => {
+        if (err) {
+            res.status(401).json({ message: 'error kasa comment' })
+        } else {
+            res.status(200).json({ message: 'succues ka sa comment' })
+        }
+    })
+})
+
+
+app.post('/viewCommentInPost', (req, res) => {
+    const postId = req.body.postId
+    const query = 'SELECT * FROM comments WHERE postId = ?'
+    db.query(query, [postId], (err, result) => {
+        if (err) {
+            res.status(401).json({ message: 'no comment found' })
+        } else {
+            res.status(200).json({ result: result })
+        }
+    })
+})
+
+
 app.listen(port, () => {
     console.log('server is running ing port ', port)
 })
