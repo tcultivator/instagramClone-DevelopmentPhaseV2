@@ -389,7 +389,7 @@ document.addEventListener('click', async (e) => {
             likeCountLabel.dataset.likecount = likeCount
             likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
 
-            likeIcon.style = 'color:white'
+            likeIcon.style = 'color:rgb(112, 112, 112)'
             const postId = e.target.dataset.id
             console.log(loginUserId)
             console.log(postId)
