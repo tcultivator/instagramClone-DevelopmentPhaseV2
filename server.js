@@ -259,7 +259,15 @@ app.post('/addComment', authenticate, (req, res) => {
         if (err) {
             res.status(401).json({ message: 'error kasa comment' })
         } else {
-            res.status(200).json({ message: 'succues ka sa comment' })
+            const query2 = 'UPDATE images SET commentCount = commentCount + 1 WHERE id = ?'
+            db.query(query2, [postId], (err, result) => {
+                if (err) {
+                    res.status(401).json({ message: 'error kasa comment' })
+                } else {
+                    res.status(200).json({ message: 'succues ka sa comment' })
+                }
+            })
+
         }
     })
 })
