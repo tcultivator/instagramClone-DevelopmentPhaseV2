@@ -36,7 +36,7 @@ let loginProfileimage;
                     `)
                 const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
                 const mediaTag = isVideo
-                    ? `<video autoplay width="100%">
+                    ? `<video autoplay width="100%" controls>
                 <source src="${element.secure_url}" type="video/mp4" >
                 Your browser does not support the video tag.
            </video>`
