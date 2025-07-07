@@ -185,19 +185,21 @@ fileUploaded.addEventListener('change', () => {
         const vid = document.createElement('video')
         vid.src = fileUrl
         vid.autoplay = true
+        vid.muted = true
         vid.loop = true
         vid.controls = true
-        vid.style.maxHeight = "90%"
+        vid.style.maxHeight = "350px"
         vid.style.maxWidth = "90%"
         preview.append(vid)
     } else {
         const fileUrl = URL.createObjectURL(file)
         const img = document.createElement('img')
         img.src = fileUrl
-        img.style.maxHeight = "90%"
+        img.style.maxHeight = "350px"
         img.style.maxWidth = "90%"
         preview.append(img)
     }
+
 
 })
 const caption = document.getElementById('caption')
