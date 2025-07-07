@@ -36,7 +36,7 @@ let loginProfileimage;
                     `)
                 const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
                 const mediaTag = isVideo
-                    ? `<video autoplay width="100%" controls>
+                    ? `<video autoplay muted width="100%" controls>
                 <source src="${element.secure_url}" type="video/mp4" >
                 Your browser does not support the video tag.
            </video>`
@@ -177,14 +177,28 @@ const fileUploaded = document.getElementById('fileUp')
 const preview = document.getElementById('preview')
 
 fileUploaded.addEventListener('change', () => {
-    preview.innerHTML = '';
+   preview.innerHTML = '';
     const file = fileUploaded.files[0]
-    const fileUrl = URL.createObjectURL(file)
-    const img = document.createElement('img')
-    img.src = fileUrl
-    img.style.maxHeight = "90%"
-    img.style.maxWidth = "90%"
-    preview.append(img)
+    console.log(file.type)
+    if (file.type == 'video/mp4') {
+        console.log('video to')
+        const fileUrl = URL.createObjectURL(file)
+        const vid = document.createElement('video')
+        vid.src = fileUrl
+        vid.autoplay = true
+        vid.loop = true
+        vid.controls = true
+        vid.style.maxHeight = "90%"
+        vid.style.maxWidth = "90%"
+        preview.append(vid)
+    } else {
+        const fileUrl = URL.createObjectURL(file)
+        const img = document.createElement('img')
+        img.src = fileUrl
+        img.style.maxHeight = "90%"
+        img.style.maxWidth = "90%"
+        preview.append(img)
+    }
 
 })
 const caption = document.getElementById('caption')
