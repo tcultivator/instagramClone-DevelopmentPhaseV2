@@ -94,15 +94,18 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
                 break;
             case 'search':
                 console.log('this is search')
+                document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'create':
                 console.log('this is create')
                 document.getElementById('createPost').style.display = 'flex'
                 document.getElementById('profileBody').style = 'display:none'
                 document.getElementById('updateProfilePic').style.display = 'none'
+                document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'notif':
                 console.log('this is notif')
+                document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'profile':
                 document.getElementById('imgGrid').innerHTML = ''
@@ -111,6 +114,7 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
                 document.getElementById('profileBody').style = 'display:block'
                 document.getElementById('createPost').style.display = 'none'
                 document.getElementById('updateProfilePic').style.display = 'none'
+                document.getElementById('viewPostBody').style.display = 'none'
                 break;
 
             default:
@@ -133,15 +137,18 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 break;
             case 'searchS':
                 console.log('this is search')
+                document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'createS':
                 console.log('this is create')
                 document.getElementById('createPost').style.display = 'flex'
                 document.getElementById('profileBody').style = 'display:none'
                 document.getElementById('updateProfilePic').style.display = 'none'
+                document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'notifS':
                 console.log('this is notif')
+                document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'profileS':
                 document.getElementById('imgGrid').innerHTML = ''
@@ -150,6 +157,7 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 document.getElementById('profileBody').style = 'display:block'
                 document.getElementById('createPost').style.display = 'none'
                 document.getElementById('updateProfilePic').style.display = 'none'
+                document.getElementById('viewPostBody').style.display = 'none'
                 break;
 
             default:
