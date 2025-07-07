@@ -5,7 +5,6 @@ let loginUsername;
 let loginUserId;
 let loginProfileimage;
 
-
 (async () => {
     const authenticate = await apiReq('/authenticate')
     if (authenticate.ok) {
