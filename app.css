@@ -204,6 +204,7 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+   
 }
 
 #userPostContent img {
@@ -216,6 +217,8 @@ body {
     font-size: 14px;
 
 }
+
+
 
 #likecommentshare {
     padding: 10px;
@@ -1114,9 +1117,7 @@ body {
         color: rgb(0, 0, 0);
     }
 
-    #postcontent div button {
-        color: rgb(0, 0, 0);
-    }
+
 
     #userProfilePost img {
         width: 30px;
@@ -1499,6 +1500,63 @@ body {
         transform: rotate(20deg);
     }
 
+    #userPostContent {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+    }
+
+    #userPostContent video {
+        max-height: 600px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #loadingBarInComment #loadingComment {
+    width: 30px;
+    height: 30px;
+    border: 5px solid white;
+    position: absolute;
+    top: 35%;
+    
+    margin-left: 2.5%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border-bottom: 5px solid transparent;
+    animation: spinLoadingComment .5s linear infinite;
+
+}
 
 
 
@@ -1583,19 +1641,20 @@ body {
     border: 5px solid white;
     position: absolute;
     top: 35%;
-    left: 47%;
+    left: 45%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     border-bottom: 5px solid transparent;
     animation: spinLoadingComment .5s linear infinite;
-    
+
 }
 
 @keyframes spinLoadingComment {
-    0%{
+    0% {
         transform: rotate(0deg);
     }
-    100%{
+
+    100% {
         transform: rotate(360deg);
     }
 }
