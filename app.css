@@ -142,6 +142,17 @@ body {
 
 }
 
+#postcontent #followBTN {
+    background-color: rgba(0, 0, 0, 0.356);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    color: var(--btn-text-color);
+    width: 70px;
+}
+
+
+
 #postlabel {
 
     font-size: 12px;
@@ -204,7 +215,7 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-   
+
 }
 
 #userPostContent img {
@@ -421,7 +432,7 @@ body {
     width: 100%;
     height: calc(100% - 54px);
     background-color: var(--bg-color);
-    z-index: 0;
+    z-index: 1;
 
 }
 
@@ -791,6 +802,7 @@ body {
     border-radius: 5px;
     width: 70px;
     padding: 2px;
+    cursor: pointer;
 }
 
 #likesAndControls {
@@ -916,6 +928,88 @@ body {
 
 
 
+
+
+
+#showFollowersBody {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: calc(100% - 54px);
+    background-color: white;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+#showFollowersBody #showFollowersHead {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid black;
+    width: 100%;
+    padding: 6px;
+    justify-content: center;
+}
+
+#showFollowersHead button {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+#showFollowersContent {
+    background-color: white;
+    width: 100%;
+    display: flex;
+    padding: 6px;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 8px;
+    max-height: calc(100% - 30px);
+    overflow: auto;
+}
+
+#followersContent {
+    background-color: rgba(0, 0, 0, 0.062);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    width: 100%;
+    text-align: center;
+
+}
+
+#followersContent div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#followersContent label {
+    color: black;
+    font-weight: bold;
+}
+
+#followersContent img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+#followersContent button {
+    background-color: var(--btn-bg-color-secondary);
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: var(--btn-text-color);
+    border: none;
+}
 
 
 
@@ -1150,7 +1244,7 @@ body {
 
     #visitprofileBody {
         background-color: rgb(255, 255, 255);
-        z-index: 0;
+
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
@@ -1521,6 +1615,88 @@ body {
 
 
 
+    #showFollowersBody {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: calc(100% - 20%);
+        height: 100%;
+        background-color: white;
+        box-sizing: border-box;
+        z-index: 1;
+    }
+
+    #showFollowersBody #showFollowersHead {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        border-bottom: 1px solid black;
+        width: 100%;
+        padding: 6px;
+        justify-content: center;
+    }
+
+    #showFollowersHead button {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+    }
+
+    #showFollowersContent {
+        background-color: white;
+        width: 100%;
+        display: flex;
+        padding: 6px;
+        box-sizing: border-box;
+        flex-direction: column;
+        gap: 8px;
+        max-height: calc(100% - 30px);
+        overflow: auto;
+    }
+
+    #followersContent {
+        background-color: rgba(0, 0, 0, 0.062);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        width: 100%;
+        text-align: center;
+
+    }
+
+    #followersContent div {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    #followersContent label {
+        color: black;
+        font-weight: bold;
+    }
+
+    #followersContent img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    #followersContent button {
+        background-color: var(--btn-bg-color-secondary);
+        padding: 5px 10px;
+        border-radius: 10px;
+        color: var(--btn-text-color);
+        border: none;
+    }
+
+
+
 
 
 
@@ -1544,19 +1720,19 @@ body {
 
 
     #loadingBarInComment #loadingComment {
-    width: 30px;
-    height: 30px;
-    border: 5px solid white;
-    position: absolute;
-    top: 35%;
-    
-    margin-left: 2.5%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border-bottom: 5px solid transparent;
-    animation: spinLoadingComment .5s linear infinite;
+        width: 30px;
+        height: 30px;
+        border: 5px solid white;
+        position: absolute;
+        top: 35%;
 
-}
+        margin-left: 2.5%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        border-bottom: 5px solid transparent;
+        animation: spinLoadingComment .5s linear infinite;
+
+    }
 
 
 
