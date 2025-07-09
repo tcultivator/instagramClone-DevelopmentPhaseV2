@@ -606,7 +606,10 @@ document.addEventListener('click', async (e) => {
                 const allPost = document.querySelectorAll('#followBTN')
                 console.log(allPost)
                 allPost.forEach(element => {
-                    element.innerHTML = 'follow'
+
+                    if (element.dataset.userid == followUserId) {
+                        element.innerHTML = 'follow'
+                    }
                 })
                 const followingCount = Number(document.getElementById('followingCount').textContent)
                 document.getElementById('followingCount').textContent = followingCount - 1
@@ -625,7 +628,10 @@ document.addEventListener('click', async (e) => {
                 const allPost = document.querySelectorAll('#followBTN')
                 console.log(allPost)
                 allPost.forEach(element => {
-                    element.innerHTML = 'unfollow'
+                    if (element.dataset.userid == followUserId) {
+                        element.innerHTML = 'unfollow'
+                    }
+
                 })
                 const followingCount = Number(document.getElementById('followingCount').textContent)
                 document.getElementById('followingCount').textContent = followingCount + 1
