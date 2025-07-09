@@ -1,11 +1,14 @@
 import { apiReq } from './fetchReq.js';
+document.getElementById('loadingBody').style = 'display:flex'
 let userData;
 let filename;
 let loginUsername;
 let loginUserId;
 let loginProfileimage;
 
+
 (async () => {
+
     const authenticate = await apiReq('/authenticate')
     if (authenticate.ok) {
         console.log('gumana')
@@ -17,6 +20,8 @@ let loginProfileimage;
         console.log('eto ung userid', loginUserId)
         document.getElementById('profileName').textContent = userData.username
         document.getElementById('changeProfile').src = userData.profileImage
+        document.getElementById('followersCount').textContent = userData.follower
+        document.getElementById('followingCount').textContent = userData.following
         const getAlldataForWall = await fetch('https://instagramclone-developmentphasev2.onrender.com/getAll', {
             method: 'POST'
         })
@@ -35,17 +40,29 @@ let loginProfileimage;
                     `)
                 const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
                 const mediaTag = isVideo
-                    ? `<video autoplay muted width="100%" controls>
-                <source src="${element.secure_url}" type="video/mp4" >
+                    ? `<video autoplay muted width="100%" id="postVid" controls>
+                <source id="vidSource" src="${element.secure_url}" type="video/mp4" >
                 Your browser does not support the video tag.
-           </video>`
+                
+           </video>
+           
+           `
+
+
                     : `<img src="${element.secure_url}" alt="User post">`;
+                const alreadyFollowData = await verifyIfAlreadyfollow(element.userId);
+                const followBtn = alreadyFollowData.alreadyFollow == true ? (
+                    `<button id="followBTN" data-userid="${element.userId}">unfollow</button>`
+                ) : (`<button id="followBTN" data-userid="${element.userId}">follow</button>`)
+
+                const followVisible = element.userId == loginUserId ? (``)
+                    : (`${followBtn}`)
                 document.getElementById('userPost').innerHTML += `
                         <div id="postcontent">  
                             <div id="userProfilePost">
                             <div>
 
-
+                                ${followVisible}
                             </div>
                             <button><i class="fa-solid fa-ellipsis"></i></button>
 
@@ -70,6 +87,7 @@ let loginProfileimage;
                     </div>
                 `
             });
+            document.getElementById('loadingBody').style = 'display:flex'
         } else {
             console.log('walang nakuha')
         }
@@ -81,7 +99,18 @@ let loginProfileimage;
             window.location.replace('index.html')
         }, 1500);
     }
+    document.getElementById('loadingBody').style = 'display:none'
 })();
+
+// document.addEventListener('mouseover', (e) => {
+//     if (e.target.matches('#postVid')) {
+//         console.log('na hover mo to')
+//         const vid = e.target.closest('#postcontent').querySelector('#postVid')
+//         const vidd = e.target.closest('#postcontent').querySelector('#vidSource')
+//         console.log(vidd)
+//         vid.controls = true
+//     }
+// })
 
 document.getElementById('footerNav').addEventListener('click', (e) => {
     try {
@@ -94,7 +123,6 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
                 break;
             case 'search':
                 console.log('this is search')
-                document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'create':
                 console.log('this is create')
@@ -184,7 +212,7 @@ const fileUploaded = document.getElementById('fileUp')
 const preview = document.getElementById('preview')
 
 fileUploaded.addEventListener('change', () => {
-   preview.innerHTML = '';
+    preview.innerHTML = '';
     const file = fileUploaded.files[0]
     console.log(file.type)
     if (file.type == 'video/mp4') {
@@ -242,6 +270,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 
 document.getElementById('closeCreatePost').addEventListener('click', () => {
     document.getElementById('createPost').style.display = 'none'
+    document.getElementById('preview').innerHTML = ''
 })
 
 document.getElementById('editProfile').addEventListener('click', () => {
@@ -301,10 +330,16 @@ document.getElementById('closeUpdateProfile').addEventListener('click', () => {
 
 
 
-
+let idOfVisitProfile;
 document.addEventListener('click', async (e) => {
-    if (e.target.matches('#userThatPost')) {
+    if (e.target.matches('#userThatPost') || e.target.matches('#followersInfo')) {
+        document.getElementById('showFollowersBody').style.display = 'none'
+        document.getElementById('showFollowersContent').innerHTML = ''
+        document.getElementById('imgGrid').innerHTML = ''
+        document.getElementById('profileBody').style = 'display:none'
+        document.getElementById('visitprofileBody').style = 'display:none'
         const userId = e.target.dataset.userid;
+        idOfVisitProfile = e.target.dataset.userid;
         console.log(userId)
         if (loginUserId == userId) {
             document.getElementById('profileBody').style = 'display:block'
@@ -316,6 +351,8 @@ document.addEventListener('click', async (e) => {
                 console.log(visitOtherProfile.data.result)
                 document.getElementById('visitprofileName').textContent = visitOtherProfile.data.result.username
                 document.getElementById('visitchangeProfile').src = visitOtherProfile.data.result.profileImage
+                document.getElementById('visitFollowerCount').textContent = visitOtherProfile.data.result.follower
+                document.getElementById('visitfollowingCount').textContent = visitOtherProfile.data.result.following
                 const viewProfileReq = await apiReq('/viewProfileReq', { userId: userId })
                 if (viewProfileReq.ok) {
                     userData = viewProfileReq.data.result
@@ -355,11 +392,12 @@ async function viewProfile() {
     const viewProfileReq = await apiReq('/viewProfileReq', { userId: loginUserId })
     if (viewProfileReq.ok) {
         userData = viewProfileReq.data.result
+        console.log('eto ung data sa profile')
         console.log(userData)
         userData.forEach(element => {
             const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
             const mediaTag = isVideo
-                ? `<video autoplay width="100%" id="imageOnPost" data-secure_url="${element.secure_url}">
+                ? `<video autoplay muted controls width="100%" id="imageOnPost" data-secure_url="${element.secure_url}">
                 <source  src="${element.secure_url}" type="video/mp4" >
                 Your browser does not support the video tag.
            </video>`
@@ -372,6 +410,7 @@ async function viewProfile() {
         });
 
         document.getElementById('postsCount').textContent = userData.length
+
     }
 }
 
@@ -515,7 +554,9 @@ async function verifyIfAlreadyLike(postId) {
     const verifyLike = await apiReq('/verifyIfAlreadyLike', { postId: postId, userId: loginUserId })
     if (verifyLike.ok) {
         console.log(verifyLike.data)
+
         return verifyLike.data
+
     } else {
         console.log('errrrrrr')
         return null
@@ -549,5 +590,138 @@ document.getElementById('submitComment').addEventListener('click', async () => {
     }
 
 })
+
+
+document.addEventListener('click', async (e) => {
+    if (e.target.matches('#followBTN')) {
+        if (e.target.textContent == 'unfollow') {
+            console.log('na click ung unfollow')
+            const followUserId = e.target.dataset.userid
+            console.log('eto ung laman ng button ', e.target.textContent)
+            console.log('eto ung userid ng gusto mo i unfollow ', followUserId)
+            const follow = await apiReq('/unfollow', { followUserId: followUserId })
+            if (follow.ok) {
+                console.log('na unfollow mo')
+                // e.target.textContent = `follow`
+                const allPost = document.querySelectorAll('#followBTN')
+                console.log(allPost)
+                allPost.forEach(element => {
+                    element.innerHTML = 'follow'
+                })
+                const followingCount = Number(document.getElementById('followingCount').textContent)
+                document.getElementById('followingCount').textContent = followingCount - 1
+            } else {
+                console.log('error sa unfoloow')
+            }
+
+        } else {
+            console.log('na click ung follow')
+            const followUserId = e.target.dataset.userid
+            console.log('eto ung laman ng button ', e.target.textContent)
+            console.log('eto ung userid ng gusto mo i follow ', followUserId)
+            const follow = await apiReq('/follow', { followUserId: followUserId })
+            if (follow.ok) {
+                console.log('na follow mo')
+                const allPost = document.querySelectorAll('#followBTN')
+                console.log(allPost)
+                allPost.forEach(element => {
+                    element.innerHTML = 'unfollow'
+                })
+                const followingCount = Number(document.getElementById('followingCount').textContent)
+                document.getElementById('followingCount').textContent = followingCount + 1
+
+            } else {
+                console.log('error sa foloow')
+            }
+        }
+
+
+    }
+})
+
+document.getElementById('followerBody').addEventListener('click', async () => {
+    document.getElementById('showFollowersContent').innerHTML = ''
+    document.getElementById('showFollowersBody').style.display = 'block'
+    console.log('na clik ung show followers')
+    const displayFollowers = await apiReq('/displayFollowers', { userId: loginUserId })
+    if (displayFollowers.ok) {
+        console.log('merong nakuha follower')
+        console.log(displayFollowers.data)
+        displayFollowers.data.forEach(element => {
+            document.getElementById('showFollowersContent').innerHTML += `
+            
+            <div id="followersContent">
+                <div>
+                    <img src="${element.profileImage}" alt="">
+                    <label id="followersInfo" data-userid="${element.id}">${element.username}</label>
+                </div>
+               
+            </div>
+            `
+        })
+    } else {
+        console.log('error ka')
+    }
+})
+
+
+document.addEventListener('click', async (e) => {
+    if (e.target.matches('#visitfollowerBody') || e.target.matches('#visitFollowerCount')) {
+        console.log('eto ung id nya ', idOfVisitProfile)
+        document.getElementById('showFollowersContent').innerHTML = ''
+        document.getElementById('showFollowersBody').style.display = 'block'
+        console.log('na clik ung show followers')
+        const displayFollowers = await apiReq('/displayFollowers', { userId: idOfVisitProfile })
+        if (displayFollowers.ok) {
+            console.log('merong nakuha follower')
+            console.log(displayFollowers.data)
+            displayFollowers.data.forEach(element => {
+                document.getElementById('showFollowersContent').innerHTML += `
+
+            <div id="followersContent">
+                <div>
+                    <img src="${element.profileImage}" alt="">
+                    <label id="followersInfo" data-userid="${element.id}">${element.username}</label>
+                </div>
+
+            </div>
+            `
+            })
+        } else {
+            console.log('error ka')
+        }
+    }
+
+})
+
+document.getElementById('closeShowFollowers').addEventListener('click', () => {
+    document.getElementById('showFollowersBody').style.display = 'none'
+    document.getElementById('showFollowersContent').innerHTML = ''
+})
+
+
+
+
+async function verifyIfAlreadyfollow(followUserId) {
+    const verifyFollow = await apiReq('/verifyIfAlreadyFollow', { followUserId: followUserId, userId: loginUserId })
+    if (verifyFollow.ok) {
+        console.log(verifyFollow.data)
+
+        return verifyFollow.data
+
+    } else {
+        console.log('errrrrrr')
+        return null
+    }
+
+}
+
+
+
+
+
+
+
+
 
 
