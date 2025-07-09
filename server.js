@@ -286,6 +286,106 @@ app.post('/viewCommentInPost', (req, res) => {
 })
 
 
+
+
+
+
+app.post('/follow', authenticate, (req, res) => {
+    const userIdOfFollower = req.userId
+    const followedUserId = req.body.followUserId
+    const query = 'INSERT INTO follower (followedUserId,userIdOfFollower) VALUES (?,?)'
+    db.query(query, [followedUserId, userIdOfFollower], (err, result) => {
+        if (err) {
+            res.status(401).json({ message: 'error ka sa pag follow' })
+        } else {
+            const query2 = 'UPDATE accounts SET follower = follower + 1 WHERE id = ?'
+            db.query(query2, [followedUserId], (err, result) => {
+                if (err) {
+                    res.status(401).json({ message: 'error ka sa pag follow' })
+                } else {
+                    const query3 = 'UPDATE accounts SET following = following + 1 WHERE id = ?'
+                    db.query(query3, [userIdOfFollower], (err, result) => {
+                        if (err) res.status(401).json({ message: 'error ka sa pag follow' })
+                        res.status(200).json({ message: 'success sa fpag follow' })
+                    })
+
+                }
+            })
+
+        }
+    })
+})
+
+
+app.post('/unfollow', authenticate, (req, res) => {
+    const userIdOfFollower = req.userId
+    const followedUserId = req.body.followUserId
+    const query = 'DELETE FROM follower WHERE followedUserId = ? && userIdOfFollower = ?'
+    db.query(query, [followedUserId, userIdOfFollower], (err, result) => {
+        if (err) {
+            res.status(401).json({ message: 'error ka sa pag unfollow' })
+        } else {
+            const query2 = 'UPDATE accounts SET follower = follower - 1 WHERE id = ?'
+            db.query(query2, [followedUserId], (err, result) => {
+                if (err) {
+                    res.status(401).json({ message: 'error ka sa pag unfollow' })
+                } else {
+                    const query3 = 'UPDATE accounts SET following = following - 1 WHERE id = ?'
+                    db.query(query3, [userIdOfFollower], (err, result) => {
+                        if (err) res.status(401).json({ message: 'error ka sa pag unfollow' })
+                        res.status(200).json({ message: 'success sa fpag unfollow' })
+                    })
+
+                }
+            })
+
+        }
+    })
+})
+
+app.post('/displayFollowers', (req, res) => {
+    const userIdOfFollower = req.body.userId
+    const query = 'SELECT userIdOfFollower FROM follower WHERE followedUserId = ? '
+    db.query(query, [userIdOfFollower], (err, result) => {
+        if (err) {
+            console.log('error walang nakha')
+        } else {
+            console.log('gegege meron')
+
+            const listOfFollowers = result.map(element => {
+                return new Promise((resolve, reject) => {
+                    console.log(element.userIdOfFollower)
+                    const query2 = 'SELECT * FROM accounts WHERE id = ?'
+                    db.query(query2, [element.userIdOfFollower], (err, result) => {
+                        if (err) {
+                            return reject(err)
+                        } else {
+                            return resolve(result[0])
+                        }
+                    });
+                    console.log('eto dapat ung last')
+                })
+
+            })
+
+            Promise.all(listOfFollowers)
+                .then((followers) => {
+                    res.status(200).json(followers)
+                })
+                .catch(() => {
+                    res.status(500).json({ message: 'Failed to get follower accounts' });
+                })
+
+
+
+
+
+
+        }
+    })
+})
+
+
 app.listen(port, () => {
     console.log('server is running ing port ', port)
 })
