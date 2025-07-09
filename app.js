@@ -111,7 +111,6 @@ let loginProfileimage;
 //         vid.controls = true
 //     }
 // })
-
 document.getElementById('footerNav').addEventListener('click', (e) => {
     try {
         const clickBtn = e.target.closest('button')
