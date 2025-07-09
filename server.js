@@ -245,6 +245,21 @@ app.post('/verifyIfAlreadyLike', (req, res) => {
 })
 
 
+app.post('/verifyIfAlreadyFollow', (req, res) => {
+    const followUserId = req.body.followUserId
+    const userId = req.body.userId
+
+    const query = 'SELECT * FROM follower WHERE followedUserId = ? && userIdOfFollower = ?'
+    db.query(query, [followUserId, userId], (err, result) => {
+        if (result.length) {
+            res.status(200).json({ alreadyFollow: true })
+        } else {
+            res.send({ alreadyFollow: false })
+        }
+    })
+})
+
+
 
 
 app.post('/addComment', authenticate, (req, res) => {
