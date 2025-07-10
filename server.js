@@ -45,10 +45,17 @@ io.on('connection', (socket) => {
     console.log('A client connected');
 
 
-    socket.on('idOfThis', (postIdOfyouwantToComment) => {
+    socket.on('idOfThis', ({postIdOfyouwantToComment,commentCount}) => {
         console.log('eto ung galing sa socket io')
         console.log(postIdOfyouwantToComment)
-        socket.broadcast.emit('idOfCommentFromIO', postIdOfyouwantToComment)
+        socket.broadcast.emit('idOfCommentFromIO', {postIdOfyouwantToComment,commentCount})
+    })
+
+    socket.on('userLikeThisPost', ({ postId, likeCount }) => {
+        socket.broadcast.emit('userLikeFromIO', { postId, likeCount })
+    })
+    socket.on('userunLikeThisPost', ({ postId, likeCount }) => {
+        socket.broadcast.emit('userunLikeFromIO', { postId, likeCount })
     })
 
 
@@ -57,6 +64,9 @@ io.on('connection', (socket) => {
 
     });
 });
+
+
+
 app.post('/loginReq', (req, res) => {
     const userData = req.body
     const query = 'SELECT * FROM accounts WHERE username = ? && password = ?'
