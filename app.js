@@ -531,7 +531,7 @@ socket.on('idOfCommentFromIO', (postIdOfyouwantToComment) => {
 })
 
 async function viewComments(postIdOfyouwantToComment) {
-    document.getElementById('loadingBarInComment').style.display = 'block'
+    // document.getElementById('loadingBarInComment').style.display = 'block'
     document.getElementById('commentsContents').innerHTML = ''
     const viewCommentInPost = await apiReq('/viewCommentInPost', { postId: postIdOfyouwantToComment })
     if (viewCommentInPost.ok) {
