@@ -69,7 +69,7 @@ socket.on('connect', () => {
                 const followVisible = element.userId == loginUserId ? (``)
                     : (`${followBtn}`)
                 document.getElementById('userPost').innerHTML += `
-                        <div id="postcontent">  
+                        <div id="postcontent" data-id="${element.id}">  
                             <div id="userProfilePost">
                             <div>
 
@@ -454,6 +454,7 @@ document.getElementById('closepreviewofImageInPost').addEventListener('click', (
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#likethisPost')) {
         const likeIcon = e.target.closest('#postcontent').querySelector('#likethisPost')
+        let likeTarget = e.target
         if (likeIcon.style.color == 'red') {
             console.log('na like mo nato')
             const likeCountLabel = e.target.closest('#postcontent').querySelector('#likeCount')
@@ -470,6 +471,8 @@ document.addEventListener('click', async (e) => {
             if (unlikeThisPost.ok) {
                 console.log('you like this post that id is ', postId)
                 console.log(likeIcon.style.color)
+                socket.emit('userunLikeThisPost', { postId, likeCount })
+
 
             } else {
 
@@ -490,6 +493,8 @@ document.addEventListener('click', async (e) => {
             if (likeThisPost.ok) {
                 console.log('you like this post that id is ', postId)
                 console.log(likeIcon.style.color)
+                console.log(likeCountLabel)
+                socket.emit('userLikeThisPost', { postId, likeCount })
 
             } else {
 
@@ -499,6 +504,22 @@ document.addEventListener('click', async (e) => {
 
 
     }
+})
+
+socket.on('userLikeFromIO', ({ postId, likeCount }) => {
+    console.log({ postId, likeCount })
+    const postElement = document.querySelector(`#postcontent[data-id="${postId}"]`)
+    const likeLabel = postElement.querySelector('#likeCount');
+    likeLabel.dataset.likecount = likeCount
+    likeLabel.innerHTML = `${likeCount} <span>Likes</span>`
+})
+socket.on('userunLikeFromIO', ({ postId, likeCount }) => {
+    console.log({ postId, likeCount })
+    const postElement = document.querySelector(`#postcontent[data-id="${postId}"]`)
+    const likeLabel = postElement.querySelector('#likeCount');
+    likeLabel.dataset.likecount = likeCount
+    likeLabel.innerHTML = `${likeCount} <span>Likes</span>`
+
 })
 let postIdOfyouwantToComment;
 let commentTarget;
@@ -520,18 +541,16 @@ document.addEventListener('click', async (e) => {
     }
 })
 
-socket.on('idOfCommentFromIO', (postIdOfyouwantToComment) => {
+socket.on('idOfCommentFromIO', ({postIdOfyouwantToComment,commentCount}) => {
     viewComments(postIdOfyouwantToComment)
-    const commentCountLabel = commentTarget.target.closest('#postcontent').querySelector('#commentCount')
-    let commentCount = Number(commentCountLabel.dataset.commentcount)
-    console.log('eto ung count ng comment dito ', commentCount)
-    commentCount += 1
+    const postElement = document.querySelector(`#postcontent[data-id="${postIdOfyouwantToComment}"]`)
+    const commentCountLabel = postElement.querySelector('#commentCount')
     commentCountLabel.dataset.commentcount = commentCount
     commentCountLabel.innerHTML = `${commentCount} <span>Comments</span>`
 })
 
 async function viewComments(postIdOfyouwantToComment) {
-    // document.getElementById('loadingBarInComment').style.display = 'block'
+    document.getElementById('loadingBarInComment').style.display = 'block'
     document.getElementById('commentsContents').innerHTML = ''
     const viewCommentInPost = await apiReq('/viewCommentInPost', { postId: postIdOfyouwantToComment })
     if (viewCommentInPost.ok) {
@@ -607,7 +626,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
         const submitComment = await apiReq('/addComment', { postId: postIdOfyouwantToComment, comment: inputComment.value, username: loginUsername, profileImage: loginProfileimage })
         if (submitComment.ok) {
             viewComments(postIdOfyouwantToComment)
-            socket.emit('idOfThis', postIdOfyouwantToComment)
+            socket.emit('idOfThis', {postIdOfyouwantToComment,commentCount})
             console.log('success ung comment')
             inputComment.value = ''
         } else {
