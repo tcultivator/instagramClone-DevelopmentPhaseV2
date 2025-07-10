@@ -1,3 +1,4 @@
+
 import { apiReq } from './fetchReq.js';
 document.getElementById('loadingBody').style = 'display:flex'
 let userData;
@@ -5,6 +6,16 @@ let filename;
 let loginUsername;
 let loginUserId;
 let loginProfileimage;
+
+
+import { io } from 'https://cdn.socket.io/4.7.2/socket.io.esm.min.js';
+
+const socket = io('https://instagramclone-developmentphasev2.onrender.com');
+
+socket.on('connect', () => {
+    console.log('Socket connected from app.js!');
+});
+
 
 
 (async () => {
@@ -111,6 +122,7 @@ let loginProfileimage;
 //         vid.controls = true
 //     }
 // })
+
 document.getElementById('footerNav').addEventListener('click', (e) => {
     try {
         const clickBtn = e.target.closest('button')
@@ -500,8 +512,22 @@ document.addEventListener('click', async (e) => {
         document.getElementById('likeCountsInComments').innerHTML = `${likeCount} <span>Likes</span>`
         document.getElementById('viewPostBody').style.display = 'block'
         document.getElementById('commentsBody').style.bottom = 0
+
+
         viewComments(postIdOfyouwantToComment)
+
+
     }
+})
+
+socket.on('idOfCommentFromIO', (postIdOfyouwantToComment) => {
+    viewComments(postIdOfyouwantToComment)
+    const commentCountLabel = commentTarget.target.closest('#postcontent').querySelector('#commentCount')
+    let commentCount = Number(commentCountLabel.dataset.commentcount)
+    console.log('eto ung count ng comment dito ', commentCount)
+    commentCount += 1
+    commentCountLabel.dataset.commentcount = commentCount
+    commentCountLabel.innerHTML = `${commentCount} <span>Comments</span>`
 })
 
 async function viewComments(postIdOfyouwantToComment) {
@@ -581,6 +607,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
         const submitComment = await apiReq('/addComment', { postId: postIdOfyouwantToComment, comment: inputComment.value, username: loginUsername, profileImage: loginProfileimage })
         if (submitComment.ok) {
             viewComments(postIdOfyouwantToComment)
+            socket.emit('idOfThis', postIdOfyouwantToComment)
             console.log('success ung comment')
             inputComment.value = ''
         } else {
@@ -730,3 +757,93 @@ async function verifyIfAlreadyfollow(followUserId) {
 
 
 
+
+document.getElementById('followingBody').addEventListener('click', async () => {
+    document.getElementById('showFollowersContent').innerHTML = ''
+    document.getElementById('showFollowersBody').style.display = 'block'
+    console.log('na clik ung show followers')
+    const displayFollowers = await apiReq('/displayFollowing', { userId: loginUserId })
+    if (displayFollowers.ok) {
+        console.log('merong nakuha follower')
+        console.log(displayFollowers.data)
+        displayFollowers.data.forEach(element => {
+            document.getElementById('showFollowersContent').innerHTML += `
+            
+            <div id="followersContent">
+                <div>
+                    <img src="${element.profileImage}" alt="">
+                    <label id="followersInfo" data-userid="${element.id}">${element.username}</label>
+                </div>
+               <button id="unfollowBtn" data-userid="${element.id}">unfollow</button>
+            </div>
+            `
+        })
+    } else {
+        console.log('error ka')
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('click', async (e) => {
+    if (e.target.matches('#visitfollowingBody') || e.target.matches('#visitfollowingCount')) {
+        console.log('eto ung id nya ', idOfVisitProfile)
+        document.getElementById('showFollowersContent').innerHTML = ''
+        document.getElementById('showFollowersBody').style.display = 'block'
+        console.log('na clik ung show followers')
+        const displayFollowers = await apiReq('/displayFollowing', { userId: idOfVisitProfile })
+        if (displayFollowers.ok) {
+            console.log('merong nakuha follower')
+            console.log(displayFollowers.data)
+            displayFollowers.data.forEach(element => {
+                document.getElementById('showFollowersContent').innerHTML += `
+
+            <div id="followersContent">
+                <div>
+                    <img src="${element.profileImage}" alt="">
+                    <label id="followersInfo" data-userid="${element.id}">${element.username}</label>
+                </div>
+
+            </div>
+            `
+            })
+        } else {
+            console.log('error ka')
+        }
+    }
+
+})
+
+
+
+
+
+document.addEventListener('click', async (e) => {
+    if (e.target.matches('#unfollowBtn')) {
+        const elementOfButton = e.target
+        const idOfFollowing = e.target.dataset.userid
+        console.log('eto ung element ', elementOfButton)
+        const elementOfWanttoUnfollow = elementOfButton.closest('#followersContent')
+        console.log(elementOfWanttoUnfollow)
+        const unfollowThisUser = await apiReq('/unfollow', { followUserId: idOfFollowing })
+        if (unfollowThisUser.ok) {
+            elementOfWanttoUnfollow.style.display = 'none'
+            const followingCount = Number(document.getElementById('followingCount').textContent)
+            document.getElementById('followingCount').textContent = followingCount - 1
+        } else {
+            alert('error')
+        }
+
+    }
+})
