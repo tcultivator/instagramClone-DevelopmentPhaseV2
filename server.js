@@ -7,6 +7,14 @@ const upload = require('./middleware/multer');
 const cloudinary = require('./util/cloudinary')
 
 const app = express()
+const http = require('http').createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(http, {
+    cors: {
+        origin: 'https://tcultivator.github.io',
+        credentials: true
+    }
+})
 app.use(express.json())
 app.use(cors({
     origin: 'https://tcultivator.github.io',
@@ -30,6 +38,25 @@ db.connect((err) => {
         console.log('database is connected')
     }
 })
+
+
+
+io.on('connection', (socket) => {
+    console.log('A client connected');
+
+
+    socket.on('idOfThis', (postIdOfyouwantToComment) => {
+        console.log('eto ung galing sa socket io')
+        console.log(postIdOfyouwantToComment)
+        socket.broadcast.emit('idOfCommentFromIO', postIdOfyouwantToComment)
+    })
+
+
+    socket.on('disconnect', () => {
+        console.log('A client disconnected');
+
+    });
+});
 app.post('/loginReq', (req, res) => {
     const userData = req.body
     const query = 'SELECT * FROM accounts WHERE username = ? && password = ?'
@@ -400,6 +427,6 @@ app.post('/displayFollowers', (req, res) => {
 })
 
 
-app.listen(port, () => {
+http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
