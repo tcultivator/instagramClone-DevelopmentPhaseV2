@@ -437,6 +437,85 @@ app.post('/displayFollowers', (req, res) => {
 })
 
 
+
+
+app.post('/displayFollowing', (req, res) => {
+    const userIdOfFollower = req.body.userId
+    const query = 'SELECT followedUserId FROM follower WHERE userIdOfFollower = ? '
+    db.query(query, [userIdOfFollower], (err, result) => {
+        if (err) {
+            console.log('error walang nakha')
+        } else {
+            console.log('gegege meron')
+
+            const listOfFollowing = result.map(element => {
+                return new Promise((resolve, reject) => {
+                    console.log(element.followedUserId)
+                    const query2 = 'SELECT * FROM accounts WHERE id = ?'
+                    db.query(query2, [element.followedUserId], (err, result) => {
+                        if (err) {
+                            return reject(err)
+                        } else {
+                            return resolve(result[0])
+                        }
+                    });
+                    console.log('eto dapat ung last')
+                })
+
+            })
+
+            Promise.all(listOfFollowing)
+                .then((following) => {
+                    res.status(200).json(following)
+                })
+                .catch(() => {
+                    res.status(500).json({ message: 'Failed to get follower accounts' });
+                })
+
+        }
+    })
+})
+
+
+app.post('/uploadStory', upload.single('image'), (req, res) => {
+    const username = req.body.username;
+    const userId = req.body.userId;
+    cloudinary.uploader.upload(req.file.path, { resource_type: 'auto' }, (err, result) => {
+        console.log(result)
+        if (err) {
+            res.status(400).json({ message: 'error uploading story' })
+            console.log('error uploading story')
+        } else {
+            console.log(result.secure_url)
+            const date = new Date()
+            const formattedDate = date.toISOString().split('T')[0];
+            console.log(formattedDate)
+            const query = 'INSERT INTO story (userId,username,secure_url,datePosted)VALUES(?,?,?,?)'
+            db.query(query, [userId, username, result.secure_url, formattedDate], (err, result) => {
+                if (err) {
+                    res.status(400).json({ message: 'error inserting to database' })
+                    console.log('error inserting to database')
+                } else {
+                    res.status(200).json({ message: 'success inserting Story' })
+                }
+            })
+        }
+
+
+    })
+})
+
+app.post('/getStories', (req, res) => {
+    const query = 'SELECT * FROM story'
+    db.query(query, (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'no story found' })
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
+
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
