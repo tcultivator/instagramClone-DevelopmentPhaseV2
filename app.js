@@ -31,6 +31,7 @@ socket.on('connect', () => {
         console.log('eto ung userid', loginUserId)
         document.getElementById('profileName').textContent = userData.username
         document.getElementById('changeProfile').src = userData.profileImage
+        document.getElementById('imageOnaddStory').src = userData.profileImage
         document.getElementById('followersCount').textContent = userData.follower
         document.getElementById('followingCount').textContent = userData.following
         const getAlldataForWall = await fetch('https://instagramclone-developmentphasev2.onrender.com/getAll', {
