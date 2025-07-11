@@ -13,10 +13,12 @@
 </head>
 
 <body>
+
     <div id="header">
         <h1>Instagang</h1>
         <button><i class="fab fa-facebook-messenger"></i></button>
     </div>
+
 
     <div id="userPost">
         <div id="storyBody">
@@ -24,65 +26,16 @@
                 <label>Stories</label>
             </div>
             <div id="stories">
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
-                </div>
-                <div id="addStories">
-                    <div id="storyImage"></div>
-                    <label>Your Story</label>
+                <div id="addStoriess">
+                    <div class="story-thumbnail">
+                        <img src="assets/example.jpg" alt="Your Story">
+                        <div id="story-label">
+                            <button type="button" id="createNewStory"><i id="createNewStory"
+                                    class="fa-solid fa-plus"></i></button>
+                            <input id="inputnewStory" style="display: none;" type="file">
+                            <label for="">Create Story</label>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -187,7 +140,6 @@
     </div>
 
 
-
     <div id="createPost" style="display: none;">
         <button id="closeCreatePost"><i class="fa-solid fa-xmark"></i></button>
         <form id="uploadForm" enctype="multipart/form-data">
@@ -230,7 +182,7 @@
             <div id="addCommentToPost">
                 <div id="addControl">
                     <input id="inputComment" type="text" placeholder="Enter comment">
-                    <button id="submitComment"><i class="fa-solid fa-paper-plane"></i></button>
+                    <button id="submitComment">SEND</button>
                 </div>
             </div>
         </div>
@@ -256,8 +208,29 @@
             <label>username</label>
         </div>
         <div id="showFollowersContent">
-           
 
+
+        </div>
+    </div>
+
+
+    <div id="addNewStory" style="display: none;">
+        <div id="addNewStoryBody">
+            <label for="">Create New Story</label>
+            <div id="storyPreview"></div>
+            <div id="storyControl">
+                <button id="closeAddStory"><i class="fa-solid fa-xmark"></i></button>
+                <button id="submitStory">Share</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="viewStoryBody" style="display: none;">
+        <div id="previewOfStory">
+            <label id="usernameOfStoryview">username</label>
+            <img id="previewOfStoryIMG" src="" alt="">
+            <button id="closeViewStory">Close</button>
         </div>
     </div>
 
@@ -273,6 +246,7 @@
     <div id="loadingCircle" style="display: none;">
         <div id="circle"></div>
     </div>
+
 
 
 </body>
