@@ -113,6 +113,55 @@ socket.on('connect', () => {
     document.getElementById('loadingBody').style = 'display:none'
 })();
 
+
+async function getAllStories() {
+    try {
+        const getStories = await apiReq('/getStories')
+        if (getStories.ok) {
+            console.log(getStories.data)
+            getStories.data.forEach(element => {
+                document.getElementById('stories').innerHTML += `
+                 <div id="addStories" data-id="${element.id}">
+                    <div id="storyBod" class="story-thumbnail">
+                        <img id="storyView" src="${element.secure_url}" alt="Your Story" data-id="${element.id}">
+                        <div id="story-label" data-id="${element.id}">${element.username}</div>
+                    </div>
+                </div>
+                `
+            })
+        } else {
+            console.log('error')
+        }
+    }
+    catch (err) {
+        console.log('error 2')
+    }
+}
+
+getAllStories();
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#storyView')) {
+        const idOfElemt = e.target.dataset.id;
+        const elementOfStory = document.querySelector(`#addStories[data-id="${idOfElemt}"]`)
+        console.log('eto ung id ng elemt ', idOfElemt)
+        console.log('eto ung element mismo ', elementOfStory)
+        const srcOfIMG = document.querySelector(`#storyView[data-id="${idOfElemt}"]`)
+        console.log(srcOfIMG.src)
+        document.getElementById('previewOfStoryIMG').src = srcOfIMG.src
+        document.getElementById('viewStoryBody').style.display = 'flex'
+        const usernameOfStory = document.querySelector(`#story-label[data-id="${idOfElemt}"]`)
+        document.getElementById('usernameOfStoryview').textContent = usernameOfStory.textContent
+
+    }
+
+})
+
+document.getElementById('closeViewStory').addEventListener('click', () => {
+    document.getElementById('viewStoryBody').style.display = 'none'
+
+})
+
 // document.addEventListener('mouseover', (e) => {
 //     if (e.target.matches('#postVid')) {
 //         console.log('na hover mo to')
@@ -866,3 +915,71 @@ document.addEventListener('click', async (e) => {
 
     }
 })
+
+
+
+const uploadNewStory = document.getElementById('inputnewStory')
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#createNewStory')) {
+        uploadNewStory.click()
+
+    }
+
+})
+const previewNewStory = document.getElementById('storyPreview')
+document.getElementById('inputnewStory').addEventListener('change', () => {
+    console.log(uploadNewStory.files[0])
+    document.getElementById('addNewStory').style.display = 'flex'
+    previewNewStory.innerHTML = '';
+    const file = uploadNewStory.files[0]
+    const fileUrl = URL.createObjectURL(file)
+    const img = document.createElement('img')
+    img.src = fileUrl
+    img.style.maxHeight = "100%"
+    img.style.maxWidth = "100%"
+    previewNewStory.append(img)
+
+})
+
+document.getElementById('closeAddStory').addEventListener('click', () => {
+
+    if (confirm('Are you sure you want to discard?')) {
+        window.location.reload()
+
+    }
+
+})
+
+document.getElementById('submitStory').addEventListener('click', async (e) => {
+    console.log('na click ung share')
+    const formData = new FormData()
+    formData.append('image', uploadNewStory.files[0])
+    formData.append('username', loginUsername)
+    formData.append('userId', loginUserId)
+
+
+    try {
+        document.getElementById('loadingCircle').style.display = 'flex'
+        const submitStory = await fetch('https://instagramclone-developmentphasev2.onrender.com/uploadStory', {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+        })
+        const data = await submitStory.json()
+        if (submitStory.ok) {
+            window.location.reload()
+            console.log(data)
+        } else {
+            alert('error submiting story')
+        }
+    } catch (err) {
+        console.log('erro ka')
+    }
+
+})
+
+
+
+
+
