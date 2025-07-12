@@ -144,10 +144,16 @@
         <button id="closeCreatePost"><i class="fa-solid fa-xmark"></i></button>
         <form id="uploadForm" enctype="multipart/form-data">
             <h2>Create new Post</h2>
-            <input id="fileUp" type="file" name="media" accept="image/*,video/*" required>
-            <div id="preview"></div>
-            <input id="caption" type="text" placeholder="Enter caption">
-            <button type="submit">Upload</button>
+            <div id="createPostUploaded">
+                <input id="fileUp" type="file" name="media" accept="image/*,video/*" required>
+                <div id="preview"></div>
+            </div>
+
+            <div id="createPostControl">
+                <input id="caption" type="text" placeholder="Enter caption">
+                <button type="submit">Upload</button>
+            </div>
+
         </form>
     </div>
 
