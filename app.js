@@ -32,7 +32,7 @@ socket.on('connect', () => {
         document.getElementById('imageOnaddStory').src = userData.profileImage
         document.getElementById('followersCount').textContent = userData.follower
         document.getElementById('followingCount').textContent = userData.following
-        const getAlldataForWall = await fetch('http://localhost:8080/getAll', {
+        const getAlldataForWall = await fetch('https://instagramclone-developmentphasev2.onrender.com/getAll', {
             method: 'POST'
         })
         const data = await getAlldataForWall.json()
