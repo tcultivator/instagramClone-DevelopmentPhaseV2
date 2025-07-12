@@ -506,7 +506,7 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
 })
 
 app.post('/getStories', (req, res) => {
-    const query = 'SELECT * FROM story'
+    const query = 'SELECT * FROM story ORDER BY id DESC'
     db.query(query, (err, result) => {
         if (err) {
             res.status(400).json({ message: 'no story found' })
