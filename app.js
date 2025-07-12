@@ -176,6 +176,7 @@ document.addEventListener('click', (e) => {
 
 document.getElementById('closeViewStory').addEventListener('click', () => {
     document.getElementById('viewStoryBody').style.display = 'none'
+    document.getElementById('previewOfStoryVID').src = ''
 
 })
 
