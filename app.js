@@ -22,9 +22,7 @@ socket.on('connect', () => {
 
     const authenticate = await apiReq('/authenticate')
     if (authenticate.ok) {
-        console.log('gumana')
         userData = authenticate.data.result
-        console.log(userData)
         loginProfileimage = userData.profileImage
         loginUsername = userData.username
         loginUserId = userData.id
@@ -34,13 +32,11 @@ socket.on('connect', () => {
         document.getElementById('imageOnaddStory').src = userData.profileImage
         document.getElementById('followersCount').textContent = userData.follower
         document.getElementById('followingCount').textContent = userData.following
-        const getAlldataForWall = await fetch('https://instagramclone-developmentphasev2.onrender.com/getAll', {
+        const getAlldataForWall = await fetch('http://localhost:8080/getAll', {
             method: 'POST'
         })
         const data = await getAlldataForWall.json()
         if (getAlldataForWall.ok) {
-            console.log('nakuha lahat ng data')
-
             let wallUpdate = data.dataa
             wallUpdate.forEach(async element => {
                 const alreadyLikedData = await verifyIfAlreadyLike(element.id);
@@ -117,14 +113,20 @@ socket.on('connect', () => {
 
 async function getAllStories() {
     try {
+        document.getElementById('imageOnaddStory').src = loginProfileimage
         const getStories = await apiReq('/getStories')
         if (getStories.ok) {
             console.log(getStories.data)
             getStories.data.forEach(element => {
+                const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
+                const media = isVideo ? (`
+                    <video id="storyView" src="${element.secure_url}"  data-id="${element.id}"></video>
+                    `) :
+                    (`<img id="storyView" src="${element.secure_url}" alt="Your Story" data-id="${element.id}">`)
                 document.getElementById('stories').innerHTML += `
                  <div id="addStories" data-id="${element.id}">
                     <div id="storyBod" class="story-thumbnail">
-                        <img id="storyView" src="${element.secure_url}" alt="Your Story" data-id="${element.id}">
+                            ${media}
                         <div id="story-label" data-id="${element.id}">${element.username}</div>
                     </div>
                 </div>
@@ -149,10 +151,25 @@ document.addEventListener('click', (e) => {
         console.log('eto ung element mismo ', elementOfStory)
         const srcOfIMG = document.querySelector(`#storyView[data-id="${idOfElemt}"]`)
         console.log(srcOfIMG.src)
-        document.getElementById('previewOfStoryIMG').src = srcOfIMG.src
-        document.getElementById('viewStoryBody').style.display = 'flex'
-        const usernameOfStory = document.querySelector(`#story-label[data-id="${idOfElemt}"]`)
-        document.getElementById('usernameOfStoryview').textContent = usernameOfStory.textContent
+        const isVideo = srcOfIMG.src.match(/\.(mp4|webm|ogg)$/i);
+        if (isVideo) {
+            document.getElementById('previewOfStoryIMG').style.display = 'none'
+            document.getElementById('previewOfStoryVID').style.display = 'block'
+            document.getElementById('previewOfStoryVID').autoplay = true
+            document.getElementById('previewOfStoryVID').src = srcOfIMG.src
+            document.getElementById('viewStoryBody').style.display = 'flex'
+            const usernameOfStory = document.querySelector(`#story-label[data-id="${idOfElemt}"]`)
+            document.getElementById('usernameOfStoryview').textContent = usernameOfStory.textContent
+
+        } else {
+            document.getElementById('previewOfStoryIMG').style.display = 'block'
+            document.getElementById('previewOfStoryVID').style.display = 'none'
+            document.getElementById('previewOfStoryIMG').src = srcOfIMG.src
+            document.getElementById('viewStoryBody').style.display = 'flex'
+            const usernameOfStory = document.querySelector(`#story-label[data-id="${idOfElemt}"]`)
+            document.getElementById('usernameOfStoryview').textContent = usernameOfStory.textContent
+        }
+
 
     }
 
@@ -454,7 +471,6 @@ async function viewProfile() {
     if (viewProfileReq.ok) {
         userData = viewProfileReq.data.result
         console.log('eto ung data sa profile')
-        console.log(userData)
         userData.forEach(element => {
             const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
             const mediaTag = isVideo
@@ -479,7 +495,6 @@ document.addEventListener('click', (e) => {
     if (e.target.matches("#imageOnPost")) {
         console.log('naclikc')
         const urlofImg = e.target.dataset.secure_url
-        console.log(urlofImg)
         const isVideo = urlofImg.match(/\.(mp4|webm|ogg)$/i);
         const mediaTag = isVideo
             ? `<video autoplay width="100%">
@@ -591,7 +606,7 @@ document.addEventListener('click', async (e) => {
     }
 })
 
-socket.on('idOfCommentFromIO', ({postIdOfyouwantToComment,commentCount}) => {
+socket.on('idOfCommentFromIO', ({ postIdOfyouwantToComment, commentCount }) => {
     viewComments(postIdOfyouwantToComment)
     const postElement = document.querySelector(`#postcontent[data-id="${postIdOfyouwantToComment}"]`)
     const commentCountLabel = postElement.querySelector('#commentCount')
@@ -647,8 +662,6 @@ document.getElementById('closeComment').addEventListener('click', () => {
 async function verifyIfAlreadyLike(postId) {
     const verifyLike = await apiReq('/verifyIfAlreadyLike', { postId: postId, userId: loginUserId })
     if (verifyLike.ok) {
-        console.log(verifyLike.data)
-
         return verifyLike.data
 
     } else {
@@ -676,7 +689,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
         const submitComment = await apiReq('/addComment', { postId: postIdOfyouwantToComment, comment: inputComment.value, username: loginUsername, profileImage: loginProfileimage })
         if (submitComment.ok) {
             viewComments(postIdOfyouwantToComment)
-            socket.emit('idOfThis', {postIdOfyouwantToComment,commentCount})
+            socket.emit('idOfThis', { postIdOfyouwantToComment, commentCount })
             console.log('success ung comment')
             inputComment.value = ''
         } else {
@@ -806,7 +819,7 @@ document.getElementById('closeShowFollowers').addEventListener('click', () => {
 async function verifyIfAlreadyfollow(followUserId) {
     const verifyFollow = await apiReq('/verifyIfAlreadyFollow', { followUserId: followUserId, userId: loginUserId })
     if (verifyFollow.ok) {
-        console.log(verifyFollow.data)
+
 
         return verifyFollow.data
 
@@ -919,6 +932,12 @@ document.addEventListener('click', async (e) => {
 
 
 
+
+
+
+
+
+
 const uploadNewStory = document.getElementById('inputnewStory')
 
 document.addEventListener('click', (e) => {
@@ -934,12 +953,24 @@ document.getElementById('inputnewStory').addEventListener('change', () => {
     document.getElementById('addNewStory').style.display = 'flex'
     previewNewStory.innerHTML = '';
     const file = uploadNewStory.files[0]
-    const fileUrl = URL.createObjectURL(file)
-    const img = document.createElement('img')
-    img.src = fileUrl
-    img.style.maxHeight = "100%"
-    img.style.maxWidth = "100%"
-    previewNewStory.append(img)
+    console.log(file.type)
+    if (file.type == 'video/mp4') {
+        const fileUrl = URL.createObjectURL(file)
+        const vid = document.createElement('video')
+        vid.src = fileUrl
+        vid.autoplay = true
+        vid.style.maxHeight = "100%"
+        vid.style.maxWidth = "100%"
+        previewNewStory.append(vid)
+    } else {
+        const fileUrl = URL.createObjectURL(file)
+        const img = document.createElement('img')
+        img.src = fileUrl
+        img.style.maxHeight = "100%"
+        img.style.maxWidth = "100%"
+        previewNewStory.append(img)
+    }
+
 
 })
 
@@ -979,8 +1010,3 @@ document.getElementById('submitStory').addEventListener('click', async (e) => {
     }
 
 })
-
-
-
-
-
