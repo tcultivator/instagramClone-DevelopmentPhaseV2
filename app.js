@@ -17,7 +17,6 @@ socket.on('connect', () => {
 });
 
 
-
 (async () => {
 
     const authenticate = await apiReq('/authenticate')
