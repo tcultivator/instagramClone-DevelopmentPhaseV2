@@ -302,19 +302,17 @@ fileUploaded.addEventListener('change', () => {
         vid.muted = true
         vid.loop = true
         vid.controls = true
-        vid.style.maxHeight = "350px"
-        vid.style.maxWidth = "90%"
+        vid.style.height = "100%"
+        vid.style.width = "100%"
         preview.append(vid)
     } else {
         const fileUrl = URL.createObjectURL(file)
         const img = document.createElement('img')
         img.src = fileUrl
-        img.style.maxHeight = "350px"
-        img.style.maxWidth = "90%"
+        img.style.height = "100%"
+        img.style.width = "100%"
         preview.append(img)
     }
-
-
 })
 const caption = document.getElementById('caption')
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
