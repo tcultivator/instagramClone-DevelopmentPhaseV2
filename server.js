@@ -488,6 +488,8 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
             const date = new Date()
             const formattedDate = date.toISOString().split('T')[0];
             console.log(formattedDate)
+            console.log(username)
+            console.log(userId)
             const query = 'INSERT INTO story (userId,username,secure_url,datePosted)VALUES(?,?,?,?)'
             db.query(query, [userId, username, result.secure_url, formattedDate], (err, result) => {
                 if (err) {
