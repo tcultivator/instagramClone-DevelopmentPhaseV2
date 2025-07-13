@@ -443,7 +443,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     formData.append('userId', loginUserId)
 
     try {
-        const upload = await fetch('http://localhost:8080/upload', {
+        const upload = await fetch('https://instagramclone-developmentphasev2.onrender.com/upload', {
             method: 'POST',
             credentials: 'include',
             body: formData
