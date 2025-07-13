@@ -225,7 +225,11 @@ document.addEventListener('click', async (e) => {
             getAllStoryViewer.data.forEach(element => {
                 let reactionsIcon = '';
                 console.log('eto ung element reactions',element.reactions)
-                if (element.reactions != 'null' ||element.reactions != null || element.reactions != ' '|| element.reactions != '') {
+
+                if(element.reactions == null){
+                    reactionsIcon = '';
+                }
+               else {
                     const parseReactionIcon = JSON.parse(element.reactions)
                     reactionsIcon = parseReactionIcon.join(' ')
                     console.log('gumana ung condiiton kapag null')
