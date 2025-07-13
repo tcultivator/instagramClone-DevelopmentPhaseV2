@@ -223,7 +223,7 @@ document.addEventListener('click', async (e) => {
             document.getElementById('storyViewerList').style.display = 'block'
             console.log(getAllStoryViewer.data)
             getAllStoryViewer.data.forEach(element => {
-                console.log(element.reactions)
+                console.log('eto ung laman ng elemet',element.reactions)
                 let reactionsIcon = '';
                 if (element.reactions != '') {
                     const parseReactionIcon = JSON.parse(element.reactions)
