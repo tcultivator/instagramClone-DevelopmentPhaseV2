@@ -490,7 +490,7 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
             console.log(formattedDate)
             console.log(username)
             console.log(userId)
-            const query = 'INSERT INTO stories (userId,username,secure_url,datePosted,viewCount)VALUES(?,?,?,?,?)'
+            const query = 'INSERT INTO story (userId,username,secure_url,datePosted,viewCount)VALUES(?,?,?,?,?)'
             db.query(query, [userId, username, result.secure_url, formattedDate,0], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting to database' })
@@ -506,7 +506,7 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
 })
 
 app.post('/getStories', (req, res) => {
-    const query = 'SELECT * FROM stories ORDER BY id DESC'
+    const query = 'SELECT * FROM story ORDER BY id DESC'
     db.query(query, (err, result) => {
         if (err) {
             res.status(400).json({ message: 'no story found' })
@@ -524,7 +524,7 @@ app.post('/getStoryViewCount', (req, res) => {
     const query1 = 'SELECT * FROM storyviewer WHERE storyId = ? && userId = ?'
     db.query(query1, [storyId, userId], (err, result) => {
         if (result.length) {
-            const query5 = 'SELECT viewCount FROM stories WHERE id = ?'
+            const query5 = 'SELECT viewCount FROM story WHERE id = ?'
             db.query(query5, [storyId], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error sa pag kuha ng viewCount' })
@@ -538,12 +538,12 @@ app.post('/getStoryViewCount', (req, res) => {
                 if (err) {
                     res.status(400).json({ message: 'error sa pag insert ng info ng viewer' })
                 } else {
-                    const query3 = 'UPDATE stories SET viewCount = viewCount + 1 WHERE id = ?'
+                    const query3 = 'UPDATE story SET viewCount = viewCount + 1 WHERE id = ?'
                     db.query(query3, [storyId], (err, result) => {
                         if (err) {
                             res.status(400).json({ message: 'error sa pag update ng view count ng story' })
                         } else {
-                            const query4 = 'SELECT viewCount FROM stories WHERE id = ?'
+                            const query4 = 'SELECT viewCount FROM story WHERE id = ?'
                             db.query(query4, [storyId], (err, result) => {
                                 if (err) {
                                     res.status(400).json({ message: 'error sa pag kuha ng viewCount' })
