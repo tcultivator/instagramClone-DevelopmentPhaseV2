@@ -279,7 +279,7 @@ document.addEventListener('click', async (e) => {
             const reactionData = JSON.stringify(reactionsArr)
             setReactions(reactionData)
 
-        }, 3000);
+        }, 1000);
     }
 })
 
