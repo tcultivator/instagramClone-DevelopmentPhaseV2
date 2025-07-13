@@ -516,6 +516,82 @@ app.post('/getStories', (req, res) => {
     })
 })
 
+app.post('/getStoryViewCount', (req, res) => {
+    const storyId = req.body.idOfElemt;
+    const userId = req.body.userId;
+    const username = req.body.username;
+    const profileImage = req.body.profileImage;
+    const query1 = 'SELECT * FROM storyviewer WHERE storyId = ? && userId = ?'
+    db.query(query1, [storyId, userId], (err, result) => {
+        if (result.length) {
+            const query5 = 'SELECT viewCount FROM story WHERE id = ?'
+            db.query(query5, [storyId], (err, result) => {
+                if (err) {
+                    res.status(400).json({ message: 'error sa pag kuha ng viewCount' })
+                } else {
+                    res.status(200).json(result)
+                }
+            })
+        } else {
+            const query2 = 'INSERT INTO storyviewer (storyId,userId,username,secure_url)VALUES(?,?,?,?)'
+            db.query(query2, [storyId, userId, username, profileImage], (err, result) => {
+                if (err) {
+                    res.status(400).json({ message: 'error sa pag insert ng info ng viewer' })
+                } else {
+                    const query3 = 'UPDATE story SET viewCount = viewCount + 1 WHERE id = ?'
+                    db.query(query3, [storyId], (err, result) => {
+                        if (err) {
+                            res.status(400).json({ message: 'error sa pag update ng view count ng story' })
+                        } else {
+                            const query4 = 'SELECT viewCount FROM story WHERE id = ?'
+                            db.query(query4, [storyId], (err, result) => {
+                                if (err) {
+                                    res.status(400).json({ message: 'error sa pag kuha ng viewCount' })
+                                } else {
+                                    res.status(200).json(result)
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+})
+
+
+
+app.post('/getAllStoryViewer', (req, res) => {
+    const storyId = req.body.storyId
+    const query = 'SELECT * FROM storyviewer WHERE storyId = ?'
+    db.query(query, [storyId], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error sa pagkuha ng viewer' })
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
+
+
+app.post('/sendStoryReactions', (req, res) => {
+    const reactionsArr = req.body.reactionsArr;
+    const selectedStoryId = req.body.selectedStoryId;
+    const loginUserId = req.body.loginUserId;
+    console.log(reactionsArr)
+    const query = 'UPDATE storyviewer SET reactions = ? WHERE storyId = ? && userId = ?'
+    db.query(query, [reactionsArr, selectedStoryId, loginUserId], (err, result) => {
+        if (err) {
+            console.log('error ka sa send reactoo')
+            res.status(400).json({ message: 'erro sending reactions' })
+        } else {
+            console.log('success sa send react')
+            res.status(200).json({ message: 'success send reactions' })
+        }
+    })
+})
+
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
