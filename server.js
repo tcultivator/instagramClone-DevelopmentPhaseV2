@@ -490,8 +490,8 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
             console.log(formattedDate)
             console.log(username)
             console.log(userId)
-            const query = 'INSERT INTO stories (userId,username,secure_url,datePosted)VALUES(?,?,?,?)'
-            db.query(query, [userId, username, result.secure_url, formattedDate], (err, result) => {
+            const query = 'INSERT INTO stories (userId,username,secure_url,datePosted,viewCount)VALUES(?,?,?,?,?)'
+            db.query(query, [userId, username, result.secure_url, formattedDate,0], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting to database' })
                     console.log('error inserting to database')
