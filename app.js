@@ -16,8 +16,6 @@ socket.on('connect', () => {
     console.log('Socket connected from app.js!');
 });
 
-
-
 (async () => {
 
     const authenticate = await apiReq('/authenticate')
