@@ -17,6 +17,7 @@ socket.on('connect', () => {
 });
 
 
+
 (async () => {
 
     const authenticate = await apiReq('/authenticate')
@@ -141,37 +142,116 @@ async function getAllStories() {
 }
 
 getAllStories();
-
+let selectedStoryId;
 document.addEventListener('click', (e) => {
     if (e.target.matches('#storyView')) {
+
         const idOfElemt = e.target.dataset.id;
+        selectedStoryId = e.target.dataset.id;
         const elementOfStory = document.querySelector(`#addStories[data-id="${idOfElemt}"]`)
         console.log('eto ung id ng elemt ', idOfElemt)
         console.log('eto ung element mismo ', elementOfStory)
+
         const srcOfIMG = document.querySelector(`#storyView[data-id="${idOfElemt}"]`)
         console.log(srcOfIMG.src)
         const isVideo = srcOfIMG.src.match(/\.(mp4|webm|ogg)$/i);
         if (isVideo) {
-            document.getElementById('previewOfStoryIMG').style.display = 'none'
-            document.getElementById('previewOfStoryVID').style.display = 'block'
+
             document.getElementById('previewOfStoryVID').autoplay = true
             document.getElementById('previewOfStoryVID').src = srcOfIMG.src
             document.getElementById('viewStoryBody').style.display = 'flex'
             const usernameOfStory = document.querySelector(`#story-label[data-id="${idOfElemt}"]`)
             document.getElementById('usernameOfStoryview').textContent = usernameOfStory.textContent
+            if (loginUsername == usernameOfStory.textContent) {
+                document.getElementById('storyViewCount').style.display = 'block'
+            } else {
+                document.getElementById('storyViewCount').style.display = 'none'
+            }
+            document.getElementById('previewOfStoryIMG').style.display = 'none'
+            document.getElementById('previewOfStoryVID').style.display = 'block'
+            getStoryViewCount(idOfElemt)
 
         } else {
-            document.getElementById('previewOfStoryIMG').style.display = 'block'
-            document.getElementById('previewOfStoryVID').style.display = 'none'
+
             document.getElementById('previewOfStoryIMG').src = srcOfIMG.src
             document.getElementById('viewStoryBody').style.display = 'flex'
             const usernameOfStory = document.querySelector(`#story-label[data-id="${idOfElemt}"]`)
             document.getElementById('usernameOfStoryview').textContent = usernameOfStory.textContent
+            if (loginUsername == usernameOfStory.textContent) {
+                document.getElementById('storyViewCount').style.display = 'block'
+            } else {
+                document.getElementById('storyViewCount').style.display = 'none'
+            }
+            document.getElementById('previewOfStoryIMG').style.display = 'block'
+            document.getElementById('previewOfStoryVID').style.display = 'none'
+            getStoryViewCount(idOfElemt)
         }
+
+
+
 
 
     }
 
+})
+
+
+async function getStoryViewCount(idOfElemt) {
+
+    const getViewCount = await apiReq('/getStoryViewCount', { idOfElemt: idOfElemt, userId: loginUserId, username: loginUsername, profileImage: loginProfileimage })
+    if (getViewCount.ok) {
+        console.log('eto ung count ng view')
+        console.log(getViewCount.data[0].viewCount)
+        document.getElementById('storyViewCount').textContent = getViewCount.data[0].viewCount
+        document.getElementById('storyViewCount').setAttribute('data-id', idOfElemt)
+        console.log(document.getElementById('storyViewCount').dataset.id)
+
+    } else {
+        console.log('error ka sa view Count')
+    }
+
+}
+
+document.addEventListener('click', async (e) => {
+    if (e.target.matches('#storyViewCount')) {
+        console.log('na click ung viewCount')
+        console.log(document.getElementById('storyViewCount').dataset)
+        const storyId = document.getElementById('storyViewCount').dataset.id
+        document.getElementById('viewerContent').innerHTML = ''
+        const getAllStoryViewer = await apiReq('/getAllStoryViewer', { storyId: storyId })
+        if (getAllStoryViewer.ok) {
+            document.getElementById('storyViewerList').style.display = 'block'
+            console.log(getAllStoryViewer.data)
+            getAllStoryViewer.data.forEach(element => {
+                let reactionsIcon = '';
+                if (element.reactions != '') {
+                    const parseReactionIcon = JSON.parse(element.reactions)
+                    reactionsIcon = parseReactionIcon.join(' ')
+                }
+
+
+
+
+
+                document.getElementById('viewerContent').innerHTML += `
+                <div id="viewerContentInfo" data-id="${element.id}">
+                    <div id="viewerInfo">
+                        <img src="${element.secure_url}" alt="">
+                        <label for="">${element.username}</label>
+                    </div>
+
+                   
+                    <div id="viewerReactions">
+                       ${reactionsIcon}
+                    </div>
+
+                </div>
+                `
+            })
+        } else {
+            alert('error')
+        }
+    }
 })
 
 document.getElementById('closeViewStory').addEventListener('click', () => {
@@ -179,6 +259,48 @@ document.getElementById('closeViewStory').addEventListener('click', () => {
     document.getElementById('previewOfStoryVID').src = ''
 
 })
+
+document.getElementById('closeStoryViewerList').addEventListener('click', () => {
+    document.getElementById('storyViewerList').style.display = 'none'
+})
+
+
+let reactionsArr = []
+let reactionDelay = null;
+document.addEventListener('click', async (e) => {
+    if (e.target.matches('#heartReact') || e.target.matches('#hahaReact') || e.target.matches('#likeReact')) {
+        console.log(e.target.outerHTML)
+        reactionsArr.push(e.target.outerHTML)
+
+        clearTimeout(reactionDelay)
+        reactionDelay = setTimeout(() => {
+            console.log('natapos na ung timeout delay')
+            console.log(reactionsArr)
+            const reactionData = JSON.stringify(reactionsArr)
+            setReactions(reactionData)
+
+        }, 3000);
+    }
+})
+
+async function setReactions(reactionsArr) {
+    const sendStoryReactions = await apiReq('/sendStoryReactions', { reactionsArr: reactionsArr, selectedStoryId: selectedStoryId, loginUserId: loginUserId })
+    if (sendStoryReactions.ok) {
+        console.log('success sa pag send ng reactions ')
+        alert('success sa pag send ng reactions ')
+    } else {
+        console.log('error sa pag send ng reactions')
+    }
+}
+
+
+
+
+
+
+
+
+
 
 // document.addEventListener('mouseover', (e) => {
 //     if (e.target.matches('#postVid')) {
@@ -205,7 +327,7 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
             case 'create':
                 console.log('this is create')
                 document.getElementById('createPost').style.display = 'flex'
-                document.getElementById('profileBody').style = 'display:none'
+                document.getElementById('profileBody').style = 'display:none '
                 document.getElementById('updateProfilePic').style.display = 'none'
                 document.getElementById('viewPostBody').style.display = 'none'
                 break;
