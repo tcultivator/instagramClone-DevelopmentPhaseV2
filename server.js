@@ -102,8 +102,6 @@ function authenticate(req, res, next) {
         req.username = verifiedToken.username;
         next()
     }
-
-
 }
 
 app.post('/authenticate', authenticate, (req, res) => {
