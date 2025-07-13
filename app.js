@@ -229,10 +229,6 @@ document.addEventListener('click', async (e) => {
                     reactionsIcon = parseReactionIcon.join(' ')
                 }
 
-
-
-
-
                 document.getElementById('viewerContent').innerHTML += `
                 <div id="viewerContentInfo" data-id="${element.id}">
                     <div id="viewerInfo">
@@ -447,7 +443,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     formData.append('userId', loginUserId)
 
     try {
-        const upload = await fetch('https://instagramclone-developmentphasev2.onrender.com/upload', {
+        const upload = await fetch('http://localhost:8080/upload', {
             method: 'POST',
             credentials: 'include',
             body: formData
