@@ -485,11 +485,11 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
             console.log('error uploading story')
         } else {
             console.log(result.secure_url)
-            const date = new Date()
-            const formattedDate = date.toISOString().split('T')[0];
-            console.log(formattedDate)
-            const query = 'INSERT INTO story (userId,username,secure_url,datePosted)VALUES(?,?,?,?)'
-            db.query(query, [userId, username, result.secure_url, formattedDate], (err, result) => {
+            // const date = new Date()
+            // const formattedDate = date.toISOString().split('T')[0];
+            // console.log(formattedDate)
+            const query = 'INSERT INTO story (userId,username,secure_url)VALUES(?,?,?)'
+            db.query(query, [userId, username, result.secure_url], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting to database' })
                     console.log('error inserting to database')
