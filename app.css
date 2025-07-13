@@ -196,7 +196,7 @@ body button {
     font-weight: bold;
     width: 100%;
     color: rgb(255, 255, 255);
-    
+
 
     text-align: center;
 }
@@ -205,8 +205,8 @@ body button {
     display: flex;
     justify-content: right;
     width: 95%;
-    
-    
+
+
 }
 
 #addNewStoryBody #storyControl #closeAddStory {
@@ -242,28 +242,95 @@ body button {
     width: 100%;
     background-color: rgb(29, 29, 29);
     height: 100%;
-    
+
 
     color: white;
 
 }
 
-#previewOfStory label {
+#previewOfStory #usernameOfStoryview {
     font-weight: bold;
     font-size: 20px;
     padding: 10px;
 }
 
-#previewOfStory button {
+#previewOfStory #closeViewStory {
     font-weight: bold;
-    font-size: 15px;
-    padding: 10px;
+    font-size: 20px;
+    padding: 5px;
     color: white;
-    background-color: var(--btn-bg-color-secondary);
+    background-color: transparent;
     border: none;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
+
+#storyViewCount {
+    position: relative;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: #2b51a5;
+    aspect-ratio: 1/1;
+    margin: 15px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    font-size: 15px;
+}
+
+#footerInViewStory {
+    display: flex;
+    align-items: center;
+}
+
+/* #storyViewCount {
+    position: absolute;
+    bottom: 10%;
+    left: 10px;
+    background-color: var(--btn-bg-color-secondary);
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    aspect-ratio: 1/1;
+    min-width: 15px;
+    text-align: center;
+    align-items: center;
+} */
+
+#reactToStory {
+
+    width: 95%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 5px;
+    justify-content: right;
+    padding: 10px;
+    margin-bottom: 10px;
+
+}
+
+#reactToStory i {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: none;
+    color: white;
+    padding: 10px;
+    background-color: #e2c12b;
+    cursor: pointer;
+}
+
+#reactToStory i:first-child {
+    background-color: red;
+}
+
+#reactToStory i:last-child {
+    background-color: blue;
+}
+
 
 
 
@@ -690,10 +757,10 @@ body button {
     text-align: center;
     display: flex;
     flex-direction: column;
-    
+
     justify-content: space-between;
     color: white;
-    
+
 }
 
 
@@ -702,20 +769,22 @@ body button {
     border-radius: 5px;
     border: 1px solid black;
 }
-#createPostControl{
+
+#createPostControl {
     display: flex;
     flex-direction: column;
     gap: 5px;
     width: 90%;
     margin: 0 auto 10px auto;
 }
-#createPostUploaded{
+
+#createPostUploaded {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-#createPostUploaded input{
+#createPostUploaded input {
     width: 50%;
     margin: auto;
 }
@@ -1190,6 +1259,123 @@ body button {
 
 
 
+#storyViewerList {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.336);
+    overflow: hidden;
+    display: flex;
+}
+
+#listOfViewer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(0, 0, 0);
+    height: 60%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#controlStoryViewer {
+    background-color: rgb(0, 0, 0);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    padding: 5px 0 20px 0;
+    border-bottom: 1px solid white;
+}
+
+#controlStoryViewer button {
+    width: 15%;
+    background-color: rgb(43, 43, 43);
+    height: 10px;
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 2px solid white;
+}
+
+
+
+
+#viewerContent {
+
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    max-height: 390px;
+
+}
+
+#viewerContentInfo {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#viewerContentInfo #viewerInfo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+#viewerContentInfo #viewerReactions {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: white;
+}
+
+
+#viewerReactions #heartReact {
+    background-color: red;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    font-size: 8px;
+}
+
+
+#hahaReact {
+    background-color: rgb(228, 154, 44);
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    font-size: 8px;
+}
+
+
+#likeReact {
+    background-color: rgb(39, 134, 223);
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    font-size: 8px;
+}
 
 
 
@@ -1203,9 +1389,12 @@ body button {
 
 
 
-
-
-
+#viewerInfo img {
+    width: 30px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 2px solid white;
+}
 
 
 
@@ -2016,7 +2205,7 @@ body button {
 
 
     #viewStoryBody {
-        background-color: rgb(255, 255, 255);
+        background-color: rgb(27, 27, 27);
         width: calc(100% - 20%);
         height: 100%;
         position: absolute;
@@ -2035,7 +2224,6 @@ body button {
         background-color: rgb(0, 0, 0);
         height: 800px;
         border-radius: 10px;
-
         color: white;
 
     }
@@ -2058,9 +2246,49 @@ body button {
     }
 
 
+    #storyViewCount {
+        position: relative;
+        width: 25px;
+        background-color: #2b51a5;
+        aspect-ratio: 1/1;
+        margin: 10px;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #footerInViewStory {
+        display: flex;
+        align-items: center;
+    }
 
 
 
+    #storyViewerList {
+        position: absolute;
+        width: calc(100% - 20%);
+        height: 100%;
+        top: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.336);
+        overflow: hidden;
+        display: flex;
+       
+        justify-items: center;
+    }
+
+
+    #listOfViewer {
+        width: 500px;
+        position: absolute;
+        bottom: 0;
+        background-color: rgb(0, 0, 0);
+        height: 60%;
+        margin: auto;
+        justify-content: center;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
 
 
 
