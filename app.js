@@ -324,7 +324,6 @@ async function setReactions(reactionsArr) {
     const sendStoryReactions = await apiReq('/sendStoryReactions', { reactionsArr: reactionsArr, selectedStoryId: selectedStoryId, loginUserId: loginUserId })
     if (sendStoryReactions.ok) {
         console.log('success sa pag send ng reactions ')
-        alert('success sa pag send ng reactions ')
     } else {
         console.log('error sa pag send ng reactions')
     }
