@@ -267,6 +267,7 @@ document.getElementById('closeStoryViewerList').addEventListener('click', () => 
 
 let reactionsArr = []
 let reactionDelay = null;
+
 let reactionsClickLimit = 7;
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#heartReact') || e.target.matches('#hahaReact') || e.target.matches('#likeReact')) {
@@ -276,6 +277,33 @@ document.addEventListener('click', async (e) => {
             console.log('reach max of reactions')
         } else {
             reactionsArr.push(e.target.outerHTML)
+
+            if (e.target.matches('#heartReact')) {
+                document.getElementById('reactionsPopupIconheart').style.display = 'flex'
+
+                setTimeout(() => {
+                    document.getElementById('reactionsPopupIconheart').style.display = 'none'
+
+                }, 200);
+
+            } else if (e.target.matches('#hahaReact')) {
+                document.getElementById('reactionsPopupIconhaha').style.display = 'flex'
+
+                setTimeout(() => {
+                    document.getElementById('reactionsPopupIconhaha').style.display = 'none'
+
+                }, 200);
+
+            } else if (e.target.matches('#likeReact')) {
+                document.getElementById('reactionsPopupIconlike').style.display = 'flex'
+
+                setTimeout(() => {
+                    document.getElementById('reactionsPopupIconlike').style.display = 'none'
+
+                }, 200);
+
+            }
+
         }
 
 
@@ -286,6 +314,7 @@ document.addEventListener('click', async (e) => {
             const reactionData = JSON.stringify(reactionsArr)
             setReactions(reactionData)
             reactionsClickLimit = 7;
+            reactionsArr = []
 
         }, 1000);
     }
