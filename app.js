@@ -267,10 +267,17 @@ document.getElementById('closeStoryViewerList').addEventListener('click', () => 
 
 let reactionsArr = []
 let reactionDelay = null;
+let reactionsClickLimit = 7;
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#heartReact') || e.target.matches('#hahaReact') || e.target.matches('#likeReact')) {
         console.log(e.target.outerHTML)
-        reactionsArr.push(e.target.outerHTML)
+        reactionsClickLimit--;
+        if (reactionsClickLimit < 0) {
+            console.log('reach max of reactions')
+        } else {
+            reactionsArr.push(e.target.outerHTML)
+        }
+
 
         clearTimeout(reactionDelay)
         reactionDelay = setTimeout(() => {
@@ -278,6 +285,7 @@ document.addEventListener('click', async (e) => {
             console.log(reactionsArr)
             const reactionData = JSON.stringify(reactionsArr)
             setReactions(reactionData)
+            reactionsClickLimit = 7;
 
         }, 1000);
     }
