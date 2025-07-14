@@ -1399,7 +1399,105 @@ body button {
 
 
 
+#reactionsPopupIconheart {
+    position: absolute;
+    top: 45%;
+    right: 44%;
+    transform: translate(-50%, -45%);
+    display: flex;
+    animation: fadeOutheart .3s ease-in;
 
+
+
+}
+
+#reactionsPopupIconheart #heartReactPopup {
+    color: red;
+    margin: auto;
+    font-size: 40px;
+
+}
+
+
+#reactionsPopupIconhaha {
+    position: absolute;
+    top: 45%;
+    right: 44%;
+    transform: translate(-50%, -45%);
+    display: flex;
+    animation: fadeOuthaha .3s ease-in;
+
+
+
+}
+
+#reactionsPopupIconhaha #hahaReactPopup {
+    color: #e2c12b;
+    margin: auto;
+    font-size: 40px;
+
+}
+
+#reactionsPopupIconlike {
+    position: absolute;
+    top: 45%;
+    right: 44%;
+    transform: translate(-50%, -45%);
+    display: flex;
+    animation: fadeOutlike .3s ease-in;
+
+
+
+}
+
+#reactionsPopupIconlike #likeReactPopup {
+    color: blue;
+    margin: auto;
+    font-size: 40px;
+
+}
+
+@keyframes fadeOutheart {
+    from {
+        opacity: 1;
+        transform: scale(1);
+
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(.3);
+
+    }
+}
+
+@keyframes fadeOuthaha {
+    from {
+        opacity: 1;
+        transform: scale(1);
+
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(.3);
+
+    }
+}
+
+@keyframes fadeOutlike {
+    from {
+        opacity: 1;
+        transform: scale(1);
+
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(.3);
+
+    }
+}
 
 
 
@@ -2273,7 +2371,7 @@ body button {
         background-color: rgba(0, 0, 0, 0.336);
         overflow: hidden;
         display: flex;
-       
+
         justify-items: center;
     }
 
@@ -2291,6 +2389,69 @@ body button {
     }
 
 
+
+    #reactionsPopupIconheart {
+        position: absolute;
+        top: 45%;
+        width: calc(100% - 20%);
+        top: 45%;
+        right: 0;
+        transform: translate(-50%, -45%);
+        display: flex;
+        animation: fadeOutheart .3s ease-in;
+
+
+
+    }
+
+    #reactionsPopupIconheart #heartReactPopup {
+        color: red;
+        margin: auto;
+        font-size: 40px;
+
+    }
+
+
+    #reactionsPopupIconhaha {
+        position: absolute;
+        top: 45%;
+        width: calc(100% - 20%);
+        top: 45%;
+        right: 0;
+        transform: translate(-50%, -45%);
+        display: flex;
+        animation: fadeOuthaha .3s ease-in;
+
+
+
+    }
+
+    #reactionsPopupIconhaha #hahaReactPopup {
+        color: #e2c12b;
+        margin: auto;
+        font-size: 40px;
+
+    }
+
+    #reactionsPopupIconlike {
+        position: absolute;
+        width: calc(100% - 20%);
+        top: 45%;
+        right: 0;
+        transform: translate(-50%, -45%);
+        display: flex;
+        animation: fadeOutlike .3s ease-in;
+
+
+
+    }
+
+    #reactionsPopupIconlike #likeReactPopup {
+        color: blue;
+        margin: auto;
+        font-size: 40px;
+
+    }
 
 
 
