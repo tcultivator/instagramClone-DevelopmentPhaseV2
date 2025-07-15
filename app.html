@@ -46,9 +46,9 @@
     <div id="footerNav">
         <button id="home"><i class="fa-solid fa-house"></i></button>
         <button id="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <button id="create"><i class="fa-solid fa-circle-plus"></i></button>
-        <button id="notif"><i class="fa-solid fa-heart"></i></button>
-        <button id="profile"><i class="fa-solid fa-user"></i></button>
+        <button id="create"><i class="fa-regular fa-square-plus"></i></button>
+        <button id="notif"><i class="fa-regular fa-heart"></i></button>
+        <button id="profile"><i class="fa-regular fa-circle-user"></i></button>
     </div>
     <div id="sidebar">
         <div class="topbar">
@@ -57,7 +57,7 @@
         <div class="botbar">
             <button id="homeS"><i class="fa-solid fa-house"></i> Home</button>
             <button id="searchS"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-            <button id="createS"><i class="fa-solid fa-circle-plus"></i> Create</button>
+            <button id="createS"><i class="fa-regular fa-square-plus"></i> Create</button>
             <button id="notifS"><i class="fa-solid fa-heart"></i> Notification</button>
             <button id="profileS"><i class="fa-solid fa-user"></i> Profile</button>
         </div>
@@ -68,10 +68,15 @@
         <div id="headProfile">
             <button type="button" id="backBtnonProfile"><i class="fa-solid fa-chevron-left"></i></button>
             <label>Profile</label>
+            <button id="settingsInProfile"><i id="gearIcon" class="fa-solid fa-gear"></i></button>
         </div>
         <div id="profileiconBody">
             <div id="icon">
                 <img src="assets/default.png" alt="" id="changeProfile">
+                <div>
+                    <button id="editProfilePic"><i class="fa-regular fa-square-plus"></i></button>
+                </div>
+
             </div>
             <div id="profileControl">
                 <label id="profileName"></label>
@@ -79,6 +84,7 @@
             </div>
 
         </div>
+        <label id="bioInProfile"></label>
         <div id="profileDetails">
             <div id="postBody">
                 <label id="postsCount"></label>
@@ -161,8 +167,11 @@
         <button type="button" id="closeUpdateProfile"><i class="fa-solid fa-xmark"></i></button>
         <form id="updateProfilePicForm" enctype="multipart/form-data">
             <h2>Update Profile Picture</h2>
-            <input type="file" id="profilefile" accept="image/*">
-            <div id="previewProfile"></div>
+            <div>
+                <input type="file" id="profilefile" accept="image/*">
+                <div id="previewProfile"></div>
+            </div>
+
             <button type="submit">Upload</button>
         </form>
     </div>
@@ -279,16 +288,62 @@
         <div id="circle"></div>
     </div>
 
-      <div id="reactionsPopupIconheart" style="display: none;" >
+
+    <div id="reactionsPopupIconheart" style="display: none;">
         <i id="heartReactPopup" class="fa-solid fa-heart"></i>
     </div>
-    <div id="reactionsPopupIconhaha" style="display: none;" >
+    <div id="reactionsPopupIconhaha" style="display: none;">
         <i id="hahaReactPopup" class="fa-solid fa-face-laugh-beam"></i>
     </div>
-    <div id="reactionsPopupIconlike" style="display: none;" >
+    <div id="reactionsPopupIconlike" style="display: none;">
         <i id="likeReactPopup" class="fa-solid fa-thumbs-up"></i>
     </div>
 
+
+
+
+
+    <div id="logoutPopup" style="display: none;">
+        <div id="logoutControl">
+            <button id="logout">logout</button>
+        </div>
+    </div>
+
+
+    <div id="editProfileInfo" style="display: none;">
+        <div id="headerInProfile">
+            <button id="closeEditProfileInfo"><i class="fa-solid fa-chevron-left"></i></button>
+            <label for="">Edit Profile Info</label>
+        </div>
+        <div id="contentOfprofileInfo">
+            <label for="">Username</label>
+            <div id="usernameDiv">
+                <input id="usernameOfUser" type="text">
+
+            </div>
+            <label for="">Email</label>
+            <div id="emailDiv">
+                <input id="emailOfUser" type="text">
+
+            </div>
+            <label for="">Address</label>
+            <div id="addressDiv">
+                <input id="addressOfUser" type="text">
+
+            </div>
+            <label for="">Age</label>
+            <div id="ageDiv">
+                <input id="ageOfUser" type="number">
+
+            </div>
+            <label for="">Bio</label>
+            <div id="bioDiv">
+                <textarea name="" id="bioOfUser"></textarea>
+                <button id="changeProfileInfoBtn">Submit</button>
+            </div>
+        </div>
+
+    </div>
 
 
 
