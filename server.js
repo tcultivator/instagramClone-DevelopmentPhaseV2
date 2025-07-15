@@ -592,6 +592,82 @@ app.post('/sendStoryReactions', (req, res) => {
     })
 })
 
+
+
+
+app.post('/logout', authenticate, (req, res) => {
+    const verifiedUserId = req.userId
+    if (verifiedUserId) {
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        })
+        res.status(200).json({ message: 'success logout' })
+    } else {
+        res.status(400).json({ message: 'error logout' })
+    }
+})
+
+
+
+
+
+
+
+
+app.post('/changeUserInfo', authenticate, (req, res) => {
+    console.log('eto 1')
+    const userId = req.userId
+    const username = req.body.username
+    const email = req.body.email
+    const address = req.body.address
+    const age = req.body.age
+    const bio = req.body.bio
+    const query = 'UPDATE accounts SET username = ? , email = ? , address = ? , age = ? , bio = ? WHERE id = ?'
+    db.query(query, [username,email,address,age,bio, userId], (err, result) => {
+        console.log('eto 2')
+        if (err) {
+            res.status(400).json({ message: 'error update username' })
+        } else {
+            const query2 = 'UPDATE images SET username = ? WHERE userId = ?'
+            db.query(query2, [username, userId], (err, result) => {
+                console.log('eto 3')
+                if (err) {
+                    res.status(400).json({ message: 'error update userInfo' })
+                } else {
+                    const query3 = 'UPDATE story SET username = ? WHERE userId = ?'
+                    db.query(query3, [username, userId], (err, result) => {
+                        console.log('eto 4')
+                        if (err) {
+                            res.status(400).json({ message: 'error update userInfo' })
+                        } else {
+                            const query4 = 'UPDATE storyviewer SET username = ? WHERE userId = ?'
+                            db.query(query4, [username, userId], (err, result) => {
+                                console.log('eto 5')
+                                if (err) {
+                                    res.status(400).json({ message: 'error update userInfo' })
+                                } else {
+                                    const query5 = 'UPDATE comments SET username = ? WHERE userId = ?'
+                                    db.query(query5, [username, userId], (err, result) => {
+                                        console.log('eto 6')
+                                        if (err) {
+                                            res.status(400).json({ message: 'error update userInfo' })
+                                        } else {
+                                            res.status(200).json({ message: 'success update userInfo' })
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+
+        }
+    })
+})
+
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
