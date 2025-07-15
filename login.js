@@ -70,17 +70,17 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
 
 //darkmode
-let toggle = false
-document.getElementById('btnToggle').addEventListener('click', () => {
-    toggle = !toggle
-    toggle ? (document.getElementById('btnToggle').innerHTML = `<i class="fa-solid fa-moon"></i>`,
-        document.documentElement.style.setProperty('--bg-color', 'black'),
-        document.documentElement.style.setProperty('--primary-text-color', 'white'),
-        document.documentElement.style.setProperty('--btntoggle-color', 'white')
+// let toggle = false
+// document.getElementById('btnToggle').addEventListener('click', () => {
+//     toggle = !toggle
+//     toggle ? (document.getElementById('btnToggle').innerHTML = `<i class="fa-solid fa-moon"></i>`,
+//         document.documentElement.style.setProperty('--bg-color', 'black'),
+//         document.documentElement.style.setProperty('--primary-text-color', 'white'),
+//         document.documentElement.style.setProperty('--btntoggle-color', 'white')
 
-    ) :
-        (document.getElementById('btnToggle').innerHTML = `<i class="fa-solid fa-sun"></i>`,
-            document.documentElement.style.setProperty('--bg-color', 'white'),
-            document.documentElement.style.setProperty('--primary-text-color', 'rgb(70, 70, 70)'),
-            document.documentElement.style.setProperty('--btntoggle-color', 'rgb(218, 173, 29)'))
-})
+//     ) :
+//         (document.getElementById('btnToggle').innerHTML = `<i class="fa-solid fa-sun"></i>`,
+//             document.documentElement.style.setProperty('--bg-color', 'white'),
+//             document.documentElement.style.setProperty('--primary-text-color', 'rgb(70, 70, 70)'),
+//             document.documentElement.style.setProperty('--btntoggle-color', 'rgb(218, 173, 29)'))
+// })
