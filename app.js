@@ -6,6 +6,10 @@ let filename;
 let loginUsername;
 let loginUserId;
 let loginProfileimage;
+let email;
+let age;
+let bio;
+let address;
 
 
 import { io } from 'https://cdn.socket.io/4.7.2/socket.io.esm.min.js';
@@ -16,6 +20,8 @@ socket.on('connect', () => {
     console.log('Socket connected from app.js!');
 });
 
+
+
 (async () => {
 
     const authenticate = await apiReq('/authenticate')
@@ -24,12 +30,18 @@ socket.on('connect', () => {
         loginProfileimage = userData.profileImage
         loginUsername = userData.username
         loginUserId = userData.id
+        email = userData.email
+        age = userData.age
+        bio = userData.bio
+        address = userData.address
+
         console.log('eto ung userid', loginUserId)
         document.getElementById('profileName').textContent = userData.username
         document.getElementById('changeProfile').src = userData.profileImage
         document.getElementById('imageOnaddStory').src = userData.profileImage
         document.getElementById('followersCount').textContent = userData.follower
         document.getElementById('followingCount').textContent = userData.following
+        document.getElementById('bioInProfile').textContent = userData.bio
         const getAlldataForWall = await fetch('https://instagramclone-developmentphasev2.onrender.com/getAll', {
             method: 'POST'
         })
@@ -222,15 +234,10 @@ document.addEventListener('click', async (e) => {
             console.log(getAllStoryViewer.data)
             getAllStoryViewer.data.forEach(element => {
                 let reactionsIcon = '';
-                console.log('eto ung element reactions',element.reactions)
-
-                if(element.reactions == null){
-                    reactionsIcon = '';
-                }
-               else {
+                if (element.reactions != '') {
                     const parseReactionIcon = JSON.parse(element.reactions)
                     reactionsIcon = parseReactionIcon.join(' ')
-                    console.log('gumana ung condiiton kapag null')
+
                 }
 
                 document.getElementById('viewerContent').innerHTML += `
@@ -507,10 +514,50 @@ document.getElementById('closeCreatePost').addEventListener('click', () => {
     document.getElementById('preview').innerHTML = ''
 })
 
-document.getElementById('editProfile').addEventListener('click', () => {
+document.getElementById('editProfilePic').addEventListener('click', () => {
     console.log('naclick ung profile')
     document.getElementById('updateProfilePic').style.display = 'flex'
 
+})
+
+
+
+
+const usernameOfUser = document.getElementById('usernameOfUser')
+const emailOfUser = document.getElementById('emailOfUser')
+const addressOfUser = document.getElementById('addressOfUser')
+const ageOfUser = document.getElementById('ageOfUser')
+const bioOfUser = document.getElementById('bioOfUser')
+document.getElementById('editProfile').addEventListener('click', () => {
+    console.log('eto ung pang edit sa mismong profile info')
+    document.getElementById('editProfileInfo').style.display = 'block'
+    usernameOfUser.value = loginUsername
+    emailOfUser.value = email
+    addressOfUser.value = address
+    ageOfUser.value = age
+    bioOfUser.value = bio
+})
+
+document.getElementById('changeProfileInfoBtn').addEventListener('click', async () => {
+    document.getElementById('loadingCircle').style.display = 'flex'
+    const changeUsername = await apiReq('/changeUserInfo', {
+        username: usernameOfUser.value,
+        email: emailOfUser.value, address: addressOfUser.value, age: ageOfUser.value,
+        bio: bioOfUser.value
+    })
+    if (changeUsername.ok) {
+        console.log('success')
+        window.location.reload()
+    } else {
+        console.log('error')
+    }
+})
+
+
+
+
+document.getElementById('closeEditProfileInfo').addEventListener('click', () => {
+    document.getElementById('editProfileInfo').style.display = 'none'
 })
 
 const profilePicUpload = document.getElementById('profilefile')
@@ -522,8 +569,8 @@ profilePicUpload.addEventListener('change', () => {
     const fileUrl = URL.createObjectURL(file)
     const img = document.createElement('img')
     img.src = fileUrl
-    img.style.maxHeight = "90%"
-    img.style.maxWidth = "90%"
+    img.style.maxHeight = "100%"
+    img.style.maxWidth = "100%"
     previewProfile.append(img)
 
 })
@@ -684,7 +731,7 @@ document.addEventListener('click', async (e) => {
             likeCountLabel.dataset.likecount = likeCount
             likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
 
-            likeIcon.style = 'color:rgb(112, 112, 112)'
+            likeIcon.style = 'color:rgba(255, 255, 255, 1)'
             const postId = e.target.dataset.id
             console.log(loginUserId)
             console.log(postId)
@@ -1163,6 +1210,35 @@ document.getElementById('submitStory').addEventListener('click', async (e) => {
         }
     } catch (err) {
         console.log('erro ka')
+    }
+
+})
+
+
+
+
+
+document.getElementById('logout').addEventListener('click', async (e) => {
+    document.getElementById('loadingCircle').style.display = 'flex'
+    document.getElementById('logoutPopup').style.display = 'none'
+    const logout = await apiReq('/logout')
+    if (logout.ok) {
+        console.log('success logout')
+        window.location.replace('index.html')
+    } else {
+        console.log('hindi ka makapag logout')
+    }
+})
+
+let settingsToggle = false
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#settingsInProfile') || e.target.matches('#gearIcon')) {
+        settingsToggle = !settingsToggle;
+        console.log('zxczxczxczxc')
+        settingsToggle ? document.getElementById('logoutPopup').style.display = 'block' :
+            document.getElementById('logoutPopup').style.display = 'none'
+    } else {
+        document.getElementById('logoutPopup').style.display = 'none'
     }
 
 })
