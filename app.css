@@ -12,7 +12,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #FFFFFF;
+    background-color: rgb(36, 36, 36);
     overflow: hidden;
 }
 
@@ -21,7 +21,7 @@ body button {
 }
 
 #header {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(36, 36, 36);
     top: 0;
     position: fixed;
     display: flex;
@@ -38,28 +38,29 @@ body button {
 #header h1 {
     font-size: 30px;
     font-family: 'Sacramento';
+    color: rgb(255, 255, 255);
 
 }
 
 #header button {
     background-color: transparent;
     border: none;
-    color: rgb(122, 122, 122);
+    color: rgb(255, 255, 255);
     font-size: 20px;
 
 }
 
 
 #storyBody {
-    background-color: #ffffff;
+    background-color: rgb(36, 36, 36);
     top: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
     padding: 5px;
-    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
-    border-top: 1px solid rgba(197, 197, 197, 0.788);
-    color: rgb(0, 0, 0);
+    border-top: 1px solid rgba(90, 90, 90, 0.788);
+
+    color: rgb(255, 255, 255);
     box-sizing: border-box;
     gap: 0px;
 
@@ -86,7 +87,7 @@ body button {
     width: 90px;
     height: 130px;
     overflow: hidden;
-    border: 2px solid #ccc;
+    border: 2px solid #7a7a7a;
     transition: border-color 0.3s ease;
     border-radius: 10px;
 }
@@ -141,12 +142,12 @@ body button {
 }
 
 #addStories:hover .story-thumbnail {
-    border-color: #007bff;
+    border-color: #4e92db;
 }
 
 
 #addNewStory {
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(36, 36, 36);
     position: absolute;
     top: 0;
     right: 0;
@@ -210,7 +211,7 @@ body button {
 }
 
 #addNewStoryBody #storyControl #closeAddStory {
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(36, 36, 36);
     color: rgb(255, 255, 255);
     font-size: 15px;
     width: 30px;
@@ -223,7 +224,7 @@ body button {
 
 
 #viewStoryBody {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(36, 36, 36);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -240,7 +241,7 @@ body button {
     gap: 5px;
     margin: auto;
     width: 100%;
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(36, 36, 36);
     height: 100%;
 
 
@@ -321,33 +322,40 @@ body button {
     padding: 10px;
     background-color: #e2c12b;
     cursor: pointer;
+    font-size: 15px;
 }
 
 #reactToStory i:first-child {
     background-color: red;
+    font-size: 15px;
 }
 
 #reactToStory i:last-child {
     background-color: blue;
+    font-size: 15px;
 }
 
 
 
-
+/* #footerNav #home i {
+    
+    color: white;
+    
+} */
 
 #userPost {
     position: absolute;
     width: 100%;
-    height: calc(100% - 20%);
+    height: calc(100% - 15.5%);
     box-sizing: border-box;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(36, 36, 36);
     top: 60px;
     z-index: -1;
     gap: 5px;
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-
+    color: white;
 }
 
 #userPost::-webkit-scrollbar {
@@ -357,44 +365,46 @@ body button {
 
 
 #postcontent {
-    background-color: rgba(255, 255, 255, 0.445);
+    background-color: rgb(36, 36, 36);
     width: 100%;
     height: fit-content;
-    margin-bottom: 5px;
+    padding-bottom: 10px;
+    border-top: 1px solid rgba(90, 90, 90, 0.788);
+    color: white;
 
 }
 
 #postcontent #followBTN {
-    background-color: rgba(0, 0, 0, 0.356);
+    background-color: rgb(27, 88, 221);
     padding: 5px;
     border-radius: 5px;
     text-align: center;
-    color: var(--btn-text-color);
+    color: white;
     width: 70px;
 }
 
 
 
 #postlabel {
-
+    color: white;
     font-size: 12px;
     margin-left: 5px;
 }
 
 #postlabel label {
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: bold;
 }
 
 #postlabel label span {
-    color: rgb(116, 116, 116);
+    color: rgb(255, 255, 255);
     font-weight: normal;
 
 }
 
 #userProfilePost {
     display: flex;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(36, 36, 36);
     justify-content: space-between;
     align-items: center;
     padding: 10px;
@@ -404,7 +414,7 @@ body button {
     display: flex;
     align-items: center;
     gap: 5px;
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
 }
@@ -413,7 +423,7 @@ body button {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 2px solid rgb(78, 78, 78);
+    border-top: 1px solid rgba(90, 90, 90, 0.788);
     cursor: pointer;
 }
 
@@ -425,7 +435,7 @@ body button {
     background-color: transparent;
     border: none;
     font-size: 12px;
-    color: rgb(102, 102, 102);
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
@@ -465,20 +475,20 @@ body button {
     background-color: transparent;
     border: none;
     font-size: 18px;
-    color: rgb(112, 112, 112);
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
 #likecommentshare button:hover {
 
-    color: rgb(180, 180, 180);
+    color: rgb(255, 255, 255);
 }
 
 #valueoflikecommentshare {
     display: flex;
     gap: 14px;
     font-size: 12px;
-    color: rgb(109, 109, 109);
+    color: rgb(255, 255, 255);
     padding: 0 0 5px 5px;
 
 }
@@ -512,24 +522,25 @@ body button {
 
 
 #footerNav {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(36, 36, 36);
     position: fixed;
     bottom: 0;
     left: 0;
-    padding: 15px 25px 15px 25px;
+
     display: flex;
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
-    border-top: 1px solid rgba(197, 197, 197, 0.788);
+    border-top: 1px solid rgb(175, 175, 175);
     gap: 35px;
+    height: 7%;
 }
 
 #footerNav button {
     background-color: transparent;
     border: none;
-    font-size: 18px;
-    color: rgb(121, 121, 121);
+    font-size: 20px;
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
@@ -544,9 +555,10 @@ body button {
 #profileBody {
     position: absolute;
     width: 100%;
-    height: calc(100% - 54px);
-    background-color: var(--bg-color);
+    height: calc(100% - 7%);
+    background-color: rgb(36, 36, 36);
     z-index: 1;
+    color: white;
 
 }
 
@@ -555,23 +567,32 @@ body button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: 10px 5px;
 
 }
 
 #headProfile label {
     font-size: 19px;
-    color: var(--blackTextcolor);
+    color: white;
 
 }
 
-#headProfile button {
+#headProfile #backBtnonProfile {
     position: absolute;
     left: 10px;
     background-color: transparent;
     border: none;
     font-size: 15px;
-    color: var(--blackTextcolor);
+    color: white;
+}
+
+#headProfile #settingsInProfile {
+    position: absolute;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 19px;
+    color: white;
 }
 
 #profileiconBody {
@@ -579,7 +600,17 @@ body button {
     align-items: center;
     padding: 30px;
     gap: 10px;
-    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
+    color: white;
+}
+
+#bioInProfile {
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    margin: 0 0 2% 5%;
+    justify-content: center;
+    justify-items: center;
+    color: white;
 }
 
 #profileiconBody #profileControl {
@@ -587,25 +618,66 @@ body button {
     flex-direction: column;
     gap: 5px;
     justify-content: left;
+    color: white;
 }
 
 #profileiconBody img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
+    color: white;
+    border: 5px solid white;
+}
+
+#profileiconBody #icon {
+
+    position: relative;
+    box-sizing: border-box;
+}
+
+#icon div {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: 200%;
+    border-bottom-left-radius: 200%;
+}
+
+#icon div button {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+    font-size: 20px;
+    background-color: rgb(36, 36, 36);
+    border-radius: 5px;
+    padding: 0 2px;
+
+}
+
+#icon div button i {
+    color: rgb(255, 255, 255);
+
 }
 
 #profileControl button {
-    background-color: var(--btn-bg-color-secondary);
+    background-color: #1C6CFF;
     padding: 7px 10px;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     color: var(--btn-text-color);
     font-weight: 600;
+    font-size: 11px;
 }
 
 #profileControl label {
-    color: var(--blackTextcolor);
+    color: white;
 }
 
 
@@ -614,6 +686,7 @@ body button {
     justify-content: space-evenly;
     padding: 10px;
     border-bottom: 1px solid rgba(197, 197, 197, 0.788);
+    border-top: 1px solid rgba(197, 197, 197, 0.788);
 }
 
 #profileDetails div {
@@ -626,17 +699,52 @@ body button {
 
 #profileDetails div label:first-child {
     font-size: 20px;
-    color: var(--blackTextcolor);
+    color: white;
 }
 
 #profileDetails div label:last-child {
     font-size: 15px;
-    color: var(--primary-text-color);
+    color: rgb(194, 194, 194);
 }
 
 
 
+#logoutPopup {
+    background-color: rgb(36, 36, 36);
 
+    position: absolute;
+
+    z-index: 1;
+    top: 40px;
+    right: 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px;
+}
+
+#logoutControl {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#logoutControl button {
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#logoutControl button:first-child {
+    background-color: #1C6CFF;
+}
+
+#logoutControl button:last-child {
+    background-color: #E85C67;
+}
 
 
 
@@ -652,10 +760,10 @@ body button {
 #visitprofileBody {
     position: absolute;
     width: 100%;
-    height: calc(100% - 54px);
-    background-color: var(--bg-color);
+    height: calc(100% - 7%);
+    background-color: rgb(36, 36, 36);
     z-index: 1;
-
+    color: white;
 }
 
 #visitheadProfile {
@@ -664,12 +772,12 @@ body button {
     align-items: center;
     justify-content: center;
     padding: 5px;
-
+    color: white;
 }
 
 #visitheadProfile label {
     font-size: 19px;
-    color: var(--blackTextcolor);
+    color: white;
 
 }
 
@@ -679,7 +787,7 @@ body button {
     background-color: transparent;
     border: none;
     font-size: 15px;
-    color: var(--blackTextcolor);
+    color: white;
 }
 
 #visitprofileiconBody {
@@ -688,6 +796,7 @@ body button {
     padding: 30px;
     gap: 10px;
     border-bottom: 1px solid rgba(197, 197, 197, 0.788);
+    color: white;
 }
 
 #visitprofileiconBody #profileControl {
@@ -695,18 +804,20 @@ body button {
     flex-direction: column;
     gap: 5px;
     justify-content: left;
+    color: white;
 }
 
 #visitprofileiconBody img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
+    border: 5px solid white;
 }
 
 
 
 #visitprofileControl label {
-    color: var(--blackTextcolor);
+    color: white;
 }
 
 
@@ -715,6 +826,7 @@ body button {
     justify-content: space-evenly;
     padding: 10px;
     border-bottom: 1px solid rgba(197, 197, 197, 0.788);
+    color: white;
 }
 
 #visitprofileDetails div {
@@ -722,24 +834,25 @@ body button {
     flex-direction: column;
     align-items: center;
     width: 100px;
+    color: white;
 
 }
 
 #visitprofileDetails div label:first-child {
     font-size: 20px;
-    color: var(--blackTextcolor);
+    color: white;
 }
 
 #visitprofileDetails div label:last-child {
     font-size: 15px;
-    color: var(--primary-text-color);
+    color: rgb(206, 206, 206);
 }
 
 
 
 
 #createPost {
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(36, 36, 36);
     position: absolute;
     right: 0;
     top: 0;
@@ -751,7 +864,7 @@ body button {
 
 #createPost form {
     width: 100%;
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(36, 36, 36);
     height: 100%;
     margin: auto;
     text-align: center;
@@ -767,7 +880,7 @@ body button {
 #createPost form #caption {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid rgb(255, 255, 255);
 }
 
 #createPostControl {
@@ -826,7 +939,7 @@ body button {
 
 
 #updateProfilePic {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(36, 36, 36);
     position: absolute;
     right: 0;
     top: 0;
@@ -847,17 +960,22 @@ body button {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    color: white;
 }
 
 #updateProfilePic #updateProfilePicForm {
-    width: 300px;
-    height: auto;
+
     margin: auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
+
+    color: white;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
 
 #updateProfilePic #updateProfilePicForm input::-webkit-file-upload-button {
@@ -876,6 +994,8 @@ body button {
     font-weight: bold;
     color: var(--btn-text-color);
     background-color: var(--btn-bg-color-secondary);
+    width: 90%;
+    margin: 0 auto 10px auto;
 }
 
 
@@ -972,7 +1092,7 @@ body button {
 }
 
 #previewofImageInPost div {
-    width: 80%;
+    width: 100%;
 
     margin: auto;
     display: flex;
@@ -1006,14 +1126,14 @@ body button {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.527);
+    background-color: rgba(0, 0, 0, 0.281);
     overflow: hidden;
     box-sizing: border-box;
 
 }
 
 #commentsBody {
-    background-color: white;
+    background-color: rgb(36, 36, 36);
     position: absolute;
     bottom: -75%;
     width: 100%;
@@ -1021,6 +1141,7 @@ body button {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     animation: up .2s linear;
+    color: white;
 
 }
 
@@ -1041,6 +1162,8 @@ body button {
     padding: 5px;
     border-bottom: 1px solid rgba(197, 197, 197, 0.788);
     gap: 10px;
+    color: white;
+
 }
 
 #commentHead #closeComment {
@@ -1069,14 +1192,14 @@ body button {
 
     width: 100%;
     height: 100%;
-    max-height: 80%;
+    max-height: 77%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     padding: 5px 10px;
     gap: 10px;
     overflow: auto;
-    background-color: white;
+    background-color: rgb(36, 36, 36);
     border-bottom: 1px solid rgba(197, 197, 197, 0.788);
     margin-top: 2px;
     scrollbar-width: none;
@@ -1089,7 +1212,7 @@ body button {
 }
 
 #commentsOnPost {
-    background-color: white;
+    background-color: rgb(36, 36, 36);
     display: flex;
     gap: 10px;
     align-items: top;
@@ -1099,10 +1222,12 @@ body button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 3px solid white;
 }
 
 #commentDetails {
-    background-color: #D9D9D9;
+    background-color: #ffffff;
+    color: black;
     width: auto;
     padding: 5px 10px;
     border-radius: 8px;
@@ -1125,34 +1250,34 @@ body button {
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 10px 10px 20px 10px;
+    padding: 0px 10px 20px 10px;
     height: auto;
     box-sizing: border-box;
-    background-color: white;
+    background-color: rgb(36, 36, 36);
 }
 
 #addControl {
     display: flex;
     gap: 5px;
-    background-color: white;
+    background-color: rgb(36, 36, 36);
 
 }
 
 #addControl input {
     padding: 10px;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100%;
     border: 1px solid rgba(197, 197, 197, 0.788);
 }
 
 #addControl button {
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
     color: white;
     font-weight: bold;
-    background-color: var(--btn-bg-color-secondary);
+    background-color: rgb(75, 110, 226);
     font-size: 10px;
     width: 60px;
     cursor: pointer;
@@ -1182,20 +1307,22 @@ body button {
     right: 0;
     width: 100%;
     height: calc(100% - 54px);
-    background-color: white;
+    background-color: rgb(36, 36, 36);
     box-sizing: border-box;
     z-index: 1;
+    color: white;
 }
 
 #showFollowersBody #showFollowersHead {
-    background-color: white;
+    background-color: rgb(36, 36, 36);
     display: flex;
     align-items: center;
     text-align: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(151, 151, 151);
     width: 100%;
     padding: 6px;
     justify-content: center;
+    color: white;
 }
 
 #showFollowersHead button {
@@ -1204,10 +1331,11 @@ body button {
     position: absolute;
     top: 5px;
     left: 5px;
+    color: white;
 }
 
 #showFollowersContent {
-    background-color: white;
+    background-color: rgb(36, 36, 36);
     width: 100%;
     display: flex;
     padding: 6px;
@@ -1219,7 +1347,7 @@ body button {
 }
 
 #followersContent {
-    background-color: rgba(0, 0, 0, 0.062);
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -1238,7 +1366,7 @@ body button {
 }
 
 #followersContent label {
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: bold;
 }
 
@@ -1246,12 +1374,13 @@ body button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 3px solid white;
 }
 
 #followersContent button {
     background-color: var(--btn-bg-color-secondary);
     padding: 5px 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     color: var(--btn-text-color);
     border: none;
 }
@@ -1274,14 +1403,14 @@ body button {
     width: 100%;
     position: absolute;
     bottom: 0;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(36, 36, 36);
     height: 60%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
 
 #controlStoryViewer {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(36, 36, 36);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     display: flex;
@@ -1509,7 +1638,77 @@ body button {
 
 
 
+#editProfileInfo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(36, 36, 36);
+    box-sizing: border-box;
+    z-index: 1;
+    color: white;
 
+}
+
+#headerInProfile {
+    width: 100%;
+    background-color: rgb(36, 36, 36);
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid rgb(102, 102, 102);
+    color: white;
+}
+
+#headerInProfile button {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+#contentOfprofileInfo {
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#contentOfprofileInfo div {
+    display: flex;
+    gap: 5px;
+}
+
+#contentOfprofileInfo input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+#contentOfprofileInfo button {
+    border-radius: 5px;
+    background-color: #1C6CFF;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+}
+
+#bioDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+#bioDiv textarea {
+    width: 100%;
+    height: 100px;
+}
+
+#bioDiv button {
+    width: 30%;
+    padding: 10px 20px;
+}
 
 
 
@@ -1586,7 +1785,8 @@ body button {
 
 @media (min-width:930px) {
     body {
-        background-color: #ffffff;
+        background-color: rgb(36, 36, 36);
+        color: white;
     }
 
     #header {
@@ -1596,13 +1796,13 @@ body button {
     #sidebar {
         position: fixed;
         left: 0;
-        background-color: #ffffff;
+        background-color: rgb(36, 36, 36);
         display: flex;
         flex-direction: column;
         gap: 60px;
         align-items: left;
         text-align: left;
-
+        color: white;
         width: 20%;
         height: 100%;
         border-right: 1px solid rgba(197, 197, 197, 0.788);
@@ -1613,7 +1813,7 @@ body button {
         padding: 15px;
         border-radius: 6px;
         background-color: transparent;
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         border: none;
         text-align: left;
         font-size: 17px;
@@ -1627,7 +1827,7 @@ body button {
 
     .topbar {
         font-size: 50px;
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         font-family: 'Sacramento';
         margin: 0 8%;
     }
@@ -1648,30 +1848,33 @@ body button {
         right: 0;
         height: calc(100%);
         top: 0;
-        background-color: #ffffff;
+        background-color: rgb(36, 36, 36);
         padding: 0px 15%;
+        color: white;
 
     }
 
     #postcontent {
 
-        border-radius: 5px;
-        background-color: #ececec;
-        color: rgb(0, 0, 0);
+
+        background-color: rgb(36, 36, 36);
+        color: rgb(255, 255, 255);
         padding-bottom: 15px;
+        border-left: 1px solid rgb(102, 102, 102);
+        border-right: 1px solid rgb(102, 102, 102);
     }
 
     #userProfilePost {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         background-color: transparent;
     }
 
     #userProfilePost label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
     #postcontent div {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
 
@@ -1680,19 +1883,19 @@ body button {
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        border: 2px solid rgb(0, 0, 0);
+        border: 2px solid rgb(102, 102, 102);
     }
 
     #storyBody {
-        background-color: #ffffff;
+        background-color: rgb(36, 36, 36);
         top: 0;
         width: 100%;
         display: flex;
         flex-direction: column;
         padding: 5px;
-        border-bottom: 1px solid rgba(197, 197, 197, 0.788);
-        border-top: 1px solid rgba(197, 197, 197, 0.788);
-        color: rgb(0, 0, 0);
+        border-bottom: 1px solid rgba(102, 102, 102, 0.788);
+        border-top: 1px solid rgba(102, 102, 102, 0.788);
+        color: rgb(255, 255, 255);
         box-sizing: border-box;
         gap: 0px;
 
@@ -1719,7 +1922,7 @@ body button {
         width: 180px;
         height: 280px;
         overflow: hidden;
-        border: 2px solid #ccc;
+        border: 2px solid #858585;
         transition: border-color 0.3s ease;
         border-radius: 10px;
     }
@@ -1735,7 +1938,7 @@ body button {
         position: absolute;
         bottom: 0;
         width: 100%;
-        padding: 4px 0;
+        padding: 8px 0;
         background: rgba(0, 0, 0, 0.699);
         color: white;
         font-size: 12px;
@@ -1771,13 +1974,13 @@ body button {
     }
 
     #postlabel label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         font-weight: bold;
     }
 
 
     #visitprofileBody {
-        background-color: rgb(255, 255, 255);
+        background-color: rgb(36, 36, 36);
 
         height: 100%;
         width: calc(100% - 20%);
@@ -1787,20 +1990,20 @@ body button {
     }
 
     #visitprofileBody #visitheadProfile label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
     #visitprofileBody #visitheadProfile button {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         cursor: pointer;
     }
 
     #visitprofileiconBody label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
     #visitprofileDetails #visitpostBody label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
     #visitprofileDetails #visitfollowerBody {
@@ -1808,7 +2011,7 @@ body button {
     }
 
     #visitprofileDetails #visitfollowerBody label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         cursor: pointer;
     }
 
@@ -1817,35 +2020,36 @@ body button {
     }
 
     #visitprofileDetails #visitfollowingBody label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         cursor: pointer;
     }
 
     #profileBody {
-        background-color: rgb(255, 255, 255);
+        background-color: rgb(36, 36, 36);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(197, 197, 197, 0.788);
+        border-left: 1px solid rgba(122, 122, 122, 0.788);
+        color: white;
     }
 
     #profileBody #headProfile label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
     #profileBody #headProfile button {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         cursor: pointer;
     }
 
     #profileiconBody label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
     #profileDetails #postBody label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
     }
 
     #profileDetails #followerBody {
@@ -1853,7 +2057,7 @@ body button {
     }
 
     #profileDetails #followerBody label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         cursor: pointer;
     }
 
@@ -1862,7 +2066,7 @@ body button {
     }
 
     #profileDetails #followingBody label {
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         cursor: pointer;
     }
 
@@ -1872,22 +2076,22 @@ body button {
 
     #profileContent {
         padding: 5px;
-        color: black;
+        color: rgb(255, 255, 255);
     }
 
     #profileContent #imgGrid {
         gap: 5px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        color: black;
+        color: rgb(255, 255, 255);
     }
 
     #profileContent #imgGrid div {
-        border: 1px solid rgba(197, 197, 197, 0.788);
+        border: 1px solid rgba(58, 58, 58, 0.788);
         border-radius: 5px;
         box-sizing: border-box;
         display: flex;
-        color: black;
+        color: rgb(255, 255, 255);
     }
 
     #profileContent #imgGrid div img {
@@ -1895,20 +2099,20 @@ body button {
         width: 100%;
         height: auto;
         background-size: contain;
-        color: black;
+        color: rgb(255, 255, 255);
     }
 
 
 
 
     #createPost {
-        background-color: rgb(29, 29, 29);
+        background-color: rgb(36, 36, 36);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(197, 197, 197, 0.788);
+        border-left: 1px solid rgba(77, 77, 77, 0.788);
     }
 
     #createPost form {
@@ -1923,13 +2127,13 @@ body button {
 
 
     #updateProfilePic {
-        background-color: rgb(255, 255, 255);
+        background-color: rgb(36, 36, 36);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(197, 197, 197, 0.788);
+        border-left: 1px solid rgba(104, 104, 104, 0.788);
 
     }
 
@@ -1985,28 +2189,27 @@ body button {
 
 
     #viewPostBody {
-        background-color: rgba(0, 0, 0, 0.158);
+        background-color: rgba(0, 0, 0, 0.452);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(197, 197, 197, 0.788);
+        border-left: 1px solid rgba(100, 100, 100, 0.788);
         display: flex;
         padding: 0 14%;
 
     }
 
     #commentsBody {
-        background-color: white;
+        background-color: rgb(36, 36, 36);
         position: absolute;
         bottom: -75%;
         width: 65%;
         height: calc(100% - 30%);
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
+
         animation: up .2s linear;
-        border: 1px solid rgba(197, 197, 197, 0.788);
+
 
 
     }
@@ -2028,6 +2231,9 @@ body button {
         padding: 5px;
         border-bottom: 1px solid rgba(197, 197, 197, 0.788);
         gap: 10px;
+        background-color: rgb(36, 36, 36);
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
     }
 
     #commentHead #closeComment {
@@ -2062,7 +2268,7 @@ body button {
         padding: 5px 10px;
         gap: 10px;
         overflow: auto;
-        background-color: white;
+        background-color: rgb(36, 36, 36);
         border-bottom: 1px solid rgba(197, 197, 197, 0.788);
         margin-top: 2px;
         scrollbar-width: none;
@@ -2075,7 +2281,7 @@ body button {
     }
 
     #commentsOnPost {
-        background-color: white;
+        background-color: rgb(36, 36, 36);
         display: flex;
         gap: 10px;
         align-items: top;
@@ -2088,7 +2294,7 @@ body button {
     }
 
     #commentDetails {
-        background-color: #D9D9D9;
+        background-color: #ffffff;
         width: auto;
         padding: 5px 10px;
         border-radius: 8px;
@@ -2114,27 +2320,27 @@ body button {
         padding: 10px 10px 20px 10px;
         height: auto;
         box-sizing: border-box;
-        background-color: white;
+        background-color: rgb(36, 36, 36);
     }
 
     #addControl {
         display: flex;
         gap: 5px;
-        background-color: white;
+        background-color: rgb(36, 36, 36);
 
     }
 
     #addControl input {
         padding: 10px;
         box-sizing: border-box;
-        border-radius: 10px;
+        border-radius: 5px;
         width: 100%;
         border: 1px solid rgba(197, 197, 197, 0.788);
     }
 
     #addControl button {
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 5px;
         border: none;
         color: white;
         font-weight: bold;
@@ -2175,13 +2381,14 @@ body button {
         right: 0;
         width: calc(100% - 20%);
         height: 100%;
-        background-color: white;
+        background-color: rgb(36, 36, 36);
         box-sizing: border-box;
         z-index: 1;
+        color: white;
     }
 
     #showFollowersBody #showFollowersHead {
-        background-color: white;
+        background-color: rgb(36, 36, 36);
         display: flex;
         align-items: center;
         text-align: center;
@@ -2189,6 +2396,7 @@ body button {
         width: 100%;
         padding: 6px;
         justify-content: center;
+        color: white;
     }
 
     #showFollowersHead button {
@@ -2200,7 +2408,7 @@ body button {
     }
 
     #showFollowersContent {
-        background-color: white;
+        background-color: rgb(36, 36, 36);
         width: 100%;
         display: flex;
         padding: 6px;
@@ -2209,6 +2417,7 @@ body button {
         gap: 8px;
         max-height: calc(100% - 30px);
         overflow: auto;
+        color: white;
     }
 
     #followersContent {
@@ -2221,6 +2430,7 @@ body button {
         padding: 10px 15px;
         width: 100%;
         text-align: center;
+        color: white;
 
     }
 
@@ -2231,7 +2441,7 @@ body button {
     }
 
     #followersContent label {
-        color: black;
+        color: rgb(255, 255, 255);
         font-weight: bold;
     }
 
@@ -2244,7 +2454,7 @@ body button {
     #followersContent button {
         background-color: var(--btn-bg-color-secondary);
         padding: 5px 10px;
-        border-radius: 10px;
+        border-radius: 5px;
         color: var(--btn-text-color);
         border: none;
     }
@@ -2258,7 +2468,7 @@ body button {
 
 
     #addNewStory {
-        background-color: rgb(255, 255, 255);
+        background-color: rgb(36, 36, 36);
         position: absolute;
         top: 0;
         right: 0;
@@ -2268,7 +2478,7 @@ body button {
         flex-direction: column;
         gap: 10px;
         align-items: center;
-
+        border-left: 1px solid rgb(78, 78, 78);
     }
 
     #addNewStoryBody {
@@ -2292,8 +2502,8 @@ body button {
         font-weight: bold;
         width: 100%;
 
-        background-color: rgba(255, 255, 255, 0.26);
-        color: rgb(0, 0, 0);
+
+        color: rgb(255, 255, 255);
         text-align: center;
     }
 
@@ -2303,13 +2513,14 @@ body button {
 
 
     #viewStoryBody {
-        background-color: rgb(27, 27, 27);
+        background-color: rgb(36, 36, 36);
         width: calc(100% - 20%);
         height: 100%;
         position: absolute;
         top: 0;
         right: 0;
         display: flex;
+        border-left: 1px solid rgb(107, 107, 107);
     }
 
     #previewOfStory {
@@ -2380,7 +2591,7 @@ body button {
         width: 500px;
         position: absolute;
         bottom: 0;
-        background-color: rgb(0, 0, 0);
+        background-color: rgb(36, 36, 36);
         height: 60%;
         margin: auto;
         justify-content: center;
@@ -2461,6 +2672,83 @@ body button {
 
 
 
+    #editProfileInfo {
+        position: absolute;
+        width: calc(100% - 20%);
+        height: 100%;
+        background-color: rgb(36, 36, 36);
+        box-sizing: border-box;
+        z-index: 1;
+        right: 0;
+        color: white;
+    }
+
+    #headerInProfile {
+        width: 100%;
+        background-color: rgb(36, 36, 36);
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid rgb(102, 102, 102);
+    }
+
+    #headerInProfile button {
+        position: absolute;
+        top: 10px;
+        left: 5px;
+        background-color: transparent;
+        border: none;
+    }
+
+    #contentOfprofileInfo {
+
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #contentOfprofileInfo div {
+        display: flex;
+        gap: 5px;
+    }
+
+    #contentOfprofileInfo input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+
+    #contentOfprofileInfo button {
+        border-radius: 5px;
+        background-color: #1C6CFF;
+        color: white;
+        border: none;
+        padding: 5px 20px;
+    }
+
+    #bioDiv {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #bioDiv textarea {
+        width: 100%;
+        height: 100px;
+    }
+
+    #bioDiv button {
+        width: 30%;
+        padding: 10px 20px;
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -2499,7 +2787,7 @@ body button {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: white;
+    background-color: rgb(36, 36, 36);
     width: 100%;
     height: 100%;
     display: flex;
