@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <script defer src="app.js" type="module"></script>
     <link href='https://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet'>
     <title>InstagramClone</title>
 </head>
 
@@ -80,11 +81,31 @@
             </div>
             <div id="profileControl">
                 <label id="profileName"></label>
-                <button type="button" id="editProfile">Edit Profile</button>
+                <div>
+                    <button type="button" id="editProfile">Edit Profile</button>
+                    <button type="button" id="aboutUser">About</button>
+                </div>
+
+
             </div>
 
         </div>
-        <label id="bioInProfile"></label>
+
+        <div id="bioBody">
+            <label id="bioInProfile"></label>
+        </div>
+
+        <div id="aboutUserInfoBody" style="display: none;">
+            <div id="aboutUserHead">
+                <label for="">About</label>
+                <button id="closeAboutUser"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <label for="">Username : <span id="usernameInAboutUser"></span></label>
+            <label for="">Email : <span id="emailInAboutUser"></span></label>
+            <label for="">Address : <span id="addressInAboutUser"></span></label>
+            <label for="">Age : <span id="ageInAboutUser"></span></label>
+        </div>
         <div id="profileDetails">
             <div id="postBody">
                 <label id="postsCount"></label>
@@ -123,6 +144,8 @@
             </div>
 
         </div>
+
+
         <div id="visitprofileDetails">
             <div id="visitpostBody">
                 <label id="visitPostCount">0</label>
@@ -344,6 +367,9 @@
         </div>
 
     </div>
+
+
+
 
 
 
