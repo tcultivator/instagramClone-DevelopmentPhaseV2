@@ -137,6 +137,9 @@ body {
     font-size: 13px;
     color:white;
 }
+#forgotPassword a {
+    color: white;
+}
 
 #btnBody {
     display: flex;
