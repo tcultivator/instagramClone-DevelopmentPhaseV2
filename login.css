@@ -21,8 +21,6 @@ body {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: auto;
     text-align: center;
     padding: 10px;
     display: flex;
