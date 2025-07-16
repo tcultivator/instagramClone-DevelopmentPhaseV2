@@ -1242,3 +1242,19 @@ document.addEventListener('click', (e) => {
     }
 
 })
+
+
+document.getElementById('aboutUser').addEventListener('click', () => {
+    console.log('zxczxczxczxczxczxc')
+    document.getElementById('profileContent').style = 'max-height: calc(100% - 63%);'
+    document.getElementById('aboutUserInfoBody').style.display = 'flex'
+    document.getElementById('usernameInAboutUser').textContent = loginUsername
+    document.getElementById('emailInAboutUser').textContent = email
+    document.getElementById('addressInAboutUser').textContent = address
+    document.getElementById('ageInAboutUser').textContent = age
+})
+
+document.getElementById('closeAboutUser').addEventListener('click', () => {
+    document.getElementById('profileContent').style = 'max-height: calc(100% - 49%);'
+    document.getElementById('aboutUserInfoBody').style.display = 'none'
+})
