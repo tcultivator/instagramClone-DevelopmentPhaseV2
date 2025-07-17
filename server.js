@@ -711,11 +711,11 @@ app.post('/submitPersonalInfo', (req, res) => {
 
 const transporter = nodemailer.createTransport({
     secure: true,
-    host: 'smtp.gmail.com',
+    host: process.env.NODEMAILER_HOST,
     port: 465,
     auth: {
-        user: 'lpanahon06@gmail.com',
-        pass: 'dqvi arzy dtxm bxik'
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_PASS
     }
 })
 
