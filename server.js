@@ -69,7 +69,7 @@ io.on('connection', (socket) => {
 
 app.post('/loginReq', (req, res) => {
     const userData = req.body
-    const query = 'SELECT * FROM accounts WHERE username = ? && password = ?'
+    const query = 'SELECT * FROM accounts WHERE email = ? && password = ?'
     db.query(query, [userData.username, userData.password], (err, result) => {
         if (!result.length) {
             console.log('walang nakuha')
