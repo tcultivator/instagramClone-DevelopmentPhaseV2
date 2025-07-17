@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstagramClone</title>
+    <script defer src="register.js" type="module"></script>
+    <link rel="stylesheet" href="register.css">
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/2820820f6e.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <form id="registerForm">
+        <label class="logo">Instagang</label>
+        <div id="emailBody">
+            <input type="email" id="email" required placeholder="">
+            <label for="email">Email Address</label>
+        </div>
+        <div id="passwordBody">
+            <input type="password" id="password" required placeholder="">
+            <label for="password">Password</label>
+        </div>
+        <div id="confirmPasswordBody">
+            <input type="password" id="confirmpassword" required placeholder="">
+            <label for="confirmpassword">Confirm Password</label>
+        </div>
+        <div id="btnBody">
+            <button id="submitBtn" disabled>Register</button>
+        </div>
+        <div id="haveAcc">
+            <a href="index.html">Already have an account?</a>
+        </div>
+    </form>
+
+    <form id="setupPersoInfo" style="display: none;">
+        <label class="logo">Instagang</label>
+        <div id="setupHeader">
+            <label for="">Setup Personal Information</label>
+        </div>
+        <div id="usernameBody">
+            <input type="text" id="username" required placeholder="">
+            <label for="username">Username</label>
+        </div>
+        <div id="addressBody">
+            <input type="text" id="address" required placeholder="">
+            <label for="address">Address</label>
+        </div>
+        <div id="ageBody">
+            <input type="number" id="age" required placeholder="">
+            <label for="age">Age</label>
+        </div>
+        <div id="btnBody">
+            <button id="submitBtnInfo" disabled>Submit</button>
+        </div>
+        <div id="dothislaterBody">
+            <a href="index.html" id="dothislater">Do this later</a>
+        </div>
+    </form>
+
+
+
+    <div id="successNotif" style="display: none;">
+        <i class="fa-regular fa-circle-check"></i>
+        <label id="successmessage"></label>
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <div id="errorNotif" style="display: none;">
+        <i class="fa-regular fa-circle-check"></i>
+        <label id="errormessage"></label>
+        <i id="closeNotifError" class="fa-solid fa-xmark"></i>
+    </div>
+
+
+
+    <div id="loading" style="display: none;">
+        <div id="loadCircle"></div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>

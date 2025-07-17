@@ -1,0 +1,343 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Righteous';
+    background-color: rgb(36, 36, 36);
+    overflow: hidden;
+
+}
+
+#registerForm .logo {
+    font-size: 60px;
+    font-family: 'Sacramento';
+    color: white;
+    margin-bottom: 40px;
+    padding: 0;
+}
+
+#registerForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+
+
+}
+
+#emailBody,
+#passwordBody,
+#confirmPasswordBody {
+    display: flex;
+    width: 300px;
+    margin: auto;
+    align-items: center;
+}
+
+#emailBody label,
+#passwordBody label,
+#confirmPasswordBody label {
+    position: absolute;
+    margin-left: 10px;
+    font-size: 12px;
+    cursor: text;
+    transition: .1s;
+    color: white;
+}
+
+
+#emailBody input,
+#passwordBody input,
+#confirmPasswordBody input {
+    padding: 20px 10px 10px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgb(167, 167, 167);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--primary-text-color);
+    color: white;
+}
+
+#emailBody input:not(:placeholder-shown)~label,
+#passwordBody input:not(:placeholder-shown)~label,
+#confirmPasswordBody input:not(:placeholder-shown)~label {
+    transform: translate(0px, -12px);
+    font-size: 11px;
+
+    color: rgb(105, 105, 105);
+}
+
+#btnBody {
+    display: flex;
+    width: 300px;
+    margin: auto;
+    align-items: center;
+}
+
+#btnBody button {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 13px 40px;
+    border: none;
+    background-color: #365899;
+    color: white;
+    gap: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 300px;
+    font-family: 'Righteous';
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #5580d1;
+    border: 1px solid #5580d1;
+}
+
+#btnBody button:disabled {
+    background-color: #365899;
+    color: #999999;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.6;
+    border: none;
+}
+
+#haveAcc a {
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#setupPersoInfo .logo {
+    font-size: 60px;
+    font-family: 'Sacramento';
+    color: white;
+    margin-bottom: 0px;
+}
+
+#setupPersoInfo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgb(36, 36, 36);
+
+
+}
+
+
+#setupHeader {
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+
+}
+
+#usernameBody,
+#addressBody,
+#ageBody {
+    display: flex;
+    width: 300px;
+    margin: auto;
+    align-items: center;
+}
+
+#usernameBody label,
+#addressBody label,
+#ageBody label {
+    position: absolute;
+    margin-left: 10px;
+    font-size: 12px;
+    cursor: text;
+    transition: .1s;
+    color: white;
+}
+
+
+#usernameBody input,
+#addressBody input,
+#ageBody input {
+    padding: 20px 10px 10px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgb(167, 167, 167);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--primary-text-color);
+    color: white;
+}
+
+#usernameBody input:not(:placeholder-shown)~label,
+#addressBody input:not(:placeholder-shown)~label,
+#ageBody input:not(:placeholder-shown)~label {
+    transform: translate(0px, -12px);
+    font-size: 11px;
+
+    color: rgb(105, 105, 105);
+}
+
+#btnBody {
+    display: flex;
+    width: 300px;
+    margin: auto;
+    align-items: center;
+}
+
+#btnBody button {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 13px 40px;
+    border: none;
+    background-color: #365899;
+    color: white;
+    gap: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 300px;
+    font-family: 'Righteous';
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #5580d1;
+    border: 1px solid #5580d1;
+}
+
+#btnBody button:disabled {
+    background-color: #365899;
+    color: #999999;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.6;
+    border: none;
+}
+
+#dothislaterBody a {
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#successNotif {
+    background-color: #4DAE5F;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    max-width: 300px;
+    margin: 10px auto 0 auto;
+    border-radius: 5px;
+    z-index: 1;
+
+}
+
+
+#errorNotif {
+    background-color: #E63946;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    max-width: 300px;
+    margin: 10px auto 0 auto;
+    border-radius: 5px;
+    z-index: 1;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.521);
+    display: flex;
+}
+
+#loadCircle {
+    width: 25px;
+    aspect-ratio: 1/1;
+    border: 5px solid white;
+    border-bottom: 5px solid transparent;
+    margin: auto;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(360deg);
+        
+
+    }
+
+    100% {
+        transform: rotate(0deg);
+        
+    }
+
+
+}
