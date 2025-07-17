@@ -16,7 +16,10 @@ username.addEventListener('input', checkifbtnenabled)
 password.addEventListener('input', checkifbtnenabled)
 
 
-
+const errorNotif = document.getElementById('errorNotif')
+const errormessage = document.getElementById('errormessage')
+const successNotif = document.getElementById('successNotif')
+const successmessage = document.getElementById('successmessage')
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
     e.preventDefault()
@@ -24,13 +27,19 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const loginReq = await apiReq('/loginReq', { username: username.value, password: password.value })
     if (loginReq.ok) {
         console.log(loginReq.data.message)
-
+        successNotif.style.display = 'flex'
+        successmessage.textContent = loginReq.data.message
         document.getElementById('loadingBody').style = 'display:flex'
         setTimeout(() => {
             window.location.replace('app.html')
         }, 1500);
     } else {
         console.log(loginReq.data.message)
+        errorNotif.style.display = 'flex'
+        errormessage.textContent = loginReq.data.message
+        timeoutInterval = setTimeout(() => {
+            errorNotif.style.display = 'none'
+        }, 4000);
 
     }
 })
