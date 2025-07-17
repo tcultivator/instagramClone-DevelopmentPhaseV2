@@ -241,6 +241,40 @@ body {
 }
 
 
+#successNotif {
+    background-color: #4DAE5F;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    max-width: 300px;
+    margin: 10px auto 0 auto;
+    border-radius: 5px;
+    z-index: 1;
+
+}
+
+
+#errorNotif {
+    background-color: #E63946;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    max-width: 300px;
+    margin: 10px auto 0 auto;
+    border-radius: 5px;
+    z-index: 1;
+
+}
+
+
+
+
+
+
 
 
 
