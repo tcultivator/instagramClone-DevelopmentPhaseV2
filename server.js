@@ -674,14 +674,14 @@ app.post('/register', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const username = req.body.username;
-
+    const defaultProfileImage = 'https://res.cloudinary.com/debbskjyl/image/upload/v1752751427/default_gulcfq.jpg';
     const query = 'SELECT * FROM accounts WHERE email = ?'
     db.query(query, [email], (err, result) => {
         if (result.length) {
             res.status(400).json({ message: 'Email is already use' })
         } else {
-            const query2 = 'INSERT INTO accounts (username,email,password) VALUES (?,?,?)'
-            db.query(query2, [username, email, password], (err, result) => {
+            const query2 = 'INSERT INTO accounts (username,email,password,profileImage,follower,following,address,age,bio) VALUES (?,?,?,?,?,?,?,?,?)'
+            db.query(query2, [username, email, password,defaultProfileImage,0,0,'Not set',0,'Not set'], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'Error! Something is wrong' })
                 } else {
