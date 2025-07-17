@@ -680,8 +680,8 @@ app.post('/register', (req, res) => {
         if (result.length) {
             res.status(400).json({ message: 'Email is already use' })
         } else {
-            const query2 = 'INSERT INTO accounts (username,email,password,profileImage,follower,following,address,age,bio) VALUES (?,?,?,?,?,?,?,?,?)'
-            db.query(query2, [username, email, password,defaultProfileImage,0,0,'Not set',0,'Not set'], (err, result) => {
+            const query2 = 'INSERT INTO accounts (username,email,password,profileImage,follower,following,address,age,bio,accountBalance,islogin,test) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
+            db.query(query2, [username, email, password,defaultProfileImage,0,0,'Not set',0,'Not set',0,0,0], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'Error! Something is wrong' })
                 } else {
