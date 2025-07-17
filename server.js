@@ -668,6 +668,49 @@ app.post('/changeUserInfo', authenticate, (req, res) => {
     })
 })
 
+
+
+app.post('/register', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    const username = req.body.username;
+
+    const query = 'SELECT * FROM accounts WHERE email = ?'
+    db.query(query, [email], (err, result) => {
+        if (result.length) {
+            res.status(400).json({ message: 'Email is already use' })
+        } else {
+            const query2 = 'INSERT INTO accounts (username,email,password) VALUES (?,?,?)'
+            db.query(query2, [username, email, password], (err, result) => {
+                if (err) {
+                    res.status(400).json({ message: 'Error! Something is wrong' })
+                } else {
+                    res.status(200).json({ message: 'Success Register' })
+                }
+            })
+        }
+    })
+})
+
+
+
+
+
+app.post('/submitPersonalInfo', (req, res) => {
+    const username = req.body.username;
+    const address = req.body.address;
+    const age = req.body.age;
+    const email = req.body.email;
+    const query = 'UPDATE accounts SET username = ? , address = ? , age = ? WHERE email = ?'
+    db.query(query, [username, address, age, email], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'Error setup personal information' })
+        } else {
+            res.status(200).json({ message: 'Success Setup Personal Information' })
+        }
+    })
+})
+
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
