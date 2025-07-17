@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const cookieparser = require('cookie-parser')
 const upload = require('./middleware/multer');
 const cloudinary = require('./util/cloudinary')
-
+const nodemailer = require('nodemailer')
 const app = express()
 const http = require('http').createServer(app)
 const { Server } = require('socket.io')
@@ -674,20 +674,15 @@ app.post('/register', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const username = req.body.username;
-    const defaultProfileImage = 'https://res.cloudinary.com/debbskjyl/image/upload/v1752751427/default_gulcfq.jpg';
+    let random6Digit = Math.floor(100000 + Math.random() * 900000);
     const query = 'SELECT * FROM accounts WHERE email = ?'
     db.query(query, [email], (err, result) => {
         if (result.length) {
             res.status(400).json({ message: 'Email is already use' })
         } else {
-            const query2 = 'INSERT INTO accounts (username,email,password,profileImage,follower,following,address,age,bio,accountBalance,islogin,test) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
-            db.query(query2, [username, email, password,defaultProfileImage,0,0,'Not set',0,'Not set',0,0,0], (err, result) => {
-                if (err) {
-                    res.status(400).json({ message: 'Error! Something is wrong' })
-                } else {
-                    res.status(200).json({ message: 'Success Register' })
-                }
-            })
+            let verificationCode = random6Digit.toString()
+            sendMail(email, 'Verification Code', verificationCode)
+            res.status(200).json({ digitcode6: random6Digit, email: email, password: password, username: username, message: 'Verification Sent' })
         }
     })
 })
@@ -707,6 +702,45 @@ app.post('/submitPersonalInfo', (req, res) => {
             res.status(400).json({ message: 'Error setup personal information' })
         } else {
             res.status(200).json({ message: 'Success Setup Personal Information' })
+        }
+    })
+})
+
+
+
+
+const transporter = nodemailer.createTransport({
+    secure: true,
+    host: 'smtp.gmail.com',
+    port: 465,
+    auth: {
+        user: 'lpanahon06@gmail.com',
+        pass: 'dqvi arzy dtxm bxik'
+    }
+})
+
+function sendMail(to, sub, message) {
+    transporter.sendMail({
+        to: to,
+        sub: sub,
+        html: message
+    })
+    console.log('message Sent')
+}
+
+
+
+app.post('/submitRegister', (req, res) => {
+    const email = req.body.postRegisterEmail;
+    const username = req.body.postRegisterUsername;
+    const password = req.body.postRegisterPassword;
+    const defaultProfileImage = 'https://res.cloudinary.com/debbskjyl/image/upload/v1752751427/default_gulcfq.jpg';
+    const query = 'INSERT INTO accounts (username,email,password,profileImage,follower,following,address,age,bio,accountBalance,islogin,test) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
+    db.query(query, [username, email, password,defaultProfileImage,0,0,'Not set',0,'Not set',0,0,0], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error registering' })
+        } else {
+            res.status(200).json({ message: 'success registering' })
         }
     })
 })
