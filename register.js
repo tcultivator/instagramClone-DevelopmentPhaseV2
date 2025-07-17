@@ -31,6 +31,14 @@ const successNotif = document.getElementById('successNotif')
 const successmessage = document.getElementById('successmessage')
 let extractedUsername;
 let timeoutInterval;
+
+
+
+
+let postRegisterEmail;
+let verificationCode;
+let postRegisterPassword;
+let postRegisterUsername;
 document.getElementById('submitBtn').addEventListener('click', async (e) => {
     e.preventDefault()
     try {
@@ -60,9 +68,18 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
                 timeoutInterval = setTimeout(() => {
                     successNotif.style.display = 'none'
                     document.getElementById('loading').style.display = 'none'
-                    document.getElementById('setupPersoInfo').style.display = 'flex'
+                    document.getElementById('verifBody').style.display = 'flex'
+                    console.log(register.data)
                     userName.value = username
                     registeredEmail = email.value
+
+                    postRegisterEmail = register.data.email
+                    postRegisterPassword = register.data.password
+                    postRegisterUsername = register.data.username
+                    verificationCode = register.data.digitcode6
+
+
+
                 }, 3000);
             } else {
                 errorNotif.style.display = 'flex'
@@ -137,3 +154,74 @@ document.getElementById('submitBtnInfo').addEventListener('click', async (e) => 
 })
 
 
+
+
+
+
+
+const input1 = document.getElementById('verif1')
+document.getElementById('verif1').addEventListener('input', () => {
+    if (input1.value.length > 1) {
+        input1.value = input1.value.slice(0, 1)
+    }
+})
+
+const input2 = document.getElementById('verif2')
+document.getElementById('verif2').addEventListener('input', () => {
+    if (input2.value.length > 1) {
+        input2.value = input2.value.slice(0, 1)
+    }
+})
+
+const input3 = document.getElementById('verif3')
+document.getElementById('verif3').addEventListener('input', () => {
+    if (input3.value.length > 1) {
+        input3.value = input3.value.slice(0, 1)
+    }
+})
+
+const input4 = document.getElementById('verif4')
+document.getElementById('verif4').addEventListener('input', () => {
+    if (input4.value.length > 1) {
+        input4.value = input4.value.slice(0, 1)
+    }
+})
+
+const input5 = document.getElementById('verif5')
+document.getElementById('verif5').addEventListener('input', () => {
+    if (input5.value.length > 1) {
+        input5.value = input5.value.slice(0, 1)
+    }
+})
+const input6 = document.getElementById('verif6')
+document.getElementById('verif6').addEventListener('input', () => {
+    if (input6.value.length > 1) {
+        input6.value = input6.value.slice(0, 1)
+    }
+})
+
+document.getElementById('verifBtn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const userInputVerification = input1.value + input2.value + input3.value + input4.value + input5.value + input6.value
+    console.log(userInputVerification)
+    if (userInputVerification == verificationCode) {
+        console.log('match ung code')
+        const submitRegister = await apiReq('/submitRegister', {
+            postRegisterEmail: postRegisterEmail,
+            postRegisterPassword: postRegisterPassword,
+            postRegisterUsername: postRegisterUsername
+        })
+        if (submitRegister.ok) {
+            document.getElementById('setupPersoInfo').style.display = 'flex'
+        } else {
+
+        }
+    } else {
+        console.log('hindi match ung code')
+        errorNotif.style.display = 'flex'
+        errormessage.textContent = 'Verification Code not Match'
+        timeoutInterval = setTimeout(() => {
+            errorNotif.style.display = 'none'
+        }, 4000);
+    }
+})
