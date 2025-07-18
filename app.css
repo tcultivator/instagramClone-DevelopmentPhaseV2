@@ -1351,11 +1351,12 @@ body button {
     top: 0;
     right: 0;
     width: 100%;
-    height: calc(100% - 54px);
+    height: calc(100% - 7%);
     background-color: rgb(36, 36, 36);
     box-sizing: border-box;
     z-index: 1;
     color: white;
+    overflow: hidden;
 }
 
 #showFollowersBody #showFollowersHead {
