@@ -164,6 +164,7 @@ document.getElementById('verif1').addEventListener('input', () => {
     if (input1.value.length > 1) {
         input1.value = input1.value.slice(0, 1)
     }
+    input2.focus();
 })
 
 const input2 = document.getElementById('verif2')
@@ -171,6 +172,7 @@ document.getElementById('verif2').addEventListener('input', () => {
     if (input2.value.length > 1) {
         input2.value = input2.value.slice(0, 1)
     }
+    input3.focus();
 })
 
 const input3 = document.getElementById('verif3')
@@ -178,6 +180,7 @@ document.getElementById('verif3').addEventListener('input', () => {
     if (input3.value.length > 1) {
         input3.value = input3.value.slice(0, 1)
     }
+    input4.focus();
 })
 
 const input4 = document.getElementById('verif4')
@@ -185,6 +188,7 @@ document.getElementById('verif4').addEventListener('input', () => {
     if (input4.value.length > 1) {
         input4.value = input4.value.slice(0, 1)
     }
+    input5.focus();
 })
 
 const input5 = document.getElementById('verif5')
@@ -192,6 +196,7 @@ document.getElementById('verif5').addEventListener('input', () => {
     if (input5.value.length > 1) {
         input5.value = input5.value.slice(0, 1)
     }
+    input6.focus();
 })
 const input6 = document.getElementById('verif6')
 document.getElementById('verif6').addEventListener('input', () => {
