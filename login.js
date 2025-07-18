@@ -39,10 +39,47 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         errormessage.textContent = loginReq.data.message
         timeoutInterval = setTimeout(() => {
             errorNotif.style.display = 'none'
-        }, 4000);
+        }, 3000);
 
     }
 })
+
+
+
+const forgotpassword = document.getElementById('forgotpasswordEnterEmail')
+forgotpassword.addEventListener('click', (e) => {
+    e.preventDefault()
+    document.getElementById('enterEmailforPassword').style.display = 'flex'
+})
+
+document.getElementById('closeForgotpassword').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('enterEmailforPassword').style.display = 'none'
+})
+
+
+const inputEmailForgot = document.getElementById('inputEmailForgot')
+
+document.getElementById('submitBtnForgot').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const sendForgotpassword = await apiReq('/sendForgotpassword', {
+        email: inputEmailForgot.value
+    })
+    if (sendForgotpassword.ok) {
+        successNotif.style.display = 'flex'
+        successmessage.textContent = sendForgotpassword.data.message
+        setTimeout(() => {
+            successNotif.style.display = 'none'
+        }, 1500);
+    } else {
+        errorNotif.style.display = 'flex'
+        errormessage.textContent = sendForgotpassword.data.message
+        timeoutInterval = setTimeout(() => {
+            errorNotif.style.display = 'none'
+        }, 1500);
+    }
+})
+
 
 
 
