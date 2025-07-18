@@ -745,6 +745,21 @@ app.post('/submitRegister', (req, res) => {
     })
 })
 
+
+app.post('/sendForgotpassword', (req, res) => {
+    const email = req.body.email;
+    const query = 'SELECT password FROM accounts WHERE email = ?'
+    db.query(query, [email], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'No account Found!' })
+        } else {
+            const returnPassword = result[0].password
+            sendMail(email, 'Your Password', returnPassword)
+            res.status(200).json({ message: 'Your password send to your email!' })
+        }
+    })
+})
+
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
