@@ -30,7 +30,7 @@
             <label for="password">Password</label>
         </div>
         <div id="forgotPassword">
-            <a href="">Forgot password</a>
+            <a id="forgotpasswordEnterEmail">Forgot password</a>
         </div>
         <div id="btnBody">
             <button id="submitBtn" disabled>Login</button>
@@ -40,7 +40,7 @@
         </div>
     </form>
 
-    
+
 
     <div id="loadingBody" style="display: none;">
         <div id="loading">
@@ -48,7 +48,8 @@
         </div>
     </div>
 
-     <div id="successNotif" style="display: none;">
+
+    <div id="successNotif" style="display: none;">
         <i class="fa-regular fa-circle-check"></i>
         <label id="successmessage"></label>
         <i class="fa-solid fa-xmark"></i>
@@ -58,6 +59,18 @@
         <i class="fa-regular fa-circle-check"></i>
         <label id="errormessage"></label>
         <i id="closeNotifError" class="fa-solid fa-xmark"></i>
+    </div>
+
+
+
+
+    <div id="enterEmailforPassword">
+        <button id="closeForgotpassword"><i  class="fa-solid fa-xmark"></i></button>
+        <form>
+            <label>Enter your registered email</label>
+            <input id="inputEmailForgot" type="email">
+            <button id="submitBtnForgot">Submit</button>
+        </form>
     </div>
 </body>
 
