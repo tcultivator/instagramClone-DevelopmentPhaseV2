@@ -81,7 +81,26 @@ document.getElementById('submitBtnForgot').addEventListener('click', async (e) =
 })
 
 
-
+document.getElementById('changePass').addEventListener('click', async (e) => {
+    e.preventDefault()
+    const changePassword = await apiReq('/sendchangePasswordReq', {
+        email: inputEmailForgot.value,
+        sendUrl: `https://tcultivator.github.io/instagramClone-DevelopmentPhaseV2/changePassword.html?email=${inputEmailForgot.value}`
+    })
+    if (changePassword.ok) {
+        successNotif.style.display = 'flex'
+        successmessage.textContent = changePassword.data.message
+        setTimeout(() => {
+            successNotif.style.display = 'none'
+        }, 1500);
+    } else {
+        errorNotif.style.display = 'flex'
+        errormessage.textContent = changePassword.data.message
+        timeoutInterval = setTimeout(() => {
+            errorNotif.style.display = 'none'
+        }, 1500);
+    }
+})
 
 
 
