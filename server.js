@@ -130,10 +130,10 @@ app.post('/upload', upload.single('image'), (req, res) => {
             console.log('error upload')
             res.status(400).json({ message: 'error uploading' })
         } else {
-            const query = 'INSERT INTO images (username,caption,secure_url,public_id,userId,likeCount,commentCount) VALUES (?,?,?,?,?,?,?)'
+            const query = 'INSERT INTO images (username,caption,secure_url,public_id,userId) VALUES (?,?,?,?,?)'
             console.log(result.secure_url)
             console.log(result.public_id)
-            db.query(query, [username, caption, result.secure_url, result.public_id, userId,0,0], (err, result) => {
+            db.query(query, [username, caption, result.secure_url, result.public_id, userId], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error uploading' })
                 } else {
@@ -490,8 +490,8 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
             console.log(formattedDate)
             console.log(username)
             console.log(userId)
-            const query = 'INSERT INTO story (userId,username,secure_url,datePosted,viewCount)VALUES(?,?,?,?,?)'
-            db.query(query, [userId, username, result.secure_url, formattedDate,0], (err, result) => {
+            const query = 'INSERT INTO story (userId,username,secure_url,datePosted)VALUES(?,?,?,?)'
+            db.query(query, [userId, username, result.secure_url, formattedDate], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting to database' })
                     console.log('error inserting to database')
@@ -735,8 +735,8 @@ app.post('/submitRegister', (req, res) => {
     const username = req.body.postRegisterUsername;
     const password = req.body.postRegisterPassword;
     const defaultProfileImage = 'https://res.cloudinary.com/debbskjyl/image/upload/v1752751427/default_gulcfq.jpg';
-    const query = 'INSERT INTO accounts (username,email,password,profileImage,follower,following,address,age,bio,accountBalance,islogin,test) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
-    db.query(query, [username, email, password,defaultProfileImage,0,0,'Not set',0,'Not set',0,0,0], (err, result) => {
+    const query = 'INSERT INTO accounts (username,email,password,profileImage,address,age,bio) VALUES (?,?,?,?,?,?,?)'
+    db.query(query, [username, email, password,defaultProfileImage,'Not set',0,'Not set'], (err, result) => {
         if (err) {
             res.status(400).json({ message: 'error registering' })
         } else {
