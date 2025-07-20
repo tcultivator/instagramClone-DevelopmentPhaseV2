@@ -735,8 +735,8 @@ app.post('/submitRegister', (req, res) => {
     const username = req.body.postRegisterUsername;
     const password = req.body.postRegisterPassword;
     const defaultProfileImage = 'https://res.cloudinary.com/debbskjyl/image/upload/v1752751427/default_gulcfq.jpg';
-    const query = 'INSERT INTO accounts (username,email,password,profileImage,address,age,bio) VALUES (?,?,?,?,?,?,?)'
-    db.query(query, [username, email, password,defaultProfileImage,'Not set',0,'Not set'], (err, result) => {
+    const query = 'INSERT INTO accounts (username,email,password,profileImage,address,age,bio,follower,following) VALUES (?,?,?,?,?,?,?,?,?)'
+    db.query(query, [username, email, password,defaultProfileImage,'Not set',0,'Not set',0,0], (err, result) => {
         if (err) {
             res.status(400).json({ message: 'error registering' })
         } else {
