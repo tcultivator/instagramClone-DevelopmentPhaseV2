@@ -760,6 +760,37 @@ app.post('/sendForgotpassword', (req, res) => {
     })
 })
 
+
+app.post('/sendchangePasswordReq', (req, res) => {
+    const email = req.body.email;
+    const sendUrl = req.body.sendUrl;
+    const query = 'SELECT password FROM accounts WHERE email = ?'
+    db.query(query, [email], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'No account Found!' })
+        } else {
+            sendMail(email, 'Your Password', sendUrl)
+            res.status(200).json({ message: 'Your change password link is send to your email!' })
+        }
+    })
+})
+
+
+app.post('/changePassword', (req, res) => {
+    const email = req.body.email;
+    const newPass = req.body.newPass;
+    const query = 'UPDATE accounts SET password = ? WHERE email = ?'
+    db.query(query, [newPass, email], (err, result) => {
+        if (err) {
+            console.log('errpr')
+            res.status(400).json({ message: 'Error Changing password' })
+        } else {
+            console.log('success')
+            res.status(200).json({ message: 'Success Changing Password!' })
+        }
+    })
+})
+
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
