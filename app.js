@@ -1297,8 +1297,8 @@ async function autoSearch(searchValue) {
                 autoSearch.data.data.map(async element => {
                     const alreadyFollowData = await verifyIfAlreadyfollow(element.id);
                     const followBtn = alreadyFollowData.alreadyFollow == true ? (
-                        `<button id="followBtnInSearch" data-userid="${element.id}">Unfollow</button>`
-                    ) : (`<button id="followBtnInSearch" data-userid="${element.id}">Follow</button>`)
+                        `<button id="followBtnInSearch" data-userid="${element.id}">unfollow</button>`
+                    ) : (`<button id="followBtnInSearch" data-userid="${element.id}">follow</button>`)
                     const isYou = element.id == loginUserId ? (``) :
                         (` <button data-id="${element.id}">Message</button>
                         ${followBtn}`)
