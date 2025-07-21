@@ -366,6 +366,8 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
                 break;
             case 'search':
                 console.log('this is search')
+                 document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('searchBody').style.display = 'block'
                 break;
             case 'create':
                 console.log('this is create')
@@ -408,7 +410,8 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 break;
             case 'searchS':
                 console.log('this is search')
-                document.getElementById('viewPostBody').style.display = 'none'
+                 document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('searchBody').style.display = 'block'
                 break;
             case 'createS':
                 console.log('this is create')
