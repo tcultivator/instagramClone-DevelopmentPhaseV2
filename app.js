@@ -1278,6 +1278,7 @@ const searchInputValue = document.getElementById('searchInput')
 searchInputValue.addEventListener('input', async () => {
     clearTimeout(searchTimeout)
     document.getElementById('searchLoadingMessage').style.display = 'block'
+    document.getElementById('searchLoadingMessage').textContent = 'Searching....'
     searchTimeout = setTimeout(() => {
         autoSearch(searchInputValue.value)
     }, 2500);
@@ -1336,6 +1337,7 @@ async function autoSearch(searchValue) {
 
 document.getElementById('searchBtn').addEventListener('click', async () => {
     document.getElementById('searchLoadingMessage').style.display = 'block'
+    document.getElementById('searchLoadingMessage').textContent = 'Searching....'
     submitSearch(searchInputValue.value)
 })
 async function submitSearch(searchValue) {
