@@ -1277,6 +1277,7 @@ let searchTimeout = null;
 const searchInputValue = document.getElementById('searchInput')
 searchInputValue.addEventListener('input', async () => {
     clearTimeout(searchTimeout)
+    document.getElementById('searchLoadingMessage').style.display = 'block'
     searchTimeout = setTimeout(() => {
         autoSearch(searchInputValue.value)
     }, 2500);
@@ -1284,7 +1285,7 @@ searchInputValue.addEventListener('input', async () => {
 
 async function autoSearch(searchValue) {
     if (searchValue) {
-        document.getElementById('searchLoadingMessage').style.display = 'block'
+        
         const autoSearch = await apiReq('/autoSearch', {
             searchValue: searchValue
         })
@@ -1334,11 +1335,11 @@ async function autoSearch(searchValue) {
 
 
 document.getElementById('searchBtn').addEventListener('click', async () => {
+    document.getElementById('searchLoadingMessage').style.display = 'block'
     submitSearch(searchInputValue.value)
 })
 async function submitSearch(searchValue) {
     if (searchValue) {
-        document.getElementById('searchLoadingMessage').style.display = 'block'
         const search = await apiReq('/search', {
             searchValue: searchValue
         })
