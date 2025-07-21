@@ -1286,18 +1286,23 @@ searchInputValue.addEventListener('input', async () => {
 
 async function autoSearch(searchValue) {
     if (searchValue) {
-        
+
         const autoSearch = await apiReq('/autoSearch', {
             searchValue: searchValue
         })
         if (autoSearch.ok) {
             document.getElementById('searchLoadingMessage').style.display = 'none'
             console.log(autoSearch.data.data)
-            const autoSearchResult = autoSearch.data.data.map(element => {
-                 const isYou = element.id == loginUserId ? (``) :
-                    (` <button data-id="${element.id}">Message</button>
-                        <button data-id="${element.id}">Follow</button>`)
-                return `
+            const autoSearchResult = await Promise.all(
+                autoSearch.data.data.map(async element => {
+                    const alreadyFollowData = await verifyIfAlreadyfollow(element.id);
+                    const followBtn = alreadyFollowData.alreadyFollow == true ? (
+                        `<button data-id="${element.id}">Unfollow</button>`
+                    ) : (`<button data-id="${element.id}">Follow</button>`)
+                    const isYou = element.id == loginUserId ? (``) :
+                        (` <button data-id="${element.id}">Message</button>
+                        ${followBtn}`)
+                    return `
             <div id="contentsOfSearchResults" data-id="${element.id}">
                     <div id="resultsDetails">
                         <img src="${element.profileImage}" alt="">
@@ -1308,11 +1313,12 @@ async function autoSearch(searchValue) {
                     </div>
             </div>
             `
-            }).join('')
+                })
+            )
 
             document.getElementById('searchResultsBody').innerHTML = `
             <div id="searchResults">
-            ${autoSearchResult}
+            ${autoSearchResult.join('')}
             </div>
             `
         } else {
@@ -1350,11 +1356,16 @@ async function submitSearch(searchValue) {
         if (search.ok) {
             document.getElementById('searchLoadingMessage').style.display = 'none'
             console.log(search.data.data)
-            const searchResults = search.data.data.map(element => {
-                const isYou = element.id == loginUserId ? (``) :
-                    (` <button data-id="${element.id}">Message</button>
-                        <button data-id="${element.id}">Follow</button>`)
-                return `
+            const searchResults = await Promise.all(
+                search.data.data.map(async element => {
+                    const alreadyFollowData = await verifyIfAlreadyfollow(element.id);
+                    const followBtn = alreadyFollowData.alreadyFollow == true ? (
+                        `<button data-id="${element.id}">Unfollow</button>`
+                    ) : (`<button data-id="${element.id}">Follow</button>`)
+                    const isYou = element.id == loginUserId ? (``) :
+                        (` <button data-id="${element.id}">Message</button>
+                        ${followBtn}`)
+                    return `
             <div id="contentsOfSearchResults" data-id="${element.id}">
                     <div id="resultsDetails">
                         <img src="${element.profileImage}" alt="">
@@ -1365,11 +1376,12 @@ async function submitSearch(searchValue) {
                     </div>
             </div>
             `
-            }).join('')
+                })
+            )
 
             document.getElementById('searchResultsBody').innerHTML = `
             <div id="searchResults">
-            ${searchResults}
+            ${searchResults.join('')}
             </div>
             `
         } else {
@@ -1391,6 +1403,4 @@ async function submitSearch(searchValue) {
 document.getElementById('closeSearchWindow').addEventListener('click', () => {
     document.getElementById('searchBody').style.display = 'none'
 })
-
-
 
