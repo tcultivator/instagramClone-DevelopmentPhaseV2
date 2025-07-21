@@ -1294,6 +1294,9 @@ async function autoSearch(searchValue) {
             document.getElementById('searchLoadingMessage').style.display = 'none'
             console.log(autoSearch.data.data)
             const autoSearchResult = autoSearch.data.data.map(element => {
+                 const isYou = element.id == loginUserId ? (``) :
+                    (` <button data-id="${element.id}">Message</button>
+                        <button data-id="${element.id}">Follow</button>`)
                 return `
             <div id="contentsOfSearchResults" data-id="${element.id}">
                     <div id="resultsDetails">
@@ -1301,8 +1304,7 @@ async function autoSearch(searchValue) {
                         <label>${element.username}</label>
                     </div>
                     <div id="resultsControl">
-                        <button data-id="${element.id}">Message</button>
-                        <button data-id="${element.id}">Follow</button>
+                       ${isYou}
                     </div>
             </div>
             `
@@ -1349,6 +1351,9 @@ async function submitSearch(searchValue) {
             document.getElementById('searchLoadingMessage').style.display = 'none'
             console.log(search.data.data)
             const searchResults = search.data.data.map(element => {
+                const isYou = element.id == loginUserId ? (``) :
+                    (` <button data-id="${element.id}">Message</button>
+                        <button data-id="${element.id}">Follow</button>`)
                 return `
             <div id="contentsOfSearchResults" data-id="${element.id}">
                     <div id="resultsDetails">
@@ -1356,8 +1361,7 @@ async function submitSearch(searchValue) {
                         <label>${element.username}</label>
                     </div>
                     <div id="resultsControl">
-                        <button data-id="${element.id}">Message</button>
-                        <button data-id="${element.id}">Follow</button>
+                       ${isYou}
                     </div>
             </div>
             `
