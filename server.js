@@ -791,6 +791,40 @@ app.post('/changePassword', (req, res) => {
     })
 })
 
+
+
+
+
+app.post('/autoSearch', (req, res) => {
+    const searchValue = req.body.searchValue;
+    const completeSearchValue = `${searchValue}%`
+    const query = 'SELECT id,username,profileImage FROM accounts WHERE username LIKE ?'
+
+    db.query(query, [completeSearchValue], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'Not Found' })
+        } else {
+            res.status(200).json({ message: 'Success Search', data: result })
+        }
+    })
+})
+
+app.post('/search', (req, res) => {
+    const searchValue = req.body.searchValue;
+    const query = 'SELECT id,username,profileImage FROM accounts WHERE username = ?'
+    db.query(query, [searchValue], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'Not Found' })
+        } else {
+            res.status(200).json({ message: 'Success Search', data: result })
+        }
+    })
+})
+
+
+
+
+
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
