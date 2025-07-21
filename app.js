@@ -905,56 +905,60 @@ document.getElementById('submitComment').addEventListener('click', async () => {
 
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#followBTN')) {
-        if (e.target.textContent == 'unfollow') {
-            console.log('na click ung unfollow')
-            const followUserId = e.target.dataset.userid
-            console.log('eto ung laman ng button ', e.target.textContent)
-            console.log('eto ung userid ng gusto mo i unfollow ', followUserId)
-            const follow = await apiReq('/unfollow', { followUserId: followUserId })
-            if (follow.ok) {
-                console.log('na unfollow mo')
-                // e.target.textContent = `follow`
-                const allPost = document.querySelectorAll('#followBTN')
-                console.log(allPost)
-                allPost.forEach(element => {
-
-                    if (element.dataset.userid == followUserId) {
-                        element.innerHTML = 'follow'
-                    }
-                })
-                const followingCount = Number(document.getElementById('followingCount').textContent)
-                document.getElementById('followingCount').textContent = followingCount - 1
-            } else {
-                console.log('error sa unfoloow')
-            }
-
-        } else {
-            console.log('na click ung follow')
-            const followUserId = e.target.dataset.userid
-            console.log('eto ung laman ng button ', e.target.textContent)
-            console.log('eto ung userid ng gusto mo i follow ', followUserId)
-            const follow = await apiReq('/follow', { followUserId: followUserId })
-            if (follow.ok) {
-                console.log('na follow mo')
-                const allPost = document.querySelectorAll('#followBTN')
-                console.log(allPost)
-                allPost.forEach(element => {
-                    if (element.dataset.userid == followUserId) {
-                        element.innerHTML = 'unfollow'
-                    }
-
-                })
-                const followingCount = Number(document.getElementById('followingCount').textContent)
-                document.getElementById('followingCount').textContent = followingCount + 1
-
-            } else {
-                console.log('error sa foloow')
-            }
-        }
-
-
+        console.log(e.target)
+        followBtnFunction(e.target)
     }
 })
+
+
+async function followBtnFunction(selectedHtmlElement) {
+    if (selectedHtmlElement.textContent == 'unfollow') {
+        console.log('na click ung unfollow')
+        const followUserId = selectedHtmlElement.dataset.userid
+        console.log('eto ung laman ng button ', selectedHtmlElement.textContent)
+        console.log('eto ung userid ng gusto mo i unfollow ', followUserId)
+        const follow = await apiReq('/unfollow', { followUserId: followUserId })
+        if (follow.ok) {
+            console.log('na unfollow mo')
+            // e.target.textContent = `follow`
+            const allPost = document.querySelectorAll(`#${selectedHtmlElement.id}`)
+            console.log(allPost)
+            allPost.forEach(element => {
+
+                if (element.dataset.userid == followUserId) {
+                    element.innerHTML = 'follow'
+                }
+            })
+            const followingCount = Number(document.getElementById('followingCount').textContent)
+            document.getElementById('followingCount').textContent = followingCount - 1
+        } else {
+            console.log('error sa unfoloow')
+        }
+
+    } else {
+        console.log('na click ung follow')
+        const followUserId = selectedHtmlElement.dataset.userid
+        console.log('eto ung laman ng button ', selectedHtmlElement.textContent)
+        console.log('eto ung userid ng gusto mo i follow ', followUserId)
+        const follow = await apiReq('/follow', { followUserId: followUserId })
+        if (follow.ok) {
+            console.log('na follow mo')
+            const allPost = document.querySelectorAll(`#${selectedHtmlElement.id}`)
+            console.log(allPost)
+            allPost.forEach(element => {
+                if (element.dataset.userid == followUserId) {
+                    element.innerHTML = 'unfollow'
+                }
+
+            })
+            const followingCount = Number(document.getElementById('followingCount').textContent)
+            document.getElementById('followingCount').textContent = followingCount + 1
+
+        } else {
+            console.log('error sa foloow')
+        }
+    }
+}
 
 document.getElementById('followerBody').addEventListener('click', async () => {
     document.getElementById('showFollowersContent').innerHTML = ''
@@ -1116,22 +1120,26 @@ document.addEventListener('click', async (e) => {
 
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#unfollowBtn')) {
-        const elementOfButton = e.target
-        const idOfFollowing = e.target.dataset.userid
-        console.log('eto ung element ', elementOfButton)
-        const elementOfWanttoUnfollow = elementOfButton.closest('#followersContent')
-        console.log(elementOfWanttoUnfollow)
-        const unfollowThisUser = await apiReq('/unfollow', { followUserId: idOfFollowing })
-        if (unfollowThisUser.ok) {
-            elementOfWanttoUnfollow.style.display = 'none'
-            const followingCount = Number(document.getElementById('followingCount').textContent)
-            document.getElementById('followingCount').textContent = followingCount - 1
-        } else {
-            alert('error')
-        }
+        unfollowBtnfunction(e.target)
 
     }
 })
+
+async function unfollowBtnfunction(selectedHtmlElement) {
+    const elementOfButton = selectedHtmlElement
+    const idOfFollowing = selectedHtmlElement.dataset.userid
+    console.log('eto ung element ', elementOfButton)
+    const elementOfWanttoUnfollow = elementOfButton.closest('#followersContent')
+    console.log(elementOfWanttoUnfollow)
+    const unfollowThisUser = await apiReq('/unfollow', { followUserId: idOfFollowing })
+    if (unfollowThisUser.ok) {
+        elementOfWanttoUnfollow.style.display = 'none'
+        const followingCount = Number(document.getElementById('followingCount').textContent)
+        document.getElementById('followingCount').textContent = followingCount - 1
+    } else {
+        alert('error')
+    }
+}
 
 
 
@@ -1258,3 +1266,121 @@ document.getElementById('closeAboutUser').addEventListener('click', () => {
     document.getElementById('profileContent').style = 'max-height: calc(100% - 49%);'
     document.getElementById('aboutUserInfoBody').style.display = 'none'
 })
+
+
+
+
+let searchTimeout = null;
+const searchInputValue = document.getElementById('searchInput')
+searchInputValue.addEventListener('input', async () => {
+    clearTimeout(searchTimeout)
+    searchTimeout = setTimeout(() => {
+        autoSearch(searchInputValue.value)
+    }, 2500);
+})
+
+async function autoSearch(searchValue) {
+    if (searchValue) {
+        document.getElementById('searchLoadingMessage').style.display = 'block'
+        const autoSearch = await apiReq('/autoSearch', {
+            searchValue: searchValue
+        })
+        if (autoSearch.ok) {
+            document.getElementById('searchLoadingMessage').style.display = 'none'
+            console.log(autoSearch.data.data)
+            const autoSearchResult = autoSearch.data.data.map(element => {
+                return `
+            <div id="contentsOfSearchResults" data-id="${element.id}">
+                    <div id="resultsDetails">
+                        <img src="${element.profileImage}" alt="">
+                        <label>${element.username}</label>
+                    </div>
+                    <div id="resultsControl">
+                        <button data-id="${element.id}">Message</button>
+                        <button data-id="${element.id}">Follow</button>
+                    </div>
+            </div>
+            `
+            }).join('')
+
+            document.getElementById('searchResultsBody').innerHTML = `
+            <div id="searchResults">
+            ${autoSearchResult}
+            </div>
+            `
+        } else {
+            document.getElementById('searchLoadingMessage').textContent = autoSearch.data.message
+            document.getElementById('searchResultsBody').innerHTML = `
+            <div id="searchResults">
+            
+            </div>
+            `
+        }
+    } else {
+        document.getElementById('searchResultsBody').innerHTML = `
+            <div id="searchResults">
+            
+            </div>
+            `
+        document.getElementById('searchLoadingMessage').style.display = 'none'
+    }
+
+}
+
+
+
+
+document.getElementById('searchBtn').addEventListener('click', async () => {
+    submitSearch(searchInputValue.value)
+})
+async function submitSearch(searchValue) {
+    if (searchValue) {
+        document.getElementById('searchLoadingMessage').style.display = 'block'
+        const search = await apiReq('/search', {
+            searchValue: searchValue
+        })
+        if (search.ok) {
+            document.getElementById('searchLoadingMessage').style.display = 'none'
+            console.log(search.data.data)
+            const searchResults = search.data.data.map(element => {
+                return `
+            <div id="contentsOfSearchResults" data-id="${element.id}">
+                    <div id="resultsDetails">
+                        <img src="${element.profileImage}" alt="">
+                        <label>${element.username}</label>
+                    </div>
+                    <div id="resultsControl">
+                        <button data-id="${element.id}">Message</button>
+                        <button data-id="${element.id}">Follow</button>
+                    </div>
+            </div>
+            `
+            }).join('')
+
+            document.getElementById('searchResultsBody').innerHTML = `
+            <div id="searchResults">
+            ${searchResults}
+            </div>
+            `
+        } else {
+            document.getElementById('searchLoadingMessage').textContent = search.data.message
+            document.getElementById('searchResultsBody').innerHTML = `
+            <div id="searchResults">
+            
+            </div>
+            `
+        }
+    }
+}
+
+
+
+
+
+
+document.getElementById('closeSearchWindow').addEventListener('click', () => {
+    document.getElementById('searchBody').style.display = 'none'
+})
+
+
+
