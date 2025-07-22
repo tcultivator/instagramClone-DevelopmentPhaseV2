@@ -124,16 +124,17 @@ app.post('/upload', upload.single('image'), (req, res) => {
     const username = req.body.username;
     const caption = req.body.caption;
     const userId = req.body.userId;
+    const userProfile = req.body.userProfile;
     console.log(username)
     cloudinary.uploader.upload(req.file.path, { resource_type: 'auto' }, (err, result) => {
         if (err) {
             console.log('error upload')
             res.status(400).json({ message: 'error uploading' })
         } else {
-            const query = 'INSERT INTO images (username,caption,secure_url,public_id,userId,likeCount,commentCount) VALUES (?,?,?,?,?,?,?)'
+            const query = 'INSERT INTO images (username,caption,secure_url,public_id,userId,likeCount,commentCount,userProfile) VALUES (?,?,?,?,?,?,?,?)'
             console.log(result.secure_url)
             console.log(result.public_id)
-            db.query(query, [username, caption, result.secure_url, result.public_id, userId,0,0], (err, result) => {
+            db.query(query, [username, caption, result.secure_url, result.public_id, userId,0,0,userProfile], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error uploading' })
                 } else {
@@ -735,8 +736,8 @@ app.post('/submitRegister', (req, res) => {
     const username = req.body.postRegisterUsername;
     const password = req.body.postRegisterPassword;
     const defaultProfileImage = 'https://res.cloudinary.com/debbskjyl/image/upload/v1752751427/default_gulcfq.jpg';
-    const query = 'INSERT INTO accounts (username,email,password,profileImage,address,age,bio,follower,following) VALUES (?,?,?,?,?,?,?,?,?)'
-    db.query(query, [username, email, password,defaultProfileImage,'Not set',0,'Not set',0,0], (err, result) => {
+    const query = 'INSERT INTO accounts (username,email,password,profileImage,address,age,bio,follower,following,userProfile) VALUES (?,?,?,?,?,?,?,?,?,?)'
+    db.query(query, [username, email, password,defaultProfileImage,'Not set',0,'Not set',0,0,'none'], (err, result) => {
         if (err) {
             res.status(400).json({ message: 'error registering' })
         } else {
