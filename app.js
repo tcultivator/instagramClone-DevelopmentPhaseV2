@@ -1305,7 +1305,7 @@ async function autoSearch(searchValue) {
                         `<button id="followBtnInSearch" data-userid="${element.id}">unfollow</button>`
                     ) : (`<button id="followBtnInSearch" data-userid="${element.id}">follow</button>`)
                     const isYou = element.id == loginUserId ? (``) :
-                        (` <button data-id="${element.id}">Message</button>
+                        (` <button id="messageThisUserInSearch" data-id="${element.id}">Message</button>
                         ${followBtn}`)
                     return `
             <div id="contentsOfSearchResults" data-id="${element.id}">
@@ -1368,7 +1368,7 @@ async function submitSearch(searchValue) {
                         `<button id="followBtnInSearch" data-userid="${element.id}">unfollow</button>`
                     ) : (`<button id="followBtnInSearch" data-userid="${element.id}">follow</button>`)
                     const isYou = element.id == loginUserId ? (``) :
-                        (` <button data-id="${element.id}">Message</button>
+                        (` <button id="messageThisUserInSearch" data-id="${element.id}">Message</button>
                         ${followBtn}`)
                     return `
             <div id="contentsOfSearchResults" data-id="${element.id}">
@@ -1421,5 +1421,261 @@ document.addEventListener('click', (e) => {
     if (e.target.matches('#followBtnInSearch')) {
         followBtnFunction(e.target)
     }
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let recieverId;
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#messageThisUserInSearch') || e.target.matches('#convoContent') || e.target.matches('#convoContent img') || e.target.matches('#convoContent label')) {
+        openConvoWindow(e.target.dataset.id)
+        recieverId = e.target.dataset.id
+    }
+})
+
+
+
+// eto ung mismong converstation
+async function openConvoWindow(recieverId) {
+    const findConvoData = await apiReq('/findConvoData', {
+        recieverId: recieverId,
+        loginUserId: loginUserId,
+        loginUsername: loginUsername,
+        loginProfileimage: loginProfileimage
+    })
+
+    if (findConvoData.ok) {
+        console.log('sa frontend success')
+        console.log(findConvoData.data)
+        displayAllMessages(recieverId, loginUserId)
+        document.getElementById('conversationBody').style.display = 'flex'
+
+        const ifRecieverIsYou = findConvoData.data[0].recieverUsername == loginUsername ? (
+
+            findConvoData.data[0].senderUsername
+        ) : (
+
+            findConvoData.data[0].recieverUsername
+        )
+        document.getElementById('usernameInconversationHeader').textContent = ifRecieverIsYou
+    } else {
+        console.log('sa frontend error')
+    }
+}
+
+
+
+
+
+
+document.getElementById('messageButtonHeader').addEventListener('click', () => {
+    document.getElementById('listOfconvoBody').innerHTML = ''
+    openMessageWindow()
+})
+
+
+
+
+// eto ung sa display ng list ng mga na message
+async function openMessageWindow() {
+    const displayAllMessageHistory = await apiReq('/displayAllMessageHistory', {
+        loginUserId: loginUserId
+    })
+
+    if (displayAllMessageHistory.ok) {
+        document.getElementById('messageBody').style.display = 'flex'
+        console.log(displayAllMessageHistory.data)
+        displayAllMessageHistory.data.forEach(element => {
+            const isMeSender = element.senderId == loginUserId ? (`
+            <div id="convoContent" data-id="${element.recieverId}">
+                <img data-id="${element.recieverId}" src="${element.recieverImage}" alt="">
+                <label data-id="${element.recieverId}" >${element.recieverUsername}</label>
+            </div>
+                `) :
+                (`
+            <div id="convoContent" data-id="${element.senderId}">
+                <img data-id="${element.senderId}" src="${element.senderImage}" alt="">
+                <label data-id="${element.senderId}" >${element.senderUsername}</label>
+            </div>
+                
+                
+                `)
+
+            document.getElementById('listOfconvoBody').innerHTML += `
+            ${isMeSender}
+            `
+        })
+    } else {
+        console.log('error sa frontend message button')
+    }
+}
+
+
+
+document.getElementById('closeMessageBody').addEventListener('click', (e) => {
+    document.getElementById('messageBody').style.display = 'none'
+})
+document.getElementById('closeconversationBody').addEventListener('click', (e) => {
+    document.getElementById('conversationBody').style.display = 'none'
+
+})
+
+
+const sendNewMessageInput = document.getElementById('sendNewMessageInput')
+
+
+const chatBox = document.getElementById('conversations');
+document.getElementById('sendNewMessageButton').addEventListener('click', async () => {
+    console.log(recieverId)
+    const sendNewMessage = await apiReq('/sendNewMessage', {
+        recieverId: recieverId,
+        loginUserId: loginUserId,
+        loginProfileimage: loginProfileimage,
+        message: sendNewMessageInput.value
+    })
+    if (sendNewMessage.ok) {
+        console.log('success sent')
+        displayNewMessage(recieverId, loginUserId)
+        socket.emit('displayNewMessage', { recieverId, loginUserId })
+    } else {
+        console.log('error sent')
+    }
+})
+
+
+
+async function displayNewMessage(recieverId, myUserId) {
+    const displayNewMess = await apiReq('/displayNewMess', {
+        recieverId: recieverId,
+        loginUserId: myUserId,
+    })
+
+    if (displayNewMess.ok) {
+        console.log(displayNewMess.data)
+        const isthismyMessage = displayNewMess.data.senderId == loginUserId ? (`
+            <div id="informationAndMessagesRight" data-id="${displayNewMess.data.senderId}">
+                <div id="textMessagesRight">
+                    <label id="textMessageDataRight">${displayNewMess.data.message}</label>
+                </div>
+                <img id="senderUserImageRight" src="${displayNewMess.data.senderImage}" alt="">
+
+            </div>
+            
+            `) :
+            (`
+            <div id="informationAndMessagesLeft" data-id="${displayNewMess.data.recieverId}">
+                <img id="senderUserImageLeft" src="${displayNewMess.data.senderImage}" alt="">
+                <div id="textMessagesLeft">
+                    <label id="textMessageDataLeft">${displayNewMess.data.message}</label>
+                </div>
+            </div>
+            `)
+
+        document.getElementById('conversations').innerHTML += `
+            ${isthismyMessage}
+            `
+        scrollToBottom()
+    } else {
+        console.log('no message')
+    }
+}
+
+
+socket.on('displayNewMessageRealtime', ({ recieverId, loginUserId }) => {
+    displayNewMessage(recieverId, loginUserId)
+})
+
+
+
+
+
+
+async function displayAllMessages(recieverId, loginUserId) {
+    document.getElementById('conversations').innerHTML = ` `
+    const getAllMessages = await apiReq('/getAllMessages', {
+        recieverId: recieverId,
+        loginUserId: loginUserId,
+    })
+    if (getAllMessages.ok) {
+        getAllMessages.data.forEach(element => {
+            const isthismyMessage = element.senderId == loginUserId ? (`
+            <div id="informationAndMessagesRight" data-id="${element.senderId}">
+                <div id="textMessagesRight">
+                    <label id="textMessageDataRight">${element.message}</label>
+                </div>
+                <img id="senderUserImageRight" src="${element.senderImage}" alt="">
+
+            </div>
+            
+            `) :
+                (`
+            <div id="informationAndMessagesLeft" data-id="${element.senderId}">
+                <img id="senderUserImageLeft" src="${element.senderImage}" alt="">
+                <div id="textMessagesLeft">
+                    <label id="textMessageDataLeft">${element.message}</label>
+                </div>
+            </div>
+            `)
+
+            document.getElementById('conversations').innerHTML += `
+            ${isthismyMessage}
+            `
+
+            scrollToBottom()
+        })
+    } else {
+        console.log('walang messages')
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function scrollToBottom() {
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+sendNewMessageInput.addEventListener('focus', () => {
+    setTimeout(() => {
+        scrollToBottom()
+    }, 500);
 
 })
