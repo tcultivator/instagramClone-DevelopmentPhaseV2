@@ -57,6 +57,9 @@ io.on('connection', (socket) => {
     socket.on('userunLikeThisPost', ({ postId, likeCount }) => {
         socket.broadcast.emit('userunLikeFromIO', { postId, likeCount })
     })
+     socket.on('displayNewMessage', ({ recieverId, loginUserId }) => {
+        socket.broadcast.emit('displayNewMessageRealtime', { recieverId, loginUserId })
+    })
 
 
     socket.on('disconnect', () => {
@@ -823,6 +826,143 @@ app.post('/search', (req, res) => {
 })
 
 
+
+
+
+
+
+
+app.post('/findConvoData', (req, res) => {
+    const recieverId = req.body.recieverId;
+    const loginUserId = req.body.loginUserId;
+    const loginUsername = req.body.loginUsername;
+    const loginProfileimage = req.body.loginProfileimage;
+    const query1 = 'SELECT * FROM convolist WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?)'
+    db.query(query1, [loginUserId, recieverId, loginUserId, recieverId], (err, result) => {
+        if (result.length) {
+            res.status(200).json(result)
+        } else {
+            const query2 = 'SELECT id,username,profileImage FROM accounts WHERE id = ?'
+            db.query(query2, [recieverId], (err, result) => {
+                if (err) {
+                    console.log('query2')
+                    res.status(400).json({ message: 'You run into problems' })
+                } else {
+                    console.log(result)
+                    const resultsData = result[0]
+                    console.log(resultsData)
+                    console.log(resultsData.id)
+                    const query3 = 'INSERT INTO convolist (senderId,senderUsername,senderImage,recieverId,recieverUsername,recieverImage) VALUES (?,?,?,?,?,?)'
+                    db.query(query3, [loginUserId, loginUsername, loginProfileimage, resultsData.id, resultsData.username, resultsData.profileImage], (err, result) => {
+                        if (err) {
+                            console.log('query3')
+                            res.status(400).json({ message: 'You run into problems' })
+                        } else {
+                            const query4 = 'SELECT * FROM convolist WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?)'
+                            db.query(query4, [loginUserId, recieverId, loginUserId, recieverId], (err, result) => {
+                                if (err) {
+                                    console.log('query4')
+                                    res.status(400).json({ message: 'You run into problems' })
+                                } else {
+                                    res.status(200).json(result)
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+app.post('/displayAllMessageHistory', (req, res) => {
+    const loginUserId = req.body.loginUserId;
+    const query = 'SELECT * FROM convolist WHERE senderId = ? OR recieverId = ?'
+    db.query(query, [loginUserId, loginUserId], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'No message history found' })
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
+
+
+
+
+
+
+
+
+app.post('/sendNewMessage', (req, res) => {
+    const recieverId = req.body.recieverId;
+    const loginUserId = req.body.loginUserId;
+    const loginProfileimage = req.body.loginProfileimage;
+    const message = req.body.message;
+
+    const query1 = 'SELECT profileImage FROM accounts WHERE id = ?'
+    db.query(query1, [recieverId], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'no data found' })
+        } else {
+            const recieverImage = result[0].profileImage
+            console.log(recieverImage)
+            const query2 = 'INSERT INTO messages (senderId,senderImage,recieverId,recieverImage,message) VALUES (?,?,?,?,?)'
+            db.query(query2, [loginUserId, loginProfileimage, recieverId, recieverImage, message], (err, result) => {
+                if (err) {
+                    res.status(400).json({ message: 'error inserting message' })
+                } else {
+                    res.status(200).json({ message: 'success inserting images' })
+                }
+            })
+        }
+    })
+})
+
+
+
+
+app.post('/displayNewMess', (req, res) => {
+    const recieverId = req.body.recieverId;
+    const loginUserId = req.body.loginUserId;
+    const query = 'SELECT * FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?) ORDER BY id DESC'
+    db.query(query, [loginUserId, recieverId, loginUserId, recieverId], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'No conversation Yet' })
+        } else {
+            res.status(200).json(result[0])
+        }
+    })
+})
+
+
+
+
+
+
+app.post('/getAllMessages', (req, res) => {
+    const recieverId = req.body.recieverId;
+    const loginUserId = req.body.loginUserId;
+    const query = 'SELECT * FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?)'
+    db.query(query, [loginUserId, recieverId, loginUserId, recieverId], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'No conversation Yet' })
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
 
 
 
