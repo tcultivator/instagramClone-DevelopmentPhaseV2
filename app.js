@@ -1491,6 +1491,7 @@ async function openConvoWindow(recieverId) {
 
 document.getElementById('messageButtonHeader').addEventListener('click', () => {
     document.getElementById('listOfconvoBody').innerHTML = ''
+    document.getElementById('messageBody').style.display = 'flex'
     openMessageWindow()
 })
 
