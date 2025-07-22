@@ -54,7 +54,7 @@ socket.on('connect', () => {
                     <button id="like" ><i id="likethisPost" style="color: red;" data-id="${element.id}" class="fa-solid fa-heart"></i></button>
                     `) :
                     (`
-                     <button id="like" ><i id="likethisPost" data-id="${element.id}" class="fa-solid fa-heart"></i></button>
+                     <button id="like" ><i id="likethisPost" data-id="${element.id}" class="fa-regular fa-heart"></i></button>
                     `)
                 const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
                 const mediaTag = isVideo
@@ -76,33 +76,34 @@ socket.on('connect', () => {
                 const followVisible = element.userId == loginUserId ? (``)
                     : (`${followBtn}`)
                 document.getElementById('userPost').innerHTML += `
-                        <div id="postcontent" data-id="${element.id}">  
-                            <div id="userProfilePost">
+                <div id="postcontent" data-id="${element.id}">  
+                        <div id="userProfilePost">
                             <div>
-
-                                ${followVisible}
+                                <img id="userThatPostImage" data-userid="${element.userId}" src="${element.userProfile}" alt="">
+                                <label id="userThatPostLabel" data-userid="${element.userId}">${element.username}</label>
                             </div>
-                            <button><i class="fa-solid fa-ellipsis"></i></button>
-
+                             <div>
+                                ${followVisible}
+                                <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                            </div>
+                            
                         </div>
                         <div id="userPostContent">
                             ${mediaTag}
                         </div>
                         <div id="likecommentshare">
                             ${likeBtn}
-                            <button id="comment"><i id="commentthispost" data-id="${element.id}" class="fa-solid fa-comment"></i></button>
-                            <button id="share"><i class="fa-solid fa-paper-plane"></i></button>
+                            <button id="comment"><i id="commentthispost" data-id="${element.id}" class="fa-regular fa-comment"></i></button>
+                            <button id="share"><i class="fa-regular fa-paper-plane"></i></button>
                         </div>
                         <div id="valueoflikecommentshare">
                             <label id="likeCount" data-likecount="${element.likeCount}">${element.likeCount} <span>Likes</span></label>
                             <label id="commentCount" data-commentcount="${element.commentCount}">${element.commentCount} <span>Comments</span></label>
                         </div>
                          <div id="postlabel">
-
                             <label id="userThatPost" data-userid="${element.userId}">${element.username} <span>${element.caption}</span></label>
                         </div>
-
-                    </div>
+                </div>
                 `
             });
             document.getElementById('loadingBody').style = 'display:flex'
@@ -234,7 +235,7 @@ document.addEventListener('click', async (e) => {
             console.log(getAllStoryViewer.data)
             getAllStoryViewer.data.forEach(element => {
                 let reactionsIcon = '';
-                if (element.reactions != null) {
+                if (element.reactions != '') {
                     const parseReactionIcon = JSON.parse(element.reactions)
                     reactionsIcon = parseReactionIcon.join(' ')
 
@@ -366,7 +367,7 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
                 break;
             case 'search':
                 console.log('this is search')
-                 document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('viewPostBody').style.display = 'none'
                 document.getElementById('searchBody').style.display = 'block'
                 break;
             case 'create':
@@ -410,7 +411,7 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 break;
             case 'searchS':
                 console.log('this is search')
-                 document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('viewPostBody').style.display = 'none'
                 document.getElementById('searchBody').style.display = 'block'
                 break;
             case 'createS':
@@ -491,6 +492,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
     formData.append('username', loginUsername)
     formData.append('caption', caption.value)
     formData.append('userId', loginUserId)
+    formData.append('userProfile', loginProfileimage)
 
     try {
         const upload = await fetch('https://instagramclone-developmentphasev2.onrender.com/upload', {
@@ -616,7 +618,7 @@ document.getElementById('closeUpdateProfile').addEventListener('click', () => {
 
 let idOfVisitProfile;
 document.addEventListener('click', async (e) => {
-    if (e.target.matches('#userThatPost') || e.target.matches('#followersInfo')) {
+    if (e.target.matches('#userThatPost') || e.target.matches('#followersInfo') || e.target.matches('#userThatPostImage') || e.target.matches('#userThatPostLabel')) {
         document.getElementById('showFollowersBody').style.display = 'none'
         document.getElementById('showFollowersContent').innerHTML = ''
         document.getElementById('imgGrid').innerHTML = ''
@@ -734,7 +736,8 @@ document.addEventListener('click', async (e) => {
             likeCountLabel.dataset.likecount = likeCount
             likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
 
-            likeIcon.style = 'color:rgba(255, 255, 255, 1)'
+            likeIcon.style = 'color:rgb(36, 36, 36)'
+            likeIcon.classList = 'fa-regular fa-heart'
             const postId = e.target.dataset.id
             console.log(loginUserId)
             console.log(postId)
@@ -757,6 +760,7 @@ document.addEventListener('click', async (e) => {
             likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
 
             likeIcon.style = 'color:red'
+            likeIcon.classList = 'fa-solid fa-heart'
             const postId = e.target.dataset.id
             console.log(loginUserId)
             console.log(postId)
@@ -831,8 +835,8 @@ async function viewComments(postIdOfyouwantToComment) {
         userComments.forEach(element => {
             const labelComments = element.username == loginUsername ? (
                 `
-                    <div id="commentDetails" style="background-color:#ade8f4">
-                        <label id="userThatComment">${element.username}</label>
+                    <div id="commentDetails" style="background-color:#1C6CFF; color:white">
+                        <label id="userThatComment" style="color:white">${element.username}</label>
                         <label for="">${element.comment}</label>
                     </div>
                 `
@@ -1255,6 +1259,9 @@ document.addEventListener('click', (e) => {
 })
 
 
+
+
+
 document.getElementById('aboutUser').addEventListener('click', () => {
     console.log('zxczxczxczxczxczxc')
     document.getElementById('profileContent').style = 'max-height: calc(100% - 63%);'
@@ -1269,8 +1276,6 @@ document.getElementById('closeAboutUser').addEventListener('click', () => {
     document.getElementById('profileContent').style = 'max-height: calc(100% - 49%);'
     document.getElementById('aboutUserInfoBody').style.display = 'none'
 })
-
-
 
 
 let searchTimeout = null;
@@ -1418,4 +1423,3 @@ document.addEventListener('click', (e) => {
     }
 
 })
-
