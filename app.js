@@ -1548,21 +1548,28 @@ const sendNewMessageInput = document.getElementById('sendNewMessageInput')
 
 const chatBox = document.getElementById('conversations');
 document.getElementById('sendNewMessageButton').addEventListener('click', async () => {
+    sendThisMessage(sendNewMessageInput.value)
+})
+
+async function sendThisMessage(message) {
     console.log(recieverId)
     const sendNewMessage = await apiReq('/sendNewMessage', {
         recieverId: recieverId,
         loginUserId: loginUserId,
         loginProfileimage: loginProfileimage,
-        message: sendNewMessageInput.value
+        message: message
     })
     if (sendNewMessage.ok) {
         console.log('success sent')
         displayNewMessage(recieverId, loginUserId)
         socket.emit('displayNewMessage', { recieverId, loginUserId })
+        sendNewMessageInput.value = ''
+        document.getElementById('sendNewMessageButton').style.display = 'none'
+        document.getElementById('sendLikeMessage').style.display = 'flex'
     } else {
         console.log('error sent')
     }
-})
+}
 
 
 
@@ -1680,3 +1687,19 @@ sendNewMessageInput.addEventListener('focus', () => {
     }, 500);
 
 })
+
+sendNewMessageInput.addEventListener('input', () => {
+    if (sendNewMessageInput.value == '') {
+        document.getElementById('sendNewMessageButton').style.display = 'none'
+        document.getElementById('sendLikeMessage').style.display = 'flex'
+    } else {
+        document.getElementById('sendNewMessageButton').style.display = 'flex'
+        document.getElementById('sendLikeMessage').style.display = 'none'
+    }
+
+})
+
+document.getElementById('sendLikeMessage').addEventListener('click',()=>{
+    sendThisMessage('👍')
+})
+
