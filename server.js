@@ -42,13 +42,20 @@ db.connect((err) => {
 
 
 io.on('connection', (socket) => {
-    console.log('A client connected');
+    const parsedCookies = require('cookie').parse(socket.handshake.headers.cookie);
+    console.log(parsedCookies)
+    const verifiedToken = jwt.verify(parsedCookies.token, secret)
+    console.log(verifiedToken)
+    // const userId = socket.handshake.query.userId;
+    console.log(`user with a user id of ${verifiedToken.userID} is connected`);
+    const USERID = String(verifiedToken.userID);
+    socket.join(USERID)
 
 
-    socket.on('idOfThis', ({postIdOfyouwantToComment,commentCount}) => {
+    socket.on('idOfThis', ({ postIdOfyouwantToComment, commentCount }) => {
         console.log('eto ung galing sa socket io')
         console.log(postIdOfyouwantToComment)
-        socket.broadcast.emit('idOfCommentFromIO', {postIdOfyouwantToComment,commentCount})
+        socket.broadcast.emit('idOfCommentFromIO', { postIdOfyouwantToComment, commentCount })
     })
 
     socket.on('userLikeThisPost', ({ postId, likeCount }) => {
@@ -57,15 +64,22 @@ io.on('connection', (socket) => {
     socket.on('userunLikeThisPost', ({ postId, likeCount }) => {
         socket.broadcast.emit('userunLikeFromIO', { postId, likeCount })
     })
-     socket.on('displayNewMessage', ({ recieverId, loginUserId }) => {
-        socket.broadcast.emit('displayNewMessageRealtime', { recieverId, loginUserId })
-    })
 
 
     socket.on('disconnect', () => {
         console.log('A client disconnected');
 
     });
+
+
+    socket.on('displayNewMessage', ({ recieverId, loginUserId, loginProfileimage, message }) => {
+        io.to(recieverId).emit('displayNewMessageRealtime', {
+            recieverId,
+            senderId: loginUserId,
+            senderImage: loginProfileimage,
+            senderMessage: message
+        })
+    })
 });
 
 
@@ -929,25 +943,6 @@ app.post('/sendNewMessage', (req, res) => {
         }
     })
 })
-
-
-
-
-app.post('/displayNewMess', (req, res) => {
-    const recieverId = req.body.recieverId;
-    const loginUserId = req.body.loginUserId;
-    const query = 'SELECT * FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?) ORDER BY id DESC'
-    db.query(query, [loginUserId, recieverId, loginUserId, recieverId], (err, result) => {
-        if (!result.length) {
-            res.status(400).json({ message: 'No conversation Yet' })
-        } else {
-            res.status(200).json(result[0])
-        }
-    })
-})
-
-
-
 
 
 
