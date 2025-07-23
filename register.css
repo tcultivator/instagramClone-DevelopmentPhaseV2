@@ -2,7 +2,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: 'Righteous';
-    background-color: rgb(36, 36, 36);
+    background-color: rgb(255, 255, 255);
     overflow: hidden;
 
 }
@@ -10,7 +10,7 @@ body {
 #registerForm .logo {
     font-size: 60px;
     font-family: 'Sacramento';
-    color: white;
+    color: rgb(36, 36, 36);
     margin-bottom: 40px;
     padding: 0;
 }
@@ -47,7 +47,7 @@ body {
     font-size: 12px;
     cursor: text;
     transition: .1s;
-    color: white;
+    color: rgb(36, 36, 36);
 }
 
 
@@ -61,7 +61,7 @@ body {
     border-radius: 5px;
     background-color: transparent;
     color: var(--primary-text-color);
-    color: white;
+    color: rgb(36, 36, 36);
 }
 
 #emailBody input:not(:placeholder-shown)~label,
@@ -110,7 +110,7 @@ body {
 }
 
 #haveAcc a {
-    color: white;
+    color: rgb(36, 36, 36);
     font-size: 12px;
     cursor: pointer;
 }
@@ -136,7 +136,7 @@ body {
 #setupPersoInfo .logo {
     font-size: 60px;
     font-family: 'Sacramento';
-    color: white;
+    color: rgb(36, 36, 36);
     margin-bottom: 0px;
 }
 
@@ -150,14 +150,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: rgb(36, 36, 36);
+    background-color: rgb(255, 255, 255);
 
 
 }
 
 
 #setupHeader {
-    color: white;
+    color: rgb(36, 36, 36);
     font-size: 20px;
     padding: 10px;
 
@@ -180,7 +180,7 @@ body {
     font-size: 12px;
     cursor: text;
     transition: .1s;
-    color: white;
+    color: rgb(36, 36, 36);
 }
 
 
@@ -194,7 +194,7 @@ body {
     border-radius: 5px;
     background-color: transparent;
     color: var(--primary-text-color);
-    color: white;
+    color: rgb(36, 36, 36);
 }
 
 #usernameBody input:not(:placeholder-shown)~label,
@@ -243,7 +243,7 @@ body {
 }
 
 #dothislaterBody a {
-    color: white;
+    color: rgb(36, 36, 36);
     font-size: 12px;
     cursor: pointer;
 }
@@ -352,7 +352,10 @@ body {
     width: 300px;
     margin: auto;
     align-items: center;
+    gap: 5px;
 }
+
+
 
 #verificationSubmit button {
     align-items: center;
@@ -387,6 +390,7 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.521);
     display: flex;
+    top: 0;
 }
 
 #loadCircle {
