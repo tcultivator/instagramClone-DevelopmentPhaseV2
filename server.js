@@ -44,7 +44,7 @@ db.connect((err) => {
 io.on('connection', (socket) => {
     const parsedCookies = require('cookie').parse(socket.handshake.headers.cookie);
     console.log(parsedCookies)
-    const verifiedToken = jwt.verify(parsedCookies.token, secret)
+    const verifiedToken = jwt.verify(parsedCookies.token, process.env.JWT_TOKEN_SECRET_KEY)
     console.log(verifiedToken)
     // const userId = socket.handshake.query.userId;
     console.log(`user with a user id of ${verifiedToken.userID} is connected`);
