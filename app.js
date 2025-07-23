@@ -14,7 +14,9 @@ let address;
 
 import { io } from 'https://cdn.socket.io/4.7.2/socket.io.esm.min.js';
 
-const socket = io('https://instagramclone-developmentphasev2.onrender.com');
+const socket = io('https://instagramclone-developmentphasev2.onrender.com',{
+    withCredentials: true
+});
 
 socket.on('connect', () => {
     console.log('Socket connected from app.js!');
@@ -1583,7 +1585,8 @@ async function sendThisMessage(message) {
     })
     if (sendNewMessage.ok) {
         console.log('success sent')
-        socket.emit('displayNewMessage', { recieverId, loginUserId })
+        socket.emit('displayNewMessage', { recieverId, loginUserId, loginProfileimage, message })
+
     } else {
         console.log('error sent')
     }
@@ -1591,38 +1594,18 @@ async function sendThisMessage(message) {
 
 
 
-async function displayNewMessage(recieverId, myUserId) {
-    const displayNewMess = await apiReq('/displayNewMess', {
-        recieverId: recieverId,
-        loginUserId: myUserId,
-    })
-
-    if (displayNewMess.ok) {
-        console.log(displayNewMess.data)
-        document.getElementById('conversations').innerHTML += `
-             <div id="informationAndMessagesLeft" data-id="${displayNewMess.data.senderId}">
-                <img id="senderUserImageLeft" src="${displayNewMess.data.senderImage}" alt="">
+socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, senderMessage }) => {
+    console.log('hahahaha eto ung na recieve sa socket')
+    document.getElementById('conversations').innerHTML += `
+             <div id="informationAndMessagesLeft" data-id="${senderId}">
+                <img id="senderUserImageLeft" src="${senderImage}" alt="">
                 <div id="textMessagesLeft">
-                    <label id="textMessageDataLeft">${displayNewMess.data.message}</label>
+                    <label id="textMessageDataLeft">${senderMessage}</label>
                 </div>
             </div>
             `
-        scrollToBottom()
-
-    } else {
-        console.log('no message')
-    }
-}
-
-
-socket.on('displayNewMessageRealtime', ({ recieverId, loginUserId }) => {
-    displayNewMessage(recieverId, loginUserId)
+    scrollToBottom()
 })
-
-
-
-
-
 
 async function displayAllMessages(recieverId, loginUserId) {
     document.getElementById('conversations').innerHTML = ` `
