@@ -1562,7 +1562,16 @@ document.getElementById('sendNewMessageButton').addEventListener('click', async 
 })
 
 async function sendThisMessage(message) {
-    console.log(recieverId)
+    document.getElementById('conversations').innerHTML += `
+             <div id="informationAndMessagesRight" data-id="${loginUserId}">
+                <div id="textMessagesRight">
+                    <label id="textMessageDataRight">${message}</label>
+                </div>
+                <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
+
+            </div>
+            `
+    scrollToBottom()
     const sendNewMessage = await apiReq('/sendNewMessage', {
         recieverId: recieverId,
         loginUserId: loginUserId,
@@ -1571,7 +1580,6 @@ async function sendThisMessage(message) {
     })
     if (sendNewMessage.ok) {
         console.log('success sent')
-        displayNewMessage(recieverId, loginUserId)
         socket.emit('displayNewMessage', { recieverId, loginUserId })
         sendNewMessageInput.value = ''
         document.getElementById('sendNewMessageButton').style.display = 'none'
