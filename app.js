@@ -1599,29 +1599,16 @@ async function displayNewMessage(recieverId, myUserId) {
 
     if (displayNewMess.ok) {
         console.log(displayNewMess.data)
-        const isthismyMessage = displayNewMess.data.senderId == loginUserId ? (`
-            <div id="informationAndMessagesRight" data-id="${displayNewMess.data.senderId}">
-                <div id="textMessagesRight">
-                    <label id="textMessageDataRight">${displayNewMess.data.message}</label>
-                </div>
-                <img id="senderUserImageRight" src="${displayNewMess.data.senderImage}" alt="">
-
-            </div>
-            
-            `) :
-            (`
-            <div id="informationAndMessagesLeft" data-id="${displayNewMess.data.recieverId}">
+        document.getElementById('conversations').innerHTML += `
+             <div id="informationAndMessagesLeft" data-id="${displayNewMess.data.senderId}">
                 <img id="senderUserImageLeft" src="${displayNewMess.data.senderImage}" alt="">
                 <div id="textMessagesLeft">
                     <label id="textMessageDataLeft">${displayNewMess.data.message}</label>
                 </div>
             </div>
-            `)
-
-        document.getElementById('conversations').innerHTML += `
-            ${isthismyMessage}
             `
         scrollToBottom()
+
     } else {
         console.log('no message')
     }
