@@ -1572,6 +1572,9 @@ async function sendThisMessage(message) {
             </div>
             `
     scrollToBottom()
+    sendNewMessageInput.value = ''
+    document.getElementById('sendNewMessageButton').style.display = 'none'
+    document.getElementById('sendLikeMessage').style.display = 'flex'
     const sendNewMessage = await apiReq('/sendNewMessage', {
         recieverId: recieverId,
         loginUserId: loginUserId,
@@ -1581,9 +1584,6 @@ async function sendThisMessage(message) {
     if (sendNewMessage.ok) {
         console.log('success sent')
         socket.emit('displayNewMessage', { recieverId, loginUserId })
-        sendNewMessageInput.value = ''
-        document.getElementById('sendNewMessageButton').style.display = 'none'
-        document.getElementById('sendLikeMessage').style.display = 'flex'
     } else {
         console.log('error sent')
     }
