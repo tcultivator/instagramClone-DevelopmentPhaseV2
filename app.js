@@ -434,6 +434,16 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 document.getElementById('updateProfilePic').style.display = 'none'
                 document.getElementById('viewPostBody').style.display = 'none'
                 break;
+             case 'messageButtonHeaderS':
+                document.getElementById('listOfconvoBody').innerHTML = ''
+                document.getElementById('messageBody').style.display = 'flex'
+                openMessageWindow()
+                console.log('this is message')
+                document.getElementById('profileBody').style = 'display:none'
+                document.getElementById('createPost').style.display = 'none'
+                document.getElementById('updateProfilePic').style.display = 'none'
+                document.getElementById('viewPostBody').style.display = 'none'
+                break;
 
             default:
                 break;
