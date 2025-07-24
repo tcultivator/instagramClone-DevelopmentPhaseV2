@@ -1,5 +1,8 @@
 
 import { apiReq } from './fetchReq.js';
+import { visitProfile, viewProfile } from './handlers/visitProfileHandler.js';
+import { followingHandler } from './handlers/viewFollowingHandler.js'
+import { followersHandler } from './handlers/viewFollowersHandler.js'
 document.getElementById('loadingBody').style = 'display:flex'
 let userData;
 let filename;
@@ -14,15 +17,14 @@ let address;
 
 import { io } from 'https://cdn.socket.io/4.7.2/socket.io.esm.min.js';
 
-const socket = io('https://instagramclone-developmentphasev2.onrender.com',{
+
+const socket = io('https://instagramclone-developmentphasev2.onrender.com', {
     withCredentials: true
 });
 
 socket.on('connect', () => {
     console.log('Socket connected from app.js!');
 });
-
-
 
 (async () => {
 
@@ -44,6 +46,10 @@ socket.on('connect', () => {
         document.getElementById('followersCount').textContent = userData.follower
         document.getElementById('followingCount').textContent = userData.following
         document.getElementById('bioInProfile').textContent = userData.bio
+
+        document.getElementById('followerBody').dataset.userid = userData.id
+        document.getElementById('followingBody').dataset.userid = userData.id
+
         const getAlldataForWall = await fetch('https://instagramclone-developmentphasev2.onrender.com/getAll', {
             method: 'POST'
         })
@@ -369,15 +375,23 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
                 break;
             case 'search':
                 console.log('this is search')
-                document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('searchBody').style.zIndex = 1
                 document.getElementById('searchBody').style.display = 'block'
+                document.getElementById('createPost').style.display = 'none'
+                document.getElementById('profileBody').style = 'display:none'
+                document.getElementById('messageBody').style.display = 'none'
+                document.getElementById('updateProfilePic').style.display = 'none'
+                document.getElementById('visitprofileBody').style = 'display:none'
                 break;
             case 'create':
                 console.log('this is create')
+                document.getElementById('searchBody').style.display = 'none'
                 document.getElementById('createPost').style.display = 'flex'
-                document.getElementById('profileBody').style = 'display:none '
+                document.getElementById('createPost').style.zIndex = 1
+                document.getElementById('profileBody').style = 'display:none'
+                document.getElementById('messageBody').style.display = 'none'
                 document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('visitprofileBody').style = 'display:none'
                 break;
             case 'notif':
                 console.log('this is notif')
@@ -386,11 +400,14 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
             case 'profile':
                 document.getElementById('imgGrid').innerHTML = ''
                 console.log('this is profile')
-                viewProfile()
-                document.getElementById('profileBody').style = 'display:block'
+                viewProfile(loginUserId)
+                document.getElementById('searchBody').style.display = 'none'
                 document.getElementById('createPost').style.display = 'none'
+                document.getElementById('profileBody').style = 'display:block'
+                document.getElementById('profileBody').style.zIndex = 1
+                document.getElementById('messageBody').style.display = 'none'
                 document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('visitprofileBody').style = 'display:none'
                 break;
 
             default:
@@ -413,15 +430,23 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 break;
             case 'searchS':
                 console.log('this is search')
-                document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('searchBody').style.zIndex = 1
                 document.getElementById('searchBody').style.display = 'block'
+                document.getElementById('createPost').style.display = 'none'
+                document.getElementById('profileBody').style = 'display:none'
+                document.getElementById('messageBody').style.display = 'none'
+                document.getElementById('updateProfilePic').style.display = 'none'
+                document.getElementById('visitprofileBody').style = 'display:none'
                 break;
             case 'createS':
                 console.log('this is create')
+                document.getElementById('searchBody').style.display = 'none'
                 document.getElementById('createPost').style.display = 'flex'
+                document.getElementById('createPost').style.zIndex = 1
                 document.getElementById('profileBody').style = 'display:none'
+                document.getElementById('messageBody').style.display = 'none'
                 document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('visitprofileBody').style = 'display:none'
                 break;
             case 'notifS':
                 console.log('this is notif')
@@ -430,21 +455,27 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
             case 'profileS':
                 document.getElementById('imgGrid').innerHTML = ''
                 console.log('this is profile')
-                viewProfile()
-                document.getElementById('profileBody').style = 'display:block'
+                viewProfile(loginUserId)
+                document.getElementById('searchBody').style.display = 'none'
                 document.getElementById('createPost').style.display = 'none'
+                document.getElementById('profileBody').style = 'display:block'
+                document.getElementById('profileBody').style.zIndex = 1
+                document.getElementById('messageBody').style.display = 'none'
                 document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('visitprofileBody').style = 'display:none'
                 break;
-             case 'messageButtonHeaderS':
+            case 'messageButtonHeaderS':
                 document.getElementById('listOfconvoBody').innerHTML = ''
                 document.getElementById('messageBody').style.display = 'flex'
+                document.getElementById('messageBody').style.zIndex = 1
                 openMessageWindow()
                 console.log('this is message')
                 document.getElementById('profileBody').style = 'display:none'
+                document.getElementById('visitprofileBody').style = 'display:none'
                 document.getElementById('createPost').style.display = 'none'
                 document.getElementById('updateProfilePic').style.display = 'none'
                 document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('searchBody').style.display = 'none'
                 break;
 
             default:
@@ -515,7 +546,6 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         const data = await upload.json()
         if (upload.ok) {
             window.location.reload()
-            document.getElementById('loadingCircle').style.display = 'none'
         } else {
             alert(data.message)
         }
@@ -624,59 +654,13 @@ document.getElementById('closeUpdateProfile').addEventListener('click', () => {
 })
 
 
-
-
-
-
-let idOfVisitProfile;
+//view user profile
 document.addEventListener('click', async (e) => {
-    if (e.target.matches('#userThatPost') || e.target.matches('#followersInfo') || e.target.matches('#userThatPostImage') || e.target.matches('#userThatPostLabel')) {
-        document.getElementById('showFollowersBody').style.display = 'none'
-        document.getElementById('showFollowersContent').innerHTML = ''
-        document.getElementById('imgGrid').innerHTML = ''
-        document.getElementById('profileBody').style = 'display:none'
-        document.getElementById('visitprofileBody').style = 'display:none'
-        const userId = e.target.dataset.userid;
-        idOfVisitProfile = e.target.dataset.userid;
-        console.log(userId)
-        if (loginUserId == userId) {
-            document.getElementById('profileBody').style = 'display:block'
-            viewProfile()
-        } else {
-            document.getElementById('visitprofileBody').style.display = 'block'
-            const visitOtherProfile = await apiReq('/visitOtherProfile', { userId: userId })
-            if (visitOtherProfile.ok) {
-                console.log(visitOtherProfile.data.result)
-                document.getElementById('visitprofileName').textContent = visitOtherProfile.data.result.username
-                document.getElementById('visitchangeProfile').src = visitOtherProfile.data.result.profileImage
-                document.getElementById('visitFollowerCount').textContent = visitOtherProfile.data.result.follower
-                document.getElementById('visitfollowingCount').textContent = visitOtherProfile.data.result.following
-                const viewProfileReq = await apiReq('/viewProfileReq', { userId: userId })
-                if (viewProfileReq.ok) {
-                    userData = viewProfileReq.data.result
-                    console.log(userData)
-                    userData.forEach(element => {
-                        const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
-                        const mediaTag = isVideo
-                            ? `<video autoplay width="100%">
-                <source id="imageOnPost" data-secure_url="${element.secure_url}" src="${element.secure_url}" type="video/mp4" >
-                Your browser does not support the video tag.
-           </video>`
-                            : `<img id="imageOnPost" data-secure_url="${element.secure_url}" src=${element.secure_url} alt="">`;
-                        document.getElementById('visitimgGrid').innerHTML += `
-             <div>
-                    ${mediaTag}
-                </div>
-            `
-                    });
-                }
-                document.getElementById('visitPostCount').textContent = userData.length
-            }
-            else {
-                console.log('may error sa pag visit')
-            }
-        }
-
+    if (e.target.matches('#userThatPost') || e.target.matches('#userThatPostImage') || e.target.matches('#userThatPostLabel')) {
+        visitProfile(loginUserId, e.target.dataset.userid)
+    } else if (e.target.matches('#followersContent') || e.target.matches('#followersUserProfile') || e.target.matches('#followersInfo')) {
+        const elementID = document.querySelector('#followersContent')
+        visitProfile(loginUserId, elementID.dataset.userid)
     }
 });
 
@@ -685,31 +669,14 @@ document.getElementById('visitbackBtnonProfile').addEventListener('click', () =>
     document.getElementById('visitimgGrid').innerHTML = ''
 })
 
+document.getElementById('visitprofileMessage').addEventListener('click', (e) => {
+    const elementID = document.querySelector('#visitprofileName')
+    openConvoWindow(elementID.dataset.userid)
+    console.log(elementID.dataset.userid)
+})
 
-async function viewProfile() {
-    const viewProfileReq = await apiReq('/viewProfileReq', { userId: loginUserId })
-    if (viewProfileReq.ok) {
-        userData = viewProfileReq.data.result
-        console.log('eto ung data sa profile')
-        userData.forEach(element => {
-            const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
-            const mediaTag = isVideo
-                ? `<video autoplay muted controls width="100%" id="imageOnPost" data-secure_url="${element.secure_url}">
-                <source  src="${element.secure_url}" type="video/mp4" >
-                Your browser does not support the video tag.
-           </video>`
-                : `<img id="imageOnPost" data-secure_url="${element.secure_url}" src=${element.secure_url} alt="">`;
-            document.getElementById('imgGrid').innerHTML += `
-             <div>
-                    ${mediaTag}
-                </div>
-            `
-        });
 
-        document.getElementById('postsCount').textContent = userData.length
 
-    }
-}
 
 document.addEventListener('click', (e) => {
     if (e.target.matches("#imageOnPost")) {
@@ -979,59 +946,40 @@ async function followBtnFunction(selectedHtmlElement) {
     }
 }
 
-document.getElementById('followerBody').addEventListener('click', async () => {
-    document.getElementById('showFollowersContent').innerHTML = ''
-    document.getElementById('showFollowersBody').style.display = 'block'
-    console.log('na clik ung show followers')
-    const displayFollowers = await apiReq('/displayFollowers', { userId: loginUserId })
-    if (displayFollowers.ok) {
-        console.log('merong nakuha follower')
-        console.log(displayFollowers.data)
-        displayFollowers.data.forEach(element => {
-            document.getElementById('showFollowersContent').innerHTML += `
-            
-            <div id="followersContent">
-                <div>
-                    <img src="${element.profileImage}" alt="">
-                    <label id="followersInfo" data-userid="${element.id}">${element.username}</label>
-                </div>
-               
-            </div>
-            `
-        })
-    } else {
-        console.log('error ka')
+
+// display your followers
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#followerBody') || e.target.matches('#followersCount') || e.target.matches('#followersLabel')) {
+        const elementID = document.querySelector('#followerBody')
+        followersHandler(loginUserId, elementID.dataset.userid)
+    }
+})
+
+// display followers of visiting profile
+document.addEventListener('click', async (e) => {
+    if (e.target.matches('#visitfollowerBody') || e.target.matches('#visitFollowerCount') || e.target.matches('#visitFollowerLabel')) {
+        const elementID = document.querySelector('#visitfollowerBody')
+        followersHandler(loginUserId, elementID.dataset.userid)
+    }
+
+})
+
+//display your following
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#followingBody') || e.target.matches('#followingCount') || e.target.matches('#followingLabel')) {
+        const elementID = document.querySelector('#followingBody')
+        followingHandler(loginUserId, elementID.dataset.userid)
     }
 })
 
 
+//display following of visiting profile
 document.addEventListener('click', async (e) => {
-    if (e.target.matches('#visitfollowerBody') || e.target.matches('#visitFollowerCount')) {
-        console.log('eto ung id nya ', idOfVisitProfile)
-        document.getElementById('showFollowersContent').innerHTML = ''
-        document.getElementById('showFollowersBody').style.display = 'block'
-        console.log('na clik ung show followers')
-        const displayFollowers = await apiReq('/displayFollowers', { userId: idOfVisitProfile })
-        if (displayFollowers.ok) {
-            console.log('merong nakuha follower')
-            console.log(displayFollowers.data)
-            displayFollowers.data.forEach(element => {
-                document.getElementById('showFollowersContent').innerHTML += `
-
-            <div id="followersContent">
-                <div>
-                    <img src="${element.profileImage}" alt="">
-                    <label id="followersInfo" data-userid="${element.id}">${element.username}</label>
-                </div>
-
-            </div>
-            `
-            })
-        } else {
-            console.log('error ka')
-        }
+    if (e.target.matches('#visitfollowingBody') || e.target.matches('#visitfollowingCount') || e.target.matches('#visitfollowingLabel')) {
+        const elementID = document.querySelector('#visitfollowingBody')
+        followingHandler(loginUserId, elementID.dataset.userid)
     }
-
 })
 
 document.getElementById('closeShowFollowers').addEventListener('click', () => {
@@ -1058,80 +1006,6 @@ async function verifyIfAlreadyfollow(followUserId) {
 
 
 
-
-
-
-
-
-
-
-
-document.getElementById('followingBody').addEventListener('click', async () => {
-    document.getElementById('showFollowersContent').innerHTML = ''
-    document.getElementById('showFollowersBody').style.display = 'block'
-    console.log('na clik ung show followers')
-    const displayFollowers = await apiReq('/displayFollowing', { userId: loginUserId })
-    if (displayFollowers.ok) {
-        console.log('merong nakuha follower')
-        console.log(displayFollowers.data)
-        displayFollowers.data.forEach(element => {
-            document.getElementById('showFollowersContent').innerHTML += `
-            
-            <div id="followersContent">
-                <div>
-                    <img src="${element.profileImage}" alt="">
-                    <label id="followersInfo" data-userid="${element.id}">${element.username}</label>
-                </div>
-               <button id="unfollowBtn" data-userid="${element.id}">unfollow</button>
-            </div>
-            `
-        })
-    } else {
-        console.log('error ka')
-    }
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener('click', async (e) => {
-    if (e.target.matches('#visitfollowingBody') || e.target.matches('#visitfollowingCount')) {
-        console.log('eto ung id nya ', idOfVisitProfile)
-        document.getElementById('showFollowersContent').innerHTML = ''
-        document.getElementById('showFollowersBody').style.display = 'block'
-        console.log('na clik ung show followers')
-        const displayFollowers = await apiReq('/displayFollowing', { userId: idOfVisitProfile })
-        if (displayFollowers.ok) {
-            console.log('merong nakuha follower')
-            console.log(displayFollowers.data)
-            displayFollowers.data.forEach(element => {
-                document.getElementById('showFollowersContent').innerHTML += `
-
-            <div id="followersContent">
-                <div>
-                    <img src="${element.profileImage}" alt="">
-                    <label id="followersInfo" data-userid="${element.id}">${element.username}</label>
-                </div>
-
-            </div>
-            `
-            })
-        } else {
-            console.log('error ka')
-        }
-    }
-
-})
 
 
 
@@ -1243,8 +1117,6 @@ document.getElementById('submitStory').addEventListener('click', async (e) => {
 
 
 
-
-
 document.getElementById('logout').addEventListener('click', async (e) => {
     document.getElementById('loadingCircle').style.display = 'flex'
     document.getElementById('logoutPopup').style.display = 'none'
@@ -1273,7 +1145,7 @@ document.addEventListener('click', (e) => {
 
 
 
-
+// view about in your userprofile
 document.getElementById('aboutUser').addEventListener('click', () => {
     console.log('zxczxczxczxczxczxc')
     document.getElementById('profileContent').style = 'max-height: calc(100% - 63%);'
@@ -1283,10 +1155,20 @@ document.getElementById('aboutUser').addEventListener('click', () => {
     document.getElementById('addressInAboutUser').textContent = address
     document.getElementById('ageInAboutUser').textContent = age
 })
-
 document.getElementById('closeAboutUser').addEventListener('click', () => {
     document.getElementById('profileContent').style = 'max-height: calc(100% - 49%);'
     document.getElementById('aboutUserInfoBody').style.display = 'none'
+})
+
+
+// view about in other user profile
+document.getElementById('visitprofileAbout').addEventListener('click', () => {
+    document.getElementById('visitprofileDetails').style = 'max-height: calc(100% - 63%);'
+    document.getElementById('visitaboutUserInfoBody').style.display = 'flex'
+})
+document.getElementById('visitcloseAboutUser').addEventListener('click', () => {
+    document.getElementById('visitprofileDetails').style = 'max-height: calc(100% - 49%);'
+    document.getElementById('visitaboutUserInfoBody').style.display = 'none'
 })
 
 
@@ -1322,8 +1204,8 @@ async function autoSearch(searchValue) {
                     return `
             <div id="contentsOfSearchResults" data-id="${element.id}">
                     <div id="resultsDetails">
-                        <img src="${element.profileImage}" alt="">
-                        <label>${element.username}</label>
+                        <img id="resultsDetailsImg" src="${element.profileImage}" alt="" data-id="${element.id}">
+                        <label id="resultsDetailsUsername" data-id="${element.id}">${element.username}</label>
                     </div>
                     <div id="resultsControl">
                        ${isYou}
@@ -1385,8 +1267,8 @@ async function submitSearch(searchValue) {
                     return `
             <div id="contentsOfSearchResults" data-id="${element.id}">
                     <div id="resultsDetails">
-                        <img src="${element.profileImage}" alt="">
-                        <label>${element.username}</label>
+                        <img id="resultsDetailsImg" src="${element.profileImage}" alt="" data-id="${element.id}">
+                        <label id="resultsDetailsUsername" data-id="${element.id}">${element.username}</label>
                     </div>
                     <div id="resultsControl">
                        ${isYou}
@@ -1413,7 +1295,13 @@ async function submitSearch(searchValue) {
 }
 
 
-
+// view user profile from search
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#contentsOfSearchResults') || e.target.matches('#resultsDetailsImg') || e.target.matches('#resultsDetailsUsername')) {
+        visitProfile(loginUserId, e.target.dataset.id)
+        document.getElementById('searchBody').style.zIndex = 0
+    }
+})
 
 
 
@@ -1422,39 +1310,12 @@ document.getElementById('closeSearchWindow').addEventListener('click', () => {
 })
 
 
-
-
-
-
-
-
-
 document.addEventListener('click', (e) => {
     if (e.target.matches('#followBtnInSearch')) {
         followBtnFunction(e.target)
     }
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1470,6 +1331,7 @@ document.addEventListener('click', (e) => {
 
 // eto ung mismong converstation
 async function openConvoWindow(recieverId) {
+    document.getElementById('loadingCircle').style.display = 'flex'
     const findConvoData = await apiReq('/findConvoData', {
         recieverId: recieverId,
         loginUserId: loginUserId,
@@ -1479,6 +1341,7 @@ async function openConvoWindow(recieverId) {
 
     if (findConvoData.ok) {
         console.log('sa frontend success')
+
         console.log(findConvoData.data)
         displayAllMessages(recieverId, loginUserId)
         document.getElementById('conversationBody').style.display = 'flex'
@@ -1504,7 +1367,14 @@ async function openConvoWindow(recieverId) {
 document.getElementById('messageButtonHeader').addEventListener('click', () => {
     document.getElementById('listOfconvoBody').innerHTML = ''
     document.getElementById('messageBody').style.display = 'flex'
+    document.getElementById('messageBody').style.zIndex = 1
     openMessageWindow()
+    document.getElementById('profileBody').style = 'display:none'
+    document.getElementById('visitprofileBody').style = 'display:none'
+    document.getElementById('createPost').style.display = 'none'
+    document.getElementById('updateProfilePic').style.display = 'none'
+    document.getElementById('viewPostBody').style.display = 'none'
+    document.getElementById('searchBody').style.display = 'none'
 })
 
 
@@ -1512,11 +1382,13 @@ document.getElementById('messageButtonHeader').addEventListener('click', () => {
 
 // eto ung sa display ng list ng mga na message
 async function openMessageWindow() {
+    document.getElementById('loadingCircle').style.display = 'flex'
     const displayAllMessageHistory = await apiReq('/displayAllMessageHistory', {
         loginUserId: loginUserId
     })
 
     if (displayAllMessageHistory.ok) {
+        document.getElementById('loadingCircle').style.display = 'none'
         document.getElementById('messageBody').style.display = 'flex'
         console.log(displayAllMessageHistory.data)
         displayAllMessageHistory.data.forEach(element => {
@@ -1593,7 +1465,6 @@ async function sendThisMessage(message) {
 }
 
 
-
 socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, senderMessage }) => {
     console.log('hahahaha eto ung na recieve sa socket')
     document.getElementById('conversations').innerHTML += `
@@ -1607,6 +1478,7 @@ socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, sen
     scrollToBottom()
 })
 
+
 async function displayAllMessages(recieverId, loginUserId) {
     document.getElementById('conversations').innerHTML = ` `
     const getAllMessages = await apiReq('/getAllMessages', {
@@ -1614,6 +1486,7 @@ async function displayAllMessages(recieverId, loginUserId) {
         loginUserId: loginUserId,
     })
     if (getAllMessages.ok) {
+
         getAllMessages.data.forEach(element => {
             const isthismyMessage = element.senderId == loginUserId ? (`
             <div id="informationAndMessagesRight" data-id="${element.senderId}">
@@ -1639,30 +1512,12 @@ async function displayAllMessages(recieverId, loginUserId) {
             `
 
             scrollToBottom()
+            document.getElementById('loadingCircle').style.display = 'none'
         })
     } else {
         console.log('walang messages')
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function scrollToBottom() {
@@ -1687,7 +1542,13 @@ sendNewMessageInput.addEventListener('input', () => {
 
 })
 
-document.getElementById('sendLikeMessage').addEventListener('click',()=>{
+document.getElementById('sendLikeMessage').addEventListener('click', () => {
     sendThisMessage('👍')
 })
 
+
+
+
+document.addEventListener('click', (e) => {
+    console.log(e.target)
+})
