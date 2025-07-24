@@ -60,8 +60,8 @@
             <button id="messageButtonHeaderS"><i class="fab fa-facebook-messenger"></i> Message</button>
             <button id="searchS"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
             <button id="createS"><i class="fa-regular fa-square-plus"></i> Create</button>
-            <button id="notifS"><i class="fa-solid fa-heart"></i> Notification</button>
-            <button id="profileS"><i class="fa-solid fa-user"></i> Profile</button>
+            <button id="notifS"><i class="fa-regular fa-heart"></i> Notification</button>
+            <button id="profileS"><i class="fa-regular fa-circle-user"></i> Profile</button>
         </div>
 
     </div>
@@ -114,11 +114,11 @@
             </div>
             <div id="followerBody">
                 <label id="followersCount">0</label>
-                <label>follower</label>
+                <label id="followersLabel">follower</label>
             </div>
             <div id="followingBody">
                 <label id="followingCount">0</label>
-                <label>following</label>
+                <label id="followingLabel">following</label>
             </div>
         </div>
         <div id="profileContent">
@@ -142,8 +142,29 @@
             </div>
             <div id="visitprofileControl">
                 <label id="visitprofileName"></label>
+                <div>
+                    <button type="button" id="visitprofileMessage">Message</button>
+                    <button type="button" id="visitprofileFollow">follow</button>
+                    <button type="button" id="visitprofileAbout">About</button>
+                </div>
             </div>
 
+        </div>
+
+        <div id="visitbioBody">
+            <label id="visitbioInProfile"></label>
+        </div>
+
+        <div id="visitaboutUserInfoBody" style="display: none;">
+            <div id="visitaboutUserHead">
+                <label for="">About</label>
+                <button id="visitcloseAboutUser"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <label for="">Username : <span id="visitusernameInAboutUser"></span></label>
+            <label for="">Email : <span id="visitemailInAboutUser"></span></label>
+            <label for="">Address : <span id="visitaddressInAboutUser"></span></label>
+            <label for="">Age : <span id="visitageInAboutUser"></span></label>
         </div>
 
 
@@ -154,11 +175,11 @@
             </div>
             <div id="visitfollowerBody">
                 <label id="visitFollowerCount">0</label>
-                <label>follower</label>
+                <label id="visitFollowerLabel">follower</label>
             </div>
             <div id="visitfollowingBody">
                 <label id="visitfollowingCount">0</label>
-                <label>following</label>
+                <label id="visitfollowingLabel">following</label>
             </div>
         </div>
         <div id="visitprofileContent">
@@ -247,7 +268,6 @@
             <label id="showFollowersBodyLabel">Followers</label>
         </div>
         <div id="showFollowersContent">
-
 
         </div>
     </div>
@@ -421,16 +441,19 @@
         </div>
 
         <div id="conversations">
-           
+
         </div>
 
 
         <div id="sendNewMessageBody">
             <div>
+                <i class="fa-solid fa-image" id="sendImageMessage"></i>
+                <i class="fa-solid fa-face-grin" id="sendEmojiMessage"></i>
                 <input id="sendNewMessageInput" type="text" placeholder="Type message">
                 <i class="fa-solid fa-location-arrow" id="sendNewMessageButton" style="display: none;"></i>
                 <i class="fa-solid fa-thumbs-up" id="sendLikeMessage"></i>
             </div>
+
         </div>
     </div>
 
