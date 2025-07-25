@@ -2,7 +2,7 @@
 
 export async function apiReq(endpoint, body) {
     try {
-        const req = await fetch('http://127.0.0.1:8080' + endpoint, {
+        const req = await fetch('https://instagramclone-developmentphasev2.onrender.com' + endpoint, {
             method: 'POST',
             credentials: 'include',
             headers: {
