@@ -43,9 +43,7 @@ db.connect((err) => {
 
 io.on('connection', (socket) => {
     const parsedCookies = require('cookie').parse(socket.handshake.headers.cookie);
-    console.log(parsedCookies)
     const verifiedToken = jwt.verify(parsedCookies.token, process.env.JWT_TOKEN_SECRET_KEY)
-    console.log(verifiedToken)
     // const userId = socket.handshake.query.userId;
     console.log(`user with a user id of ${verifiedToken.userID} is connected`);
     const USERID = String(verifiedToken.userID);
@@ -53,8 +51,6 @@ io.on('connection', (socket) => {
 
 
     socket.on('idOfThis', ({ postIdOfyouwantToComment, commentCount }) => {
-        console.log('eto ung galing sa socket io')
-        console.log(postIdOfyouwantToComment)
         socket.broadcast.emit('idOfCommentFromIO', { postIdOfyouwantToComment, commentCount })
     })
 
@@ -72,12 +68,13 @@ io.on('connection', (socket) => {
     });
 
 
-    socket.on('displayNewMessage', ({ recieverId, loginUserId, loginProfileimage, message }) => {
+    socket.on('displayNewMessage', ({ recieverId, loginUserId, loginProfileimage, message, loginUsername }) => {
         io.to(recieverId).emit('displayNewMessageRealtime', {
             recieverId,
             senderId: loginUserId,
             senderImage: loginProfileimage,
-            senderMessage: message
+            senderMessage: message,
+            senderUsername:loginUsername
         })
     })
 });
@@ -89,7 +86,6 @@ app.post('/loginReq', (req, res) => {
     const query = 'SELECT * FROM accounts WHERE email = ? && password = ?'
     db.query(query, [userData.username, userData.password], (err, result) => {
         if (!result.length) {
-            console.log('walang nakuha')
             res.status(401).json({ message: 'Error Login' })
         } else {
             const returnData = result[0]
@@ -107,11 +103,7 @@ app.post('/loginReq', (req, res) => {
 
 function authenticate(req, res, next) {
     const token = req.cookies.token
-    console.log(req.cookies)
-    console.log(req.cookies.token)
     if (!token) {
-        console.log('eto ung token sa loob ng auth ', token)
-
         res.status(401).json({ message: 'unauthorize user! hhahaha' })
     } else {
         const verifiedToken = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY)
@@ -123,7 +115,6 @@ function authenticate(req, res, next) {
 
 app.post('/authenticate', authenticate, (req, res) => {
     const verifiedUserId = req.userId
-    console.log('eto na ung verified userid ', verifiedUserId)
     const query = 'SELECT * FROM accounts WHERE id = ?'
     db.query(query, [verifiedUserId], (err, result) => {
         if (!result.length) {
@@ -142,21 +133,15 @@ app.post('/upload', upload.single('image'), (req, res) => {
     const caption = req.body.caption;
     const userId = req.body.userId;
     const userProfile = req.body.userProfile;
-    console.log(username)
     cloudinary.uploader.upload(req.file.path, { resource_type: 'auto' }, (err, result) => {
         if (err) {
-            console.log('error upload')
             res.status(400).json({ message: 'error uploading' })
         } else {
             const query = 'INSERT INTO images (username,caption,secure_url,public_id,userId,likeCount,commentCount,userProfile) VALUES (?,?,?,?,?,?,?,?)'
-            console.log(result.secure_url)
-            console.log(result.public_id)
             db.query(query, [username, caption, result.secure_url, result.public_id, userId,0,0,userProfile], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error uploading' })
                 } else {
-
-                    console.log('success upload!')
                     res.status(200).json({ message: 'success uploading' })
                 }
             })
@@ -168,7 +153,6 @@ app.put('/uploadProfilePic', upload.single('image'), (req, res) => {
     const userId = req.body.userId;
     cloudinary.uploader.upload(req.file.path, (err, result) => {
         if (err) {
-            console.log('error ka')
             res.status(400).json({ message: 'error uploading to cloud' })
         } else {
             const query = 'UPDATE accounts SET profileImage = ? WHERE id = ?'
@@ -190,7 +174,6 @@ app.post('/getAll', (req, res) => {
         if (!result.length) {
             res.status(401).json({ message: 'not found' })
         } else {
-            console.log(result)
             res.status(200).json({ dataa: result })
         }
     })
@@ -199,13 +182,11 @@ app.post('/getAll', (req, res) => {
 
 app.post('/visitOtherProfile', (req, res) => {
     const userID = req.body
-    console.log('eto ung nakuha user id ', userID)
     const query = 'SELECT * FROM accounts WHERE id = ?'
     db.query(query, [userID.userId], (err, result) => {
         if (!result.length) {
             res.status(401).json({ message: 'no account found' })
         } else {
-            console.log(result)
             res.status(200).json({ result: result[0] })
         }
     })
@@ -227,14 +208,10 @@ app.post('/viewProfileReq', (req, res) => {
 
 
 app.post('/likeThisPost', (req, res) => {
-    console.log('test')
     const postId = req.body.postId
     const userId = req.body.userId
-    console.log(postId)
-    console.log(userId)
     let alreadyLike = true;
     const query = 'INSERT INTO postthatlikee (postId,userId,alreadyLike) VALUES (?,?,?)'
-
     db.query(query, [postId, userId, alreadyLike], (err, result) => {
         if (err) {
             res.status(401).json({ message: 'error sa like' })
@@ -253,11 +230,8 @@ app.post('/likeThisPost', (req, res) => {
 
 
 app.post('/unlikeThisPost', (req, res) => {
-    console.log('test')
     const postId = req.body.postId
     const userId = req.body.userId
-    console.log(postId)
-    console.log(userId)
     let alreadyLike = false;
     const query = 'UPDATE postthatlikee SET alreadyLike = ? WHERE postId =? && userId = ? '
 
@@ -280,13 +254,9 @@ app.post('/unlikeThisPost', (req, res) => {
 
 
 
-
-
-
 app.post('/verifyIfAlreadyLike', (req, res) => {
     const postId = req.body.postId
     const userId = req.body.userId
-    console.log('eto ung post id ', postId)
     const query = 'SELECT postId FROM postthatlikee WHERE postId = ? && userId = ? && alreadyLike = ? ORDER BY postId DESC'
     db.query(query, [postId, userId, true], (err, result) => {
         if (result.length) {
@@ -301,7 +271,6 @@ app.post('/verifyIfAlreadyLike', (req, res) => {
 app.post('/verifyIfAlreadyFollow', (req, res) => {
     const followUserId = req.body.followUserId
     const userId = req.body.userId
-
     const query = 'SELECT * FROM follower WHERE followedUserId = ? && userIdOfFollower = ?'
     db.query(query, [followUserId, userId], (err, result) => {
         if (result.length) {
@@ -417,11 +386,8 @@ app.post('/displayFollowers', (req, res) => {
         if (err) {
             console.log('error walang nakha')
         } else {
-            console.log('gegege meron')
-
             const listOfFollowers = result.map(element => {
                 return new Promise((resolve, reject) => {
-                    console.log(element.userIdOfFollower)
                     const query2 = 'SELECT * FROM accounts WHERE id = ?'
                     db.query(query2, [element.userIdOfFollower], (err, result) => {
                         if (err) {
@@ -444,10 +410,6 @@ app.post('/displayFollowers', (req, res) => {
                 })
 
 
-
-
-
-
         }
     })
 })
@@ -466,7 +428,6 @@ app.post('/displayFollowing', (req, res) => {
 
             const listOfFollowing = result.map(element => {
                 return new Promise((resolve, reject) => {
-                    console.log(element.followedUserId)
                     const query2 = 'SELECT * FROM accounts WHERE id = ?'
                     db.query(query2, [element.followedUserId], (err, result) => {
                         if (err) {
@@ -497,22 +458,16 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
     const username = req.body.username;
     const userId = req.body.userId;
     cloudinary.uploader.upload(req.file.path, { resource_type: 'auto' }, (err, result) => {
-        console.log(result)
         if (err) {
             res.status(400).json({ message: 'error uploading story' })
-            console.log('error uploading story')
         } else {
             console.log(result.secure_url)
             const date = new Date()
             const formattedDate = date.toISOString().split('T')[0];
-            console.log(formattedDate)
-            console.log(username)
-            console.log(userId)
             const query = 'INSERT INTO story (userId,username,secure_url,datePosted,viewCount)VALUES(?,?,?,?,?)'
             db.query(query, [userId, username, result.secure_url, formattedDate,0], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting to database' })
-                    console.log('error inserting to database')
                 } else {
                     res.status(200).json({ message: 'success inserting Story' })
                 }
@@ -601,10 +556,8 @@ app.post('/sendStoryReactions', (req, res) => {
     const query = 'UPDATE storyviewer SET reactions = ? WHERE storyId = ? && userId = ?'
     db.query(query, [reactionsArr, selectedStoryId, loginUserId], (err, result) => {
         if (err) {
-            console.log('error ka sa send reactoo')
             res.status(400).json({ message: 'erro sending reactions' })
         } else {
-            console.log('success sa send react')
             res.status(200).json({ message: 'success send reactions' })
         }
     })
@@ -817,7 +770,6 @@ app.post('/autoSearch', (req, res) => {
     const searchValue = req.body.searchValue;
     const completeSearchValue = `${searchValue}%`
     const query = 'SELECT id,username,profileImage FROM accounts WHERE username LIKE ?'
-
     db.query(query, [completeSearchValue], (err, result) => {
         if (!result.length) {
             res.status(400).json({ message: 'Not Found' })
@@ -862,10 +814,7 @@ app.post('/findConvoData', (req, res) => {
                     console.log('query2')
                     res.status(400).json({ message: 'You run into problems' })
                 } else {
-                    console.log(result)
                     const resultsData = result[0]
-                    console.log(resultsData)
-                    console.log(resultsData.id)
                     const query3 = 'INSERT INTO convolist (senderId,senderUsername,senderImage,recieverId,recieverUsername,recieverImage) VALUES (?,?,?,?,?,?)'
                     db.query(query3, [loginUserId, loginUsername, loginProfileimage, resultsData.id, resultsData.username, resultsData.profileImage], (err, result) => {
                         if (err) {
@@ -924,14 +873,12 @@ app.post('/sendNewMessage', (req, res) => {
     const loginUserId = req.body.loginUserId;
     const loginProfileimage = req.body.loginProfileimage;
     const message = req.body.message;
-
     const query1 = 'SELECT profileImage FROM accounts WHERE id = ?'
     db.query(query1, [recieverId], (err, result) => {
         if (!result.length) {
             res.status(400).json({ message: 'no data found' })
         } else {
             const recieverImage = result[0].profileImage
-            console.log(recieverImage)
             const query2 = 'INSERT INTO messages (senderId,senderImage,recieverId,recieverImage,message) VALUES (?,?,?,?,?)'
             db.query(query2, [loginUserId, loginProfileimage, recieverId, recieverImage, message], (err, result) => {
                 if (err) {
@@ -955,6 +902,20 @@ app.post('/getAllMessages', (req, res) => {
             res.status(400).json({ message: 'No conversation Yet' })
         } else {
             res.status(200).json(result)
+        }
+    })
+})
+
+
+app.post('/getNewMessageToDisplayAtHistory', (req, res) => {
+    const senderId = req.body.senderId;
+    const recieverId = req.body.recieverId;
+    const query = 'SELECT senderId,message FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?) ORDER BY id DESC'
+    db.query(query, [senderId, recieverId, senderId, recieverId], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error ka gago' })
+        } else {
+            res.status(200).json(result[0])
         }
     })
 })
