@@ -1305,14 +1305,17 @@ async function openMessageWindow() {
         document.getElementById('messageBody').style.display = 'flex'
         console.log(displayAllMessageHistory.data)
         displayAllMessageHistory.data.forEach(async element => {
+            console.log(element.senderUsername)
+            
             const newMessage = await displayNewMessageAtHistory(element.senderId, element.recieverId)
+            console.log(newMessage.senderId)
             const senderIdIsMe = newMessage.senderId == loginUserId ? (
                 `
-                <label data-id="${element.senderId}" id="latestMessageInHistory">You: <span>${newMessage.message}</span></label>
+                <label data-id="${newMessage.senderId}" id="latestMessageInHistory">You: <span>${newMessage.message}</span></label>
                 `
             ) :
                 (`
-                <label data-id="${element.recieverId}" id="latestMessageInHistory">${element.recieverUsername}: <span>${newMessage.message}</span></label>
+                <label data-id="${newMessage.senderId}" id="latestMessageInHistory">${newMessage.senderUsername}: <span>${newMessage.message}</span></label>
                 
                 `)
             const isMeSender = element.senderId == loginUserId ? (`
@@ -1347,7 +1350,6 @@ async function openMessageWindow() {
 }
 
 
-
 document.getElementById('closeMessageBody').addEventListener('click', (e) => {
     document.getElementById('messageBody').style.display = 'none'
 })
@@ -1376,13 +1378,20 @@ async function sendThisMessage(message) {
             </div>
             `
     scrollToBottom(chatBox)
-    document.getElementById('latestMessageInHistory').innerHTML = `You: <span>${message}</span>`
+
+    const fakeElement = document.querySelector(`#convoContent[data-id="${recieverId}"]`)
+    if (fakeElement) {
+        const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+        labelElementOnHistoryMessage.innerHTML = `You: <span>${message}</span>`
+    }
+
     sendNewMessageInput.value = ''
     document.getElementById('sendNewMessageButton').style.display = 'none'
     document.getElementById('sendLikeMessage').style.display = 'flex'
     const sendNewMessage = await apiReq('/sendNewMessage', {
         recieverId: recieverId,
         loginUserId: loginUserId,
+        senderUsername:loginUsername,
         loginProfileimage: loginProfileimage,
         message: message
     })
@@ -1407,9 +1416,13 @@ socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, sen
             </div>
             `
     scrollToBottom(chatBox)
-    document.getElementById('latestMessageInHistory').innerHTML = `${senderUsername}: <span>${senderMessage}</span>`
-})
+    const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
+    if (fakeElement) {
+        const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+        labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>${senderMessage}</span>`
+    }
 
+})
 
 export const chatBox = document.getElementById('conversations');
 export function scrollToBottom(chatBox) {
