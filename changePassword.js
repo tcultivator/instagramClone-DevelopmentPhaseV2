@@ -1,4 +1,4 @@
-import { apiReq } from './fetchReq.js';
+import { apiReq } from './utils/fetchReq.js';
 
 const getUrl = new URLSearchParams(window.location.search)
 const actualUrl = getUrl.get('email')
