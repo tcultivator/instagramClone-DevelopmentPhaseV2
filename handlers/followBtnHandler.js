@@ -1,6 +1,5 @@
 import { apiReq } from '../utils/fetchReq.js';
 
-
 export async function followBtnFunction(selectedHtmlElement) {
     if (selectedHtmlElement.textContent == 'unfollow') {
         console.log('na click ung unfollow')
