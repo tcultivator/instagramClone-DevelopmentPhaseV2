@@ -1,9 +1,16 @@
 
-import { apiReq } from './fetchReq.js';
+import { apiReq } from './utils/fetchReq.js';
 import { visitProfile, viewProfile } from './handlers/visitProfileHandler.js';
 import { followingHandler } from './handlers/viewFollowingHandler.js'
 import { followersHandler } from './handlers/viewFollowersHandler.js'
+import { verifyIfAlreadyfollow } from './helper/verifyFollow.js'
+import { followBtnFunction } from './handlers/followBtnHandler.js';
+import { displayAllMessages } from './handlers/displayAllMessageHandler.js'
+import { displayNewMessageAtHistory } from './helper/displayNewMessageAtHistory.js'
+
 document.getElementById('loadingBody').style = 'display:flex'
+
+
 let userData;
 let filename;
 let loginUsername;
@@ -76,7 +83,7 @@ socket.on('connect', () => {
 
 
                     : `<img src="${element.secure_url}" alt="User post">`;
-                const alreadyFollowData = await verifyIfAlreadyfollow(element.userId);
+                const alreadyFollowData = await verifyIfAlreadyfollow(element.userId, loginUserId);
                 const followBtn = alreadyFollowData.alreadyFollow == true ? (
                     `<button id="followBTN" data-userid="${element.userId}">unfollow</button>`
                 ) : (`<button id="followBTN" data-userid="${element.userId}">follow</button>`)
@@ -346,23 +353,6 @@ async function setReactions(reactionsArr) {
 }
 
 
-
-
-
-
-
-
-
-
-// document.addEventListener('mouseover', (e) => {
-//     if (e.target.matches('#postVid')) {
-//         console.log('na hover mo to')
-//         const vid = e.target.closest('#postcontent').querySelector('#postVid')
-//         const vidd = e.target.closest('#postcontent').querySelector('#vidSource')
-//         console.log(vidd)
-//         vid.controls = true
-//     }
-// })
 
 document.getElementById('footerNav').addEventListener('click', (e) => {
     try {
@@ -889,62 +879,14 @@ document.getElementById('submitComment').addEventListener('click', async () => {
 })
 
 
+
+// follow/unfollow actions
 document.addEventListener('click', async (e) => {
-    if (e.target.matches('#followBTN')) {
+    if (e.target.matches('#followBTN') || e.target.matches('#unfollowBtn') || e.target.matches('#visitprofileFollow') || e.target.matches('#followBtnInSearch')) {
         console.log(e.target)
         followBtnFunction(e.target)
     }
 })
-
-
-async function followBtnFunction(selectedHtmlElement) {
-    if (selectedHtmlElement.textContent == 'unfollow') {
-        console.log('na click ung unfollow')
-        const followUserId = selectedHtmlElement.dataset.userid
-        console.log('eto ung laman ng button ', selectedHtmlElement.textContent)
-        console.log('eto ung userid ng gusto mo i unfollow ', followUserId)
-        const follow = await apiReq('/unfollow', { followUserId: followUserId })
-        if (follow.ok) {
-            console.log('na unfollow mo')
-            // e.target.textContent = `follow`
-            const allPost = document.querySelectorAll(`#${selectedHtmlElement.id}`)
-            console.log(allPost)
-            allPost.forEach(element => {
-
-                if (element.dataset.userid == followUserId) {
-                    element.innerHTML = 'follow'
-                }
-            })
-            const followingCount = Number(document.getElementById('followingCount').textContent)
-            document.getElementById('followingCount').textContent = followingCount - 1
-        } else {
-            console.log('error sa unfoloow')
-        }
-
-    } else {
-        console.log('na click ung follow')
-        const followUserId = selectedHtmlElement.dataset.userid
-        console.log('eto ung laman ng button ', selectedHtmlElement.textContent)
-        console.log('eto ung userid ng gusto mo i follow ', followUserId)
-        const follow = await apiReq('/follow', { followUserId: followUserId })
-        if (follow.ok) {
-            console.log('na follow mo')
-            const allPost = document.querySelectorAll(`#${selectedHtmlElement.id}`)
-            console.log(allPost)
-            allPost.forEach(element => {
-                if (element.dataset.userid == followUserId) {
-                    element.innerHTML = 'unfollow'
-                }
-
-            })
-            const followingCount = Number(document.getElementById('followingCount').textContent)
-            document.getElementById('followingCount').textContent = followingCount + 1
-
-        } else {
-            console.log('error sa foloow')
-        }
-    }
-}
 
 
 // display your followers
@@ -987,52 +929,28 @@ document.getElementById('closeShowFollowers').addEventListener('click', () => {
     document.getElementById('showFollowersContent').innerHTML = ''
 })
 
+// document.addEventListener('click', async (e) => {
+//     if (e.target.matches('#unfollowBtn')) {
+//         unfollowBtnfunction(e.target)
 
+//     }
+// })
 
-
-async function verifyIfAlreadyfollow(followUserId) {
-    const verifyFollow = await apiReq('/verifyIfAlreadyFollow', { followUserId: followUserId, userId: loginUserId })
-    if (verifyFollow.ok) {
-
-
-        return verifyFollow.data
-
-    } else {
-        console.log('errrrrrr')
-        return null
-    }
-
-}
-
-
-
-
-
-
-
-
-document.addEventListener('click', async (e) => {
-    if (e.target.matches('#unfollowBtn')) {
-        unfollowBtnfunction(e.target)
-
-    }
-})
-
-async function unfollowBtnfunction(selectedHtmlElement) {
-    const elementOfButton = selectedHtmlElement
-    const idOfFollowing = selectedHtmlElement.dataset.userid
-    console.log('eto ung element ', elementOfButton)
-    const elementOfWanttoUnfollow = elementOfButton.closest('#followersContent')
-    console.log(elementOfWanttoUnfollow)
-    const unfollowThisUser = await apiReq('/unfollow', { followUserId: idOfFollowing })
-    if (unfollowThisUser.ok) {
-        elementOfWanttoUnfollow.style.display = 'none'
-        const followingCount = Number(document.getElementById('followingCount').textContent)
-        document.getElementById('followingCount').textContent = followingCount - 1
-    } else {
-        alert('error')
-    }
-}
+// async function unfollowBtnfunction(selectedHtmlElement) {
+//     const elementOfButton = selectedHtmlElement
+//     const idOfFollowing = selectedHtmlElement.dataset.userid
+//     console.log('eto ung element ', elementOfButton)
+//     const elementOfWanttoUnfollow = elementOfButton.closest('#followersContent')
+//     console.log(elementOfWanttoUnfollow)
+//     const unfollowThisUser = await apiReq('/unfollow', { followUserId: idOfFollowing })
+//     if (unfollowThisUser.ok) {
+//         elementOfWanttoUnfollow.style.display = 'none'
+//         const followingCount = Number(document.getElementById('followingCount').textContent)
+//         document.getElementById('followingCount').textContent = followingCount - 1
+//     } else {
+//         alert('error')
+//     }
+// }
 
 
 
@@ -1194,7 +1112,7 @@ async function autoSearch(searchValue) {
             console.log(autoSearch.data.data)
             const autoSearchResult = await Promise.all(
                 autoSearch.data.data.map(async element => {
-                    const alreadyFollowData = await verifyIfAlreadyfollow(element.id);
+                    const alreadyFollowData = await verifyIfAlreadyfollow(element.id, loginUserId);
                     const followBtn = alreadyFollowData.alreadyFollow == true ? (
                         `<button id="followBtnInSearch" data-userid="${element.id}">unfollow</button>`
                     ) : (`<button id="followBtnInSearch" data-userid="${element.id}">follow</button>`)
@@ -1257,7 +1175,7 @@ async function submitSearch(searchValue) {
             console.log(search.data.data)
             const searchResults = await Promise.all(
                 search.data.data.map(async element => {
-                    const alreadyFollowData = await verifyIfAlreadyfollow(element.id);
+                    const alreadyFollowData = await verifyIfAlreadyfollow(element.id, loginUserId);
                     const followBtn = alreadyFollowData.alreadyFollow == true ? (
                         `<button id="followBtnInSearch" data-userid="${element.id}">unfollow</button>`
                     ) : (`<button id="followBtnInSearch" data-userid="${element.id}">follow</button>`)
@@ -1310,18 +1228,13 @@ document.getElementById('closeSearchWindow').addEventListener('click', () => {
 })
 
 
-document.addEventListener('click', (e) => {
-    if (e.target.matches('#followBtnInSearch')) {
-        followBtnFunction(e.target)
-    }
 
-})
 
 
 
 let recieverId;
 document.addEventListener('click', (e) => {
-    if (e.target.matches('#messageThisUserInSearch') || e.target.matches('#convoContent') || e.target.matches('#convoContent img') || e.target.matches('#convoContent label')) {
+    if (e.target.matches('#messageThisUserInSearch') || e.target.matches('#convoContent') || e.target.matches('#convoContent img')) {
         openConvoWindow(e.target.dataset.id)
         recieverId = e.target.dataset.id
     }
@@ -1391,17 +1304,33 @@ async function openMessageWindow() {
         document.getElementById('loadingCircle').style.display = 'none'
         document.getElementById('messageBody').style.display = 'flex'
         console.log(displayAllMessageHistory.data)
-        displayAllMessageHistory.data.forEach(element => {
+        displayAllMessageHistory.data.forEach(async element => {
+            const newMessage = await displayNewMessageAtHistory(element.senderId, element.recieverId)
+            const senderIdIsMe = newMessage.senderId == loginUserId ? (
+                `
+                <label data-id="${element.senderId}" id="latestMessageInHistory">You: <span>${newMessage.message}</span></label>
+                `
+            ) :
+                (`
+                <label data-id="${element.recieverId}" id="latestMessageInHistory">${element.recieverUsername}: <span>${newMessage.message}</span></label>
+                
+                `)
             const isMeSender = element.senderId == loginUserId ? (`
             <div id="convoContent" data-id="${element.recieverId}">
                 <img data-id="${element.recieverId}" src="${element.recieverImage}" alt="">
-                <label data-id="${element.recieverId}" >${element.recieverUsername}</label>
+                <div>
+                    <label data-id="${element.recieverId}">${element.recieverUsername}</label>
+                    ${senderIdIsMe}
+                </div>
             </div>
                 `) :
                 (`
             <div id="convoContent" data-id="${element.senderId}">
                 <img data-id="${element.senderId}" src="${element.senderImage}" alt="">
-                <label data-id="${element.senderId}" >${element.senderUsername}</label>
+                <div>
+                    <label data-id="${element.senderId}">${element.senderUsername}</label>
+                    ${senderIdIsMe}
+                </div>
             </div>
                 
                 
@@ -1430,7 +1359,7 @@ document.getElementById('closeconversationBody').addEventListener('click', (e) =
 const sendNewMessageInput = document.getElementById('sendNewMessageInput')
 
 
-const chatBox = document.getElementById('conversations');
+
 document.getElementById('sendNewMessageButton').addEventListener('click', async () => {
     sendThisMessage(sendNewMessageInput.value)
 })
@@ -1445,7 +1374,8 @@ async function sendThisMessage(message) {
 
             </div>
             `
-    scrollToBottom()
+    scrollToBottom(chatBox)
+    document.getElementById('latestMessageInHistory').innerHTML = `You: <span>${message}</span>`
     sendNewMessageInput.value = ''
     document.getElementById('sendNewMessageButton').style.display = 'none'
     document.getElementById('sendLikeMessage').style.display = 'flex'
@@ -1457,7 +1387,7 @@ async function sendThisMessage(message) {
     })
     if (sendNewMessage.ok) {
         console.log('success sent')
-        socket.emit('displayNewMessage', { recieverId, loginUserId, loginProfileimage, message })
+        socket.emit('displayNewMessage', { recieverId, loginUserId, loginProfileimage, message, loginUsername })
 
     } else {
         console.log('error sent')
@@ -1465,7 +1395,7 @@ async function sendThisMessage(message) {
 }
 
 
-socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, senderMessage }) => {
+socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, senderMessage, senderUsername }) => {
     console.log('hahahaha eto ung na recieve sa socket')
     document.getElementById('conversations').innerHTML += `
              <div id="informationAndMessagesLeft" data-id="${senderId}">
@@ -1475,58 +1405,19 @@ socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, sen
                 </div>
             </div>
             `
-    scrollToBottom()
+    scrollToBottom(chatBox)
+    document.getElementById('latestMessageInHistory').innerHTML = `${senderUsername}: <span>${senderMessage}</span>`
 })
 
 
-async function displayAllMessages(recieverId, loginUserId) {
-    document.getElementById('conversations').innerHTML = ` `
-    const getAllMessages = await apiReq('/getAllMessages', {
-        recieverId: recieverId,
-        loginUserId: loginUserId,
-    })
-    if (getAllMessages.ok) {
-
-        getAllMessages.data.forEach(element => {
-            const isthismyMessage = element.senderId == loginUserId ? (`
-            <div id="informationAndMessagesRight" data-id="${element.senderId}">
-                <div id="textMessagesRight">
-                    <label id="textMessageDataRight">${element.message}</label>
-                </div>
-                <img id="senderUserImageRight" src="${element.senderImage}" alt="">
-
-            </div>
-            
-            `) :
-                (`
-            <div id="informationAndMessagesLeft" data-id="${element.senderId}">
-                <img id="senderUserImageLeft" src="${element.senderImage}" alt="">
-                <div id="textMessagesLeft">
-                    <label id="textMessageDataLeft">${element.message}</label>
-                </div>
-            </div>
-            `)
-
-            document.getElementById('conversations').innerHTML += `
-            ${isthismyMessage}
-            `
-
-            scrollToBottom()
-            document.getElementById('loadingCircle').style.display = 'none'
-        })
-    } else {
-        console.log('walang messages')
-    }
-}
-
-
-function scrollToBottom() {
+export const chatBox = document.getElementById('conversations');
+export function scrollToBottom(chatBox) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 sendNewMessageInput.addEventListener('focus', () => {
     setTimeout(() => {
-        scrollToBottom()
+        scrollToBottom(chatBox)
     }, 500);
 
 })
@@ -1545,7 +1436,6 @@ sendNewMessageInput.addEventListener('input', () => {
 document.getElementById('sendLikeMessage').addEventListener('click', () => {
     sendThisMessage('👍')
 })
-
 
 
 
