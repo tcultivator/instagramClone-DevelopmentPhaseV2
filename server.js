@@ -871,16 +871,18 @@ app.post('/displayAllMessageHistory', (req, res) => {
 app.post('/sendNewMessage', (req, res) => {
     const recieverId = req.body.recieverId;
     const loginUserId = req.body.loginUserId;
+    const senderUsername = req.body.senderUsername;
     const loginProfileimage = req.body.loginProfileimage;
     const message = req.body.message;
+
     const query1 = 'SELECT profileImage FROM accounts WHERE id = ?'
     db.query(query1, [recieverId], (err, result) => {
         if (!result.length) {
             res.status(400).json({ message: 'no data found' })
         } else {
             const recieverImage = result[0].profileImage
-            const query2 = 'INSERT INTO messages (senderId,senderImage,recieverId,recieverImage,message) VALUES (?,?,?,?,?)'
-            db.query(query2, [loginUserId, loginProfileimage, recieverId, recieverImage, message], (err, result) => {
+            const query2 = 'INSERT INTO messages (senderId,senderImage,senderUsername,recieverId,recieverImage,message) VALUES (?,?,?,?,?,?)'
+            db.query(query2, [loginUserId, loginProfileimage, senderUsername, recieverId, recieverImage, message], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting message' })
                 } else {
@@ -890,7 +892,6 @@ app.post('/sendNewMessage', (req, res) => {
         }
     })
 })
-
 
 
 app.post('/getAllMessages', (req, res) => {
@@ -910,7 +911,7 @@ app.post('/getAllMessages', (req, res) => {
 app.post('/getNewMessageToDisplayAtHistory', (req, res) => {
     const senderId = req.body.senderId;
     const recieverId = req.body.recieverId;
-    const query = 'SELECT senderId,message FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?) ORDER BY id DESC'
+    const query = 'SELECT senderId,message,senderUsername FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?) ORDER BY id DESC'
     db.query(query, [senderId, recieverId, senderId, recieverId], (err, result) => {
         if (err) {
             res.status(400).json({ message: 'error ka gago' })
