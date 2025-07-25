@@ -1,4 +1,4 @@
-import { apiReq } from './fetchReq.js';
+import { apiReq } from './utils/fetchReq.js';
 
 const username = document.getElementById('username')
 const password = document.getElementById('password')
