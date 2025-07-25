@@ -1342,6 +1342,7 @@ async function openMessageWindow() {
         })
     } else {
         console.log('error sa frontend message button')
+        document.getElementById('loadingCircle').style.display = 'none'
     }
 }
 
