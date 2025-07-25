@@ -20,6 +20,8 @@ export async function followBtnFunction(selectedHtmlElement) {
             })
             const followingCount = Number(document.getElementById('followingCount').textContent)
             document.getElementById('followingCount').textContent = followingCount - 1
+            const visitfollowerCount = Number(document.getElementById('visitFollowerCount').textContent)
+            document.getElementById('visitFollowerCount').textContent = visitfollowerCount - 1
 
             //this is the ui in following list
             const elementOfWanttoUnfollow = document.querySelector(`#followersContent[data-userid = "${selectedHtmlElement.dataset.userid}"]`)
@@ -58,6 +60,8 @@ export async function followBtnFunction(selectedHtmlElement) {
             })
             const followingCount = Number(document.getElementById('followingCount').textContent)
             document.getElementById('followingCount').textContent = followingCount + 1
+            const visitfollowerCount = Number(document.getElementById('visitFollowerCount').textContent)
+            document.getElementById('visitFollowerCount').textContent = visitfollowerCount + 1
 
             // this is the ui in visitprofile
             document.getElementById('visitprofileFollow').textContent = 'unfollow'
