@@ -1,4 +1,4 @@
-import { apiReq } from './fetchReq.js';
+import { apiReq } from './utils/fetchReq.js';
 
 
 const email = document.getElementById('email')
