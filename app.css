@@ -32,7 +32,7 @@ body button {
     width: 100%;
     box-sizing: border-box;
     height: 60px;
-    font-family: 'Righteous';
+
 
 }
 
@@ -1524,7 +1524,7 @@ body button {
     border-radius: 5px;
     color: black;
     border: 2px solid black;
-    
+
 }
 
 
@@ -2056,6 +2056,7 @@ body button {
     display: flex;
     gap: 5px;
     box-sizing: border-box;
+    justify-content: end;
 
 }
 
@@ -2070,9 +2071,9 @@ body button {
     aspect-ratio: 1/1;
     border: 2px solid black;
     color: black;
-    font-size: 15px;
-    border-radius: 5px;
-    width: 40px;
+    font-size: 12px;
+    border-radius: 50%;
+    width: 30px;
     background-color: transparent;
 }
 
@@ -2107,17 +2108,17 @@ body button {
 }
 
 
-#convoContent div{
-    
+#convoContent div {
+
     display: flex;
     flex-direction: column;
 }
 
-#convoContent div label:first-child{
+#convoContent div label:first-child {
     font-size: 17px;
 }
 
-#convoContent div label:last-child{
+#convoContent div label:last-child {
     font-size: 12px;
 }
 
@@ -2185,7 +2186,7 @@ body button {
 }
 
 
-#informationAndMessagesLeft img {
+#informationAndMessagesLeft #senderUserImageLeft {
     aspect-ratio: 1/1;
     width: 24px;
     border-radius: 50%;
@@ -2201,6 +2202,13 @@ body button {
 }
 
 
+#informationAndMessagesLeft #textMessagesLeftImg {
+    padding: 0;
+    max-width: 50%;
+
+}
+
+
 
 #informationAndMessagesRight {
     display: flex;
@@ -2210,7 +2218,7 @@ body button {
 }
 
 
-#informationAndMessagesRight img {
+#informationAndMessagesRight #senderUserImageRight {
     aspect-ratio: 1/1;
     width: 24px;
     border-radius: 50%;
@@ -2226,6 +2234,17 @@ body button {
     word-wrap: break-word;
 }
 
+#informationAndMessagesRight #textMessagesRightImg {
+    padding: 0;
+    max-width: 50%;
+
+}
+
+#sendfileMessage {
+    width: 100%;
+    border-radius: 5px;
+}
+
 
 
 #sendNewMessageBody {
@@ -2234,7 +2253,7 @@ body button {
     display: flex;
     box-sizing: border-box;
     gap: 5px;
-    border-top: 1px solid black;
+    border-top: 1px solid rgb(163, 163, 163);
     bottom: 0;
     height: 7%;
     align-items: center;
@@ -2243,41 +2262,143 @@ body button {
 
 }
 
-#sendNewMessageBody div {
-
+#sendNewMessageBody #sendNewMessageBodController {
+    align-items: center;
     width: 100%;
     display: flex;
     gap: 5px;
+    position: relative;
 
 }
 
-#sendNewMessageBody div input {
+#sendNewMessageBodController div {
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding: 9px;
-    border-radius: 5px;
-    border: 1px solid black;
+    position: relative;
 }
 
+#sendNewMessageBodController div #sendEmojiMessage {
+    position: absolute;
+    right: 7px;
+    font-size: 21px;
+    color: #007bff;
+}
 
-#sendNewMessageBody div #sendNewMessageButton {
-    font-size: 20px;
+#sendNewMessageBodController div input {
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid rgb(90, 90, 90);
+    background-color: #cecece;
+    width: 100%;
+
+}
+
+#sendNewMessageBody #sendNewMessageBodController #sendNewMessageButton,
+#sendLikeMessage,
+#sendImageMessage,
+#sendVoiceMessage {
+
+    width: 43px;
+    border: none;
+    border-radius: 25px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+#sendNewMessageBody #sendNewMessageBodController #sendNewMessageButton:hover,
+#sendLikeMessage:hover,
+#sendImageMessage:hover,
+#sendVoiceMessage:hover {
+    background-color: #e6e6e6;
+}
+
+#sendNewMessageBody #sendNewMessageBodController #sendNewMessageButton i {
+    font-size: 28px;
     align-items: center;
     text-align: center;
     color: #007bff;
     display: flex;
     transform: rotate(45deg);
+    margin-left: -5px;
+
 }
 
-
-
-#sendImageMessage,
-#sendEmojiMessage,
-#sendLikeMessage {
-    font-size: 20px;
+#sendLikeMessage i,
+#sendImageMessage i,
+#sendVoiceMessage i {
+    font-size: 25px;
     align-items: center;
     text-align: center;
     color: #007bff;
     display: flex;
+
+}
+
+
+
+
+
+#fileImageWantToSendPreview {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    z-index: 1;
+}
+
+#ImgPreview {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+#ImgPreview img {
+    width: 100%;
+    max-height: 800px;
+}
+
+#ImgPreview video {
+    width: 100%;
+    max-height: 800px;
+}
+
+#fileImageWantToSendPreview label {
+    position: absolute;
+    top: 5px;
+}
+
+#fileImageWantToSendPreviewControls {
+    position: absolute;
+    bottom: 10px;
+    width: 50%;
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+#fileImageWantToSendPreviewControls button {
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+#fileImageWantToSendPreviewControls :last-child {
+    background-color: #007bff;
+    color: white;
 }
 
 
@@ -2345,6 +2466,7 @@ body button {
         height: 100%;
         border-right: 1px solid rgba(197, 197, 197, 0.788);
 
+
     }
 
     #sidebar button {
@@ -2357,6 +2479,7 @@ body button {
         font-size: 17px;
         cursor: pointer;
         margin: 0 8%;
+        font-family: 'Poppins';
     }
 
     #sidebar button:hover {
@@ -2487,6 +2610,7 @@ body button {
         align-items: center;
 
 
+
     }
 
     #story-label button {
@@ -2534,6 +2658,7 @@ body button {
     #visitprofileBody #visitheadProfile button {
         color: rgb(36, 36, 36);
         cursor: pointer;
+
     }
 
     #visitprofileiconBody label {
@@ -2580,6 +2705,7 @@ body button {
     #profileBody #headProfile button {
         color: rgb(36, 36, 36);
         cursor: pointer;
+
     }
 
     #profileiconBody label {
@@ -3471,9 +3597,9 @@ body button {
         aspect-ratio: 1/1;
         border: 2px solid black;
         color: black;
-        font-size: 19px;
-        border-radius: 5px;
-        width: 40px;
+        font-size: 12px;
+        border-radius: 50%;
+        width: 30px;
         background-color: transparent;
     }
 
@@ -3575,12 +3701,7 @@ body button {
     }
 
 
-    #informationAndMessagesLeft img {
-        aspect-ratio: 1/1;
-        width: 24px;
-        border-radius: 50%;
 
-    }
 
     #textMessagesLeft {
         background-color: rgb(226, 226, 226);
@@ -3600,73 +3721,29 @@ body button {
     }
 
 
-    #informationAndMessagesRight img {
-        aspect-ratio: 1/1;
-        width: 24px;
-        border-radius: 50%;
+
+
+
+    #informationAndMessagesRight #textMessagesRightImg {
+        padding: 0;
+        max-width: 30%;
 
     }
 
-    #textMessagesRight {
-        background-color: #007bff;
-        padding: 5px;
+    #sendfileMessage {
+        width: 100%;
         border-radius: 5px;
-        color: white;
-        max-width: 50%;
-        word-wrap: break-word;
+    }
+
+
+    #informationAndMessagesLeft #textMessagesLeftImg {
+        padding: 0;
+        max-width: 30%;
+
     }
 
 
 
-
-
-    #sendNewMessageBody {
-        background-color: rgb(255, 255, 255);
-        width: 100%;
-        display: flex;
-        box-sizing: border-box;
-        gap: 5px;
-        border-top: 1px solid black;
-        bottom: 0;
-        height: 8%;
-        align-items: center;
-        padding: 0 10px;
-        position: absolute;
-
-    }
-
-    #sendNewMessageBody div {
-
-        width: 100%;
-        display: flex;
-        gap: 8px;
-    }
-
-    #sendNewMessageBody div input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid black;
-    }
-
-    #sendNewMessageBody div #sendNewMessageButton {
-        font-size: 35px;
-        align-items: center;
-        text-align: center;
-        color: #007bff;
-        display: flex;
-        transform: rotate(45deg);
-    }
-
-
-
-    #sendLikeMessage {
-        font-size: 30px;
-        align-items: center;
-        text-align: center;
-        color: #007bff;
-        display: flex;
-    }
 
 
 
@@ -3815,4 +3892,11 @@ body button {
     100% {
         transform: rotate(360deg);
     }
+}
+
+
+emoji-picker{
+    position: absolute;
+    bottom: 60px;
+    right: 0;
 }
