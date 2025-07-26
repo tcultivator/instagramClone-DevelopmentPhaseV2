@@ -45,7 +45,7 @@ export async function displayAllMessages(recieverId, loginUserId) {
                     const isthismyMessage = element.senderId == loginUserId ? (`
                     <div id="informationAndMessagesRight" data-id="${element.senderId}">
                         <div id="textMessagesRightImg">
-                            <video controls preload="metadata" loading="lazy" poster="assets/posterForVid.jpg" id="sendfileMessage" src="${element.message}"></video>
+                            <video controls preload="metadata" loading="lazy" poster="../assets/posterForVid.jpg" id="sendfileMessage" src="${element.message}"></video>
                         </div>
                         <img id="senderUserImageRight" src="${element.senderImage}" alt="">
 
@@ -56,7 +56,7 @@ export async function displayAllMessages(recieverId, loginUserId) {
                     <div id="informationAndMessagesLeft" data-id="${element.senderId}">
                         <img id="senderUserImageLeft" src="${element.senderImage}" alt="">
                         <div id="textMessagesLeftImg">
-                            <video controls preload="metadata" loading="lazy" poster="assets/posterForVid.jpg" id="sendfileMessage" src="${element.message}"></video>
+                            <video controls preload="metadata" loading="lazy" poster="../assets/posterForVid.jpg" id="sendfileMessage" src="${element.message}"></video>
                         </div>
                     </div>
                     `)
