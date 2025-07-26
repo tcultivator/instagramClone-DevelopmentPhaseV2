@@ -413,10 +413,6 @@
 
 
 
-
-
-
-
     <div id="messageBody" style="display: none;">
         <div id="messageHeader">
             <button><i class="fa-solid fa-chevron-left" id="closeMessageBody"></i></button>
@@ -424,7 +420,6 @@
         </div>
 
         <div id="messageSearchBody">
-            <input id="messageSearchInput" type="text">
             <button id="submitMessageSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div id="listOfconvoBody">
@@ -446,22 +441,40 @@
 
 
         <div id="sendNewMessageBody">
-            <div>
-                <i class="fa-solid fa-image" id="sendImageMessage"></i>
-                <i class="fa-solid fa-face-grin" id="sendEmojiMessage"></i>
-                <input id="sendNewMessageInput" type="text" placeholder="Type message">
-                <i class="fa-solid fa-location-arrow" id="sendNewMessageButton" style="display: none;"></i>
-                <i class="fa-solid fa-thumbs-up" id="sendLikeMessage"></i>
+            <div id="sendNewMessageBodController">
+                <button id="sendImageMessage"><i class="fa-solid fa-image"></i></button>
+                <button id="sendVoiceMessage"><i class="fa-solid fa-microphone"></i></button>
+                <input type="file" id="inputFileMessage" style="display: none;" accept="image/*,video/*">
+                <div>
+                    <input id="sendNewMessageInput" type="text" placeholder="Type message">
+                    <i class="fa-solid fa-face-grin" id="sendEmojiMessage"></i>
+                </div>
+                <emoji-picker id="emojiList" style="display: none;" class="light"></emoji-picker>
+                <button id="sendNewMessageButton" style="display: none;"><i
+                        class="fa-solid fa-location-arrow"></i></button>
+                <button id="sendLikeMessage"><i class="fa-solid fa-thumbs-up"></i></button>
             </div>
 
         </div>
     </div>
 
+    <div id="fileImageWantToSendPreview" style="display: none;">
+        <label for="">Preview</label>
+        <div id="ImgPreview">
+
+        </div>
+        <div id="fileImageWantToSendPreviewControls">
+            <button id="closePreviewInSendMessage">Cancel</button>
+            <button id="sendThisFileMessage">Send</button>
+        </div>
+
+    </div>
 
 
 
-   
 
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
 </body>
 
 </html>
