@@ -6,7 +6,11 @@ import { followersHandler } from './handlers/viewFollowersHandler.js'
 import { verifyIfAlreadyfollow } from './helper/verifyFollow.js'
 import { followBtnFunction } from './handlers/followBtnHandler.js';
 import { displayAllMessages } from './handlers/displayAllMessageHandler.js'
-import { displayNewMessageAtHistory } from './helper/displayNewMessageAtHistory.js'
+import { autoSearch, submitSearch } from './handlers/searchHandler.js'
+import { openMessageWindow } from './handlers/openMessageWindowHandler.js'
+
+// navigation datafile
+import { createPostNav, messageNav, profileNav, searchNav } from './UI/UI.js';
 
 document.getElementById('loadingBody').style = 'display:flex'
 
@@ -353,7 +357,7 @@ async function setReactions(reactionsArr) {
 }
 
 
-
+// navigation for mobile
 document.getElementById('footerNav').addEventListener('click', (e) => {
     try {
         const clickBtn = e.target.closest('button')
@@ -365,39 +369,19 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
                 break;
             case 'search':
                 console.log('this is search')
-                document.getElementById('searchBody').style.zIndex = 1
-                document.getElementById('searchBody').style.display = 'block'
-                document.getElementById('createPost').style.display = 'none'
-                document.getElementById('profileBody').style = 'display:none'
-                document.getElementById('messageBody').style.display = 'none'
-                document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('visitprofileBody').style = 'display:none'
+                searchNav()
                 break;
             case 'create':
                 console.log('this is create')
-                document.getElementById('searchBody').style.display = 'none'
-                document.getElementById('createPost').style.display = 'flex'
-                document.getElementById('createPost').style.zIndex = 1
-                document.getElementById('profileBody').style = 'display:none'
-                document.getElementById('messageBody').style.display = 'none'
-                document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('visitprofileBody').style = 'display:none'
+                createPostNav()
                 break;
             case 'notif':
                 console.log('this is notif')
                 document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'profile':
-                document.getElementById('imgGrid').innerHTML = ''
-                console.log('this is profile')
+                profileNav()
                 viewProfile(loginUserId)
-                document.getElementById('searchBody').style.display = 'none'
-                document.getElementById('createPost').style.display = 'none'
-                document.getElementById('profileBody').style = 'display:block'
-                document.getElementById('profileBody').style.zIndex = 1
-                document.getElementById('messageBody').style.display = 'none'
-                document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('visitprofileBody').style = 'display:none'
                 break;
 
             default:
@@ -408,7 +392,7 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
     }
 })
 
-
+// navigation for desktop
 document.getElementById('sidebar').addEventListener('click', (e) => {
     try {
         const clickBtn = e.target.closest('button')
@@ -420,52 +404,27 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 break;
             case 'searchS':
                 console.log('this is search')
-                document.getElementById('searchBody').style.zIndex = 1
-                document.getElementById('searchBody').style.display = 'block'
-                document.getElementById('createPost').style.display = 'none'
-                document.getElementById('profileBody').style = 'display:none'
-                document.getElementById('messageBody').style.display = 'none'
-                document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('visitprofileBody').style = 'display:none'
+                searchNav()
                 break;
             case 'createS':
                 console.log('this is create')
-                document.getElementById('searchBody').style.display = 'none'
-                document.getElementById('createPost').style.display = 'flex'
-                document.getElementById('createPost').style.zIndex = 1
-                document.getElementById('profileBody').style = 'display:none'
-                document.getElementById('messageBody').style.display = 'none'
-                document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('visitprofileBody').style = 'display:none'
+                createPostNav()
                 break;
             case 'notifS':
                 console.log('this is notif')
                 document.getElementById('viewPostBody').style.display = 'none'
                 break;
             case 'profileS':
-                document.getElementById('imgGrid').innerHTML = ''
                 console.log('this is profile')
+                profileNav()
                 viewProfile(loginUserId)
-                document.getElementById('searchBody').style.display = 'none'
-                document.getElementById('createPost').style.display = 'none'
-                document.getElementById('profileBody').style = 'display:block'
-                document.getElementById('profileBody').style.zIndex = 1
-                document.getElementById('messageBody').style.display = 'none'
-                document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('visitprofileBody').style = 'display:none'
+
                 break;
             case 'messageButtonHeaderS':
-                document.getElementById('listOfconvoBody').innerHTML = ''
-                document.getElementById('messageBody').style.display = 'flex'
-                document.getElementById('messageBody').style.zIndex = 1
-                openMessageWindow()
+
+                openMessageWindow(loginUserId)
                 console.log('this is message')
-                document.getElementById('profileBody').style = 'display:none'
-                document.getElementById('visitprofileBody').style = 'display:none'
-                document.getElementById('createPost').style.display = 'none'
-                document.getElementById('updateProfilePic').style.display = 'none'
-                document.getElementById('viewPostBody').style.display = 'none'
-                document.getElementById('searchBody').style.display = 'none'
+                messageNav()
                 break;
 
             default:
@@ -929,33 +888,6 @@ document.getElementById('closeShowFollowers').addEventListener('click', () => {
     document.getElementById('showFollowersContent').innerHTML = ''
 })
 
-// document.addEventListener('click', async (e) => {
-//     if (e.target.matches('#unfollowBtn')) {
-//         unfollowBtnfunction(e.target)
-
-//     }
-// })
-
-// async function unfollowBtnfunction(selectedHtmlElement) {
-//     const elementOfButton = selectedHtmlElement
-//     const idOfFollowing = selectedHtmlElement.dataset.userid
-//     console.log('eto ung element ', elementOfButton)
-//     const elementOfWanttoUnfollow = elementOfButton.closest('#followersContent')
-//     console.log(elementOfWanttoUnfollow)
-//     const unfollowThisUser = await apiReq('/unfollow', { followUserId: idOfFollowing })
-//     if (unfollowThisUser.ok) {
-//         elementOfWanttoUnfollow.style.display = 'none'
-//         const followingCount = Number(document.getElementById('followingCount').textContent)
-//         document.getElementById('followingCount').textContent = followingCount - 1
-//     } else {
-//         alert('error')
-//     }
-// }
-
-
-
-
-
 
 
 
@@ -1090,6 +1022,7 @@ document.getElementById('visitcloseAboutUser').addEventListener('click', () => {
 })
 
 
+// auto search function
 let searchTimeout = null;
 const searchInputValue = document.getElementById('searchInput')
 searchInputValue.addEventListener('input', async () => {
@@ -1097,120 +1030,17 @@ searchInputValue.addEventListener('input', async () => {
     document.getElementById('searchLoadingMessage').style.display = 'block'
     document.getElementById('searchLoadingMessage').textContent = 'Searching....'
     searchTimeout = setTimeout(() => {
-        autoSearch(searchInputValue.value)
+        autoSearch(searchInputValue.value, loginUserId)
     }, 2500);
 })
 
-async function autoSearch(searchValue) {
-    if (searchValue) {
 
-        const autoSearch = await apiReq('/autoSearch', {
-            searchValue: searchValue
-        })
-        if (autoSearch.ok) {
-            document.getElementById('searchLoadingMessage').style.display = 'none'
-            console.log(autoSearch.data.data)
-            const autoSearchResult = await Promise.all(
-                autoSearch.data.data.map(async element => {
-                    const alreadyFollowData = await verifyIfAlreadyfollow(element.id, loginUserId);
-                    const followBtn = alreadyFollowData.alreadyFollow == true ? (
-                        `<button id="followBtnInSearch" data-userid="${element.id}">unfollow</button>`
-                    ) : (`<button id="followBtnInSearch" data-userid="${element.id}">follow</button>`)
-                    const isYou = element.id == loginUserId ? (``) :
-                        (` <button id="messageThisUserInSearch" data-id="${element.id}">Message</button>
-                        ${followBtn}`)
-                    return `
-            <div id="contentsOfSearchResults" data-id="${element.id}">
-                    <div id="resultsDetails">
-                        <img id="resultsDetailsImg" src="${element.profileImage}" alt="" data-id="${element.id}">
-                        <label id="resultsDetailsUsername" data-id="${element.id}">${element.username}</label>
-                    </div>
-                    <div id="resultsControl">
-                       ${isYou}
-                    </div>
-            </div>
-            `
-                })
-            )
-
-            document.getElementById('searchResultsBody').innerHTML = `
-            <div id="searchResults">
-            ${autoSearchResult.join('')}
-            </div>
-            `
-        } else {
-            document.getElementById('searchLoadingMessage').textContent = autoSearch.data.message
-            document.getElementById('searchResultsBody').innerHTML = `
-            <div id="searchResults">
-            
-            </div>
-            `
-        }
-    } else {
-        document.getElementById('searchResultsBody').innerHTML = `
-            <div id="searchResults">
-            
-            </div>
-            `
-        document.getElementById('searchLoadingMessage').style.display = 'none'
-    }
-
-}
-
-
-
-
+// submit search function
 document.getElementById('searchBtn').addEventListener('click', async () => {
     document.getElementById('searchLoadingMessage').style.display = 'block'
     document.getElementById('searchLoadingMessage').textContent = 'Searching....'
-    submitSearch(searchInputValue.value)
+    submitSearch(searchInputValue.value, loginUserId)
 })
-async function submitSearch(searchValue) {
-    if (searchValue) {
-        const search = await apiReq('/search', {
-            searchValue: searchValue
-        })
-        if (search.ok) {
-            document.getElementById('searchLoadingMessage').style.display = 'none'
-            console.log(search.data.data)
-            const searchResults = await Promise.all(
-                search.data.data.map(async element => {
-                    const alreadyFollowData = await verifyIfAlreadyfollow(element.id, loginUserId);
-                    const followBtn = alreadyFollowData.alreadyFollow == true ? (
-                        `<button id="followBtnInSearch" data-userid="${element.id}">unfollow</button>`
-                    ) : (`<button id="followBtnInSearch" data-userid="${element.id}">follow</button>`)
-                    const isYou = element.id == loginUserId ? (``) :
-                        (` <button id="messageThisUserInSearch" data-id="${element.id}">Message</button>
-                        ${followBtn}`)
-                    return `
-            <div id="contentsOfSearchResults" data-id="${element.id}">
-                    <div id="resultsDetails">
-                        <img id="resultsDetailsImg" src="${element.profileImage}" alt="" data-id="${element.id}">
-                        <label id="resultsDetailsUsername" data-id="${element.id}">${element.username}</label>
-                    </div>
-                    <div id="resultsControl">
-                       ${isYou}
-                    </div>
-            </div>
-            `
-                })
-            )
-
-            document.getElementById('searchResultsBody').innerHTML = `
-            <div id="searchResults">
-            ${searchResults.join('')}
-            </div>
-            `
-        } else {
-            document.getElementById('searchLoadingMessage').textContent = search.data.message
-            document.getElementById('searchResultsBody').innerHTML = `
-            <div id="searchResults">
-            
-            </div>
-            `
-        }
-    }
-}
 
 
 // view user profile from search
@@ -1251,10 +1081,7 @@ async function openConvoWindow(recieverId) {
         loginUsername: loginUsername,
         loginProfileimage: loginProfileimage
     })
-
     if (findConvoData.ok) {
-        console.log('sa frontend success')
-
         console.log(findConvoData.data)
         displayAllMessages(recieverId, loginUserId)
         document.getElementById('conversationBody').style.display = 'flex'
@@ -1276,78 +1103,14 @@ async function openConvoWindow(recieverId) {
 
 
 
-
+// eto ung sa display ng list ng mga na message
+// navigation for mobile
 document.getElementById('messageButtonHeader').addEventListener('click', () => {
-    document.getElementById('listOfconvoBody').innerHTML = ''
-    document.getElementById('messageBody').style.display = 'flex'
-    document.getElementById('messageBody').style.zIndex = 1
-    openMessageWindow()
-    document.getElementById('profileBody').style = 'display:none'
-    document.getElementById('visitprofileBody').style = 'display:none'
-    document.getElementById('createPost').style.display = 'none'
-    document.getElementById('updateProfilePic').style.display = 'none'
-    document.getElementById('viewPostBody').style.display = 'none'
-    document.getElementById('searchBody').style.display = 'none'
+    openMessageWindow(loginUserId)
+    messageNav()
 })
 
 
-
-
-// eto ung sa display ng list ng mga na message
-async function openMessageWindow() {
-    document.getElementById('loadingCircle').style.display = 'flex'
-    const displayAllMessageHistory = await apiReq('/displayAllMessageHistory', {
-        loginUserId: loginUserId
-    })
-
-    if (displayAllMessageHistory.ok) {
-        document.getElementById('loadingCircle').style.display = 'none'
-        document.getElementById('messageBody').style.display = 'flex'
-        console.log(displayAllMessageHistory.data)
-        displayAllMessageHistory.data.forEach(async element => {
-            console.log(element.senderUsername)
-            
-            const newMessage = await displayNewMessageAtHistory(element.senderId, element.recieverId)
-            console.log(newMessage.senderId)
-            const senderIdIsMe = newMessage.senderId == loginUserId ? (
-                `
-                <label data-id="${newMessage.senderId}" id="latestMessageInHistory">You: <span>${newMessage.message}</span></label>
-                `
-            ) :
-                (`
-                <label data-id="${newMessage.senderId}" id="latestMessageInHistory">${newMessage.senderUsername}: <span>${newMessage.message}</span></label>
-                
-                `)
-            const isMeSender = element.senderId == loginUserId ? (`
-            <div id="convoContent" data-id="${element.recieverId}">
-                <img data-id="${element.recieverId}" src="${element.recieverImage}" alt="">
-                <div>
-                    <label data-id="${element.recieverId}">${element.recieverUsername}</label>
-                    ${senderIdIsMe}
-                </div>
-            </div>
-                `) :
-                (`
-            <div id="convoContent" data-id="${element.senderId}">
-                <img data-id="${element.senderId}" src="${element.senderImage}" alt="">
-                <div>
-                    <label data-id="${element.senderId}">${element.senderUsername}</label>
-                    ${senderIdIsMe}
-                </div>
-            </div>
-                
-                
-                `)
-
-            document.getElementById('listOfconvoBody').innerHTML += `
-            ${isMeSender}
-            `
-        })
-    } else {
-        console.log('error sa frontend message button')
-        document.getElementById('loadingCircle').style.display = 'none'
-    }
-}
 
 
 document.getElementById('closeMessageBody').addEventListener('click', (e) => {
@@ -1358,11 +1121,8 @@ document.getElementById('closeconversationBody').addEventListener('click', (e) =
 
 })
 
-
+// send messages
 const sendNewMessageInput = document.getElementById('sendNewMessageInput')
-
-
-
 document.getElementById('sendNewMessageButton').addEventListener('click', async () => {
     sendThisMessage(sendNewMessageInput.value)
 })
@@ -1378,7 +1138,8 @@ async function sendThisMessage(message) {
             </div>
             `
     scrollToBottom(chatBox)
-
+    emojiOnOff = !emojiOnOff
+    document.getElementById('emojiList').style.display = 'none'
     const fakeElement = document.querySelector(`#convoContent[data-id="${recieverId}"]`)
     if (fakeElement) {
         const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
@@ -1391,7 +1152,7 @@ async function sendThisMessage(message) {
     const sendNewMessage = await apiReq('/sendNewMessage', {
         recieverId: recieverId,
         loginUserId: loginUserId,
-        senderUsername:loginUsername,
+        senderUsername: loginUsername,
         loginProfileimage: loginProfileimage,
         message: message
     })
@@ -1406,8 +1167,46 @@ async function sendThisMessage(message) {
 
 
 socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, senderMessage, senderUsername }) => {
-    console.log('hahahaha eto ung na recieve sa socket')
-    document.getElementById('conversations').innerHTML += `
+
+    const isMedia = senderMessage.match(/\.(mp4|webm|ogg|jpg|jpeg|png|gif|webp)$/i);
+    if (isMedia) {
+        const isImage = senderMessage.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+        if (isImage) {
+            document.getElementById('conversations').innerHTML += `
+             <div id="informationAndMessagesLeft" data-id="${senderId}">
+                <img id="senderUserImageLeft" src="${senderImage}" alt="">
+                <div id="textMessagesLeftImg">
+                    <img id="sendfileMessage" src="${senderMessage}" alt="">
+                </div>
+            </div>
+            `
+            scrollToBottom(chatBox)
+            const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
+            if (fakeElement) {
+                const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+                labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
+            }
+        } else {
+
+            document.getElementById('conversations').innerHTML += `
+              <div id="informationAndMessagesLeft" data-id="${senderId}">
+                        <img id="senderUserImageLeft" src="${senderImage}" alt="">
+                        <div id="textMessagesLeftImg">
+                            <video controls preload="metadata" loading="lazy" poster="assets/posterForVid.jpg" id="sendfileMessage" src="${senderMessage}"></video>
+                        </div>
+                </div>
+            `
+            scrollToBottom(chatBox)
+            const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
+            if (fakeElement) {
+                const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+                labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
+            }
+
+        }
+    } else {
+        console.log('hahahaha eto ung na recieve sa socket')
+        document.getElementById('conversations').innerHTML += `
              <div id="informationAndMessagesLeft" data-id="${senderId}">
                 <img id="senderUserImageLeft" src="${senderImage}" alt="">
                 <div id="textMessagesLeft">
@@ -1415,19 +1214,27 @@ socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, sen
                 </div>
             </div>
             `
-    scrollToBottom(chatBox)
-    const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
-    if (fakeElement) {
-        const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
-        labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>${senderMessage}</span>`
+        scrollToBottom(chatBox)
+        const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
+        if (fakeElement) {
+            const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+            labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>${senderMessage}</span>`
+        }
     }
 
+
 })
+
 
 export const chatBox = document.getElementById('conversations');
 export function scrollToBottom(chatBox) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+export function scrollToBottomImage(chatBox) {
+    const allMedia = chatBox.querySelectorAll('img, video');
+}
+
 
 sendNewMessageInput.addEventListener('focus', () => {
     setTimeout(() => {
@@ -1436,7 +1243,13 @@ sendNewMessageInput.addEventListener('focus', () => {
 
 })
 
+
+// like button and send button toggle
 sendNewMessageInput.addEventListener('input', () => {
+    sendButtonToggle()
+
+})
+function sendButtonToggle() {
     if (sendNewMessageInput.value == '') {
         document.getElementById('sendNewMessageButton').style.display = 'none'
         document.getElementById('sendLikeMessage').style.display = 'flex'
@@ -1444,15 +1257,143 @@ sendNewMessageInput.addEventListener('input', () => {
         document.getElementById('sendNewMessageButton').style.display = 'flex'
         document.getElementById('sendLikeMessage').style.display = 'none'
     }
-
-})
+}
 
 document.getElementById('sendLikeMessage').addEventListener('click', () => {
     sendThisMessage('👍')
 })
 
 
+document.getElementById('submitMessageSearch').addEventListener('click', () => {
+    searchNav()
+})
+
 
 document.addEventListener('click', (e) => {
     console.log(e.target)
 })
+
+
+const inputFileMessage = document.getElementById('inputFileMessage')
+const ImgPreviewFile = document.getElementById('ImgPreviewFile')
+const ImgPreview = document.getElementById('ImgPreview')
+let selectedFileMessage;
+document.getElementById('sendImageMessage').addEventListener('click', () => {
+    inputFileMessage.click();
+})
+
+
+inputFileMessage.addEventListener('change', (e) => {
+    ImgPreview.innerHTML = ''
+    console.log('meron ng data na nakalaman')
+    selectedFileMessage = inputFileMessage.files[0];
+    console.log(selectedFileMessage)
+    const previewOfFileSelected = URL.createObjectURL(selectedFileMessage)
+    if (selectedFileMessage.type == 'video/mp4') {
+        const ImgPreviewFile = document.createElement('video')
+        ImgPreviewFile.controls = true
+        ImgPreviewFile.maxWidth = '100%'
+        ImgPreviewFile.preload = 'metadata'
+        ImgPreviewFile.src = previewOfFileSelected
+        ImgPreview.append(ImgPreviewFile)
+
+    } else {
+        const ImgPreviewFile = document.createElement('img')
+        ImgPreviewFile.src = previewOfFileSelected
+        ImgPreview.append(ImgPreviewFile)
+
+    }
+
+    document.getElementById('fileImageWantToSendPreview').style.display = 'flex'
+})
+
+document.getElementById('closePreviewInSendMessage').addEventListener('click', () => {
+    document.getElementById('fileImageWantToSendPreview').style.display = 'none'
+    inputFileMessage.value = ''
+})
+
+document.getElementById('sendThisFileMessage').addEventListener('click', () => {
+    sendFileAsMessage(selectedFileMessage, loginUsername, loginUserId, recieverId, loginProfileimage)
+})
+
+async function sendFileAsMessage(selectedFileMessage, loginUsername, loginUserId, recieverId, loginProfileimage) {
+    try {
+        document.getElementById('loadingCircle').style.display = 'flex'
+        const formData = new FormData();
+        console.log(selectedFileMessage)
+        formData.append('image', selectedFileMessage)
+        formData.append('username', loginUsername)
+        formData.append('senderId', loginUserId)
+        formData.append('recieverId', recieverId)
+        formData.append('userImage', loginProfileimage)
+        // display your message for you in realtime
+        const sendImageUrl = URL.createObjectURL(selectedFileMessage)
+        if (selectedFileMessage.type != 'video/mp4') {
+            document.getElementById('conversations').innerHTML += `
+             <div id="informationAndMessagesRight" data-id="${loginUserId}">
+                <div id="textMessagesRightImg">
+                    <img id="sendfileMessage" src="${sendImageUrl}" alt="">
+                </div>
+                <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
+
+            </div>
+            `
+        } else {
+            document.getElementById('conversations').innerHTML += `
+            <div id="informationAndMessagesRight" data-id="${sendImageUrl}">
+                        <div id="textMessagesRightImg">
+                            <video controls preload="metadata" loading="lazy" id="sendfileMessage" src="${sendImageUrl}"></video>
+                        </div>
+                        <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
+
+            </div>
+            
+            `
+        }
+
+
+        scrollToBottom(chatBox)
+        const fakeElement = document.querySelector(`#convoContent[data-id="${recieverId}"]`)
+        if (fakeElement) {
+            const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+            labelElementOnHistoryMessage.innerHTML = `<span>You Sent File Message</span>`
+        }
+
+
+
+        const sendThisFileMessage = await fetch('https://instagramclone-developmentphasev2.onrender.com/sendThisFileMessage', {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+        })
+        const data = await sendThisFileMessage.json()
+        if (sendThisFileMessage.ok) {
+            const message = data.message;
+            console.log('success sending this message')
+            document.getElementById('fileImageWantToSendPreview').style.display = 'none'
+            inputFileMessage.value = ''
+            socket.emit('displayNewMessage', { recieverId, loginUserId, loginProfileimage, message, loginUsername })
+            document.getElementById('loadingCircle').style.display = 'none'
+        } else {
+            console.log('error sending this message')
+            document.getElementById('loadingCircle').style.display = 'none'
+        }
+    }
+    catch (err) {
+        console.log('error in request sending message!')
+        document.getElementById('loadingCircle').style.display = 'none'
+    }
+}
+
+let emojiOnOff = false;
+document.getElementById('sendEmojiMessage').addEventListener('click', () => {
+    emojiOnOff = !emojiOnOff
+    emojiOnOff ? (document.getElementById('emojiList').style.display = 'flex') :
+        (document.getElementById('emojiList').style.display = 'none')
+
+})
+document.querySelector('emoji-picker').addEventListener('emoji-click', e => {
+    console.log(e.detail.unicode)
+    sendNewMessageInput.value += e.detail.unicode
+    sendButtonToggle()
+});
