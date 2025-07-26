@@ -923,6 +923,43 @@ app.post('/getNewMessageToDisplayAtHistory', (req, res) => {
 
 
 
+app.post('/sendThisFileMessage', upload.single('image'), (req, res) => {
+    const loginUsername = req.body.username;
+    const loginUserId = req.body.senderId;
+    const recieverId = req.body.recieverId;
+    const loginProfileimage = req.body.userImage;
+    const query1 = 'SELECT profileImage FROM accounts WHERE id = ?'
+    db.query(query1, [recieverId], (err, result) => {
+        if (!result.length || err) {
+            res.status(400).json({ message: 'cannot find this user' })
+        } else {
+            const recieverImage = result[0].profileImage
+            cloudinary.uploader.upload(req.file.path, { resource_type: 'auto' }, (err, result) => {
+
+                const fileMessageUrl = optimizeFile(result.secure_url);
+                if (err) {
+                    res.status(400).json({ message: 'error sending file message' })
+                } else {
+                    const query2 = 'INSERT INTO messages (senderId,senderImage,senderUsername,recieverId,recieverImage,message) VALUES (?,?,?,?,?,?)'
+                    db.query(query2, [loginUserId, loginProfileimage, loginUsername, recieverId, recieverImage, fileMessageUrl], (err, result) => {
+                        if (err) {
+                            res.status(400).json({ message: 'cannot inserting your message!' })
+                        } else {
+                            res.status(200).json({ message: fileMessageUrl })
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+})
+function optimizeFile(fileMessageUrl) {
+    return fileMessageUrl.replace('/upload/', '/upload/q_auto,f_auto/')
+}
+
+
+
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
