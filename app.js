@@ -1168,11 +1168,12 @@ async function sendThisMessage(message) {
 
 socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, senderMessage, senderUsername }) => {
 
-    const isMedia = senderMessage.match(/\.(mp4|webm|ogg|jpg|jpeg|png|gif|webp)$/i);
-    if (isMedia) {
-        const isImage = senderMessage.match(/\.(jpg|jpeg|png|gif|webp)$/i);
-        if (isImage) {
-            document.getElementById('conversations').innerHTML += `
+    if (recieverId == loginUserId) {
+        const isMedia = senderMessage.match(/\.(mp4|webm|ogg|jpg|jpeg|png|gif|webp)$/i);
+        if (isMedia) {
+            const isImage = senderMessage.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+            if (isImage) {
+                document.getElementById('conversations').innerHTML += `
              <div id="informationAndMessagesLeft" data-id="${senderId}">
                 <img id="senderUserImageLeft" src="${senderImage}" alt="">
                 <div id="textMessagesLeftImg">
@@ -1180,33 +1181,33 @@ socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, sen
                 </div>
             </div>
             `
-            scrollToBottom(chatBox)
-            const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
-            if (fakeElement) {
-                const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
-                labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
-            }
-        } else {
+                scrollToBottom(chatBox)
+                const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
+                if (fakeElement) {
+                    const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+                    labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
+                }
+            } else {
 
-            document.getElementById('conversations').innerHTML += `
+                document.getElementById('conversations').innerHTML += `
               <div id="informationAndMessagesLeft" data-id="${senderId}">
                         <img id="senderUserImageLeft" src="${senderImage}" alt="">
                         <div id="textMessagesLeftImg">
-                            <video controls preload="metadata" loading="lazy" poster="./assets/posterForVid.jpg" id="sendfileMessage" src="${senderMessage}"></video>
+                            <video controls preload="metadata" loading="lazy" poster="assets/posterForVid.jpg" id="sendfileMessage" src="${senderMessage}"></video>
                         </div>
                 </div>
             `
-            scrollToBottom(chatBox)
-            const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
-            if (fakeElement) {
-                const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
-                labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
-            }
+                scrollToBottom(chatBox)
+                const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
+                if (fakeElement) {
+                    const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+                    labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
+                }
 
-        }
-    } else {
-        console.log('hahahaha eto ung na recieve sa socket')
-        document.getElementById('conversations').innerHTML += `
+            }
+        } else {
+            console.log('hahahaha eto ung na recieve sa socket')
+            document.getElementById('conversations').innerHTML += `
              <div id="informationAndMessagesLeft" data-id="${senderId}">
                 <img id="senderUserImageLeft" src="${senderImage}" alt="">
                 <div id="textMessagesLeft">
@@ -1214,13 +1215,16 @@ socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, sen
                 </div>
             </div>
             `
-        scrollToBottom(chatBox)
-        const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
-        if (fakeElement) {
-            const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
-            labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>${senderMessage}</span>`
+            scrollToBottom(chatBox)
+            const fakeElement = document.querySelector(`#convoContent[data-id="${senderId}"]`)
+            if (fakeElement) {
+                const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
+                labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>${senderMessage}</span>`
+            }
         }
     }
+
+
 
 
 })
