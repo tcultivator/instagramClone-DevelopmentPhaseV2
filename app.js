@@ -1192,7 +1192,7 @@ socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, sen
               <div id="informationAndMessagesLeft" data-id="${senderId}">
                         <img id="senderUserImageLeft" src="${senderImage}" alt="">
                         <div id="textMessagesLeftImg">
-                            <video controls preload="metadata" loading="lazy" poster="assets/posterForVid.jpg" id="sendfileMessage" src="${senderMessage}"></video>
+                            <video controls preload="metadata" loading="lazy" poster="./assets/posterForVid.jpg" id="sendfileMessage" src="${senderMessage}"></video>
                         </div>
                 </div>
             `
