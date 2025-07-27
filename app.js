@@ -1166,9 +1166,9 @@ async function sendThisMessage(message) {
 }
 
 
-socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, senderMessage, senderUsername }) => {
+socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, senderMessage, senderUsername }) => {
 
-    if (recieverId == loginUserId) {
+    if (recieverId == senderId) {
         const isMedia = senderMessage.match(/\.(mp4|webm|ogg|jpg|jpeg|png|gif|webp)$/i);
         if (isMedia) {
             const isImage = senderMessage.match(/\.(jpg|jpeg|png|gif|webp)$/i);
@@ -1223,10 +1223,6 @@ socket.on('displayNewMessageRealtime', ({ recieverId, senderId, senderImage, sen
             }
         }
     }
-
-
-
-
 })
 
 
