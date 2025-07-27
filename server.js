@@ -70,11 +70,11 @@ io.on('connection', (socket) => {
 
     socket.on('displayNewMessage', ({ recieverId, loginUserId, loginProfileimage, message, loginUsername }) => {
         io.to(recieverId).emit('displayNewMessageRealtime', {
-            recieverId,
+            newRecieverId: recieverId,
             senderId: loginUserId,
             senderImage: loginProfileimage,
             senderMessage: message,
-            senderUsername:loginUsername
+            senderUsername: loginUsername
         })
     })
 });
