@@ -1049,6 +1049,11 @@ body button {
     cursor: pointer;
 }
 
+#uploadNewFileForPost{
+    color: rgba(255, 255, 255, 0.397);
+    font-size: 100px;
+}
+
 #createPost form button {
     padding: 10px;
     border: none;
