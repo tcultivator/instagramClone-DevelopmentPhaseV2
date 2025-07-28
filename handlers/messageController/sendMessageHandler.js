@@ -7,6 +7,7 @@ export default async function sendThisMessage(message, recieverId, loginUserId, 
              <div id="informationAndMessagesRight" data-id="${loginUserId}">
                 <div id="textMessagesRight">
                     <label id="textMessageDataRight">${message}</label>
+                    <label id="seenLabel"></label>
                 </div>
                 <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
 
