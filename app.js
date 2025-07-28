@@ -916,7 +916,8 @@ socket.on('userSeenThisMessage', ({ testMessage }) => {
         newElementForSeen.id = 'seenLabel'
         newElementForSeen.textContent = 'seen'
         newMessage.append(newElementForSeen)
-    } else if (messageFile) {
+    } 
+    if (messageFile) {
         const newMessageFile = messageFile[messageFile.length - 1]
         const newElementFileForSeen = document.createElement('label')
         newElementFileForSeen.id = 'seenLabel'
