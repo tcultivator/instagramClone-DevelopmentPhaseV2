@@ -348,11 +348,7 @@ document.getElementById('closeCreatePost').addEventListener('click', () => {
     fileUploaded.value = ''
 })
 
-document.getElementById('editProfilePic').addEventListener('click', () => {
-    console.log('naclick ung profile')
-    document.getElementById('updateProfilePic').style.display = 'flex'
 
-})
 
 
 
@@ -388,7 +384,12 @@ document.getElementById('changeProfileInfoBtn').addEventListener('click', async 
 })
 
 
+document.getElementById('editProfilePic').addEventListener('click', () => {
+    console.log('naclick ung profile')
+    document.getElementById('updateProfilePic').style.display = 'flex'
+    profilePicUpload.click()
 
+})
 
 document.getElementById('closeEditProfileInfo').addEventListener('click', () => {
     document.getElementById('editProfileInfo').style.display = 'none'
