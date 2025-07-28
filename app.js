@@ -279,7 +279,9 @@ document.getElementById('backBtnonProfile').addEventListener('click', (e) => {
 
 
 
-
+document.getElementById('uploadNewFileForPost').addEventListener('click', () => {
+    fileUploaded.click()
+})
 const fileUploaded = document.getElementById('fileUp')
 const preview = document.getElementById('preview')
 
@@ -341,6 +343,8 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
 document.getElementById('closeCreatePost').addEventListener('click', () => {
     document.getElementById('createPost').style.display = 'none'
     document.getElementById('preview').innerHTML = ''
+    document.getElementById('uploadNewFileForPost').style.display = 'block'
+    fileUploaded.value = ''
 })
 
 document.getElementById('editProfilePic').addEventListener('click', () => {
