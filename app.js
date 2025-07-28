@@ -1,16 +1,19 @@
 
 import { apiReq } from './utils/fetchReq.js';
-import { visitProfile, viewProfile } from './handlers/visitProfileHandler.js';
-import { followingHandler } from './handlers/viewFollowingHandler.js'
-import { followersHandler } from './handlers/viewFollowersHandler.js'
-import { verifyIfAlreadyfollow } from './helper/verifyFollow.js'
-import { followBtnFunction } from './handlers/followBtnHandler.js';
-import { displayAllMessages } from './handlers/displayAllMessageHandler.js'
 import { autoSearch, submitSearch } from './handlers/searchHandler.js'
-import { openMessageWindow } from './handlers/openMessageWindowHandler.js'
 
+// postController
+import { viewComments, likeThisPost, followBtnFunction } from './handlers/postController/index.js'
+// storyController
+import { viewStory, sendStoryReaction, getAllStories, displayAllStoryViewer } from './handlers/storyController/index.js';
 // navigation datafile
-import { createPostNav, messageNav, profileNav, searchNav } from './UI/UI.js';
+import { createPostNav, messageNav, profileNav, searchNav } from './UI/index.js';
+// message Controller
+import { sendFileAsMessage, openConvoWindow, openMessageWindow, sendThisMessage } from './handlers/messageController/index.js'
+// profile Controller
+import {followersHandler,followingHandler,visitProfile,viewProfile} from './handlers/profileController/index.js'
+// helper
+import { verifyIfAlreadyfollow, verifyIfAlreadyLike } from './helper/index.js'
 
 document.getElementById('loadingBody').style = 'display:flex'
 
@@ -68,7 +71,7 @@ socket.on('connect', () => {
         if (getAlldataForWall.ok) {
             let wallUpdate = data.dataa
             wallUpdate.forEach(async element => {
-                const alreadyLikedData = await verifyIfAlreadyLike(element.id);
+                const alreadyLikedData = await verifyIfAlreadyLike(element.id, loginUserId);
                 const likeBtn = alreadyLikedData.alreadyLike == true ? (`
                     <button id="like" ><i id="likethisPost" style="color: red;" data-id="${element.id}" class="fa-solid fa-heart"></i></button>
                     `) :
@@ -139,145 +142,22 @@ socket.on('connect', () => {
     }
     document.getElementById('loadingBody').style = 'display:none'
 })();
+// function to display all stories
+getAllStories(loginProfileimage);
 
-
-async function getAllStories() {
-    try {
-        document.getElementById('imageOnaddStory').src = loginProfileimage
-        const getStories = await apiReq('/getStories')
-        if (getStories.ok) {
-            console.log(getStories.data)
-            getStories.data.forEach(element => {
-                const isVideo = element.secure_url.match(/\.(mp4|webm|ogg)$/i);
-                const media = isVideo ? (`
-                    <video id="storyView" src="${element.secure_url}"  data-id="${element.id}"></video>
-                    `) :
-                    (`<img id="storyView" src="${element.secure_url}" alt="Your Story" data-id="${element.id}">`)
-                document.getElementById('stories').innerHTML += `
-                 <div id="addStories" data-id="${element.id}">
-                    <div id="storyBod" class="story-thumbnail">
-                            ${media}
-                        <div id="story-label" data-id="${element.id}">${element.username}</div>
-                    </div>
-                </div>
-                `
-            })
-        } else {
-            console.log('error')
-        }
-    }
-    catch (err) {
-        console.log('error 2')
-    }
-}
-
-getAllStories();
 let selectedStoryId;
 document.addEventListener('click', (e) => {
     if (e.target.matches('#storyView')) {
-
-        const idOfElemt = e.target.dataset.id;
         selectedStoryId = e.target.dataset.id;
-        const elementOfStory = document.querySelector(`#addStories[data-id="${idOfElemt}"]`)
-        console.log('eto ung id ng elemt ', idOfElemt)
-        console.log('eto ung element mismo ', elementOfStory)
-
-        const srcOfIMG = document.querySelector(`#storyView[data-id="${idOfElemt}"]`)
-        console.log(srcOfIMG.src)
-        const isVideo = srcOfIMG.src.match(/\.(mp4|webm|ogg)$/i);
-        if (isVideo) {
-
-            document.getElementById('previewOfStoryVID').autoplay = true
-            document.getElementById('previewOfStoryVID').src = srcOfIMG.src
-            document.getElementById('viewStoryBody').style.display = 'flex'
-            const usernameOfStory = document.querySelector(`#story-label[data-id="${idOfElemt}"]`)
-            document.getElementById('usernameOfStoryview').textContent = usernameOfStory.textContent
-            if (loginUsername == usernameOfStory.textContent) {
-                document.getElementById('storyViewCount').style.display = 'block'
-            } else {
-                document.getElementById('storyViewCount').style.display = 'none'
-            }
-            document.getElementById('previewOfStoryIMG').style.display = 'none'
-            document.getElementById('previewOfStoryVID').style.display = 'block'
-            getStoryViewCount(idOfElemt)
-
-        } else {
-
-            document.getElementById('previewOfStoryIMG').src = srcOfIMG.src
-            document.getElementById('viewStoryBody').style.display = 'flex'
-            const usernameOfStory = document.querySelector(`#story-label[data-id="${idOfElemt}"]`)
-            document.getElementById('usernameOfStoryview').textContent = usernameOfStory.textContent
-            if (loginUsername == usernameOfStory.textContent) {
-                document.getElementById('storyViewCount').style.display = 'block'
-            } else {
-                document.getElementById('storyViewCount').style.display = 'none'
-            }
-            document.getElementById('previewOfStoryIMG').style.display = 'block'
-            document.getElementById('previewOfStoryVID').style.display = 'none'
-            getStoryViewCount(idOfElemt)
-        }
-
-
-
-
-
+        viewStory(e.target, loginUserId, loginUsername, loginProfileimage)
     }
 
 })
 
 
-async function getStoryViewCount(idOfElemt) {
-
-    const getViewCount = await apiReq('/getStoryViewCount', { idOfElemt: idOfElemt, userId: loginUserId, username: loginUsername, profileImage: loginProfileimage })
-    if (getViewCount.ok) {
-        console.log('eto ung count ng view')
-        console.log(getViewCount.data[0].viewCount)
-        document.getElementById('storyViewCount').textContent = getViewCount.data[0].viewCount
-        document.getElementById('storyViewCount').setAttribute('data-id', idOfElemt)
-        console.log(document.getElementById('storyViewCount').dataset.id)
-
-    } else {
-        console.log('error ka sa view Count')
-    }
-
-}
-
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#storyViewCount')) {
-        console.log('na click ung viewCount')
-        console.log(document.getElementById('storyViewCount').dataset)
-        const storyId = document.getElementById('storyViewCount').dataset.id
-        document.getElementById('viewerContent').innerHTML = ''
-        const getAllStoryViewer = await apiReq('/getAllStoryViewer', { storyId: storyId })
-        if (getAllStoryViewer.ok) {
-            document.getElementById('storyViewerList').style.display = 'block'
-            console.log(getAllStoryViewer.data)
-            getAllStoryViewer.data.forEach(element => {
-                let reactionsIcon = '';
-                if (element.reactions != '') {
-                    const parseReactionIcon = JSON.parse(element.reactions)
-                    reactionsIcon = parseReactionIcon.join(' ')
-
-                }
-
-                document.getElementById('viewerContent').innerHTML += `
-                <div id="viewerContentInfo" data-id="${element.id}">
-                    <div id="viewerInfo">
-                        <img src="${element.secure_url}" alt="">
-                        <label for="">${element.username}</label>
-                    </div>
-
-                   
-                    <div id="viewerReactions">
-                       ${reactionsIcon}
-                    </div>
-
-                </div>
-                `
-            })
-        } else {
-            alert('error')
-        }
+        displayAllStoryViewer()
     }
 })
 
@@ -292,69 +172,18 @@ document.getElementById('closeStoryViewerList').addEventListener('click', () => 
 })
 
 
-let reactionsArr = []
-let reactionDelay = null;
-
-let reactionsClickLimit = 7;
+export let storyControl = {
+    reactionsArr: [],
+    reactionDelay: null,
+    reactionsClickLimit: 7
+}
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#heartReact') || e.target.matches('#hahaReact') || e.target.matches('#likeReact')) {
-        console.log(e.target.outerHTML)
-        reactionsClickLimit--;
-        if (reactionsClickLimit < 0) {
-            console.log('reach max of reactions')
-        } else {
-            reactionsArr.push(e.target.outerHTML)
-
-            if (e.target.matches('#heartReact')) {
-                document.getElementById('reactionsPopupIconheart').style.display = 'flex'
-
-                setTimeout(() => {
-                    document.getElementById('reactionsPopupIconheart').style.display = 'none'
-
-                }, 200);
-
-            } else if (e.target.matches('#hahaReact')) {
-                document.getElementById('reactionsPopupIconhaha').style.display = 'flex'
-
-                setTimeout(() => {
-                    document.getElementById('reactionsPopupIconhaha').style.display = 'none'
-
-                }, 200);
-
-            } else if (e.target.matches('#likeReact')) {
-                document.getElementById('reactionsPopupIconlike').style.display = 'flex'
-
-                setTimeout(() => {
-                    document.getElementById('reactionsPopupIconlike').style.display = 'none'
-
-                }, 200);
-
-            }
-
-        }
-
-
-        clearTimeout(reactionDelay)
-        reactionDelay = setTimeout(() => {
-            console.log('natapos na ung timeout delay')
-            console.log(reactionsArr)
-            const reactionData = JSON.stringify(reactionsArr)
-            setReactions(reactionData)
-            reactionsClickLimit = 7;
-            reactionsArr = []
-
-        }, 1000);
+        sendStoryReaction(e.target, selectedStoryId, loginUserId)
     }
 })
 
-async function setReactions(reactionsArr) {
-    const sendStoryReactions = await apiReq('/sendStoryReactions', { reactionsArr: reactionsArr, selectedStoryId: selectedStoryId, loginUserId: loginUserId })
-    if (sendStoryReactions.ok) {
-        console.log('success sa pag send ng reactions ')
-    } else {
-        console.log('error sa pag send ng reactions')
-    }
-}
+
 
 
 // navigation for mobile
@@ -405,10 +234,12 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
             case 'searchS':
                 console.log('this is search')
                 searchNav()
+                convoOpen = false;
                 break;
             case 'createS':
                 console.log('this is create')
                 createPostNav()
+                convoOpen = false;
                 break;
             case 'notifS':
                 console.log('this is notif')
@@ -418,6 +249,7 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 console.log('this is profile')
                 profileNav()
                 viewProfile(loginUserId)
+                convoOpen = false;
 
                 break;
             case 'messageButtonHeaderS':
@@ -425,6 +257,7 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 openMessageWindow(loginUserId)
                 console.log('this is message')
                 messageNav()
+                convoOpen = false;
                 break;
 
             default:
@@ -620,7 +453,7 @@ document.getElementById('visitbackBtnonProfile').addEventListener('click', () =>
 
 document.getElementById('visitprofileMessage').addEventListener('click', (e) => {
     const elementID = document.querySelector('#visitprofileName')
-    openConvoWindow(elementID.dataset.userid)
+    openConvoWindow(elementID.dataset.userid, loginUserId, loginUsername, loginProfileimage, socket)
     console.log(elementID.dataset.userid)
 })
 
@@ -654,58 +487,7 @@ document.getElementById('closepreviewofImageInPost').addEventListener('click', (
 
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#likethisPost')) {
-        const likeIcon = e.target.closest('#postcontent').querySelector('#likethisPost')
-        let likeTarget = e.target
-        if (likeIcon.style.color == 'red') {
-            console.log('na like mo nato')
-            const likeCountLabel = e.target.closest('#postcontent').querySelector('#likeCount')
-            let likeCount = Number(likeCountLabel.dataset.likecount)
-            likeCount -= 1
-            likeCountLabel.dataset.likecount = likeCount
-            likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
-
-            likeIcon.style = 'color:rgb(36, 36, 36)'
-            likeIcon.classList = 'fa-regular fa-heart'
-            const postId = e.target.dataset.id
-            console.log(loginUserId)
-            console.log(postId)
-            const unlikeThisPost = await apiReq('/unlikeThisPost', { postId: postId, userId: loginUserId })
-            if (unlikeThisPost.ok) {
-                console.log('you like this post that id is ', postId)
-                console.log(likeIcon.style.color)
-                socket.emit('userunLikeThisPost', { postId, likeCount })
-
-
-            } else {
-
-                console.log('error sa like')
-            }
-        } else {
-            const likeCountLabel = e.target.closest('#postcontent').querySelector('#likeCount')
-            let likeCount = Number(likeCountLabel.dataset.likecount)
-            likeCount += 1
-            likeCountLabel.dataset.likecount = likeCount
-            likeCountLabel.innerHTML = `${likeCount} <span>Likes</span>`
-
-            likeIcon.style = 'color:red'
-            likeIcon.classList = 'fa-solid fa-heart'
-            const postId = e.target.dataset.id
-            console.log(loginUserId)
-            console.log(postId)
-            const likeThisPost = await apiReq('/likeThisPost', { postId: postId, userId: loginUserId })
-            if (likeThisPost.ok) {
-                console.log('you like this post that id is ', postId)
-                console.log(likeIcon.style.color)
-                console.log(likeCountLabel)
-                socket.emit('userLikeThisPost', { postId, likeCount })
-
-            } else {
-
-                console.log('error sa like')
-            }
-        }
-
-
+        likeThisPost(e.target, loginUserId, socket)
     }
 })
 
@@ -738,76 +520,28 @@ document.addEventListener('click', async (e) => {
         document.getElementById('commentsBody').style.bottom = 0
 
 
-        viewComments(postIdOfyouwantToComment)
+        viewComments(postIdOfyouwantToComment, loginUsername)
 
 
     }
 })
 
 socket.on('idOfCommentFromIO', ({ postIdOfyouwantToComment, commentCount }) => {
-    viewComments(postIdOfyouwantToComment)
+    viewComments(postIdOfyouwantToComment, loginUsername)
     const postElement = document.querySelector(`#postcontent[data-id="${postIdOfyouwantToComment}"]`)
     const commentCountLabel = postElement.querySelector('#commentCount')
     commentCountLabel.dataset.commentcount = commentCount
     commentCountLabel.innerHTML = `${commentCount} <span>Comments</span>`
 })
 
-async function viewComments(postIdOfyouwantToComment) {
-    document.getElementById('loadingBarInComment').style.display = 'block'
-    document.getElementById('commentsContents').innerHTML = ''
-    const viewCommentInPost = await apiReq('/viewCommentInPost', { postId: postIdOfyouwantToComment })
-    if (viewCommentInPost.ok) {
-        console.log('success sa pagkuha sa comment')
-        console.log(viewCommentInPost.data.result)
-        const userComments = viewCommentInPost.data.result
-        userComments.forEach(element => {
-            const labelComments = element.username == loginUsername ? (
-                `
-                    <div id="commentDetails" style="background-color:#1C6CFF; color:white">
-                        <label id="userThatComment" style="color:white">${element.username}</label>
-                        <label for="">${element.comment}</label>
-                    </div>
-                `
-            ) :
-                (
-                    `
-                   
-                    <div id="commentDetails">
-                        <label id="userThatComment">${element.username}</label>
-                        <label for="">${element.comment}</label>
-                    </div>
-                
-                    `
-                )
-            document.getElementById('commentsContents').innerHTML += `
-                <div id="commentsOnPost">
-                <img src="${element.profileImage}" alt="">
-                    ${labelComments}
-                </div>
-                `
-        })
-        document.getElementById('loadingBarInComment').style.display = 'none'
-    } else {
-        console.log('error sa pagkuha')
-    }
-}
+
 
 document.getElementById('closeComment').addEventListener('click', () => {
     document.getElementById('viewPostBody').style.display = 'none'
 
 })
 
-async function verifyIfAlreadyLike(postId) {
-    const verifyLike = await apiReq('/verifyIfAlreadyLike', { postId: postId, userId: loginUserId })
-    if (verifyLike.ok) {
-        return verifyLike.data
 
-    } else {
-        console.log('errrrrrr')
-        return null
-    }
-
-}
 const inputComment = document.getElementById('inputComment')
 document.getElementById('submitComment').addEventListener('click', async () => {
     const commentCountLabel = commentTarget.target.closest('#postcontent').querySelector('#commentCount')
@@ -826,7 +560,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
         document.getElementById('loadingBarInComment').style.display = 'block'
         const submitComment = await apiReq('/addComment', { postId: postIdOfyouwantToComment, comment: inputComment.value, username: loginUsername, profileImage: loginProfileimage })
         if (submitComment.ok) {
-            viewComments(postIdOfyouwantToComment)
+            viewComments(postIdOfyouwantToComment, loginUsername)
             socket.emit('idOfThis', { postIdOfyouwantToComment, commentCount })
             console.log('success ung comment')
             inputComment.value = ''
@@ -1061,45 +795,16 @@ document.getElementById('closeSearchWindow').addEventListener('click', () => {
 
 
 
-
+// open convo
 let recieverId;
+let convoOpen = false;
 document.addEventListener('click', (e) => {
     if (e.target.matches('#messageThisUserInSearch') || e.target.matches('#convoContent') || e.target.matches('#convoContent img')) {
-        openConvoWindow(e.target.dataset.id)
+        openConvoWindow(e.target.dataset.id, loginUserId, loginUsername, loginProfileimage, socket)
         recieverId = e.target.dataset.id
+        convoOpen = true;
     }
 })
-
-
-
-// eto ung mismong converstation
-async function openConvoWindow(recieverId) {
-    document.getElementById('loadingCircle').style.display = 'flex'
-    const findConvoData = await apiReq('/findConvoData', {
-        recieverId: recieverId,
-        loginUserId: loginUserId,
-        loginUsername: loginUsername,
-        loginProfileimage: loginProfileimage
-    })
-    if (findConvoData.ok) {
-        console.log(findConvoData.data)
-        displayAllMessages(recieverId, loginUserId)
-        document.getElementById('conversationBody').style.display = 'flex'
-
-        const ifRecieverIsYou = findConvoData.data[0].recieverUsername == loginUsername ? (
-
-            findConvoData.data[0].senderUsername
-        ) : (
-
-            findConvoData.data[0].recieverUsername
-        )
-        document.getElementById('usernameInconversationHeader').textContent = ifRecieverIsYou
-    } else {
-        console.log('sa frontend error')
-    }
-}
-
-
 
 
 
@@ -1111,70 +816,37 @@ document.getElementById('messageButtonHeader').addEventListener('click', () => {
 })
 
 
-
-
+// close message list
 document.getElementById('closeMessageBody').addEventListener('click', (e) => {
     document.getElementById('messageBody').style.display = 'none'
 })
+
+//close convo
 document.getElementById('closeconversationBody').addEventListener('click', (e) => {
     document.getElementById('conversationBody').style.display = 'none'
+    convoOpen = false;
 
 })
 
 // send messages
 const sendNewMessageInput = document.getElementById('sendNewMessageInput')
 document.getElementById('sendNewMessageButton').addEventListener('click', async () => {
-    sendThisMessage(sendNewMessageInput.value)
+    sendThisMessage(sendNewMessageInput.value, recieverId, loginUserId, loginUsername, loginProfileimage, socket)
+    emojiOnOff = !emojiOnOff
 })
 
-async function sendThisMessage(message) {
-    document.getElementById('conversations').innerHTML += `
-             <div id="informationAndMessagesRight" data-id="${loginUserId}">
-                <div id="textMessagesRight">
-                    <label id="textMessageDataRight">${message}</label>
-                </div>
-                <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
-
-            </div>
-            `
-    scrollToBottom(chatBox)
-    emojiOnOff = !emojiOnOff
-    document.getElementById('emojiList').style.display = 'none'
-    const fakeElement = document.querySelector(`#convoContent[data-id="${recieverId}"]`)
-    if (fakeElement) {
-        const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
-        labelElementOnHistoryMessage.innerHTML = `You: <span>${message}</span>`
-    }
-
-    sendNewMessageInput.value = ''
-    document.getElementById('sendNewMessageButton').style.display = 'none'
-    document.getElementById('sendLikeMessage').style.display = 'flex'
-    const sendNewMessage = await apiReq('/sendNewMessage', {
-        recieverId: recieverId,
-        loginUserId: loginUserId,
-        senderUsername: loginUsername,
-        loginProfileimage: loginProfileimage,
-        message: message
-    })
-    if (sendNewMessage.ok) {
-        console.log('success sent')
-        socket.emit('displayNewMessage', { recieverId, loginUserId, loginProfileimage, message, loginUsername })
-
-    } else {
-        console.log('error sent')
-    }
-}
 
 
+// ready to transfer code
 socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, senderMessage, senderUsername }) => {
-
-
     const isMedia = senderMessage.match(/\.(mp4|webm|ogg|jpg|jpeg|png|gif|webp)$/i);
     if (isMedia) {
-
         const isImage = senderMessage.match(/\.(jpg|jpeg|png|gif|webp)$/i);
         if (isImage) {
             if (recieverId == senderId) {
+                if (convoOpen) {
+                    socket.emit('seenThisMessage', { recieverId })
+                }
                 document.getElementById('conversations').innerHTML += `
              <div id="informationAndMessagesLeft" data-id="${senderId}">
                 <img id="senderUserImageLeft" src="${senderImage}" alt="">
@@ -1191,6 +863,9 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
             }
         } else {
             if (recieverId == senderId) {
+                if (convoOpen) {
+                    socket.emit('seenThisMessage', { recieverId })
+                }
                 document.getElementById('conversations').innerHTML += `
               <div id="informationAndMessagesLeft" data-id="${senderId}">
                         <img id="senderUserImageLeft" src="${senderImage}" alt="">
@@ -1206,11 +881,12 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
                 const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
                 labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
             }
-
         }
-
     } else {
         if (recieverId == senderId) {
+            if (convoOpen) {
+                socket.emit('seenThisMessage', { recieverId })
+            }
             console.log('hahahaha eto ung na recieve sa socket')
             document.getElementById('conversations').innerHTML += `
              <div id="informationAndMessagesLeft" data-id="${senderId}">
@@ -1228,6 +904,31 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
         }
     }
 })
+
+// ready to transfer code
+socket.on('userSeenThisMessage', ({ testMessage }) => {
+    console.log('eto kapag na seen ng user', testMessage)
+
+    const message = document.querySelectorAll('#textMessagesRight')
+    const messageFile = document.querySelectorAll('#textMessagesRightImg')
+    if (message) {
+        const newMessage = message[message.length - 1]
+        const newElementForSeen = document.createElement('label')
+        newElementForSeen.id = 'seenLabel'
+        newElementForSeen.textContent = 'seen'
+        newMessage.append(newElementForSeen)
+    } else if (messageFile) {
+        const newMessageFile = messageFile[messageFile.length - 1]
+        const newElementFileForSeen = document.createElement('label')
+        newElementFileForSeen.id = 'seenLabel'
+        newElementFileForSeen.textContent = 'seen'
+        newMessageFile.append(newElementFileForSeen)
+    }
+
+
+})
+
+
 
 
 export const chatBox = document.getElementById('conversations');
@@ -1264,7 +965,7 @@ function sendButtonToggle() {
 }
 
 document.getElementById('sendLikeMessage').addEventListener('click', () => {
-    sendThisMessage('👍')
+    sendThisMessage('👍', recieverId, loginUserId, loginUsername, loginProfileimage, socket)
 })
 
 
@@ -1317,77 +1018,10 @@ document.getElementById('closePreviewInSendMessage').addEventListener('click', (
 })
 
 document.getElementById('sendThisFileMessage').addEventListener('click', () => {
-    sendFileAsMessage(selectedFileMessage, loginUsername, loginUserId, recieverId, loginProfileimage)
+    sendFileAsMessage(selectedFileMessage, loginUsername, loginUserId, recieverId, loginProfileimage, socket)
 })
 
-async function sendFileAsMessage(selectedFileMessage, loginUsername, loginUserId, recieverId, loginProfileimage) {
-    try {
-        document.getElementById('loadingCircle').style.display = 'flex'
-        const formData = new FormData();
-        console.log(selectedFileMessage)
-        formData.append('image', selectedFileMessage)
-        formData.append('username', loginUsername)
-        formData.append('senderId', loginUserId)
-        formData.append('recieverId', recieverId)
-        formData.append('userImage', loginProfileimage)
-        // display your message for you in realtime
-        const sendImageUrl = URL.createObjectURL(selectedFileMessage)
-        if (selectedFileMessage.type != 'video/mp4') {
-            document.getElementById('conversations').innerHTML += `
-             <div id="informationAndMessagesRight" data-id="${loginUserId}">
-                <div id="textMessagesRightImg">
-                    <img id="sendfileMessage" src="${sendImageUrl}" alt="">
-                </div>
-                <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
 
-            </div>
-            `
-        } else {
-            document.getElementById('conversations').innerHTML += `
-            <div id="informationAndMessagesRight" data-id="${sendImageUrl}">
-                        <div id="textMessagesRightImg">
-                            <video controls preload="metadata" loading="lazy" id="sendfileMessage" src="${sendImageUrl}"></video>
-                        </div>
-                        <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
-
-            </div>
-            
-            `
-        }
-
-
-        scrollToBottom(chatBox)
-        const fakeElement = document.querySelector(`#convoContent[data-id="${recieverId}"]`)
-        if (fakeElement) {
-            const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
-            labelElementOnHistoryMessage.innerHTML = `<span>You Sent File Message</span>`
-        }
-
-
-
-        const sendThisFileMessage = await fetch('https://instagramclone-developmentphasev2.onrender.com/sendThisFileMessage', {
-            method: 'POST',
-            credentials: 'include',
-            body: formData
-        })
-        const data = await sendThisFileMessage.json()
-        if (sendThisFileMessage.ok) {
-            const message = data.message;
-            console.log('success sending this message')
-            document.getElementById('fileImageWantToSendPreview').style.display = 'none'
-            inputFileMessage.value = ''
-            socket.emit('displayNewMessage', { recieverId, loginUserId, loginProfileimage, message, loginUsername })
-            document.getElementById('loadingCircle').style.display = 'none'
-        } else {
-            console.log('error sending this message')
-            document.getElementById('loadingCircle').style.display = 'none'
-        }
-    }
-    catch (err) {
-        console.log('error in request sending message!')
-        document.getElementById('loadingCircle').style.display = 'none'
-    }
-}
 
 let emojiOnOff = false;
 document.getElementById('sendEmojiMessage').addEventListener('click', () => {
