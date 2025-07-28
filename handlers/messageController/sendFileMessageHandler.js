@@ -20,6 +20,7 @@ export default async function sendFileAsMessage(selectedFileMessage, loginUserna
              <div id="informationAndMessagesRight" data-id="${loginUserId}">
                 <div id="textMessagesRightImg">
                     <img id="sendfileMessage" src="${sendImageUrl}" alt="">
+                    <label id="seenLabel"></label>
                 </div>
                 <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
 
@@ -30,6 +31,7 @@ export default async function sendFileAsMessage(selectedFileMessage, loginUserna
             <div id="informationAndMessagesRight" data-id="${sendImageUrl}">
                         <div id="textMessagesRightImg">
                             <video controls preload="metadata" loading="lazy" id="sendfileMessage" src="${sendImageUrl}"></video>
+                            <label id="seenLabel"></label>
                         </div>
                         <img id="senderUserImageRight" src="${loginProfileimage}" alt="">
 
