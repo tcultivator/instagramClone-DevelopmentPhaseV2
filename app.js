@@ -844,7 +844,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
         if (isImage) {
             if (recieverId == senderId) {
                 if (convoOpen) {
-                    socket.emit('seenThisMessage', { recieverId })
+                    socket.emit('seenThisMessage', { recieverId, loginUserId })
                 }
                 document.getElementById('conversations').innerHTML += `
              <div id="informationAndMessagesLeft" data-id="${senderId}">
@@ -863,7 +863,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
         } else {
             if (recieverId == senderId) {
                 if (convoOpen) {
-                    socket.emit('seenThisMessage', { recieverId })
+                    socket.emit('seenThisMessage', { recieverId, loginUserId })
                 }
                 document.getElementById('conversations').innerHTML += `
               <div id="informationAndMessagesLeft" data-id="${senderId}">
@@ -884,7 +884,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
     } else {
         if (recieverId == senderId) {
             if (convoOpen) {
-                socket.emit('seenThisMessage', { recieverId })
+                socket.emit('seenThisMessage', { recieverId, loginUserId })
             }
             console.log('hahahaha eto ung na recieve sa socket')
             document.getElementById('conversations').innerHTML += `
@@ -905,27 +905,18 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
 })
 
 // ready to transfer code
-socket.on('userSeenThisMessage', ({ testMessage }) => {
+socket.on('userSeenThisMessage', ({ testMessage, newRecieverId, newLoginUserId }) => {
     console.log('eto kapag na seen ng user', testMessage)
-
-    const message = document.querySelectorAll('#textMessagesRight')
-    const messageFile = document.querySelectorAll('#textMessagesRightImg')
-    if (message) {
-        const newMessage = message[message.length - 1]
-        const newElementForSeen = document.createElement('label')
-        newElementForSeen.id = 'seenLabel'
-        newElementForSeen.textContent = 'seen'
-        newMessage.append(newElementForSeen)
-    } 
-    if (messageFile) {
-        const newMessageFile = messageFile[messageFile.length - 1]
-        const newElementFileForSeen = document.createElement('label')
-        newElementFileForSeen.id = 'seenLabel'
-        newElementFileForSeen.textContent = 'seen'
-        newMessageFile.append(newElementFileForSeen)
+    if (convoOpen == true) {
+        if (newRecieverId == loginUserId && newLoginUserId == recieverId) {
+            console.log('gagana lang dapat to kapag ikaw ung pinagsendan ng message')
+            const message = document.querySelectorAll('#seenLabel')
+            console.log('eto ung element na may seenLabel ', message)
+            for (let index = 0; index < message.length; index++) {
+                message[index].innerHTML = 'seen'
+            }
+        }
     }
-
-
 })
 
 
