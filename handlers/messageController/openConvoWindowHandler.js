@@ -12,7 +12,7 @@ export default async function openConvoWindow(recieverId, loginUserId, loginUser
     if (findConvoData.ok) {
         console.log(findConvoData.data)
         displayAllMessages(recieverId, loginUserId)
-        socket.emit('seenThisMessage', { recieverId })
+        socket.emit('seenThisMessage', { recieverId, loginUserId })
         document.getElementById('conversationBody').style.display = 'flex'
 
         const ifRecieverIsYou = findConvoData.data[0].recieverUsername == loginUsername ? (
