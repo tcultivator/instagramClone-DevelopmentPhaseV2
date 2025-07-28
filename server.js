@@ -78,10 +78,12 @@ io.on('connection', (socket) => {
         })
     })
 
-    socket.on('seenThisMessage', ({ recieverId }) => {
+   socket.on('seenThisMessage', ({ recieverId, loginUserId }) => {
         console.log('eto ung sa seen galing sa emit')
         io.to(recieverId).emit('userSeenThisMessage', {
-            testMessage: 'hahahahahaha'
+            testMessage: 'hahahahahaha',
+            newRecieverId: recieverId,
+            newLoginUserId: loginUserId
         })
     })
 });
