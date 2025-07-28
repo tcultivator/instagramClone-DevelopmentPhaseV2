@@ -43,7 +43,7 @@ db.connect((err) => {
 
 io.on('connection', (socket) => {
     const parsedCookies = require('cookie').parse(socket.handshake.headers.cookie);
-    const verifiedToken = jwt.verify(parsedCookies.token, process.env.JWT_TOKEN_SECRET_KEY)
+    const verifiedToken = jwt.verify(parsedCookies.token, secret)
     // const userId = socket.handshake.query.userId;
     console.log(`user with a user id of ${verifiedToken.userID} is connected`);
     const USERID = String(verifiedToken.userID);
@@ -75,6 +75,13 @@ io.on('connection', (socket) => {
             senderImage: loginProfileimage,
             senderMessage: message,
             senderUsername: loginUsername
+        })
+    })
+
+    socket.on('seenThisMessage', ({ recieverId }) => {
+        console.log('eto ung sa seen galing sa emit')
+        io.to(recieverId).emit('userSeenThisMessage', {
+            testMessage: 'hahahahahaha'
         })
     })
 });
@@ -897,14 +904,24 @@ app.post('/sendNewMessage', (req, res) => {
 app.post('/getAllMessages', (req, res) => {
     const recieverId = req.body.recieverId;
     const loginUserId = req.body.loginUserId;
-    const query = 'SELECT * FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?)'
-    db.query(query, [loginUserId, recieverId, loginUserId, recieverId], (err, result) => {
-        if (!result.length) {
-            res.status(400).json({ message: 'No conversation Yet' })
+    const query1 = 'UPDATE messages SET seen = ? WHERE senderId = ? && recieverId = ?'
+    db.query(query1, [true, recieverId, loginUserId], (err, result) => {
+        if (err) {
+            console.log('eto ung sa q1')
+            res.status(400).json({ message: 'error updating seen to this messages' })
         } else {
-            res.status(200).json(result)
+            const query2 = 'SELECT * FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?)'
+            db.query(query2, [loginUserId, recieverId, loginUserId, recieverId], (err, result) => {
+                if (!result.length) {
+                    console.log('eto ung sa q2')
+                    res.status(400).json({ message: 'No conversation Yet' })
+                } else {
+                    res.status(200).json(result)
+                }
+            })
         }
     })
+
 })
 
 
