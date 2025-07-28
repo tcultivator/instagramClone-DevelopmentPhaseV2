@@ -2215,7 +2215,11 @@ body button {
     align-items: start;
     gap: 5px;
     justify-content: end;
+    padding-bottom: 10px;
+    position: relative;
 }
+
+
 
 
 #informationAndMessagesRight #senderUserImageRight {
@@ -2232,12 +2236,21 @@ body button {
     color: white;
     max-width: 50%;
     word-wrap: break-word;
+    position: relative;
+}
+#seenLabel{
+    position: absolute;
+    font-size: 10px;
+    bottom: -10px;
+    left: 0;
+    color: black;
+    
 }
 
 #informationAndMessagesRight #textMessagesRightImg {
     padding: 0;
     max-width: 50%;
-
+    position: relative;
 }
 
 #sendfileMessage {
