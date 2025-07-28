@@ -287,6 +287,7 @@ const preview = document.getElementById('preview')
 
 fileUploaded.addEventListener('change', () => {
     preview.innerHTML = '';
+    document.getElementById('uploadNewFileForPost').style.display = 'none'
     const file = fileUploaded.files[0]
     console.log(file.type)
     if (file.type == 'video/mp4') {
