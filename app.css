@@ -2245,10 +2245,10 @@ body button {
 }
 #seenLabel{
     position: absolute;
-    font-size: 10px;
+    font-size: 9px;
     bottom: -10px;
     left: 0;
-    color: black;
+    color: rgb(97, 97, 97);
     
 }
 
