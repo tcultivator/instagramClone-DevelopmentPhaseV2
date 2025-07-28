@@ -441,8 +441,7 @@ document.addEventListener('click', async (e) => {
     if (e.target.matches('#userThatPost') || e.target.matches('#userThatPostImage') || e.target.matches('#userThatPostLabel')) {
         visitProfile(loginUserId, e.target.dataset.userid)
     } else if (e.target.matches('#followersContent') || e.target.matches('#followersUserProfile') || e.target.matches('#followersInfo')) {
-        const elementID = document.querySelector('#followersContent')
-        visitProfile(loginUserId, elementID.dataset.userid)
+        visitProfile(loginUserId, e.target.dataset.userid)
     }
 });
 
