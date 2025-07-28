@@ -888,8 +888,8 @@ app.post('/sendNewMessage', (req, res) => {
             res.status(400).json({ message: 'no data found' })
         } else {
             const recieverImage = result[0].profileImage
-            const query2 = 'INSERT INTO messages (senderId,senderImage,senderUsername,recieverId,recieverImage,message) VALUES (?,?,?,?,?,?)'
-            db.query(query2, [loginUserId, loginProfileimage, senderUsername, recieverId, recieverImage, message], (err, result) => {
+            const query2 = 'INSERT INTO messages (senderId,senderImage,senderUsername,recieverId,recieverImage,message,seen) VALUES (?,?,?,?,?,?,?)'
+            db.query(query2, [loginUserId, loginProfileimage, senderUsername, recieverId, recieverImage, message,false], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting message' })
                 } else {
