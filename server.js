@@ -957,8 +957,8 @@ app.post('/sendThisFileMessage', upload.single('image'), (req, res) => {
                 if (err) {
                     res.status(400).json({ message: 'error sending file message' })
                 } else {
-                    const query2 = 'INSERT INTO messages (senderId,senderImage,senderUsername,recieverId,recieverImage,message) VALUES (?,?,?,?,?,?)'
-                    db.query(query2, [loginUserId, loginProfileimage, loginUsername, recieverId, recieverImage, fileMessageUrl], (err, result) => {
+                    const query2 = 'INSERT INTO messages (senderId,senderImage,senderUsername,recieverId,recieverImage,message,seen) VALUES (?,?,?,?,?,?,?)'
+                    db.query(query2, [loginUserId, loginProfileimage, loginUsername, recieverId, recieverImage, fileMessageUrl,false], (err, result) => {
                         if (err) {
                             res.status(400).json({ message: 'cannot inserting your message!' })
                         } else {
