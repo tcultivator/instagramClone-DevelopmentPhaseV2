@@ -11,7 +11,7 @@ export default async function displayAllStoryViewer() {
         console.log(getAllStoryViewer.data)
         getAllStoryViewer.data.forEach(element => {
             let reactionsIcon = '';
-            if (element.reactions != '') {
+            if (element.reactions != null) {
                 const parseReactionIcon = JSON.parse(element.reactions)
                 reactionsIcon = parseReactionIcon.join(' ')
 
