@@ -85,6 +85,7 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
                 }, 3000);
             } else {
                 errorNotif.style.display = 'flex'
+                document.getElementById('serverLoadingBody').style.display = 'none'
                 errormessage.textContent = register.data.message
                 email.style.boxShadow = '0px 0px 4px #E63946'
                 timeoutInterval = setTimeout(() => {
