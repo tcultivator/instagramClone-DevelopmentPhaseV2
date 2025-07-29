@@ -54,6 +54,7 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
                 confirmpassword.style.boxShadow = "none"
             }, 4000);
         } else {
+            document.getElementById('serverLoadingBody').style.display = 'flex'
             const username = email.value.split('@')[0];
             extractedUsername = email.value.split('@')[0];
             console.log(username)
@@ -64,6 +65,7 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
             if (register.ok) {
                 successNotif.style.display = 'flex'
                 document.getElementById('loading').style.display = 'flex'
+                document.getElementById('serverLoadingBody').style.display = 'none'
                 successmessage.textContent = register.data.message
                 timeoutInterval = setTimeout(() => {
                     successNotif.style.display = 'none'
