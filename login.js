@@ -23,6 +23,7 @@ const successmessage = document.getElementById('successmessage')
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
     e.preventDefault()
+    document.getElementById('serverLoadingBody').style.display = 'flex'
     console.log(username.value)
     const loginReq = await apiReq('/loginReq', { username: username.value, password: password.value })
     if (loginReq.ok) {
@@ -30,6 +31,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         successNotif.style.display = 'flex'
         successmessage.textContent = loginReq.data.message
         document.getElementById('loadingBody').style = 'display:flex'
+        document.getElementById('serverLoadingBody').style.display = 'none'
         setTimeout(() => {
             window.location.replace('app.html')
         }, 1500);
