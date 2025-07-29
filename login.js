@@ -38,6 +38,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     } else {
         console.log(loginReq.data.message)
         errorNotif.style.display = 'flex'
+        document.getElementById('serverLoadingBody').style.display = 'none'
         errormessage.textContent = loginReq.data.message
         timeoutInterval = setTimeout(() => {
             errorNotif.style.display = 'none'
