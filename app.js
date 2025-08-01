@@ -1071,3 +1071,16 @@ document.addEventListener('click', (e) => {
     }
 
 })
+
+
+
+socket.on('sendRealtimeNotifFromServer', ({ recieverId }) => {
+    console.log('narecieve ko ung socket')
+    if (recieverId == loginUserId) {
+        console.log('eto ung sa loob ng socket kapag ako ung reciever')
+        console.log(recieverId)
+        console.log(loginUserId)
+        getUnreadNotif();
+        displayNotifications();
+    }
+})
