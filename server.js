@@ -978,6 +978,62 @@ function optimizeFile(fileMessageUrl) {
 }
 
 
+app.post('/sendNotif', (req, res) => {
+    const recieverId = req.body.recieverId;
+    const senderId = req.body.senderId;
+    const senderUsername = req.body.senderUsername;
+    const senderImage = req.body.senderImage;
+    const notifMessage = req.body.notifMessage;
+
+    const query = 'INSERT INTO notifications (recieverId,senderId,senderUsername,senderImage,notifMessage,isRead) VALUES (?,?,?,?,?,?)'
+    db.query(query, [recieverId, senderId, senderUsername, senderImage, notifMessage, false], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error sending notifications' })
+        } else {
+            res.status(200).json({ message: 'success sending notifications' })
+        }
+    })
+})
+
+
+app.post('/displayAllNotifications', authenticate, (req, res) => {
+    const userId = req.userId
+    const query = 'SELECT * FROM notifications WHERE recieverId = ?'
+    db.query(query, [userId], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error getting notification data' })
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
+
+app.post('/markReadThisNotif', (req, res) => {
+    const notifId = req.body.notifId;
+    const query = 'UPDATE notifications SET status = ? WHERE id = ?'
+    db.query(query, [true, notifId], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error mark read this notification' })
+        } else {
+            res.status(200).json({ message: 'succes mark read this notification' })
+        }
+    })
+})
+
+
+app.post('/getAllUnreadNotif', authenticate, (req, res) => {
+    const userId = req.userId
+    const query = 'SELECT * FROM notifications WHERE recieverId = ? && status = ?'
+    db.query(query, [userId, false], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error geting notificaiton count' })
+        } else {
+            res.status(200).json({ unreadNotifCount: result.length })
+        }
+    })
+})
+
+
 
 http.listen(port, () => {
     console.log('server is running ing port ', port)
