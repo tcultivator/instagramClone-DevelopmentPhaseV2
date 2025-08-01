@@ -424,6 +424,7 @@ body button {
     height: 30px;
     border-radius: 50%;
     cursor: pointer;
+    border: 2px solid rgb(0, 0, 0);
 }
 
 #userProfilePost label {
@@ -544,9 +545,21 @@ body button {
     cursor: pointer;
 }
 
+#footerNav sup {
+    font-size: 10px;
+    position: absolute;
+
+}
+
 
 #sidebar {
     display: none;
+}
+
+#sidebar sup {
+    font-size: 10px;
+    position: absolute;
+
 }
 
 
@@ -557,7 +570,7 @@ body button {
     width: 100%;
     height: calc(100% - 7%);
     background-color: rgb(255, 255, 255);
-    z-index: 1;
+    z-index: 2;
     color: rgb(36, 36, 36);
 
 }
@@ -868,7 +881,7 @@ body button {
     width: 100%;
     height: calc(100% - 7%);
     background-color: rgb(255, 255, 255);
-    z-index: 1;
+    z-index: 2;
     color: rgb(36, 36, 36);
 }
 
@@ -1049,7 +1062,7 @@ body button {
     cursor: pointer;
 }
 
-#uploadNewFileForPost{
+#uploadNewFileForPost {
     color: rgba(255, 255, 255, 0.397);
     font-size: 100px;
 }
@@ -1367,6 +1380,7 @@ body button {
     height: 30px;
     border-radius: 50%;
     border: 3px solid rgb(36, 36, 36);
+    cursor: pointer;
 }
 
 #commentDetails {
@@ -1953,7 +1967,7 @@ body button {
     justify-content: space-between;
     padding: 10px;
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.055);
+    background-color: #eaeaea;
 }
 
 #resultsDetails {
@@ -1975,13 +1989,13 @@ body button {
 }
 
 #resultsControl button {
-    padding: 5px;
+    padding: 3px 5px;
     border-radius: 5px;
     color: rgb(36, 36, 36);
     border: 2px solid rgb(36, 36, 36);
     background-color: transparent;
-    font-size: 12px;
-    width: 80px;
+    font-size: 10px;
+    width: 60px;
 }
 
 
@@ -2099,9 +2113,9 @@ body button {
     display: flex;
     align-items: center;
     gap: 5px;
-    background-color: rgb(221, 221, 221);
+    background-color: #eaeaea;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
 }
 
@@ -2195,7 +2209,7 @@ body button {
     aspect-ratio: 1/1;
     width: 24px;
     border-radius: 50%;
-
+    cursor: pointer;
 }
 
 #textMessagesLeft {
@@ -2231,7 +2245,7 @@ body button {
     aspect-ratio: 1/1;
     width: 24px;
     border-radius: 50%;
-
+    cursor: pointer;
 }
 
 #textMessagesRight {
@@ -2243,13 +2257,14 @@ body button {
     word-wrap: break-word;
     position: relative;
 }
-#seenLabel{
+
+#seenLabel {
     position: absolute;
     font-size: 9px;
     bottom: -10px;
     left: 0;
     color: rgb(97, 97, 97);
-    
+
 }
 
 #informationAndMessagesRight #textMessagesRightImg {
@@ -2423,6 +2438,81 @@ body button {
 
 
 
+#notificationBody {
+    position: absolute;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: calc(100% - 7%);
+}
+
+#notificationHeader {
+    border-bottom: 1px solid #363636;
+    padding: 5px;
+    text-align: center;
+}
+
+#notificationHeader button {
+    position: absolute;
+    left: 3px;
+    background-color: transparent;
+    border: none;
+}
+
+#notificationContentBody {
+    padding: 10px;
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    max-height: calc(100% - 8%);
+    overflow: auto;
+}
+
+#notifContentDetails {
+    display: flex;
+    align-items: center;
+
+
+    padding: 10px;
+    border-radius: 5px;
+    gap: 5px;
+    position: relative;
+}
+
+#notifContentDetails img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+#notifDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+#notifDetails #notificationContentLabel {
+    font-size: 12px;
+}
+
+#notifContentDetails #notificationMenu {
+    position: absolute;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+}
+
+
+#markReadThisNotif {
+    position: absolute;
+    right: 10%;
+    border-radius: 5px;
+    padding: 3px 5px;
+    border: 2px solid #363636;
+    background-color: white;
+    font-size: 12px;
+}
 
 
 
@@ -2562,7 +2652,7 @@ body button {
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        border: 2px solid rgb(102, 102, 102);
+        border: 2px solid rgb(0, 0, 0);
     }
 
     #storyBody {
@@ -3815,6 +3905,96 @@ body button {
 
 
 
+
+
+
+
+
+
+
+    #notificationBody {
+        position: absolute;
+        width: calc(100% - 20.1%);
+        background-color: rgb(255, 255, 255);
+        height: 100%;
+        right: 0;
+    }
+
+    #notificationHeader {
+        border-bottom: 1px solid #363636;
+        padding: 5px;
+        text-align: center;
+    }
+
+    #notificationHeader button {
+        position: absolute;
+        left: 3px;
+        background-color: transparent;
+        border: none;
+    }
+
+    #notificationContentBody {
+        padding: 10px;
+        gap: 6px;
+        display: flex;
+        flex-direction: column;
+        background-color: #ffffff;
+        max-height: calc(100% - 8%);
+        overflow: auto;
+    }
+
+    #notifContentDetails {
+        display: flex;
+        align-items: center;
+
+
+        padding: 10px;
+        border-radius: 5px;
+        gap: 5px;
+        position: relative;
+    }
+
+    #notifContentDetails img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+
+    #notifDetails {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #notifDetails #notificationContentLabel {
+        font-size: 12px;
+    }
+
+    #notifContentDetails #notificationMenu {
+        position: absolute;
+        right: 10px;
+        background-color: transparent;
+        border: none;
+        font-size: 15px;
+    }
+
+
+    #markReadThisNotif {
+        position: absolute;
+        right: 10%;
+        border-radius: 5px;
+        padding: 3px 5px;
+        border: 2px solid #363636;
+        background-color: white;
+        font-size: 12px;
+    }
+
+
+
+
+
+
+
 }
 
 
@@ -3913,7 +4093,7 @@ body button {
 }
 
 
-emoji-picker{
+emoji-picker {
     position: absolute;
     bottom: 60px;
     right: 0;
