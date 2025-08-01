@@ -48,7 +48,7 @@
         <button id="home"><i class="fa-solid fa-house"></i></button>
         <button id="search"><i class="fa-solid fa-magnifying-glass"></i></button>
         <button id="create"><i class="fa-regular fa-square-plus"></i></button>
-        <button id="notif"><i class="fa-regular fa-heart"></i></button>
+        <button id="notif"><i class="fa-regular fa-heart"></i><sup id="unreadNotifCount">0</sup></button>
         <button id="profile"><i class="fa-regular fa-circle-user"></i></button>
     </div>
     <div id="sidebar">
@@ -60,7 +60,7 @@
             <button id="messageButtonHeaderS"><i class="fab fa-facebook-messenger"></i> Message</button>
             <button id="searchS"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
             <button id="createS"><i class="fa-regular fa-square-plus"></i> Create</button>
-            <button id="notifS"><i class="fa-regular fa-heart"></i> Notification</button>
+            <button id="notifS"><i class="fa-regular fa-heart"></i> Notification<sup id="unreadNotifSCount">0</sup></button>
             <button id="profileS"><i class="fa-regular fa-circle-user"></i> Profile</button>
         </div>
 
@@ -470,6 +470,20 @@
         </div>
 
     </div>
+
+    <div id="notificationBody" style="display: none;">
+        <div id="notificationHeader">
+            <button id="closeNotification"><i class="fa-solid fa-chevron-left"></i></button>
+            <label for="">Notification</label>
+        </div>
+        <div id="notificationContentBody">
+
+
+
+        </div>
+
+    </div>
+
 
 
 
