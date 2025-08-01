@@ -86,6 +86,9 @@ io.on('connection', (socket) => {
             newLoginUserId: loginUserId
         })
     })
+     socket.on('sendRealTimeNotification', ({ recieverId }) => {
+        io.to(recieverId).emit('sendRealtimeNotifFromServer', { recieverId })
+    })
 });
 
 
