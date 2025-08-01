@@ -1,7 +1,7 @@
 import { apiReq } from '../../utils/fetchReq.js';
+import { sendNotif } from '../notificationController/sendNotifcationHandler.js';
 
-
-export default async function followBtnFunction(selectedHtmlElement) {
+export default async function followBtnFunction(selectedHtmlElement, loginUserId, loginUsername, loginProfileimage) {
     if (selectedHtmlElement.textContent == 'unfollow') {
         console.log('na click ung unfollow')
         const followUserId = selectedHtmlElement.dataset.userid
@@ -9,7 +9,7 @@ export default async function followBtnFunction(selectedHtmlElement) {
         console.log('eto ung userid ng gusto mo i unfollow ', followUserId)
         const follow = await apiReq('/unfollow', { followUserId: followUserId })
         if (follow.ok) {
-
+            sendNotif(followUserId, loginUserId, loginUsername, loginProfileimage, follow.data.message)
             // this is the ui in user post
             const allPost = document.querySelectorAll(`#followBTN`)
             console.log(allPost)
@@ -48,7 +48,7 @@ export default async function followBtnFunction(selectedHtmlElement) {
         console.log('eto ung userid ng gusto mo i follow ', followUserId)
         const follow = await apiReq('/follow', { followUserId: followUserId })
         if (follow.ok) {
-
+            sendNotif(followUserId, loginUserId, loginUsername, loginProfileimage, follow.data.message)
             // this is the ui in user post
             const allPost = document.querySelectorAll(`#followBTN`)
             console.log(allPost)
