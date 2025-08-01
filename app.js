@@ -11,9 +11,17 @@ import { createPostNav, messageNav, profileNav, searchNav } from './UI/index.js'
 // message Controller
 import { sendFileAsMessage, openConvoWindow, openMessageWindow, sendThisMessage } from './handlers/messageController/index.js'
 // profile Controller
-import {followersHandler,followingHandler,visitProfile,viewProfile} from './handlers/profileController/index.js'
+import { followersHandler, followingHandler, visitProfile, viewProfile } from './handlers/profileController/index.js'
 // helper
 import { verifyIfAlreadyfollow, verifyIfAlreadyLike } from './helper/index.js'
+//notification controller
+import { displayNotifications } from './handlers/notificationController/displayNotificationHanlder.js';
+import { markReadThisNotif } from './handlers/notificationController/markReadNotificationHandler.js';
+import { getUnreadNotif } from './handlers/notificationController/getUnreadNotifCount.js';
+
+
+
+
 
 document.getElementById('loadingBody').style = 'display:flex'
 
@@ -144,6 +152,7 @@ socket.on('connect', () => {
 })();
 // function to display all stories
 getAllStories(loginProfileimage);
+getUnreadNotif();
 
 let selectedStoryId;
 document.addEventListener('click', (e) => {
@@ -207,6 +216,8 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
             case 'notif':
                 console.log('this is notif')
                 document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('notificationBody').style.display = 'block'
+                displayNotifications()
                 break;
             case 'profile':
                 profileNav()
@@ -244,6 +255,8 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
             case 'notifS':
                 console.log('this is notif')
                 document.getElementById('viewPostBody').style.display = 'none'
+                document.getElementById('notificationBody').style.display = 'block'
+                displayNotifications()
                 break;
             case 'profileS':
                 console.log('this is profile')
@@ -285,9 +298,10 @@ document.getElementById('uploadNewFileForPost').addEventListener('click', () => 
 const fileUploaded = document.getElementById('fileUp')
 const preview = document.getElementById('preview')
 
+
 fileUploaded.addEventListener('change', () => {
-    preview.innerHTML = '';
     document.getElementById('uploadNewFileForPost').style.display = 'none'
+    preview.innerHTML = '';
     const file = fileUploaded.files[0]
     console.log(file.type)
     if (file.type == 'video/mp4') {
@@ -388,7 +402,6 @@ document.getElementById('editProfilePic').addEventListener('click', () => {
     console.log('naclick ung profile')
     document.getElementById('updateProfilePic').style.display = 'flex'
     profilePicUpload.click()
-
 })
 
 document.getElementById('closeEditProfileInfo').addEventListener('click', () => {
@@ -448,6 +461,11 @@ document.addEventListener('click', async (e) => {
         visitProfile(loginUserId, e.target.dataset.userid)
     } else if (e.target.matches('#followersContent') || e.target.matches('#followersUserProfile') || e.target.matches('#followersInfo')) {
         visitProfile(loginUserId, e.target.dataset.userid)
+        console.log('eto ung id kapag na select na ', e.target.dataset.userid)
+    } else if (e.target.matches('#visitProfileFromComments')) {
+        visitProfile(loginUserId, e.target.dataset.userid)
+    } else if (e.target.matches('#senderUserImageRight') || e.target.matches('#senderUserImageLeft')) {
+        visitProfile(loginUserId, e.target.dataset.userid)
     }
 });
 
@@ -492,7 +510,7 @@ document.getElementById('closepreviewofImageInPost').addEventListener('click', (
 
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#likethisPost')) {
-        likeThisPost(e.target, loginUserId, socket)
+        likeThisPost(e.target, loginUserId, socket, loginUsername, loginProfileimage)
     }
 })
 
@@ -582,7 +600,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#followBTN') || e.target.matches('#unfollowBtn') || e.target.matches('#visitprofileFollow') || e.target.matches('#followBtnInSearch')) {
         console.log(e.target)
-        followBtnFunction(e.target)
+        followBtnFunction(e.target, loginUserId, loginUsername, loginProfileimage)
     }
 })
 
@@ -921,8 +939,13 @@ socket.on('userSeenThisMessage', ({ testMessage, newRecieverId, newLoginUserId }
             for (let index = 0; index < message.length; index++) {
                 message[index].innerHTML = 'seen'
             }
+
         }
+
     }
+
+
+
 })
 
 
@@ -1032,3 +1055,19 @@ document.querySelector('emoji-picker').addEventListener('emoji-click', e => {
     sendNewMessageInput.value += e.detail.unicode
     sendButtonToggle()
 });
+
+
+
+
+document.getElementById('closeNotification').addEventListener('click', () => {
+    document.getElementById('notificationBody').style.display = 'none'
+})
+
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#markReadThisNotif')) {
+        console.log('eto kapag na click mo ung mark read')
+        markReadThisNotif(e.target.dataset.id)
+    }
+
+})
