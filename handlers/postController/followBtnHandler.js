@@ -10,6 +10,7 @@ export default async function followBtnFunction(selectedHtmlElement, loginUserId
         const follow = await apiReq('/unfollow', { followUserId: followUserId })
         if (follow.ok) {
             sendNotif(followUserId, loginUserId, loginUsername, loginProfileimage, follow.data.message)
+            socket.emit('sendRealTimeNotification', { recieverId: followUserId })
             // this is the ui in user post
             const allPost = document.querySelectorAll(`#followBTN`)
             console.log(allPost)
@@ -49,6 +50,7 @@ export default async function followBtnFunction(selectedHtmlElement, loginUserId
         const follow = await apiReq('/follow', { followUserId: followUserId })
         if (follow.ok) {
             sendNotif(followUserId, loginUserId, loginUsername, loginProfileimage, follow.data.message)
+            socket.emit('sendRealTimeNotification', { recieverId: followUserId })
             // this is the ui in user post
             const allPost = document.querySelectorAll(`#followBTN`)
             console.log(allPost)
