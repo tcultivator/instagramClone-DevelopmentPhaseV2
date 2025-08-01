@@ -1,7 +1,7 @@
 import { apiReq } from '../../utils/fetchReq.js';
 import { sendNotif } from '../notificationController/sendNotifcationHandler.js';
 
-export default async function followBtnFunction(selectedHtmlElement, loginUserId, loginUsername, loginProfileimage) {
+export default async function followBtnFunction(selectedHtmlElement, loginUserId, loginUsername, loginProfileimage,socket) {
     if (selectedHtmlElement.textContent == 'unfollow') {
         console.log('na click ung unfollow')
         const followUserId = selectedHtmlElement.dataset.userid
