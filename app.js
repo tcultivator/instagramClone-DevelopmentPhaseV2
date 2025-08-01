@@ -600,7 +600,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#followBTN') || e.target.matches('#unfollowBtn') || e.target.matches('#visitprofileFollow') || e.target.matches('#followBtnInSearch')) {
         console.log(e.target)
-        followBtnFunction(e.target, loginUserId, loginUsername, loginProfileimage)
+        followBtnFunction(e.target, loginUserId, loginUsername, loginProfileimage,socket)
     }
 })
 
