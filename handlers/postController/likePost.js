@@ -47,6 +47,7 @@ export default async function likeThisPost(targetElement, loginUserId, socket, l
             console.log(likeThisPost)
             socket.emit('userLikeThisPost', { postId, likeCount })
             sendNotif(userPostId.dataset.userid, loginUserId, loginUsername, loginProfileimage, likeThisPost.data.message)
+            socket.emit('sendRealTimeNotification', { recieverId: userPostId.dataset.userid })
         } else {
 
             console.log('error sa like')
