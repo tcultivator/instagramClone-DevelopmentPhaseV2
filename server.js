@@ -230,7 +230,7 @@ app.post('/likeThisPost', (req, res) => {
                 if (err) {
                     res.status(401).json({ messag: 'error liking' })
                 } else {
-                    res.status(200).json({ message: 'success liking' })
+                    res.status(200).json({ message: 'Like your post' })
                 }
             })
         }
@@ -309,7 +309,7 @@ app.post('/addComment', authenticate, (req, res) => {
                 if (err) {
                     res.status(401).json({ message: 'error kasa comment' })
                 } else {
-                    res.status(200).json({ message: 'succues ka sa comment' })
+                    res.status(200).json({ message: 'Comment to your post' })
                 }
             })
 
@@ -351,7 +351,7 @@ app.post('/follow', authenticate, (req, res) => {
                     const query3 = 'UPDATE accounts SET following = following + 1 WHERE id = ?'
                     db.query(query3, [userIdOfFollower], (err, result) => {
                         if (err) res.status(401).json({ message: 'error ka sa pag follow' })
-                        res.status(200).json({ message: 'success sa fpag follow' })
+                        res.status(200).json({ message: 'Start following you' })
                     })
 
                 }
@@ -378,7 +378,7 @@ app.post('/unfollow', authenticate, (req, res) => {
                     const query3 = 'UPDATE accounts SET following = following - 1 WHERE id = ?'
                     db.query(query3, [userIdOfFollower], (err, result) => {
                         if (err) res.status(401).json({ message: 'error ka sa pag unfollow' })
-                        res.status(200).json({ message: 'success sa fpag unfollow' })
+                        res.status(200).json({ message: 'Unfollow you' })
                     })
 
                 }
@@ -567,7 +567,7 @@ app.post('/sendStoryReactions', (req, res) => {
         if (err) {
             res.status(400).json({ message: 'erro sending reactions' })
         } else {
-            res.status(200).json({ message: 'success send reactions' })
+            res.status(200).json({ message: 'React to your story' })
         }
     })
 })
