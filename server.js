@@ -985,7 +985,7 @@ app.post('/sendNotif', (req, res) => {
     const senderImage = req.body.senderImage;
     const notifMessage = req.body.notifMessage;
 
-    const query = 'INSERT INTO notifications (recieverId,senderId,senderUsername,senderImage,notifMessage,isRead) VALUES (?,?,?,?,?,?)'
+    const query = 'INSERT INTO notifications (recieverId,senderId,senderUsername,senderImage,notifMessage,status) VALUES (?,?,?,?,?,?)'
     db.query(query, [recieverId, senderId, senderUsername, senderImage, notifMessage, false], (err, result) => {
         if (err) {
             res.status(400).json({ message: 'error sending notifications' })
