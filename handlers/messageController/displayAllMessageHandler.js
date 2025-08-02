@@ -1,6 +1,7 @@
 import { apiReq } from '../../utils/fetchReq.js';
 import { scrollToBottom } from '../../app.js'
 import { chatBox } from '../../app.js';
+import { checkIfHasNewMessage } from './index.js'
 
 
 export async function displayAllMessages(recieverId, loginUserId) {
@@ -10,7 +11,7 @@ export async function displayAllMessages(recieverId, loginUserId) {
         loginUserId: loginUserId,
     })
     if (getAllMessages.ok) {
-
+        checkIfHasNewMessage()
         getAllMessages.data.forEach(element => {
             const isMedia = element.message.match(/\.(mp4|webm|ogg|jpg|jpeg|png|gif|webp)$/i);
             if (isMedia) {
@@ -116,4 +117,5 @@ export async function displayAllMessages(recieverId, loginUserId) {
         console.log('walang messages')
         document.getElementById('loadingCircle').style.display = 'none'
     }
+
 }
