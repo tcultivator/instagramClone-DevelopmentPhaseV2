@@ -1049,8 +1049,22 @@ app.post('/deleteNotif', (req, res) => {
 })
 
 
+app.post('/checkIfHasNewMessage', authenticate, (req, res) => {
+    const recieverId = req.userId;
+    const query = 'SELECT * FROM messages WHERE recieverId = ? && seen = ?'
+    db.query(query, [recieverId, false], (err, result) => {
+        if (!result.length) {
+            res.status(400).json({ message: 'no new message found!' })
+        } else {
+            res.status(200).json({ message: 'has new message found!' })
+        }
+    })
+})
+
+
 
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
