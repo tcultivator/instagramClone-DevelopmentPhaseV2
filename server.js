@@ -1036,8 +1036,21 @@ app.post('/getAllUnreadNotif', authenticate, (req, res) => {
     })
 })
 
+app.post('/deleteNotif', (req, res) => {
+    const notifId = req.body.notifId;
+    const query = 'DELETE FROM notifications WHERE id = ?'
+    db.query(query, [notifId], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error deleting notif' })
+        } else {
+            res.status(200).json({ message: 'success deleting notif' })
+        }
+    })
+})
+
 
 
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
