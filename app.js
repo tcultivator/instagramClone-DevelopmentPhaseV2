@@ -874,6 +874,7 @@ document.getElementById('sendNewMessageButton').addEventListener('click', async 
 // ready to transfer code
 socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, senderMessage, senderUsername }) => {
     const isMedia = senderMessage.match(/\.(mp4|webm|ogg|jpg|jpeg|png|gif|webp)$/i);
+    checkIfHasNewMessage()
     if (isMedia) {
         const isImage = senderMessage.match(/\.(jpg|jpeg|png|gif|webp)$/i);
         if (isImage) {
@@ -1112,6 +1113,7 @@ document.addEventListener('click', (e) => {
         }
     }
 })
+
 
 
 
