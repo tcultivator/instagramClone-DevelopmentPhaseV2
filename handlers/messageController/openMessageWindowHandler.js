@@ -44,6 +44,29 @@ export default async function openMessageWindow(loginUserId) {
 
 
 
+            const isThisnewMessage = newMessage.seen == false ? (`
+                    <div id="convoContent" data-id="${element.senderId}" style="background-color: rgba(128, 128, 128, 1);" >
+                        <img data-id="${element.senderId}" src="${element.senderImage}" alt="">
+                        <div>
+                            <label data-id="${element.senderId}">${element.senderUsername}</label>
+                            ${senderIdIsMe}
+                        </div>
+                    </div>
+                    
+                    `) :
+                (`
+                    <div id="convoContent" data-id="${element.senderId}" style="background-color: #eaeaea;" >
+                        <img data-id="${element.senderId}" src="${element.senderImage}" alt="">
+                        <div>
+                            <label data-id="${element.senderId}">${element.senderUsername}</label>
+                            ${senderIdIsMe}
+                        </div>
+                    </div>
+                    
+                    `)
+
+
+
             const isMeSender = element.senderId == loginUserId ? (`
             <div id="convoContent" data-id="${element.recieverId}">
                 <img data-id="${element.recieverId}" src="${element.recieverImage}" alt="">
@@ -54,14 +77,8 @@ export default async function openMessageWindow(loginUserId) {
             </div>
                 `) :
                 (`
-            <div id="convoContent" data-id="${element.senderId}">
-                <img data-id="${element.senderId}" src="${element.senderImage}" alt="">
-                <div>
-                    <label data-id="${element.senderId}">${element.senderUsername}</label>
-                    ${senderIdIsMe}
-                </div>
-            </div>
-                
+            
+                ${isThisnewMessage}
                 
                 `)
 
@@ -73,4 +90,5 @@ export default async function openMessageWindow(loginUserId) {
         console.log('error sa frontend message button')
         document.getElementById('loadingCircle').style.display = 'none'
     }
+
 }
