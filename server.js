@@ -933,7 +933,7 @@ app.post('/getAllMessages', (req, res) => {
 app.post('/getNewMessageToDisplayAtHistory', (req, res) => {
     const senderId = req.body.senderId;
     const recieverId = req.body.recieverId;
-    const query = 'SELECT senderId,message,senderUsername FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?) ORDER BY id DESC'
+    const query = 'SELECT senderId,message,senderUsername,seen FROM messages WHERE (senderId = ? && recieverId = ?) OR (recieverId = ? && senderId = ?) ORDER BY id DESC'
     db.query(query, [senderId, recieverId, senderId, recieverId], (err, result) => {
         if (err) {
             res.status(400).json({ message: 'error ka gago' })
@@ -1066,5 +1066,6 @@ app.post('/checkIfHasNewMessage', authenticate, (req, res) => {
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
