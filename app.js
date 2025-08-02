@@ -18,7 +18,7 @@ import { verifyIfAlreadyfollow, verifyIfAlreadyLike } from './helper/index.js'
 import { displayNotifications } from './handlers/notificationController/displayNotificationHanlder.js';
 import { markReadThisNotif } from './handlers/notificationController/markReadNotificationHandler.js';
 import { getUnreadNotif } from './handlers/notificationController/getUnreadNotifCount.js';
-
+import { deleteNotif } from './handlers/notificationController/deleteNotifHandler.js';
 
 
 
@@ -1084,3 +1084,15 @@ socket.on('sendRealtimeNotifFromServer', ({ recieverId }) => {
         displayNotifications();
     }
 })
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#notificationMenu')) {
+        console.log('eto ung id ng notification ', e.target.dataset.id)
+        if (confirm('Delete Notification?')) {
+            deleteNotif(e.target.dataset.id)
+        } else {
+            console.log('na cancel ung delete')
+        }
+    }
+})
+
