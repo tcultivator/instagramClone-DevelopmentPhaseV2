@@ -9,7 +9,7 @@ import { viewStory, sendStoryReaction, getAllStories, displayAllStoryViewer } fr
 // navigation datafile
 import { createPostNav, messageNav, profileNav, searchNav } from './UI/index.js';
 // message Controller
-import { sendFileAsMessage, openConvoWindow, openMessageWindow, sendThisMessage } from './handlers/messageController/index.js'
+import { sendFileAsMessage, openConvoWindow, openMessageWindow, sendThisMessage, checkIfHasNewMessage } from './handlers/messageController/index.js'
 // profile Controller
 import { followersHandler, followingHandler, visitProfile, viewProfile } from './handlers/profileController/index.js'
 // helper
@@ -150,9 +150,17 @@ socket.on('connect', () => {
     }
     document.getElementById('loadingBody').style = 'display:none'
 })();
+
+
+
+// this is automatic run functions, meaning once the page reload it will run this functions
 // function to display all stories
 getAllStories(loginProfileimage);
 getUnreadNotif();
+checkIfHasNewMessage();
+
+
+
 
 let selectedStoryId;
 document.addEventListener('click', (e) => {
@@ -867,6 +875,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
         const isImage = senderMessage.match(/\.(jpg|jpeg|png|gif|webp)$/i);
         if (isImage) {
             if (recieverId == senderId) {
+                checkIfHasNewMessage()
                 if (convoOpen) {
                     socket.emit('seenThisMessage', { recieverId, loginUserId })
                 }
@@ -886,6 +895,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
             }
         } else {
             if (recieverId == senderId) {
+                checkIfHasNewMessage()
                 if (convoOpen) {
                     socket.emit('seenThisMessage', { recieverId, loginUserId })
                 }
@@ -907,6 +917,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
         }
     } else {
         if (recieverId == senderId) {
+            checkIfHasNewMessage()
             if (convoOpen) {
                 socket.emit('seenThisMessage', { recieverId, loginUserId })
             }
@@ -1095,4 +1106,5 @@ document.addEventListener('click', (e) => {
         }
     }
 })
+
 
