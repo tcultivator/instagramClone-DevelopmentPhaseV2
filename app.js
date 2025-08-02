@@ -834,6 +834,9 @@ document.addEventListener('click', (e) => {
         openConvoWindow(e.target.dataset.id, loginUserId, loginUsername, loginProfileimage, socket)
         recieverId = e.target.dataset.id
         convoOpen = true;
+        const convoContentElement = document.querySelector(`#convoContent[data-id="${recieverId}"]`)
+        console.log('eto ung element na mababago dapat ung bg ', convoContentElement)
+        convoContentElement.style = 'background-color: #eaeaea;'
     }
 })
 
@@ -1106,5 +1109,6 @@ document.addEventListener('click', (e) => {
         }
     }
 })
+
 
 
