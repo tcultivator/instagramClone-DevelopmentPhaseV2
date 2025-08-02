@@ -48,7 +48,7 @@ body button {
     border: none;
     color: rgb(36, 36, 36);
     font-size: 20px;
-
+    position: relative;
 }
 
 
@@ -1010,6 +1010,7 @@ body button {
     height: 100%;
     color: rgb(0, 0, 0);
     display: flex;
+    overflow: hidden;
 }
 
 #createPost form {
@@ -1039,7 +1040,17 @@ body button {
     gap: 5px;
     width: 90%;
     margin: 0 auto 10px auto;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    padding: 0px 20px;
+    box-sizing: border-box;
 }
+
+#createPostControl input {
+    background-color: rgba(255, 255, 255, 0.514);
+}
+
 
 #createPostUploaded {
     display: flex;
@@ -1050,6 +1061,7 @@ body button {
 #createPostUploaded input {
     width: 50%;
     margin: auto;
+
 }
 
 #createPost form #fileUp::-webkit-file-upload-button {
@@ -1065,6 +1077,10 @@ body button {
 #uploadNewFileForPost {
     color: rgba(255, 255, 255, 0.397);
     font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #createPost form button {
@@ -1088,6 +1104,29 @@ body button {
     font-size: 20px;
     cursor: pointer;
     color: white;
+}
+
+#uploadNewFileForPost {
+    color: rgba(255, 255, 255, 0.397);
+    font-size: 100px;
+}
+
+
+#createPost form #preview {
+    width: 100%;
+    margin: auto;
+    height: 100%;
+
+}
+
+#uploadForm h2 {
+    color: #ffffff;
+    font-weight: normal;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 
@@ -2522,7 +2561,24 @@ body button {
 
 
 
+#newMessageIndicator {
+    position: absolute;
+    color: red;
+    font-size: 6px;
+    top: 0;
+    right: 0;
+}
 
+#SnewMessageIndicator {
+    position: absolute;
+    color: red;
+    top: 15%;
+    left: 6%;
+}
+
+#SnewMessageIndicator i {
+    font-size: 6px;
+}
 
 
 
@@ -2588,6 +2644,7 @@ body button {
         cursor: pointer;
         margin: 0 8%;
         font-family: 'Poppins';
+        position: relative;
     }
 
     #sidebar button:hover {
@@ -2888,13 +2945,33 @@ body button {
     }
 
     #createPost form {
-
+        background-color: rgb(255, 255, 255);
         width: 600px;
+    }
+
+    #uploadForm h2 {
+        color: #363636;
+        font-weight: normal;
+
     }
 
     #createPost form #preview {
         width: 100%;
         margin: auto;
+        height: 100%;
+
+    }
+
+    #uploadNewFileForPost {
+        color: rgba(133, 133, 133, 0.842);
+        font-size: 100px;
+        cursor: pointer;
+    }
+
+    #createPost form #caption {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid rgb(36, 36, 36);
     }
 
 
@@ -2954,6 +3031,20 @@ body button {
 
 
 
+
+    #createPostControl {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 40%;
+        margin: 0 auto 10px auto;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0px 20px;
+        box-sizing: border-box;
+    }
 
 
 
