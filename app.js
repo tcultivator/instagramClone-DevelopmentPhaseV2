@@ -895,6 +895,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
             if (fakeElement) {
                 const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
                 labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
+                fakeElement.style = 'background-color: rgba(128, 128, 128, 1);'
             }
         } else {
             if (recieverId == senderId) {
@@ -916,6 +917,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
             if (fakeElement) {
                 const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
                 labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>Sent File</span>`
+                fakeElement.style = 'background-color: rgba(128, 128, 128, 1);'
             }
         }
     } else {
@@ -938,6 +940,7 @@ socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, 
         if (fakeElement) {
             const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
             labelElementOnHistoryMessage.innerHTML = `${senderUsername}: <span>${senderMessage}</span>`
+            fakeElement.style = 'background-color: rgba(128, 128, 128, 1);'
         }
     }
 })
@@ -1109,6 +1112,7 @@ document.addEventListener('click', (e) => {
         }
     }
 })
+
 
 
 
