@@ -2174,10 +2174,13 @@ body button {
 
 #convoContent div label:first-child {
     font-size: 17px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
 }
 
 #convoContent div label:last-child {
     font-size: 12px;
+    color: rgb(78, 78, 78);
 }
 
 
