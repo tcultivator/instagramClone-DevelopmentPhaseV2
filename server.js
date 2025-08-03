@@ -42,12 +42,17 @@ db.connect((err) => {
 
 
 io.on('connection', (socket) => {
-    const parsedCookies = require('cookie').parse(socket.handshake.headers.cookie);
-    const verifiedToken = jwt.verify(parsedCookies.token, process.env.JWT_TOKEN_SECRET_KEY)
-    // const userId = socket.handshake.query.userId;
-    console.log(`user with a user id of ${verifiedToken.userID} is connected`);
-    const USERID = String(verifiedToken.userID);
-    socket.join(USERID)
+   const tokenFromCookies = socket.handshake.headers.cookie;
+    let verifiedToken;
+    if (tokenFromCookies) {
+        const parsedCookies = require('cookie').parse(tokenFromCookies);
+        verifiedToken = jwt.verify(parsedCookies.token, process.env.JWT_TOKEN_SECRET_KEY)
+        // const userId = socket.handshake.query.userId;
+        console.log(`user with a user id of ${verifiedToken.userID} is connected`);
+        const USERID = String(verifiedToken.userID);
+        socket.join(USERID)
+
+    }
 
 
     socket.on('idOfThis', ({ postIdOfyouwantToComment, commentCount }) => {
@@ -1066,6 +1071,7 @@ app.post('/checkIfHasNewMessage', authenticate, (req, res) => {
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
