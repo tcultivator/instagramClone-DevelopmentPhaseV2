@@ -50,7 +50,7 @@ export default async function sendFileAsMessage(selectedFileMessage, loginUserna
 
 
 
-        const sendThisFileMessage = await fetch('http://localhost:8080/sendThisFileMessage', {
+        const sendThisFileMessage = await fetch('https://instagramclone-developmentphasev2.onrender.com/sendThisFileMessage', {
             method: 'POST',
             credentials: 'include',
             body: formData
@@ -72,4 +72,5 @@ export default async function sendFileAsMessage(selectedFileMessage, loginUserna
         console.log('error in request sending message!')
         document.getElementById('loadingCircle').style.display = 'none'
     }
+
 }
