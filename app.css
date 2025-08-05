@@ -2090,17 +2090,18 @@ body button {
 }
 
 #messageHeader {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    padding: 10px 5px;
     border-bottom: 1px solid black;
+    box-sizing: border-box;
 }
 
 #messageHeader button {
-    position: absolute;
+
     left: 5px;
     background-color: transparent;
     color: black;
@@ -2108,31 +2109,45 @@ body button {
 
 }
 
-#messageSearchBody {
-    background-color: white;
-    padding: 10px;
+#messageRequestButtonBody {
+    background-color: rgb(255, 255, 255);
+    padding: 10px 10px 0px 10px;
     display: flex;
     gap: 5px;
     box-sizing: border-box;
-    justify-content: end;
 
 }
 
-#messageSearchBody input {
-    width: 100%;
-    padding: 5px;
+
+
+#messageRequestButtonBody button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #4E73C2;
     border-radius: 5px;
-    border: 2px solid black;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    position: relative;
+    color: white;
 }
 
-#messageSearchBody button {
-    aspect-ratio: 1/1;
-    border: 2px solid black;
-    color: black;
-    font-size: 12px;
-    border-radius: 50%;
-    width: 30px;
-    background-color: transparent;
+
+
+#messageRequestButtonBody button #reqmesIcon {
+    font-size: 25px;
+}
+
+#newMessReqIndicator {
+    position: absolute;
+    background-color: red;
+    font-size: 10px;
+    left: 25px;
+    top: 5px;
+    padding: 1px 5px;
+    border-radius: 5px;
 }
 
 
@@ -2199,7 +2214,7 @@ body button {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    z-index: 1;
+    z-index: 2;
     overflow: hidden;
 }
 
@@ -2570,6 +2585,7 @@ body button {
     font-size: 6px;
     top: 0;
     right: 0;
+
 }
 
 #SnewMessageIndicator {
@@ -2582,6 +2598,95 @@ body button {
 #SnewMessageIndicator i {
     font-size: 6px;
 }
+
+
+
+
+
+
+#messageRequestBody {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1;
+}
+
+#messageRequestHeader {
+    padding: 10px;
+    border-bottom: 1px solid rgb(119, 119, 119);
+    text-align: center;
+    position: relative;
+}
+
+#messageRequestHeader #closeMessageRequest {
+    position: absolute;
+    left: 5px;
+    background-color: transparent;
+    border: none;
+}
+
+#messageRequestContents {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#messageRequestDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #eaeaea;
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+#messageRequestUserInfo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#messageRequestUserInfo #messageRequestProfileImage {
+    aspect-ratio: 1/1;
+    width: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+#messageRequestAcceptBtn {
+    background-color: white;
+    border: 1px solid #363636;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3771,7 +3876,7 @@ body button {
     }
 
     #messageHeader button {
-        position: absolute;
+
         left: 5px;
         background-color: transparent;
         color: black;
@@ -3779,7 +3884,7 @@ body button {
 
     }
 
-    #messageSearchBody {
+    #messageRequestButtonBody {
         background-color: white;
         padding: 10px;
         display: flex;
@@ -3788,14 +3893,9 @@ body button {
 
     }
 
-    #messageSearchBody input {
-        width: 100%;
-        padding: 5px;
-        border-radius: 5px;
-        border: 2px solid black;
-    }
 
-    #messageSearchBody button {
+
+    #messageRequestButtonBody button {
         aspect-ratio: 1/1;
         border: 2px solid black;
         color: black;
@@ -3804,6 +3904,9 @@ body button {
         width: 30px;
         background-color: transparent;
     }
+
+
+
 
 
     #listOfconvoBody {
