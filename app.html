@@ -17,7 +17,7 @@
 
     <div id="header">
         <h1>Instagang</h1>
-        <button id="messageButtonHeader"><i class="fab fa-facebook-messenger"></i><sup id="newMessageIndicator" ><i
+        <button id="messageButtonHeader"><i class="fab fa-facebook-messenger"></i><sup id="newMessageIndicator"><i
                     class="fa-solid fa-circle"></i></sup></button>
     </div>
 
@@ -421,10 +421,13 @@
         <div id="messageHeader">
             <button><i class="fa-solid fa-chevron-left" id="closeMessageBody"></i></button>
             <label>Message</label>
+            <button id="submitMessageSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
 
-        <div id="messageSearchBody">
-            <button id="submitMessageSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <div id="messageRequestButtonBody">
+            <button id="openMessageRequest"><i id="reqmesIcon" class="fa-regular fa-message"></i><sup
+                    id="newMessReqIndicator"></sup> Message
+                Requests</button>
         </div>
         <div id="listOfconvoBody">
 
@@ -485,6 +488,17 @@
 
         </div>
 
+    </div>
+
+
+    <div id="messageRequestBody" style="display: none;">
+        <div id="messageRequestHeader">
+            <button id="closeMessageRequest"><i class="fa-solid fa-chevron-left"></i></button>
+            <label for="">Message Requests</label>
+        </div>
+        <div id="messageRequestContents">
+            
+        </div>
     </div>
 
 
