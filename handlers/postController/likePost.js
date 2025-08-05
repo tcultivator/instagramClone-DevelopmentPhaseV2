@@ -2,6 +2,7 @@ import { apiReq } from "../../utils/fetchReq.js";
 import { sendNotif } from "../notificationController/sendNotifcationHandler.js";
 export default async function likeThisPost(targetElement, loginUserId, socket, loginUsername, loginProfileimage) {
     const likeIcon = targetElement.closest('#postcontent').querySelector('#likethisPost')
+    document.getElementById('clickSound').play();
     if (likeIcon.style.color == 'red') {
         console.log('na like mo nato')
         const likeCountLabel = targetElement.closest('#postcontent').querySelector('#likeCount')
@@ -54,3 +55,4 @@ export default async function likeThisPost(targetElement, loginUserId, socket, l
         }
     }
 }
+
