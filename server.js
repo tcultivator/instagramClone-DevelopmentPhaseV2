@@ -1067,10 +1067,50 @@ app.post('/checkIfHasNewMessage', authenticate, (req, res) => {
 })
 
 
+app.post('/displayAllMessageRequest', authenticate, (req, res) => {
+    const userId = req.userId;
+    const query = 'SELECT * FROM convolist WHERE (senderId = ? OR recieverId = ?) && isFriends = ?'
+    db.query(query, [userId, userId, false], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error in getting message Request' })
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
+
+
+app.post('/acceptMessageRequest', (req, res) => {
+    const messageReqId = req.body.messageReqId;
+    const query = 'UPDATE convolist SET isFriends = ? WHERE id = ?'
+    db.query(query, [true, messageReqId], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error accepting message' })
+        } else {
+            res.status(200).json({ message: 'success accepting message' })
+        }
+    })
+})
+
+
+app.post('/getMessageRequestCounts', authenticate, (req, res) => {
+    const userId = req.userId;
+    const query = 'SELECT * FROM convolist WHERE recieverId = ? && isFriends = ?'
+    db.query(query, [userId, false], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error on getting the count on messageRequest' })
+        } else {
+            res.status(200).json({ resultCount: result.length })
+        }
+    })
+})
+
+
 
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
