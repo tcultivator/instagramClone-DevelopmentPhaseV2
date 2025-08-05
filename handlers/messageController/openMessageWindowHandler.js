@@ -3,6 +3,7 @@ import { displayNewMessageAtHistory } from '../../helper/index.js'
 
 export default async function openMessageWindow(loginUserId) {
     document.getElementById('loadingCircle').style.display = 'flex'
+    document.getElementById('listOfconvoBody').innerHTML = ''
     const displayAllMessageHistory = await apiReq('/displayAllMessageHistory', {
         loginUserId: loginUserId
     })
@@ -143,4 +144,5 @@ export default async function openMessageWindow(loginUserId) {
         console.log('error sa frontend message button')
         document.getElementById('loadingCircle').style.display = 'none'
     }
+
 }
