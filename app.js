@@ -879,6 +879,9 @@ document.getElementById('sendNewMessageButton').addEventListener('click', async 
 // ready to transfer code
 socket.on('displayNewMessageRealtime', ({ newRecieverId, senderId, senderImage, senderMessage, senderUsername }) => {
     const isMedia = senderMessage.match(/\.(mp4|webm|ogg|jpg|jpeg|png|gif|webp)$/i);
+     if (convoOpen == false) {
+        document.getElementById('messageNotif').play();
+    }
     checkIfHasNewMessage()
     if (isMedia) {
         const isImage = senderMessage.match(/\.(jpg|jpeg|png|gif|webp)$/i);
@@ -1104,6 +1107,7 @@ socket.on('sendRealtimeNotifFromServer', ({ recieverId }) => {
         console.log(loginUserId)
         getUnreadNotif();
         displayNotifications();
+        document.getElementById('messageNotif').play();
     }
 })
 
@@ -1140,6 +1144,7 @@ document.addEventListener('click', (e) => {
         acceptMessageRequest(e.target, loginUserId)
     }
 })
+
 
 
 
