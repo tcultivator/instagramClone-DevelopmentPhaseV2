@@ -42,6 +42,7 @@ export default async function sendFileAsMessage(selectedFileMessage, loginUserna
 
 
         scrollToBottom(chatBox)
+        document.getElementById('clickSound').play();
         const fakeElement = document.querySelector(`#convoContent[data-id="${recieverId}"]`)
         if (fakeElement) {
             const labelElementOnHistoryMessage = fakeElement.querySelector('#latestMessageInHistory')
@@ -74,3 +75,4 @@ export default async function sendFileAsMessage(selectedFileMessage, loginUserna
     }
 
 }
+
