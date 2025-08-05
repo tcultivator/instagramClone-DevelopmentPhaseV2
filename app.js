@@ -591,6 +591,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
         console.log('please type something')
     } else {
         document.getElementById('loadingBarInComment').style.display = 'block'
+        document.getElementById('clickSound').play();
         const submitComment = await apiReq('/addComment', { postId: postIdOfyouwantToComment, comment: inputComment.value, username: loginUsername, profileImage: loginProfileimage })
         if (submitComment.ok) {
             viewComments(postIdOfyouwantToComment, loginUsername)
@@ -1139,6 +1140,7 @@ document.addEventListener('click', (e) => {
         acceptMessageRequest(e.target, loginUserId)
     }
 })
+
 
 
 
