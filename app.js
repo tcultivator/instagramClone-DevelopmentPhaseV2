@@ -1107,7 +1107,7 @@ socket.on('sendRealtimeNotifFromServer', ({ recieverId }) => {
         console.log(loginUserId)
         getUnreadNotif();
         displayNotifications();
-        document.getElementById('messageNotif').play();
+        document.getElementById('notifSound').play();
     }
 })
 
@@ -1144,6 +1144,7 @@ document.addEventListener('click', (e) => {
         acceptMessageRequest(e.target, loginUserId)
     }
 })
+
 
 
 
