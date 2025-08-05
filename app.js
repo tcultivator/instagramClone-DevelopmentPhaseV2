@@ -9,7 +9,7 @@ import { viewStory, sendStoryReaction, getAllStories, displayAllStoryViewer } fr
 // navigation datafile
 import { createPostNav, messageNav, profileNav, searchNav } from './UI/index.js';
 // message Controller
-import { sendFileAsMessage, openConvoWindow, openMessageWindow, sendThisMessage, checkIfHasNewMessage } from './handlers/messageController/index.js'
+import { sendFileAsMessage, openConvoWindow, openMessageWindow, sendThisMessage, checkIfHasNewMessage, displayMessageRequest, acceptMessageRequest, getMessageRequestCounts } from './handlers/messageController/index.js'
 // profile Controller
 import { followersHandler, followingHandler, visitProfile, viewProfile } from './handlers/profileController/index.js'
 // helper
@@ -151,13 +151,12 @@ socket.on('connect', () => {
     document.getElementById('loadingBody').style = 'display:none'
 })();
 
-
-
 // this is automatic run functions, meaning once the page reload it will run this functions
 // function to display all stories
 getAllStories(loginProfileimage);
 getUnreadNotif();
 checkIfHasNewMessage();
+
 
 
 
@@ -230,6 +229,7 @@ document.getElementById('footerNav').addEventListener('click', (e) => {
             case 'profile':
                 profileNav()
                 viewProfile(loginUserId)
+
                 break;
 
             default:
@@ -279,6 +279,7 @@ document.getElementById('sidebar').addEventListener('click', (e) => {
                 console.log('this is message')
                 messageNav()
                 convoOpen = false;
+                getMessageRequestCounts()
                 break;
 
             default:
@@ -486,6 +487,7 @@ document.getElementById('visitprofileMessage').addEventListener('click', (e) => 
     const elementID = document.querySelector('#visitprofileName')
     openConvoWindow(elementID.dataset.userid, loginUserId, loginUsername, loginProfileimage, socket)
     console.log(elementID.dataset.userid)
+
 })
 
 
@@ -608,7 +610,7 @@ document.getElementById('submitComment').addEventListener('click', async () => {
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#followBTN') || e.target.matches('#unfollowBtn') || e.target.matches('#visitprofileFollow') || e.target.matches('#followBtnInSearch')) {
         console.log(e.target)
-        followBtnFunction(e.target, loginUserId, loginUsername, loginProfileimage,socket)
+        followBtnFunction(e.target, loginUserId, loginUsername, loginProfileimage, socket)
     }
 })
 
@@ -830,13 +832,14 @@ document.getElementById('closeSearchWindow').addEventListener('click', () => {
 let recieverId;
 let convoOpen = false;
 document.addEventListener('click', (e) => {
-    if (e.target.matches('#messageThisUserInSearch') || e.target.matches('#convoContent') || e.target.matches('#convoContent img')) {
+    if (e.target.matches('#messageThisUserInSearch') || e.target.matches('#convoContent') || e.target.matches('#convoContent img') || e.target.matches('#messageRequestDetails')) {
         openConvoWindow(e.target.dataset.id, loginUserId, loginUsername, loginProfileimage, socket)
         recieverId = e.target.dataset.id
         convoOpen = true;
         const convoContentElement = document.querySelector(`#convoContent[data-id="${recieverId}"]`)
         console.log('eto ung element na mababago dapat ung bg ', convoContentElement)
         convoContentElement.style = 'background-color: #eaeaea;'
+
     }
 })
 
@@ -847,6 +850,7 @@ document.addEventListener('click', (e) => {
 document.getElementById('messageButtonHeader').addEventListener('click', () => {
     openMessageWindow(loginUserId)
     messageNav()
+    getMessageRequestCounts()
 })
 
 
@@ -1091,7 +1095,6 @@ document.addEventListener('click', (e) => {
 })
 
 
-
 socket.on('sendRealtimeNotifFromServer', ({ recieverId }) => {
     console.log('narecieve ko ung socket')
     if (recieverId == loginUserId) {
@@ -1102,6 +1105,7 @@ socket.on('sendRealtimeNotifFromServer', ({ recieverId }) => {
         displayNotifications();
     }
 })
+
 
 document.addEventListener('click', (e) => {
     if (e.target.matches('#notificationMenu')) {
@@ -1115,6 +1119,26 @@ document.addEventListener('click', (e) => {
 })
 
 
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#openMessageRequest')) {
+        console.log('na click mo ung button anto')
+        displayMessageRequest(loginUserId)
+        document.getElementById('messageRequestBody').style.display = 'block'
+    }
+})
+
+document.getElementById('closeMessageRequest').addEventListener('click', () => {
+    document.getElementById('messageRequestBody').style.display = 'none'
+})
+
+
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('#messageRequestAcceptBtn')) {
+        console.log('eto ung accept sa message req')
+        acceptMessageRequest(e.target, loginUserId)
+    }
+})
 
 
 
