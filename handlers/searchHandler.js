@@ -59,6 +59,7 @@ export async function autoSearch(searchValue, loginUserId) {
 
 
 export async function submitSearch(searchValue, loginUserId) {
+    document.getElementById('clickSound').play();
     if (searchValue) {
         const search = await apiReq('/search', {
             searchValue: searchValue
@@ -104,4 +105,5 @@ export async function submitSearch(searchValue, loginUserId) {
         }
     }
 }
+
 
