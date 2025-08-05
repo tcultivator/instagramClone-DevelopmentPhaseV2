@@ -2,6 +2,7 @@ import { apiReq } from '../../utils/fetchReq.js';
 import { sendNotif } from '../notificationController/sendNotifcationHandler.js';
 
 export default async function followBtnFunction(selectedHtmlElement, loginUserId, loginUsername, loginProfileimage,socket) {
+    document.getElementById('clickSound').play();
     if (selectedHtmlElement.textContent == 'unfollow') {
         console.log('na click ung unfollow')
         const followUserId = selectedHtmlElement.dataset.userid
@@ -79,3 +80,4 @@ export default async function followBtnFunction(selectedHtmlElement, loginUserId
         }
     }
 }
+
