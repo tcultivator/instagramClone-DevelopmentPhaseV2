@@ -3,6 +3,7 @@ import { scrollToBottom } from "../../app.js";
 import { chatBox } from "../../app.js";
 
 export default async function sendThisMessage(message, recieverId, loginUserId, loginUsername, loginProfileimage,socket) {
+    document.getElementById('clickSound').play();
     document.getElementById('conversations').innerHTML += `
              <div id="informationAndMessagesRight" data-id="${loginUserId}">
                 <div id="textMessagesRight">
@@ -39,4 +40,5 @@ export default async function sendThisMessage(message, recieverId, loginUserId, 
     } else {
         console.log('error sent')
     }
+
 }
