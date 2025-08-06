@@ -19,6 +19,7 @@ import { displayNotifications } from './handlers/notificationController/displayN
 import { markReadThisNotif } from './handlers/notificationController/markReadNotificationHandler.js';
 import { getUnreadNotif } from './handlers/notificationController/getUnreadNotifCount.js';
 import { deleteNotif } from './handlers/notificationController/deleteNotifHandler.js';
+import { markAllRead } from './handlers/notificationController/markAllReadHandler.js'
 
 
 
@@ -1144,6 +1145,11 @@ document.addEventListener('click', (e) => {
         acceptMessageRequest(e.target, loginUserId)
     }
 })
+
+document.getElementById('markAllRead').addEventListener('click', () => {
+    markAllRead()
+})
+
 
 
 
