@@ -534,7 +534,7 @@ body button {
     box-sizing: border-box;
     border-top: 1px solid rgb(175, 175, 175);
     gap: 35px;
-    height: 7%;
+    height: 50px;
 }
 
 #footerNav button {
@@ -568,7 +568,7 @@ body button {
 #profileBody {
     position: absolute;
     width: 100%;
-    height: calc(100% - 7%);
+    height: calc(100% - 50px);
     background-color: rgb(255, 255, 255);
     z-index: 2;
     color: rgb(36, 36, 36);
@@ -879,7 +879,7 @@ body button {
 #visitprofileBody {
     position: absolute;
     width: 100%;
-    height: calc(100% - 7%);
+    height: calc(100% - 50px);
     background-color: rgb(255, 255, 255);
     z-index: 2;
     color: rgb(36, 36, 36);
@@ -1504,7 +1504,7 @@ body button {
     top: 0;
     right: 0;
     width: 100%;
-    height: calc(100% - 7%);
+    height: calc(100% - 50px);
     background-color: rgb(255, 255, 255);
     box-sizing: border-box;
     z-index: 1;
@@ -1921,7 +1921,7 @@ body button {
 #searchBody {
     position: absolute;
     width: 100%;
-    height: calc(100% - 7%);
+    height: calc(100% - 50px);
     background-color: rgb(255, 255, 255);
     box-sizing: border-box;
     z-index: 1;
@@ -2068,6 +2068,7 @@ body button {
     width: 100%;
     align-items: center;
     text-align: center;
+    
 }
 
 
@@ -2223,20 +2224,31 @@ body button {
     background-color: white;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
     height: 30px;
+    padding: 5px;
+    box-sizing: border-box;
+
 }
 
 
-#conversationHeader button {
-    position: absolute;
-    left: 5px;
+#conversationHeader button:first-child {
+
+    
     background-color: transparent;
     color: black;
     border: none;
 
+}
+
+#conversationHeader button:last-child {
+    
+    background-color: transparent;
+    color: rgb(201, 62, 62);
+    border: none;
+    font-size: 15px;
 }
 
 #conversations {
@@ -2248,7 +2260,7 @@ body button {
     overflow: auto;
     position: absolute;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 50px;
     max-height: calc(100% - 13%);
 
 }
@@ -2499,7 +2511,7 @@ body button {
     position: absolute;
     width: 100%;
     background-color: rgb(255, 255, 255);
-    height: calc(100% - 7%);
+    height: calc(100% - 54px);
 }
 
 #notificationHeader {
@@ -2521,7 +2533,7 @@ body button {
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    max-height: calc(100% - 8%);
+    max-height: calc(100% - 8.5%);
     overflow: auto;
 }
 
@@ -2571,6 +2583,13 @@ body button {
     font-size: 12px;
 }
 
+
+#markAllReadBody{
+    
+    padding: 5px 10px;
+    display: flex;
+    justify-content: end;
+}
 
 
 
