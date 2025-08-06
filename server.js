@@ -1105,11 +1105,24 @@ app.post('/getMessageRequestCounts', authenticate, (req, res) => {
     })
 })
 
+app.post('/markAllRead', authenticate, (req, res) => {
+    const userId = req.userId;
+    const query = 'UPDATE notifications SET status = ? WHERE recieverId = ?'
+    db.query(query, [true, userId], (err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'error on mark all read' })
+        } else {
+            res.status(200).json({ message: 'success mark all read' })
+        }
+    })
+})
+
 
 
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
