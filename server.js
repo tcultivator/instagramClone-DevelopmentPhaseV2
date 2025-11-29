@@ -99,6 +99,7 @@ io.on('connection', (socket) => {
 
 
 app.post('/loginReq', (req, res) => {
+    try{
     const userData = req.body
     const query = 'SELECT * FROM accounts WHERE email = ? && password = ?'
     db.query(query, [userData.username, userData.password], (err, result) => {
@@ -116,6 +117,9 @@ app.post('/loginReq', (req, res) => {
 
         }
     })
+    }catch(err){
+        console.log(err)
+    }
 })
 
 function authenticate(req, res, next) {
@@ -1127,6 +1131,7 @@ app.post('/markAllRead', authenticate, (req, res) => {
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
