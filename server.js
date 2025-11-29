@@ -6,6 +6,9 @@ const cookieparser = require('cookie-parser')
 const upload = require('./middleware/multer');
 const cloudinary = require('./util/cloudinary')
 const nodemailer = require('nodemailer')
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 const app = express()
 const http = require('http').createServer(app)
 const { Server } = require('socket.io')
@@ -719,28 +722,22 @@ app.post('/submitPersonalInfo', (req, res) => {
 
 
 
-const transporter = nodemailer.createTransport({
-    secure: true,
-    host: process.env.NODEMAILER_HOST,
-    port: 465,
-    auth: {
-        user: process.env.NODEMAILER_USER,
-        pass: process.env.NODEMAILER_PASS
-    }
-})
+function sendMail(to, subject, htmlMessage) {
+  const msg = {
+    to: to,
+    from: process.env.NODEMAILER_USER, // this must be a verified sender in SendGrid
+    subject: subject,
+    html: htmlMessage,
+  };
 
-function sendMail(to, sub, message) {
-    try{
-    transporter.sendMail({
-        to: to,
-        sub: sub,
-        html: message
+  sgMail
+    .send(msg)
+    .then((response) => {
+      console.log('Email sent; status:', response[0].statusCode);
     })
-    console.log('message Sent')
-    }
-    catch(err){
-        console.error(err)
-    }
+    .catch((error) => {
+      console.error('SendGrid send error:', error);
+    });
 }
 
 
@@ -1149,6 +1146,7 @@ app.post('/markAllRead', authenticate, (req, res) => {
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
