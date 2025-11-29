@@ -99,28 +99,46 @@ io.on('connection', (socket) => {
 
 
 app.post('/loginReq', (req, res) => {
-    try{
-    const userData = req.body
-    const query = 'SELECT * FROM accounts WHERE email = ? && password = ?'
-    db.query(query, [userData.username, userData.password], (err, result) => {
-        if (!result.length) {
-            res.status(401).json({ message: 'Error Login' })
-        } else {
-            const returnData = result[0]
-            const token = jwt.sign({ userID: returnData.id, username: returnData.username }, process.env.JWT_TOKEN_SECRET_KEY, { expiresIn: '1h' })
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'none'
-            })
-            res.status(200).json({ message: 'Success login' })
+  const { username, password } = req.body;
 
-        }
-    })
-    }catch(err){
-        console.log(err)
+  const query = 'SELECT * FROM accounts WHERE email = ? AND password = ?';
+  console.log('DEBUG: /loginReq called with:', username, password);
+
+  db.query(query, [username, password], (err, results) => {
+    console.log('DEBUG: db.query callback fired');
+
+    if (err) {
+      console.error('DB error on loginReq:', err);       // log database error
+      return res.status(500).json({ message: 'Server error' });
     }
-})
+
+    console.log('DEBUG: results =', results);
+
+    if (!Array.isArray(results) || results.length === 0) {
+      console.log('DEBUG: no user found or wrong credentials');
+      return res.status(401).json({ message: 'Error Login' });
+    }
+
+    const user = results[0];
+    console.log('DEBUG: user found:', user);
+
+    const token = jwt.sign(
+      { userID: user.id, username: user.username },
+      process.env.JWT_TOKEN_SECRET_KEY,
+      { expiresIn: '1h' }
+    );
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none'
+    });
+
+    console.log('DEBUG: login success — token issued');
+    return res.status(200).json({ message: 'Success login' });
+  });
+});
+
 
 function authenticate(req, res, next) {
     const token = req.cookies.token
@@ -1131,6 +1149,7 @@ app.post('/markAllRead', authenticate, (req, res) => {
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
