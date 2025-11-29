@@ -59,7 +59,7 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
             }, 4000);
         } else {
             console.log('gumana 1')
-            document.getElementById('serverLoadingBody').style.display = 'flex'
+            
             console.log('gumana 2')
             const username = email.value.split('@')[0];
             console.log('gumana 3')
@@ -77,7 +77,7 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
             if (register.ok) {
                 successNotif.style.display = 'flex'
                 document.getElementById('loading').style.display = 'flex'
-                document.getElementById('serverLoadingBody').style.display = 'none'
+                
                 successmessage.textContent = register.data.message
                 timeoutInterval = setTimeout(() => {
                     successNotif.style.display = 'none'
@@ -97,7 +97,7 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
                 }, 3000);
             } else {
                 errorNotif.style.display = 'flex'
-                document.getElementById('serverLoadingBody').style.display = 'none'
+                
                 errormessage.textContent = register.data.message
                 email.style.boxShadow = '0px 0px 4px #E63946'
                 timeoutInterval = setTimeout(() => {
@@ -245,5 +245,6 @@ document.getElementById('verifBtn').addEventListener('click', async (e) => {
         }, 4000);
     }
 })
+
 
 
