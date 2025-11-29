@@ -688,17 +688,33 @@ app.post('/register', (req, res) => {
     const password = req.body.password;
     const username = req.body.username;
     let random6Digit = Math.floor(100000 + Math.random() * 900000);
-    const query = 'SELECT * FROM accounts WHERE email = ?'
+
+    const query = 'SELECT * FROM accounts WHERE email = ?';
+
     db.query(query, [email], (err, result) => {
-        if (result.length) {
-            res.status(400).json({ message: 'Email is already use' })
-        } else {
-            let verificationCode = random6Digit.toString()
-            sendMail(email, 'Verification Code', verificationCode)
-            res.status(200).json({ digitcode6: random6Digit, email: email, password: password, username: username, message: 'Verification Sent' })
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ message: 'Database error', error: err });
         }
-    })
-})
+
+        if (result.length) {
+            res.status(400).json({ message: 'Email is already used' });
+        } else {
+            let verificationCode = random6Digit.toString();
+
+            sendMail(email, 'Verification Code', verificationCode);
+
+            res.status(200).json({
+                digitcode6: random6Digit,
+                email: email,
+                password: password,
+                username: username,
+                message: 'Verification Sent'
+            });
+        }
+    });
+});
+
 
 
 
@@ -730,14 +746,16 @@ function sendMail(to, subject, htmlMessage) {
     html: htmlMessage,
   };
 
-  sgMail
-    .send(msg)
-    .then((response) => {
-      console.log('Email sent; status:', response[0].statusCode);
-    })
-    .catch((error) => {
-      console.error('SendGrid send error:', error);
-    });
+ sgMail
+  .send(msg)
+  .then(response => {
+    console.log('Email sent; status:', response[0].statusCode);
+  })
+  .catch(error => {
+    console.error('SendGrid send error:', error);
+    res.status(500).json({ message: 'Failed to send verification email', error });
+  });
+
 }
 
 
@@ -1146,6 +1164,7 @@ app.post('/markAllRead', authenticate, (req, res) => {
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
