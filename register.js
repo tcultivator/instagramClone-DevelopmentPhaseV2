@@ -42,7 +42,7 @@ let postRegisterUsername;
 document.getElementById('submitBtn').addEventListener('click', async (e) => {
     e.preventDefault()
     try {
-         console.log(username)
+         console.log(userName.value)
             console.log(email.value)
             console.log(password.value)
             console.log(confirmpassword.value)
@@ -59,7 +59,6 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
             }, 4000);
         } else {
             console.log('gumana 1')
-            
             console.log('gumana 2')
             const username = email.value.split('@')[0];
             console.log('gumana 3')
@@ -245,6 +244,7 @@ document.getElementById('verifBtn').addEventListener('click', async (e) => {
         }, 4000);
     }
 })
+
 
 
 
