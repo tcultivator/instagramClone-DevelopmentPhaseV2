@@ -708,12 +708,17 @@ const transporter = nodemailer.createTransport({
 })
 
 function sendMail(to, sub, message) {
+    try{
     transporter.sendMail({
         to: to,
         sub: sub,
         html: message
     })
     console.log('message Sent')
+    }
+    catch(err){
+        console.error(err)
+    }
 }
 
 
@@ -1122,6 +1127,7 @@ app.post('/markAllRead', authenticate, (req, res) => {
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
