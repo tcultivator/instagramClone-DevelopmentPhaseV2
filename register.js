@@ -42,6 +42,10 @@ let postRegisterUsername;
 document.getElementById('submitBtn').addEventListener('click', async (e) => {
     e.preventDefault()
     try {
+         console.log(username)
+            console.log(email.value)
+            console.log(password.value)
+            console.log(confirmpassword.value)
         if (password.value != confirmpassword.value) {
             errorNotif.style.display = 'flex'
             errormessage.textContent = 'Password not match'
@@ -54,9 +58,13 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
                 confirmpassword.style.boxShadow = "none"
             }, 4000);
         } else {
+            console.log('gumana 1')
             document.getElementById('serverLoadingBody').style.display = 'flex'
+            console.log('gumana 2')
             const username = email.value.split('@')[0];
+            console.log('gumana 3')
             extractedUsername = email.value.split('@')[0];
+            console.log('gumana 4')
             console.log(username)
             console.log(username)
             console.log(email.value)
@@ -237,4 +245,5 @@ document.getElementById('verifBtn').addEventListener('click', async (e) => {
         }, 4000);
     }
 })
+
 
