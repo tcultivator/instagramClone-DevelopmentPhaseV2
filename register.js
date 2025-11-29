@@ -58,6 +58,10 @@ document.getElementById('submitBtn').addEventListener('click', async (e) => {
             const username = email.value.split('@')[0];
             extractedUsername = email.value.split('@')[0];
             console.log(username)
+            console.log(username)
+            console.log(email.value)
+            console.log(password.value)
+            console.log(confirmpassword.value)
             const register = await apiReq('/register', {
                 email: email.value, password: password.value,
                 username: username
@@ -233,3 +237,4 @@ document.getElementById('verifBtn').addEventListener('click', async (e) => {
         }, 4000);
     }
 })
+
