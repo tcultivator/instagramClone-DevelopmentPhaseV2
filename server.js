@@ -683,35 +683,47 @@ app.post('/changeUserInfo', authenticate, (req, res) => {
 
 
 
-app.post('/register', (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    const username = req.body.username;
-    let random6Digit = Math.floor(100000 + Math.random() * 900000);
+app.post('/register', async (req, res) => {
+    const { email, password, username } = req.body;
+    const random6Digit = Math.floor(100000 + Math.random() * 900000);
+
+    console.log('Register route hit for email:', email); // ✅ always logs
 
     const query = 'SELECT * FROM accounts WHERE email = ?';
 
-    db.query(query, [email], (err, result) => {
+    db.query(query, [email], async (err, result) => {
         if (err) {
-            console.error('Database query error:', err);
+            console.error('Database query error:', err); // ✅ always logs DB errors
             return res.status(500).json({ message: 'Database error', error: err });
         }
 
+        console.log('Query result length:', result.length); // ✅ logs whether email exists
+
         if (result.length) {
-            res.status(400).json({ message: 'Email is already used' });
-        } else {
-            let verificationCode = random6Digit.toString();
-
-            sendMail(email, 'Verification Code', verificationCode);
-
-            res.status(200).json({
-                digitcode6: random6Digit,
-                email: email,
-                password: password,
-                username: username,
-                message: 'Verification Sent'
-            });
+            console.log('Email already used:', email);
+            return res.status(400).json({ message: 'Email is already used' });
         }
+
+        const verificationCode = random6Digit.toString();
+        console.log('Generated verification code:', verificationCode);
+
+        try {
+            await sendMail(email, 'Verification Code', verificationCode);
+            console.log('Verification email sent successfully to:', email);
+        } catch (err) {
+            console.error('SendGrid send error:', err);
+            return res.status(500).json({ message: 'Failed to send verification email', error: err });
+        }
+
+        res.status(200).json({
+            digitcode6: random6Digit,
+            email,
+            password,
+            username,
+            message: 'Verification Sent'
+        });
+
+        console.log('Response sent for registration of email:', email);
     });
 });
 
@@ -1164,6 +1176,7 @@ app.post('/markAllRead', authenticate, (req, res) => {
 http.listen(port, () => {
     console.log('server is running ing port ', port)
 })
+
 
 
 
