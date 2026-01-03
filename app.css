@@ -1,11 +1,12 @@
 :root {
-    --bg-color: #FFFFFF;
-    --primary-text-color: rgb(70, 70, 70);
+    --bg-color: #000000;
+    --primary-text-color: rgb(255, 255, 255);
     --btn-text-color: white;
     --btn-bg-color-secondary: #4E73C2;
     --btntoggle-color: rgb(218, 173, 29);
     --blackTextcolor: black;
-
+    --border-color: rgba(197, 197, 197, 0.363);
+    --bg-secondary: rgb(29, 29, 29);
 }
 
 body {
@@ -39,29 +40,26 @@ body button {
 #header h1 {
     font-size: 30px;
     font-family: 'Sacramento';
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 
 }
 
 #header button {
     background-color: transparent;
     border: none;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     font-size: 20px;
     position: relative;
 }
 
 
 #storyBody {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     top: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
     padding: 5px;
-
-
-    color: rgb(36, 36, 36);
     box-sizing: border-box;
     gap: 0px;
 
@@ -90,7 +88,7 @@ body button {
     overflow: hidden;
     transition: border-color 0.3s ease;
     border-radius: 10px;
-    border: 1px solid rgb(179, 179, 179);
+    border: 1px solid var(--border-color);
 }
 
 .story-thumbnail img {
@@ -112,7 +110,7 @@ body button {
     bottom: 0;
     width: 100%;
     padding: 4px 0;
-    background: rgba(0, 0, 0, 0.699);
+    background: rgba(57, 93, 211, 0.363);
     color: white;
     font-size: 12px;
     text-align: center;
@@ -148,7 +146,7 @@ body button {
 
 
 #addNewStory {
-    background-color: rgb(36, 36, 36);
+    background-color: var(--bg-color);
     position: absolute;
     top: 0;
     right: 0;
@@ -242,7 +240,7 @@ body button {
     gap: 5px;
     margin: auto;
     width: 100%;
-    background-color: rgb(36, 36, 36);
+    background-color: var(--bg-color);
     height: 100%;
 
 
@@ -366,11 +364,11 @@ body button {
 
 
 #postcontent {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     width: 100%;
     height: fit-content;
     padding-bottom: 10px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 
 }
 
@@ -379,33 +377,33 @@ body button {
     padding: 5px;
     border-radius: 5px;
     text-align: center;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     width: 70px;
-    border: 2px solid rgb(36, 36, 36);
+    border: 2px solid var(--primary-text-color);
 }
 
 
 
 #postlabel {
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     font-size: 12px;
     margin-left: 5px;
 }
 
 #postlabel label {
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     font-weight: bold;
 }
 
 #postlabel label span {
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     font-weight: normal;
 
 }
 
 #userProfilePost {
     display: flex;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.705);
     justify-content: space-between;
     align-items: center;
     padding: 10px;
@@ -424,7 +422,7 @@ body button {
     height: 30px;
     border-radius: 50%;
     cursor: pointer;
-    border: 2px solid rgb(0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
 }
 
 #userProfilePost label {
@@ -436,7 +434,7 @@ body button {
     border: none;
     font-size: 12px;
     cursor: pointer;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 
@@ -476,20 +474,20 @@ body button {
     background-color: transparent;
     border: none;
     font-size: 20px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     cursor: pointer;
 }
 
 #likecommentshare button:hover {
 
-    color: rgb(63, 63, 63);
+    color: rgba(255, 255, 255, 0.767);
 }
 
 #valueoflikecommentshare {
     display: flex;
     gap: 14px;
     font-size: 12px;
-    color: rgb(36, 36, 36);
+    color: rgba(255, 255, 255, 0.63);
     padding: 0 0 5px 5px;
 
 }
@@ -523,7 +521,7 @@ body button {
 
 
 #footerNav {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     position: fixed;
     bottom: 0;
     left: 0;
@@ -532,7 +530,7 @@ body button {
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
-    border-top: 1px solid rgb(175, 175, 175);
+    border-top: 1px solid var(--border-color);
     gap: 35px;
     height: 50px;
 }
@@ -541,7 +539,7 @@ body button {
     background-color: transparent;
     border: none;
     font-size: 22px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     cursor: pointer;
 }
 
@@ -569,9 +567,9 @@ body button {
     position: absolute;
     width: 100%;
     height: calc(100% - 50px);
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     z-index: 2;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 
 }
 
@@ -586,7 +584,7 @@ body button {
 
 #headProfile label {
     font-size: 19px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 
 }
 
@@ -596,7 +594,7 @@ body button {
     background-color: transparent;
     border: none;
     font-size: 15px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #headProfile #settingsInProfile {
@@ -605,7 +603,7 @@ body button {
     background-color: transparent;
     border: none;
     font-size: 19px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #profileiconBody {
@@ -613,7 +611,7 @@ body button {
     align-items: center;
     padding: 30px;
     gap: 10px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #bioBody {
@@ -630,7 +628,7 @@ body button {
 
     justify-content: center;
     justify-items: center;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     font-size: 10px;
 }
 
@@ -662,7 +660,7 @@ body button {
 #aboutUserHead button {
     border: none;
     background-color: transparent;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 
@@ -681,7 +679,7 @@ body button {
 
     justify-content: center;
     justify-items: center;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     font-size: 10px;
 }
 
@@ -713,7 +711,7 @@ body button {
 #visitaboutUserHead button {
     border: none;
     background-color: transparent;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 
@@ -723,7 +721,7 @@ body button {
     flex-direction: column;
     gap: 5px;
     justify-content: left;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #profileControl div {
@@ -743,8 +741,8 @@ body button {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    color: rgb(36, 36, 36);
-    border: 5px solid rgb(36, 36, 36);
+    
+    border: 5px solid white;
 }
 
 #profileiconBody #icon {
@@ -773,14 +771,14 @@ body button {
     bottom: 0;
     right: 10%;
     font-size: 20px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     border-radius: 5px;
     padding: 0 2px;
 
 }
 
 #icon div button i {
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 
 }
 
@@ -789,14 +787,14 @@ body button {
 
     border: none;
     border-radius: 5px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     font-weight: 600;
     font-size: 11px;
-    border: 2px solid rgb(36, 36, 36);
+    border: 2px solid var(--primary-text-color);
 }
 
 #profileControl label {
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 
@@ -804,7 +802,7 @@ body button {
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
-    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
+    border-bottom: 1px solid var(--border-color);
     margin-top: 10px;
 }
 
@@ -818,18 +816,18 @@ body button {
 
 #profileDetails div label:first-child {
     font-size: 20px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #profileDetails div label:last-child {
     font-size: 15px;
-    color: rgb(65, 65, 65);
+    color: var(--primary-text-color);
 }
 
 
 
 #logoutPopup {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
 
     position: absolute;
 
@@ -837,8 +835,7 @@ body button {
     top: 40px;
     right: 20px;
     border-radius: 5px;
-    border: 1px solid rgb(36, 36, 36);
-    padding: 5px;
+    border: 1px solid var(--border-color)
 }
 
 #logoutControl {
@@ -880,9 +877,9 @@ body button {
     position: absolute;
     width: 100%;
     height: calc(100% - 50px);
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     z-index: 2;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #visitheadProfile {
@@ -891,12 +888,12 @@ body button {
     align-items: center;
     justify-content: center;
     padding: 5px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #visitheadProfile label {
     font-size: 19px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 
 }
 
@@ -906,7 +903,7 @@ body button {
     background-color: transparent;
     border: none;
     font-size: 15px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #visitprofileiconBody {
@@ -914,7 +911,7 @@ body button {
     align-items: center;
     padding: 30px;
     gap: 10px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #visitprofileiconBody #profileControl {
@@ -922,20 +919,20 @@ body button {
     flex-direction: column;
     gap: 5px;
     justify-content: left;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #visitprofileiconBody img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 5px solid rgb(36, 36, 36);
+    border: 5px solid var(--primary-text-color);
 }
 
 
 
 #visitprofileControl label {
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 
@@ -944,7 +941,7 @@ body button {
     flex-direction: column;
     gap: 5px;
     justify-content: left;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #visitprofileControl div {
@@ -964,10 +961,10 @@ body button {
     background-color: transparent;
     border: none;
     border-radius: 5px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     font-weight: 600;
     font-size: 11px;
-    border: 2px solid rgb(36, 36, 36);
+    border: 2px solid var(--border-color);
 }
 
 
@@ -975,8 +972,8 @@ body button {
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
-    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
-    color: rgb(36, 36, 36);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--primary-text-color);
 }
 
 #visitprofileDetails div {
@@ -984,38 +981,39 @@ body button {
     flex-direction: column;
     align-items: center;
     width: 100px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 
 }
 
 #visitprofileDetails div label:first-child {
     font-size: 20px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #visitprofileDetails div label:last-child {
     font-size: 15px;
-    color: rgb(59, 59, 59);
+    color: var(--primary-text-color);
 }
 
 
-
+#closeNotification{
+    color: var(--primary-text-color);
+}
 
 #createPost {
-    background-color: rgb(36, 36, 36);
+    background-color: var(--bg-color);
     position: absolute;
     right: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    color: rgb(0, 0, 0);
     display: flex;
     overflow: hidden;
 }
 
 #createPost form {
     width: 100%;
-    background-color: rgb(36, 36, 36);
+    background-color: var(--bg-color);
     height: 100%;
     margin: auto;
     text-align: center;
@@ -1023,7 +1021,7 @@ body button {
     flex-direction: column;
 
     justify-content: space-between;
-    color: white;
+    color: var(--primary-text-color);
 
 }
 
@@ -1031,7 +1029,7 @@ body button {
 #createPost form #caption {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid var(--border-color);
 }
 
 #createPostControl {
@@ -1048,7 +1046,8 @@ body button {
 }
 
 #createPostControl input {
-    background-color: rgba(255, 255, 255, 0.514);
+    background-color: transparent;
+    color: var(--primary-text-color);
 }
 
 
@@ -1133,7 +1132,7 @@ body button {
 
 
 #updateProfilePic {
-    background-color: rgb(36, 36, 36);
+    background-color: var(--bg-color);
     position: absolute;
     right: 0;
     top: 0;
@@ -1283,7 +1282,7 @@ body button {
     background-color: rgba(0, 0, 0, 0.815);
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 2;
     display: flex;
 }
 
@@ -1505,15 +1504,15 @@ body button {
     right: 0;
     width: 100%;
     height: calc(100% - 50px);
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     box-sizing: border-box;
-    z-index: 1;
-    color: rgb(36, 36, 36);
+    z-index: 2;
+    color: var(--primary-text-color);
     overflow: hidden;
 }
 
 #showFollowersBody #showFollowersHead {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     display: flex;
     align-items: center;
     text-align: center;
@@ -1521,7 +1520,7 @@ body button {
     width: 100%;
     padding: 6px;
     justify-content: center;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #showFollowersHead button {
@@ -1530,11 +1529,11 @@ body button {
     position: absolute;
     top: 5px;
     left: 5px;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #showFollowersContent {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     width: 100%;
     display: flex;
     padding: 6px;
@@ -1565,23 +1564,23 @@ body button {
 }
 
 #followersContent label {
-    color: rgb(36, 36, 36);
-    font-weight: bold;
+    color: var(--primary-text-color);
+    
 }
 
 #followersContent img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 3px solid rgb(36, 36, 36);
+    border: 3px solid var(--primary-text-color);
 }
 
 #followersContent button {
     background-color: transparent;
     padding: 5px 10px;
     border-radius: 5px;
-    color: black;
-    border: 2px solid black;
+    color: var(--primary-text-color);
+    border: 2px solid var(--primary-text-color);
 
 }
 
@@ -1603,28 +1602,28 @@ body button {
     width: 100%;
     position: absolute;
     bottom: 0;
-    background-color: rgb(36, 36, 36);
+    background-color: rgb(255, 255, 255);
     height: 60%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
 
 #controlStoryViewer {
-    background-color: rgb(36, 36, 36);
+    background-color: rgb(255, 255, 255);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     display: flex;
     padding: 5px 0 20px 0;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.418);
 }
 
 #controlStoryViewer button {
     width: 15%;
-    background-color: rgb(43, 43, 43);
+    background-color: rgb(255, 255, 255);
     height: 10px;
     margin: 0 auto;
     border-radius: 15px;
-    border: 2px solid white;
+    border: 2px solid rgba(0, 0, 0, 0.699);
 }
 
 
@@ -1654,7 +1653,7 @@ body button {
     display: flex;
     align-items: center;
     gap: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 #viewerContentInfo #viewerReactions {
@@ -1842,21 +1841,21 @@ body button {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     box-sizing: border-box;
     z-index: 1;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     overflow: hidden;
 
 }
 
 #headerInProfile {
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     padding: 10px;
     text-align: center;
 
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #headerInProfile button {
@@ -1865,7 +1864,7 @@ body button {
     left: 5px;
     background-color: transparent;
     border: none;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 }
 
 #contentOfprofileInfo {
@@ -1885,7 +1884,9 @@ body button {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid white;
+    background-color: transparent;
+    color: var(--primary-text-color);
 }
 
 #contentOfprofileInfo button {
@@ -1904,8 +1905,8 @@ body button {
 #bioDiv textarea {
     width: 100%;
     height: 100px;
-    background-color: white;
-    color: black;
+    background-color: transparent;
+    color: var(--primary-text-color);
 }
 
 #bioDiv button {
@@ -1922,11 +1923,11 @@ body button {
     position: absolute;
     width: 100%;
     height: calc(100% - 50px);
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     box-sizing: border-box;
     z-index: 1;
     right: 0;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
 
 }
 
@@ -1936,7 +1937,7 @@ body button {
     box-sizing: border-box;
     position: fixed;
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     height: 7%;
 }
 
@@ -1951,15 +1952,17 @@ body button {
     border-radius: 5px;
     border: none;
     width: 100%;
-    border: 2px solid rgb(36, 36, 36);
+    border: 2px solid white;
+    background-color: transparent;
+    color: var(--primary-text-color);
 }
 
 #searchContent button {
     padding: 15px;
     border-radius: 5px;
-    border: 2px solid black;
+    border: 2px solid var(--primary-text-color);
     background-color: transparent;
-    color: rgb(0, 0, 0);
+    color: var(--primary-text-color);
     font-size: 13px;
     box-sizing: border-box;
     text-align: center;
@@ -1969,7 +1972,7 @@ body button {
 
 #closeSearchWindow {
     background-color: transparent;
-    color: rgb(36, 36, 36);
+    color: var(--primary-text-color);
     border: none;
     font-size: 20px;
     position: absolute;
@@ -2006,7 +2009,7 @@ body button {
     justify-content: space-between;
     padding: 10px;
     border-radius: 5px;
-    background-color: #eaeaea;
+    background-color: #eaeaeab4;
 }
 
 #resultsDetails {
@@ -2068,7 +2071,7 @@ body button {
     width: 100%;
     align-items: center;
     text-align: center;
-    
+
 }
 
 
@@ -2083,7 +2086,7 @@ body button {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: white;
+    background-color: var(--bg-color);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -2091,27 +2094,28 @@ body button {
 }
 
 #messageHeader {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 5px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
+    color: var(--primary-text-color);
 }
 
 #messageHeader button {
 
     left: 5px;
     background-color: transparent;
-    color: black;
+    color: var(--primary-text-color);
     border: none;
 
 }
 
 #messageRequestButtonBody {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     padding: 10px 10px 0px 10px;
     display: flex;
     gap: 5px;
@@ -2153,7 +2157,7 @@ body button {
 
 
 #listOfconvoBody {
-    background-color: white;
+    background-color: var(--bg-color);
     max-height: 800px;
     height: 100%;
     overflow: auto;
@@ -2211,7 +2215,7 @@ body button {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: white;
+    background-color: var(--bg-color);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -2221,30 +2225,31 @@ body button {
 
 
 #conversationHeader {
-    background-color: white;
+    background-color: var(--bg-color);
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--border-color);
     height: 30px;
     padding: 5px;
     box-sizing: border-box;
+    color: var(--primary-text-color);
 
 }
 
 
 #conversationHeader button:first-child {
 
-    
+
     background-color: transparent;
-    color: black;
+    color: var(--primary-text-color);
     border: none;
 
 }
 
 #conversationHeader button:last-child {
-    
+
     background-color: transparent;
     color: rgb(201, 62, 62);
     border: none;
@@ -2282,17 +2287,19 @@ body button {
 }
 
 #textMessagesLeft {
-    background-color: rgb(226, 226, 226);
+    background-color: rgba(255, 255, 255, 0.596);
     padding: 5px;
     border-radius: 5px;
     max-width: 50%;
     word-wrap: break-word;
+    color: var(--primary-text-color);
 }
 
 
 #informationAndMessagesLeft #textMessagesLeftImg {
     padding: 0;
     max-width: 50%;
+    
 
 }
 
@@ -2350,12 +2357,12 @@ body button {
 
 
 #sendNewMessageBody {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     width: 100%;
     display: flex;
     box-sizing: border-box;
     gap: 5px;
-    border-top: 1px solid rgb(163, 163, 163);
+    border-top: 1px solid var(--border-color);
     bottom: 0;
     height: 7%;
     align-items: center;
@@ -2415,7 +2422,7 @@ body button {
 #sendLikeMessage:hover,
 #sendImageMessage:hover,
 #sendVoiceMessage:hover {
-    background-color: #e6e6e6;
+    background-color: #e6e6e641;
 }
 
 #sendNewMessageBody #sendNewMessageBodController #sendNewMessageButton i {
@@ -2510,12 +2517,13 @@ body button {
 #notificationBody {
     position: absolute;
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     height: calc(100% - 54px);
+    color: var(--primary-text-color);
 }
 
 #notificationHeader {
-    border-bottom: 1px solid #363636;
+    border-bottom: 1px var(--border-color);
     padding: 5px;
     text-align: center;
 }
@@ -2532,9 +2540,10 @@ body button {
     gap: 6px;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: var(--bg-color);
     max-height: calc(100% - 8.5%);
     overflow: auto;
+    color: black;
 }
 
 #notifContentDetails {
@@ -2552,7 +2561,7 @@ body button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 2px solid black;
+    border: 2px solid var(--primary-text-color);
 }
 
 #notifDetails {
@@ -2578,14 +2587,14 @@ body button {
     right: 10%;
     border-radius: 5px;
     padding: 3px 5px;
-    border: 2px solid #363636;
-    background-color: white;
+    border: 2px solid var(--primary-text-color);
+    background-color: var(--primary-text-color);
     font-size: 12px;
 }
 
 
-#markAllReadBody{
-    
+#markAllReadBody {
+
     padding: 5px 10px;
     display: flex;
     justify-content: end;
@@ -2629,15 +2638,16 @@ body button {
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: white;
+    background-color: var(--bg-color);
     z-index: 1;
 }
 
 #messageRequestHeader {
     padding: 10px;
-    border-bottom: 1px solid rgb(119, 119, 119);
+    border-bottom: 1px solid var(--border-color);
     text-align: center;
     position: relative;
+    color: var(--primary-text-color);
 }
 
 #messageRequestHeader #closeMessageRequest {
@@ -2645,10 +2655,11 @@ body button {
     left: 5px;
     background-color: transparent;
     border: none;
+    color: var(--primary-text-color);
 }
 
 #messageRequestContents {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
@@ -2735,8 +2746,8 @@ body button {
 
 @media (min-width:930px) {
     body {
-        background-color: rgb(255, 255, 255);
-        color: rgb(36, 36, 36);
+        background-color: var(--bg-color);
+        color: var(--primary-text-color);
     }
 
     #header {
@@ -2746,25 +2757,23 @@ body button {
     #sidebar {
         position: fixed;
         left: 0;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         display: flex;
         flex-direction: column;
         gap: 60px;
         align-items: left;
         text-align: left;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         width: 20%;
         height: 100%;
-        border-right: 1px solid rgba(197, 197, 197, 0.788);
-
-
+        border-right: 1px solid var(--border-color)
     }
 
     #sidebar button {
         padding: 15px;
         border-radius: 6px;
         background-color: transparent;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         border: none;
         text-align: left;
         font-size: 17px;
@@ -2780,7 +2789,7 @@ body button {
 
     .topbar {
         font-size: 50px;
-        color: rgb(0, 0, 0);
+        color: var(--primary-text-color);
         font-family: 'Sacramento';
         margin: 0 8%;
     }
@@ -2801,33 +2810,33 @@ body button {
         right: 0;
         height: calc(100%);
         top: 0;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         padding: 0px 15%;
-        color: rgb(36, 36, 36);
+
 
     }
 
     #postcontent {
 
 
-        background-color: rgb(255, 255, 255);
-        color: rgb(36, 36, 36);
+        background-color: var(--bg-color);
+        color: var(--primary-text-color);
         padding-bottom: 15px;
-        border-left: 1px solid rgb(102, 102, 102);
-        border-right: 1px solid rgb(102, 102, 102);
+        border-left: 1px solid var(--border-color);
+        border-right: 1px solid var(--border-color);
     }
 
     #userProfilePost {
-        color: rgb(36, 36, 36);
+
         background-color: transparent;
     }
 
     #userProfilePost label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #postcontent div {
-        color: rgb(36, 36, 36);
+        color: rgba(255, 255, 255, 0.692);
     }
 
 
@@ -2836,19 +2845,19 @@ body button {
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        border: 2px solid rgb(0, 0, 0);
+        border: 2px solid rgb(255, 255, 255);
     }
 
     #storyBody {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         top: 0;
         width: 100%;
         display: flex;
         flex-direction: column;
         padding: 5px;
-        border-bottom: 1px solid rgba(102, 102, 102, 0.788);
-        border-top: 1px solid rgba(102, 102, 102, 0.788);
-        color: rgb(36, 36, 36);
+        border-bottom: 1px solid var(--border-color);
+        border-top: 1px solid var(--border-color);
+
         box-sizing: border-box;
         gap: 0px;
 
@@ -2875,7 +2884,7 @@ body button {
         width: 180px;
         height: 280px;
         overflow: hidden;
-        border: 2px solid #858585;
+        border: 2px solid var(--border-color);
         transition: border-color 0.3s ease;
         border-radius: 10px;
     }
@@ -2892,7 +2901,7 @@ body button {
         bottom: 0;
         width: 100%;
         padding: 8px 0;
-        background: rgba(0, 0, 0, 0.699);
+        background: rgba(57, 93, 211, 0.363);
         color: white;
         font-size: 12px;
         text-align: center;
@@ -2928,37 +2937,37 @@ body button {
     }
 
     #postlabel label {
-        color: rgb(36, 36, 36);
+        color: rgb(255, 255, 255);
         font-weight: bold;
     }
 
 
     #visitprofileBody {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
 
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(197, 197, 197, 0.788);
+        border-left: 1px solid var(--border-color);
     }
 
     #visitprofileBody #visitheadProfile label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #visitprofileBody #visitheadProfile button {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         cursor: pointer;
 
     }
 
     #visitprofileiconBody label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #visitprofileDetails #visitpostBody label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #visitprofileDetails #visitfollowerBody {
@@ -2966,7 +2975,7 @@ body button {
     }
 
     #visitprofileDetails #visitfollowerBody label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         cursor: pointer;
     }
 
@@ -2975,37 +2984,37 @@ body button {
     }
 
     #visitprofileDetails #visitfollowingBody label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         cursor: pointer;
     }
 
     #profileBody {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(122, 122, 122, 0.788);
-        color: rgb(36, 36, 36);
+        border-left: 1px solid var(--border-color);
+        color: var(--primary-text-color);
     }
 
     #profileBody #headProfile label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #profileBody #headProfile button {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         cursor: pointer;
 
     }
 
     #profileiconBody label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #profileDetails #postBody label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #profileDetails #followerBody {
@@ -3013,7 +3022,7 @@ body button {
     }
 
     #profileDetails #followerBody label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         cursor: pointer;
     }
 
@@ -3022,7 +3031,7 @@ body button {
     }
 
     #profileDetails #followingBody label {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         cursor: pointer;
     }
 
@@ -3032,22 +3041,22 @@ body button {
 
     #profileContent {
         padding: 5px;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #profileContent #imgGrid {
         gap: 5px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #profileContent #imgGrid div {
-        border: 1px solid rgba(58, 58, 58, 0.788);
+        border: 1px solid var(--border-color);
         border-radius: 5px;
         box-sizing: border-box;
         display: flex;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #profileContent #imgGrid div img {
@@ -3055,29 +3064,29 @@ body button {
         width: 100%;
         height: auto;
         background-size: contain;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
 
 
 
     #createPost {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(77, 77, 77, 0.788);
+        border-left: 1px solid var(--border-color);
     }
 
     #createPost form {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         width: 600px;
     }
 
     #uploadForm h2 {
-        color: #363636;
+        color: var(--primary-text-color);
         font-weight: normal;
 
     }
@@ -3098,23 +3107,23 @@ body button {
     #createPost form #caption {
         padding: 10px;
         border-radius: 5px;
-        border: 1px solid rgb(36, 36, 36);
+        border: 1px solid var(--border-color);
     }
 
 
     #updateProfilePic {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(104, 104, 104, 0.788);
+        border-left: 1px solid var(--border-color);
 
     }
 
     #createPost #closeCreatePost {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         cursor: pointer;
     }
 
@@ -3126,7 +3135,7 @@ body button {
         border: none;
         font-size: 20px;
         font-weight: bold;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         cursor: pointer;
 
     }
@@ -3179,13 +3188,13 @@ body button {
 
 
     #viewPostBody {
-        background-color: rgba(0, 0, 0, 0.452);
+        background-color: rgba(0, 0, 0, 0.418);
         z-index: 1;
         height: 100%;
         width: calc(100% - 20%);
         position: absolute;
         right: 0;
-        border-left: 1px solid rgba(100, 100, 100, 0.788);
+        border-left: 1px solid var(--border-color);
         display: flex;
         padding: 0 14%;
 
@@ -3197,7 +3206,8 @@ body button {
         bottom: -75%;
         width: 65%;
         height: calc(100% - 30%);
-
+        border: 1px solid var(--border-color);
+        
         animation: up .2s linear;
 
 
@@ -3219,9 +3229,8 @@ body button {
         flex-direction: column;
         align-items: center;
         padding: 5px;
-        border-bottom: 1px solid rgba(197, 197, 197, 0.788);
         gap: 10px;
-        background-color: rgb(255, 255, 255);
+        
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
     }
@@ -3258,8 +3267,8 @@ body button {
         padding: 5px 10px;
         gap: 10px;
         overflow: auto;
-        background-color: rgb(255, 255, 255);
-        border-bottom: 1px solid rgba(197, 197, 197, 0.788);
+        
+        
         margin-top: 2px;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -3271,7 +3280,7 @@ body button {
     }
 
     #commentsOnPost {
-        background-color: rgb(255, 255, 255);
+        
         display: flex;
         gap: 10px;
         align-items: top;
@@ -3284,7 +3293,7 @@ body button {
     }
 
     #commentDetails {
-        background-color: #e6e6e6;
+        background-color: #00000033;
         width: auto;
         padding: 5px 10px;
         border-radius: 8px;
@@ -3310,13 +3319,14 @@ body button {
         padding: 10px 10px 20px 10px;
         height: auto;
         box-sizing: border-box;
-        background-color: rgb(255, 255, 255);
+        
+
     }
 
     #addControl {
         display: flex;
         gap: 5px;
-        background-color: rgb(255, 255, 255);
+        
 
     }
 
@@ -3325,7 +3335,8 @@ body button {
         box-sizing: border-box;
         border-radius: 5px;
         width: 100%;
-        border: 1px solid rgba(197, 197, 197, 0.788);
+        background-color: transparent;
+       
     }
 
     #addControl button {
@@ -3371,22 +3382,22 @@ body button {
         right: 0;
         width: calc(100% - 20%);
         height: 100%;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         box-sizing: border-box;
-        z-index: 1;
-        color: rgb(36, 36, 36);
+        z-index: 2;
+        color: var(--primary-text-color);
     }
 
     #showFollowersBody #showFollowersHead {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         display: flex;
         align-items: center;
         text-align: center;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid var(--border-color);
         width: 100%;
         padding: 6px;
         justify-content: center;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #showFollowersHead button {
@@ -3398,7 +3409,7 @@ body button {
     }
 
     #showFollowersContent {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         width: 100%;
         display: flex;
         padding: 6px;
@@ -3407,11 +3418,11 @@ body button {
         gap: 8px;
         max-height: calc(100% - 30px);
         overflow: auto;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #followersContent {
-        background-color: rgb(219, 219, 219);
+        background-color: rgba(255, 255, 255, 0.37);
         border-radius: 10px;
         display: flex;
         align-items: center;
@@ -3420,7 +3431,7 @@ body button {
         padding: 10px 15px;
         width: 100%;
         text-align: center;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
 
     }
 
@@ -3431,8 +3442,8 @@ body button {
     }
 
     #followersContent label {
-        color: rgb(36, 36, 36);
-        font-weight: bold;
+        color: var(--primary-text-color);
+        
     }
 
     #followersContent img {
@@ -3458,7 +3469,7 @@ body button {
 
 
     #addNewStory {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         position: absolute;
         top: 0;
         right: 0;
@@ -3468,7 +3479,7 @@ body button {
         flex-direction: column;
         gap: 10px;
         align-items: center;
-        border-left: 1px solid rgb(78, 78, 78);
+        border-left: 1px solid var(--border-color);
     }
 
     #addNewStoryBody {
@@ -3485,7 +3496,7 @@ body button {
 
 
     #addNewStoryBody #storyControl #closeAddStory {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #addNewStoryBody label {
@@ -3496,7 +3507,7 @@ body button {
         width: 100%;
 
 
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         text-align: center;
     }
 
@@ -3506,14 +3517,14 @@ body button {
 
 
     #viewStoryBody {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         width: calc(100% - 20%);
         height: 100%;
         position: absolute;
         top: 0;
         right: 0;
         display: flex;
-        border-left: 1px solid rgb(107, 107, 107);
+        border-left: 1px solid var(--border-color);
     }
 
     #previewOfStory {
@@ -3523,15 +3534,15 @@ body button {
         gap: 5px;
         margin: auto;
         width: 500px;
-        background-color: rgb(70, 70, 70);
+        background-color: rgba(255, 255, 255, 0.507);
         height: 800px;
         border-radius: 10px;
-        color: white;
+        color: var(--primary-text-color);
 
     }
 
     #previewOfStory #closeViewStory {
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #previewOfStory label {
@@ -3544,7 +3555,7 @@ body button {
         font-weight: bold;
         font-size: 15px;
         padding: 10px;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         background-color: var(--btn-bg-color-secondary);
         border: none;
         border-bottom-right-radius: 10px;
@@ -3588,7 +3599,7 @@ body button {
         width: 500px;
         position: absolute;
         bottom: 0;
-        background-color: rgb(36, 36, 36);
+        background-color: rgb(255, 255, 255);
         height: 60%;
         margin: auto;
         justify-content: center;
@@ -3673,19 +3684,19 @@ body button {
         position: absolute;
         width: calc(100% - 20%);
         height: 100%;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         box-sizing: border-box;
         z-index: 1;
         right: 0;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
     }
 
     #headerInProfile {
         width: 100%;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         padding: 10px;
         text-align: center;
-        border-bottom: 1px solid rgb(102, 102, 102);
+        border-bottom: 1px solid var(--border-color);
     }
 
     #headerInProfile button {
@@ -3713,7 +3724,7 @@ body button {
         width: 100%;
         padding: 10px;
         border-radius: 5px;
-        border: 1px solid black;
+        border: 1px solid white;
     }
 
     #contentOfprofileInfo button {
@@ -3751,12 +3762,12 @@ body button {
         position: absolute;
         width: calc(100% - 20%);
         height: 100%;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         box-sizing: border-box;
         z-index: 1;
         right: 0;
-        color: rgb(36, 36, 36);
-        border-left: 1px solid rgb(102, 102, 102);
+        color: var(--primary-text-color);
+        border-left: 1px solid var(--border-color);
     }
 
     #searchHeader {
@@ -3764,10 +3775,10 @@ body button {
         justify-content: space-between;
         padding: 10px;
         box-sizing: border-box;
-        border-bottom: 1px solid rgb(75, 75, 75);
+        border-bottom: 1px solid var(--border-color);
         position: fixed;
         width: 80%;
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         height: 6%;
         gap: 50%;
 
@@ -3783,19 +3794,21 @@ body button {
         padding: 15px;
         border-radius: 5px;
         width: 100%;
+        background-color: transparent;
+        
     }
 
     #searchContent button {
         padding: 15px;
         border-radius: 5px;
-        border: 2px solid black;
+        border: 2px solid var(--primary-text-color);
         background-color: transparent;
-        color: rgb(0, 0, 0);
+        color: var(--primary-text-color);
     }
 
     #closeSearchWindow {
         background-color: transparent;
-        color: rgb(36, 36, 36);
+        color: var(--primary-text-color);
         border: none;
         font-size: 20px;
     }
@@ -3830,7 +3843,7 @@ body button {
         justify-content: space-between;
         padding: 10px;
         border-radius: 5px;
-        background-color: rgba(0, 0, 0, 0.055);
+        background-color: #eaeaeab4;
         position: relative;
     }
 
@@ -3875,61 +3888,43 @@ body button {
         position: absolute;
         width: calc(100% - 20%);
         height: 100%;
-        background-color: white;
+        background-color: var(--bg-color);
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
         overflow: hidden;
         right: 0;
-        border-left: 1px solid rgb(107, 107, 107);
+        border-left: 1px solid var(--border-color);
     }
 
     #messageHeader {
-        background-color: white;
+        background-color: var(--bg-color);
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         padding: 5px;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--primary-text-color);
     }
 
     #messageHeader button {
 
         left: 5px;
         background-color: transparent;
-        color: black;
+        color: var(--primary-text-color);
         border: none;
 
     }
 
-    #messageRequestButtonBody {
-        background-color: white;
-        padding: 10px;
-        display: flex;
-        gap: 5px;
-        box-sizing: border-box;
-
-    }
-
-
-
-    #messageRequestButtonBody button {
-        aspect-ratio: 1/1;
-        border: 2px solid black;
-        color: black;
-        font-size: 12px;
-        border-radius: 50%;
-        width: 30px;
-        background-color: transparent;
-    }
+   
 
 
 
 
 
     #listOfconvoBody {
-        background-color: white;
+        background-color: var(--bg-color);
         max-height: 800px;
         height: 100%;
         overflow: auto;
@@ -3944,7 +3939,7 @@ body button {
         display: flex;
         align-items: center;
         gap: 5px;
-        background-color: rgb(221, 221, 221);
+        background-color: var(--bg-color);
         border-radius: 5px;
         padding: 5px;
         cursor: pointer;
@@ -3966,37 +3961,18 @@ body button {
         position: absolute;
         width: calc(100% - 20%);
         height: 100%;
-        background-color: white;
+        background-color: var(--bg-color);
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
         z-index: 1;
         overflow: hidden;
         right: 0;
-        border-left: 1px solid rgb(107, 107, 107);
+        border-left: 1px solid var(--border-color);
     }
 
 
-    #conversationHeader {
-        background-color: white;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid black;
-        height: 30px;
-        box-sizing: border-box;
-    }
-
-
-    #conversationHeader button {
-        position: absolute;
-        left: 5px;
-        background-color: transparent;
-        color: black;
-        border: none;
-
-    }
+    
 
     #conversations {
         box-sizing: border-box;
@@ -4028,7 +4004,7 @@ body button {
 
 
     #textMessagesLeft {
-        background-color: rgb(226, 226, 226);
+         background-color: rgba(255, 255, 255, 0.596);
         padding: 5px;
         border-radius: 5px;
         max-width: 50%;
@@ -4131,15 +4107,16 @@ body button {
     #notificationBody {
         position: absolute;
         width: calc(100% - 20.1%);
-        background-color: rgb(255, 255, 255);
+        background-color: var(--bg-color);
         height: 100%;
         right: 0;
     }
 
     #notificationHeader {
-        border-bottom: 1px solid #363636;
+        border-bottom: 1px solid var(--border-color);
         padding: 5px;
         text-align: center;
+        color: var(--primary-text-color);
     }
 
     #notificationHeader button {
@@ -4154,9 +4131,10 @@ body button {
         gap: 6px;
         display: flex;
         flex-direction: column;
-        background-color: #ffffff;
+        background-color: var(--bg-color);
         max-height: calc(100% - 8%);
         overflow: auto;
+        color: black;
     }
 
     #notifContentDetails {
@@ -4174,7 +4152,7 @@ body button {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        border: 2px solid black;
+        border: 2px solid var(--primary-text-color);
     }
 
     #notifDetails {
@@ -4200,7 +4178,7 @@ body button {
         right: 10%;
         border-radius: 5px;
         padding: 3px 5px;
-        border: 2px solid #363636;
+        border: 2px solid var(--border-color);
         background-color: white;
         font-size: 12px;
     }
@@ -4221,7 +4199,7 @@ body button {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     width: 100%;
     height: 100%;
     display: flex;

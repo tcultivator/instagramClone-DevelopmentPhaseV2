@@ -2,7 +2,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: 'Righteous';
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     overflow: hidden;
 
 }
@@ -10,7 +10,7 @@ body {
 #registerForm .logo {
     font-size: 60px;
     font-family: 'Sacramento';
-    color: rgb(36, 36, 36);
+    color: rgb(255, 255, 255);
     margin-bottom: 40px;
     padding: 0;
 }
@@ -47,7 +47,7 @@ body {
     font-size: 12px;
     cursor: text;
     transition: .1s;
-    color: rgb(36, 36, 36);
+    color: rgba(255, 255, 255, 0.555);
 }
 
 
@@ -61,7 +61,7 @@ body {
     border-radius: 5px;
     background-color: transparent;
     color: var(--primary-text-color);
-    color: rgb(36, 36, 36);
+    color: rgb(255, 255, 255);
 }
 
 #emailBody input:not(:placeholder-shown)~label,
@@ -110,7 +110,7 @@ body {
 }
 
 #haveAcc a {
-    color: rgb(36, 36, 36);
+    color: rgba(255, 255, 255, 0.644);
     font-size: 12px;
     cursor: pointer;
 }
