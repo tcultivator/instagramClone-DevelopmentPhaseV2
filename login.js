@@ -88,7 +88,7 @@ document.getElementById('changePass').addEventListener('click', async (e) => {
     e.preventDefault()
     const changePassword = await apiReq('/sendchangePasswordReq', {
         email: inputEmailForgot.value,
-        sendUrl: `https://tcultivator.github.io/instagramClone-DevelopmentPhaseV2/changePassword.html?email=${inputEmailForgot.value}`
+        sendUrl: `https://instagramclone-developmentphasev2.onrender.com/instagramClone-DevelopmentPhaseV2/changePassword.html?email=${inputEmailForgot.value}`
     })
     if (changePassword.ok) {
         successNotif.style.display = 'flex'
