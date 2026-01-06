@@ -1,38 +1,61 @@
 import { apiReq } from "../../utils/fetchReq.js"
 
 export default async function displayAllStoryViewer() {
-    console.log('na click ung viewCount')
-    console.log(document.getElementById('storyViewCount').dataset)
-    const storyId = document.getElementById('storyViewCount').dataset.id
-    document.getElementById('viewerContent').innerHTML = ''
+    console.log('View count clicked')
+
+    // Get ID safely
+    const countBtn = document.getElementById('storyViewCount');
+    if (!countBtn) return;
+    const storyId = countBtn.dataset.id;
+
+    // Reset Content
+    document.getElementById('viewerContent').innerHTML = '';
+
+    // Show Modal
+    const viewerListModal = document.getElementById('storyViewerList');
+    viewerListModal.style.display = 'block'; // Triggers CSS flex rule
+
     const getAllStoryViewer = await apiReq('/getAllStoryViewer', { storyId: storyId })
+
     if (getAllStoryViewer.ok) {
-        document.getElementById('storyViewerList').style.display = 'block'
         console.log(getAllStoryViewer.data)
+
+        // Handle empty state
+        if (getAllStoryViewer.data.length === 0) {
+            document.getElementById('viewerContent').innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #8e8e8e; font-size: 14px;">
+                    No views yet.
+                </div>
+            `;
+            return;
+        }
+
         getAllStoryViewer.data.forEach(element => {
             let reactionsIcon = '';
             if (element.reactions != null) {
-                const parseReactionIcon = JSON.parse(element.reactions)
-                reactionsIcon = parseReactionIcon.join(' ')
-
+                try {
+                    const parseReactionIcon = JSON.parse(element.reactions)
+                    reactionsIcon = parseReactionIcon.join('') // Join without spaces for tight emoji cluster
+                } catch (e) {
+                    console.error("Error parsing reactions", e);
+                }
             }
 
+            // Updated HTML Structure for CSS Styling
             document.getElementById('viewerContent').innerHTML += `
-                <div id="viewerContentInfo" data-id="${element.id}">
-                    <div id="viewerInfo">
-                        <img src="${element.secure_url}" alt="">
-                        <label for="">${element.username}</label>
+                <div class="viewer-row" data-id="${element.id}">
+                    <div class="viewer-info">
+                        <img src="${element.secure_url}" alt="${element.username}">
+                        <label>${element.username}</label>
                     </div>
 
-                   
-                    <div id="viewerReactions">
+                    <div class="viewer-reactions">
                        ${reactionsIcon}
                     </div>
-
                 </div>
-                `
+            `
         })
     } else {
-        alert('error')
+        console.log('Error fetching viewers');
     }
 }

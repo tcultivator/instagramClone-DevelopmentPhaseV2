@@ -1,25 +1,27 @@
 :root {
-    --bg-color: #000000;
-    --primary-text-color: rgb(255, 255, 255);
+    --bg-color: #ffffff;
+    --primary-text-color: rgb(0, 0, 0);
     --btn-text-color: white;
     --btn-bg-color-secondary: #4E73C2;
     --btntoggle-color: rgb(218, 173, 29);
     --blackTextcolor: black;
-    --border-color: rgba(197, 197, 197, 0.363);
+    --border-color: rgb(172, 172, 172);
     --bg-secondary: rgb(29, 29, 29);
+
 }
 
 body {
     padding: 0;
     margin: 0;
-    font-family: 'Righteous';
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     overflow: hidden;
 }
 
+
 body button {
     cursor: pointer;
-    font-family: 'Righteous';
+    font-family: 'Inter', sans-serif;
 }
 
 #header {
@@ -53,218 +55,11 @@ body button {
 }
 
 
-#storyBody {
-    background-color: var(--bg-color);
-    top: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    box-sizing: border-box;
-    gap: 0px;
-
-}
-
-#stories {
-    display: flex;
-    gap: 5px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-}
-
-#addStories {
-    cursor: pointer;
-    font-family: sans-serif;
-    border-radius: 10px;
-
-}
-
-.story-thumbnail {
-    position: relative;
-    width: 90px;
-    height: 130px;
-    overflow: hidden;
-    transition: border-color 0.3s ease;
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-}
-
-.story-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.story-thumbnail video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-#story-label {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 4px 0;
-    background: rgba(57, 93, 211, 0.363);
-    color: white;
-    font-size: 12px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    font-family: 'Righteous';
-
-}
-
-#story-label button {
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    width: 30px;
-    border: none;
-    text-align: center;
-    background-color: #055bb6;
-    font-size: 10px;
-    font-weight: bold;
-    color: white;
-    transition: .2s;
-    z-index: 1;
-}
-
-#story-label button:hover {
-    transform: scale(1.1);
-}
-
-#addStories:hover .story-thumbnail {
-    border-color: #4e92db;
-}
-
-
-#addNewStory {
-    background-color: var(--bg-color);
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-#addNewStoryBody {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    gap: 5px;
-    justify-content: space-between;
-    padding: 10px 0;
-
-
-}
-
-#addNewStoryBody button {
-    background-color: var(--btn-bg-color-secondary);
-    width: 20%;
-
-    padding: 7px;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    font-weight: bold;
-
-    position: relative;
-    margin: 0 10px;
-}
-
-#addNewStoryBody label {
-
-    padding: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    width: 100%;
-    color: rgb(255, 255, 255);
-
-
-    text-align: center;
-}
-
-#addNewStoryBody #storyControl {
-    display: flex;
-    justify-content: right;
-    width: 95%;
-
-
-}
-
-#addNewStoryBody #storyControl #closeAddStory {
-    background-color: transparent;
-    color: rgb(255, 255, 255);
-    font-size: 15px;
-    width: 30px;
-    border-radius: 5px;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
 
 
 
-#viewStoryBody {
-    background-color: rgb(36, 36, 36);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    box-sizing: border-box;
-}
-
-#previewOfStory {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 5px;
-    margin: auto;
-    width: 100%;
-    background-color: var(--bg-color);
-    height: 100%;
 
 
-    color: white;
-
-}
-
-#previewOfStory #usernameOfStoryview {
-    font-weight: bold;
-    font-size: 20px;
-    padding: 10px;
-}
-
-#previewOfStory #closeViewStory {
-    font-weight: bold;
-    font-size: 20px;
-    padding: 5px;
-    color: rgb(255, 255, 255);
-    background-color: transparent;
-    border: none;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
 
 #storyViewCount {
     position: relative;
@@ -281,216 +76,31 @@ body button {
     font-size: 15px;
 }
 
-#footerInViewStory {
-    display: flex;
-    align-items: center;
-}
-
-/* #storyViewCount {
-    position: absolute;
-    bottom: 10%;
-    left: 10px;
-    background-color: var(--btn-bg-color-secondary);
-    border-radius: 5px;
-    color: white;
-    font-size: 14px;
-    padding: 7px;
-    aspect-ratio: 1/1;
-    min-width: 15px;
-    text-align: center;
-    align-items: center;
-} */
-
-#reactToStory {
-
-    width: 95%;
-    box-sizing: border-box;
-    display: flex;
-    gap: 5px;
-    justify-content: right;
-    padding: 10px;
-    margin-bottom: 10px;
-
-}
-
-#reactToStory i {
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    border: none;
-    color: white;
-    padding: 10px;
-    background-color: #e2c12b;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-#reactToStory i:first-child {
-    background-color: red;
-    font-size: 15px;
-}
-
-#reactToStory i:last-child {
-    background-color: blue;
-    font-size: 15px;
-}
-
-
-
-/* #footerNav #home i {
-    
-    color: white;
-    
-} */
-
-#userPost {
-    position: absolute;
-    width: 100%;
-    height: calc(100% - 15.5%);
-    box-sizing: border-box;
-
-    top: 60px;
-    z-index: -1;
-    gap: 5px;
-    overflow: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-}
-
-#userPost::-webkit-scrollbar {
-    display: none;
-}
-
-
-
-#postcontent {
-    background-color: var(--bg-color);
-    width: 100%;
-    height: fit-content;
-    padding-bottom: 10px;
-    color: var(--primary-text-color);
-
-}
-
-#postcontent #followBTN {
-    background-color: transparent;
-    padding: 5px;
-    border-radius: 5px;
-    text-align: center;
-    color: var(--primary-text-color);
-    width: 70px;
-    border: 2px solid var(--primary-text-color);
-}
-
-
-
-#postlabel {
-    color: var(--primary-text-color);
-    font-size: 12px;
-    margin-left: 5px;
-}
-
-#postlabel label {
-    color: var(--primary-text-color);
-    font-weight: bold;
-}
-
-#postlabel label span {
-    color: var(--primary-text-color);
-    font-weight: normal;
-
-}
-
-#userProfilePost {
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.705);
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-}
-
-#userProfilePost div {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: 500;
-    font-family: 'Roboto', sans-serif;
-}
-
-#userProfilePost img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid rgb(255, 255, 255);
-}
-
-#userProfilePost label {
-    cursor: pointer;
-}
-
-#userProfilePost button {
-    background-color: transparent;
-    border: none;
-    font-size: 12px;
-    cursor: pointer;
-    color: var(--primary-text-color);
-}
 
 
 
 
-#userPostContent {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-
-}
-
-#userPostContent img {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-}
-
-#userPostContent label {
-    margin-left: 10px;
-    font-size: 14px;
-
-}
 
 
 
-#likecommentshare {
-    padding: 10px;
 
-    display: flex;
-    gap: 10px;
-    justify-content: left;
-}
 
-#likecommentshare button {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    color: var(--primary-text-color);
-    cursor: pointer;
-}
 
-#likecommentshare button:hover {
 
-    color: rgba(255, 255, 255, 0.767);
-}
 
-#valueoflikecommentshare {
-    display: flex;
-    gap: 14px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.63);
-    padding: 0 0 5px 5px;
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -563,194 +173,6 @@ body button {
 
 
 
-#profileBody {
-    position: absolute;
-    width: 100%;
-    height: calc(100% - 50px);
-    background-color: var(--bg-color);
-    z-index: 2;
-    color: var(--primary-text-color);
-
-}
-
-#headProfile {
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 5px;
-
-}
-
-#headProfile label {
-    font-size: 19px;
-    color: var(--primary-text-color);
-
-}
-
-#headProfile #backBtnonProfile {
-    position: absolute;
-    left: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 15px;
-    color: var(--primary-text-color);
-}
-
-#headProfile #settingsInProfile {
-    position: absolute;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 19px;
-    color: var(--primary-text-color);
-}
-
-#profileiconBody {
-    display: flex;
-    align-items: center;
-    padding: 30px;
-    gap: 10px;
-    color: var(--primary-text-color);
-}
-
-#bioBody {
-
-    padding: 0 20px;
-    display: flex;
-    justify-content: center;
-}
-
-#bioInProfile {
-    padding: 5px;
-    text-align: center;
-    align-items: center;
-
-    justify-content: center;
-    justify-items: center;
-    color: var(--primary-text-color);
-    font-size: 10px;
-}
-
-
-#aboutUserInfoBody {
-    display: flex;
-    flex-direction: column;
-
-    padding: 5px 10px;
-}
-
-#aboutUserInfoBody label {
-    font-size: 11px;
-}
-
-#aboutUserInfoBody span {
-    font-size: 11px;
-}
-
-#aboutUserHead {
-    display: flex;
-    justify-content: space-between;
-}
-
-#aboutUserHead label {
-    font-size: 14px;
-}
-
-#aboutUserHead button {
-    border: none;
-    background-color: transparent;
-    color: var(--primary-text-color);
-}
-
-
-
-#visitbioBody {
-
-    padding: 0 20px;
-    display: flex;
-    justify-content: center;
-}
-
-#visitbioInProfile {
-    padding: 5px;
-    text-align: center;
-    align-items: center;
-
-    justify-content: center;
-    justify-items: center;
-    color: var(--primary-text-color);
-    font-size: 10px;
-}
-
-
-#visitaboutUserInfoBody {
-    display: flex;
-    flex-direction: column;
-
-    padding: 5px 10px;
-}
-
-#visitaboutUserInfoBody label {
-    font-size: 11px;
-}
-
-#visitaboutUserInfoBody span {
-    font-size: 11px;
-}
-
-#visitaboutUserHead {
-    display: flex;
-    justify-content: space-between;
-}
-
-#visitaboutUserHead label {
-    font-size: 14px;
-}
-
-#visitaboutUserHead button {
-    border: none;
-    background-color: transparent;
-    color: var(--primary-text-color);
-}
-
-
-
-#profileiconBody #profileControl {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    justify-content: left;
-    color: var(--primary-text-color);
-}
-
-#profileControl div {
-    display: flex;
-    gap: 5px;
-}
-
-#profileControl div button {
-    padding: 5px 10px;
-    background-color: transparent;
-    width: 90px;
-}
-
-
-
-#profileiconBody img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    
-    border: 5px solid white;
-}
-
-#profileiconBody #icon {
-
-    position: relative;
-    box-sizing: border-box;
-}
-
 #icon div {
     position: absolute;
     bottom: 0;
@@ -782,47 +204,8 @@ body button {
 
 }
 
-#profileControl button {
-    background-color: transparent;
-
-    border: none;
-    border-radius: 5px;
-    color: var(--primary-text-color);
-    font-weight: 600;
-    font-size: 11px;
-    border: 2px solid var(--primary-text-color);
-}
-
-#profileControl label {
-    color: var(--primary-text-color);
-}
 
 
-#profileDetails {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 10px;
-    border-bottom: 1px solid var(--border-color);
-    margin-top: 10px;
-}
-
-#profileDetails div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100px;
-
-}
-
-#profileDetails div label:first-child {
-    font-size: 20px;
-    color: var(--primary-text-color);
-}
-
-#profileDetails div label:last-child {
-    font-size: 15px;
-    color: var(--primary-text-color);
-}
 
 
 
@@ -866,546 +249,6 @@ body button {
 
 
 
-
-
-
-
-
-
-
-#visitprofileBody {
-    position: absolute;
-    width: 100%;
-    height: calc(100% - 50px);
-    background-color: var(--bg-color);
-    z-index: 2;
-    color: var(--primary-text-color);
-}
-
-#visitheadProfile {
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    color: var(--primary-text-color);
-}
-
-#visitheadProfile label {
-    font-size: 19px;
-    color: var(--primary-text-color);
-
-}
-
-#visitheadProfile button {
-    position: absolute;
-    left: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 15px;
-    color: var(--primary-text-color);
-}
-
-#visitprofileiconBody {
-    display: flex;
-    align-items: center;
-    padding: 30px;
-    gap: 10px;
-    color: var(--primary-text-color);
-}
-
-#visitprofileiconBody #profileControl {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    justify-content: left;
-    color: var(--primary-text-color);
-}
-
-#visitprofileiconBody img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 5px solid var(--primary-text-color);
-}
-
-
-
-#visitprofileControl label {
-    color: var(--primary-text-color);
-}
-
-
-#visitprofileControl #profileControl {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    justify-content: left;
-    color: var(--primary-text-color);
-}
-
-#visitprofileControl div {
-    display: flex;
-    gap: 3px;
-    width: 100%;
-}
-
-#visitprofileControl div button {
-    padding: 5px 10px;
-    background-color: transparent;
-    width: 100%;
-    min-width: 70px;
-}
-
-#visitprofileControl button {
-    background-color: transparent;
-    border: none;
-    border-radius: 5px;
-    color: var(--primary-text-color);
-    font-weight: 600;
-    font-size: 11px;
-    border: 2px solid var(--border-color);
-}
-
-
-#visitprofileDetails {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 10px;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--primary-text-color);
-}
-
-#visitprofileDetails div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100px;
-    color: var(--primary-text-color);
-
-}
-
-#visitprofileDetails div label:first-child {
-    font-size: 20px;
-    color: var(--primary-text-color);
-}
-
-#visitprofileDetails div label:last-child {
-    font-size: 15px;
-    color: var(--primary-text-color);
-}
-
-
-#closeNotification{
-    color: var(--primary-text-color);
-}
-
-#createPost {
-    background-color: var(--bg-color);
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    overflow: hidden;
-}
-
-#createPost form {
-    width: 100%;
-    background-color: var(--bg-color);
-    height: 100%;
-    margin: auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-
-    justify-content: space-between;
-    color: var(--primary-text-color);
-
-}
-
-
-#createPost form #caption {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid var(--border-color);
-}
-
-#createPostControl {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 90%;
-    margin: 0 auto 10px auto;
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    padding: 0px 20px;
-    box-sizing: border-box;
-}
-
-#createPostControl input {
-    background-color: transparent;
-    color: var(--primary-text-color);
-}
-
-
-#createPostUploaded {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-#createPostUploaded input {
-    width: 50%;
-    margin: auto;
-
-}
-
-#createPost form #fileUp::-webkit-file-upload-button {
-    width: 100%;
-    padding: 10px;
-    color: var(--btn-text-color);
-    background-color: var(--btn-bg-color-secondary);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#uploadNewFileForPost {
-    color: rgba(255, 255, 255, 0.397);
-    font-size: 100px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#createPost form button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    color: var(--btn-text-color);
-    background-color: var(--btn-bg-color-secondary);
-    cursor: pointer;
-}
-
-#createPost #closeCreatePost {
-    border: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    color: var(--blackTextcolor);
-    font-weight: bold;
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
-}
-
-#uploadNewFileForPost {
-    color: rgba(255, 255, 255, 0.397);
-    font-size: 100px;
-}
-
-
-#createPost form #preview {
-    width: 100%;
-    margin: auto;
-    height: 100%;
-
-}
-
-#uploadForm h2 {
-    color: #ffffff;
-    font-weight: normal;
-    position: absolute;
-    text-align: center;
-    top: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-
-
-
-#updateProfilePic {
-    background-color: var(--bg-color);
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    color: rgb(0, 0, 0);
-    display: flex;
-    z-index: 1;
-
-}
-
-#updateProfilePic #closeUpdateProfile {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    color: white;
-}
-
-#updateProfilePic #updateProfilePicForm {
-
-    margin: auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    color: white;
-    width: 100%;
-    height: 100%;
-    justify-content: space-between;
-    box-sizing: border-box;
-}
-
-#updateProfilePic #updateProfilePicForm input::-webkit-file-upload-button {
-    width: 100%;
-    padding: 10px;
-    color: var(--btn-text-color);
-    background-color: var(--btn-bg-color-secondary);
-    border: none;
-    border-radius: 5px;
-}
-
-#updateProfilePic #updateProfilePicForm button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    color: var(--btn-text-color);
-    background-color: var(--btn-bg-color-secondary);
-    width: 90%;
-    margin: 0 auto 10px auto;
-}
-
-
-
-
-
-
-
-
-#profileContent {
-    box-sizing: border-box;
-    padding: 5px;
-    max-height: calc(100% - 49%);
-    overflow: auto;
-    -ms-overflow-style: none;
-
-
-}
-
-#profileContent::-webkit-scrollbar {
-    display: none;
-}
-
-#profileContent #imgGrid {
-    gap: 5px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-#profileContent #imgGrid div {
-    border: 1px solid rgba(197, 197, 197, 0.788);
-    border-radius: 5px;
-    box-sizing: border-box;
-    display: flex;
-}
-
-#profileContent #imgGrid div img {
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    background-size: contain;
-}
-
-
-
-
-
-
-#visitprofileContent {
-    box-sizing: border-box;
-    padding: 5px;
-    max-height: calc(100% - 250px);
-    overflow: auto;
-    -ms-overflow-style: none;
-}
-
-#visitprofileContent::-webkit-scrollbar {
-    display: none;
-}
-
-#visitprofileContent #visitimgGrid {
-    gap: 5px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-#visitprofileContent #visitimgGrid div {
-    border: 1px solid rgba(197, 197, 197, 0.788);
-    border-radius: 5px;
-    box-sizing: border-box;
-    display: flex;
-}
-
-#visitprofileContent #visitimgGrid div img {
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    background-size: contain;
-}
-
-
-
-
-
-
-
-
-
-#previewofImageInPost {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.815);
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    display: flex;
-}
-
-#previewofImageInPost div {
-    width: 100%;
-
-    margin: auto;
-    display: flex;
-}
-
-#previewofImageInPost div img {
-    width: 100%;
-    height: auto;
-    margin: auto;
-}
-
-#previewofImageInPost button {
-    background-color: transparent;
-    color: white;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-}
-
-
-
-
-
-
-#viewPostBody {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.418);
-    overflow: hidden;
-    box-sizing: border-box;
-
-}
-
-#commentsBody {
-    background-color: rgb(255, 255, 255);
-    position: absolute;
-    bottom: -75%;
-    width: 100%;
-    height: calc(100% - 30%);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    animation: up .2s linear;
-    color: rgb(36, 36, 36);
-
-}
-
-@keyframes up {
-    0% {
-        bottom: -75%;
-    }
-
-    100% {
-        bottom: 0%;
-    }
-}
-
-#commentHead {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5px;
-    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
-    gap: 10px;
-    color: rgb(36, 36, 36);
-
-}
-
-#commentHead #closeComment {
-    border-radius: 5px;
-    width: 70px;
-    padding: 2px;
-    cursor: pointer;
-}
-
-#likesAndControls {
-    display: flex;
-
-    width: 90%;
-    justify-content: space-between;
-
-}
-
-#likesAndControls button {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-#commentsContents {
-
-    width: 100%;
-    height: 100%;
-    max-height: 77%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    padding: 5px 10px;
-    gap: 10px;
-    overflow: auto;
-    background-color: rgb(255, 255, 255);
-    border-bottom: 1px solid rgba(197, 197, 197, 0.788);
-    margin-top: 2px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-}
-
-#commentsContents::-webkit-scrollbar {
-    display: none;
-}
-
 #commentsOnPost {
     background-color: rgb(255, 255, 255);
     display: flex;
@@ -1420,80 +263,6 @@ body button {
     border: 3px solid rgb(36, 36, 36);
     cursor: pointer;
 }
-
-#commentDetails {
-    background-color: #dddddd;
-    color: black;
-    width: auto;
-    padding: 5px 10px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-}
-
-#commentDetails label {
-    word-break: break-all;
-}
-
-#commentDetails #userThatComment {
-    color: black;
-    font-weight: bold;
-}
-
-#addCommentToPost {
-
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 0px 10px 20px 10px;
-    height: auto;
-    box-sizing: border-box;
-    background-color: rgb(255, 255, 255);
-}
-
-#addControl {
-    display: flex;
-    gap: 5px;
-    background-color: rgb(255, 255, 255);
-
-}
-
-#addControl input {
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    width: 100%;
-    border: 1px solid rgba(197, 197, 197, 0.788);
-}
-
-#addControl button {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    font-weight: bold;
-    background-color: rgb(75, 110, 226);
-    font-size: 10px;
-    width: 60px;
-    cursor: pointer;
-}
-
-#addControl button i {
-    transform: rotate(20deg);
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1565,7 +334,7 @@ body button {
 
 #followersContent label {
     color: var(--primary-text-color);
-    
+
 }
 
 #followersContent img {
@@ -1580,102 +349,12 @@ body button {
     padding: 5px 10px;
     border-radius: 5px;
     color: var(--primary-text-color);
-    border: 2px solid var(--primary-text-color);
+    border: 1px solid var(--primary-text-color);
 
 }
 
 
 
-
-#storyViewerList {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.336);
-    overflow: hidden;
-    display: flex;
-}
-
-#listOfViewer {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    background-color: rgb(255, 255, 255);
-    height: 60%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
-
-#controlStoryViewer {
-    background-color: rgb(255, 255, 255);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    display: flex;
-    padding: 5px 0 20px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.418);
-}
-
-#controlStoryViewer button {
-    width: 15%;
-    background-color: rgb(255, 255, 255);
-    height: 10px;
-    margin: 0 auto;
-    border-radius: 15px;
-    border: 2px solid rgba(0, 0, 0, 0.699);
-}
-
-
-
-
-#viewerContent {
-
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 100%;
-    max-height: 390px;
-
-}
-
-#viewerContentInfo {
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#viewerContentInfo #viewerInfo {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: rgb(0, 0, 0);
-}
-
-#viewerContentInfo #viewerReactions {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    color: white;
-}
-
-
-#viewerReactions #heartReact {
-    background-color: red;
-    width: 15px;
-    height: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    font-size: 8px;
-}
 
 
 #hahaReact {
@@ -1712,78 +391,6 @@ body button {
 
 
 
-
-
-
-
-
-#viewerInfo img {
-    width: 30px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    border: 2px solid white;
-}
-
-
-
-
-#reactionsPopupIconheart {
-    position: absolute;
-    top: 45%;
-    right: 44%;
-    transform: translate(-50%, -45%);
-    display: flex;
-    animation: fadeOutheart .3s ease-in;
-
-
-
-}
-
-#reactionsPopupIconheart #heartReactPopup {
-    color: red;
-    margin: auto;
-    font-size: 40px;
-
-}
-
-
-#reactionsPopupIconhaha {
-    position: absolute;
-    top: 45%;
-    right: 44%;
-    transform: translate(-50%, -45%);
-    display: flex;
-    animation: fadeOuthaha .3s ease-in;
-
-
-
-}
-
-#reactionsPopupIconhaha #hahaReactPopup {
-    color: #e2c12b;
-    margin: auto;
-    font-size: 40px;
-
-}
-
-#reactionsPopupIconlike {
-    position: absolute;
-    top: 45%;
-    right: 44%;
-    transform: translate(-50%, -45%);
-    display: flex;
-    animation: fadeOutlike .3s ease-in;
-
-
-
-}
-
-#reactionsPopupIconlike #likeReactPopup {
-    color: blue;
-    margin: auto;
-    font-size: 40px;
-
-}
 
 @keyframes fadeOutheart {
     from {
@@ -1826,387 +433,6 @@ body button {
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-#editProfileInfo {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
-    box-sizing: border-box;
-    z-index: 1;
-    color: var(--primary-text-color);
-    overflow: hidden;
-
-}
-
-#headerInProfile {
-    width: 100%;
-    background-color: var(--bg-color);
-    padding: 10px;
-    text-align: center;
-
-    color: var(--primary-text-color);
-}
-
-#headerInProfile button {
-    position: absolute;
-    top: 10px;
-    left: 5px;
-    background-color: transparent;
-    border: none;
-    color: var(--primary-text-color);
-}
-
-#contentOfprofileInfo {
-
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#contentOfprofileInfo div {
-    display: flex;
-    gap: 5px;
-}
-
-#contentOfprofileInfo input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid white;
-    background-color: transparent;
-    color: var(--primary-text-color);
-}
-
-#contentOfprofileInfo button {
-    border-radius: 5px;
-    background-color: #1C6CFF;
-    color: white;
-    border: none;
-    padding: 5px 20px;
-}
-
-#bioDiv {
-    display: flex;
-    flex-direction: column;
-}
-
-#bioDiv textarea {
-    width: 100%;
-    height: 100px;
-    background-color: transparent;
-    color: var(--primary-text-color);
-}
-
-#bioDiv button {
-    width: 30%;
-    padding: 7px 20px;
-}
-
-
-
-
-
-
-#searchBody {
-    position: absolute;
-    width: 100%;
-    height: calc(100% - 50px);
-    background-color: var(--bg-color);
-    box-sizing: border-box;
-    z-index: 1;
-    right: 0;
-    color: var(--primary-text-color);
-
-}
-
-#searchHeader {
-    display: flex;
-    padding: 10px;
-    box-sizing: border-box;
-    position: fixed;
-    width: 100%;
-    background-color: var(--bg-color);
-    height: 7%;
-}
-
-#searchContent {
-    display: flex;
-    gap: 5px;
-    width: 80%;
-}
-
-#searchContent input {
-    padding: 15px;
-    border-radius: 5px;
-    border: none;
-    width: 100%;
-    border: 2px solid white;
-    background-color: transparent;
-    color: var(--primary-text-color);
-}
-
-#searchContent button {
-    padding: 15px;
-    border-radius: 5px;
-    border: 2px solid var(--primary-text-color);
-    background-color: transparent;
-    color: var(--primary-text-color);
-    font-size: 13px;
-    box-sizing: border-box;
-    text-align: center;
-    display: flex;
-    align-items: center;
-}
-
-#closeSearchWindow {
-    background-color: transparent;
-    color: var(--primary-text-color);
-    border: none;
-    font-size: 20px;
-    position: absolute;
-    right: 10px;
-}
-
-
-
-#searchResultsBody {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding: 10px;
-    height: calc(100% - 6%);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    overflow: auto;
-}
-
-#searchResultsBody::-webkit-scrollbar {
-    display: none;
-}
-
-#searchResults {
-    gap: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-#contentsOfSearchResults {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #eaeaeab4;
-}
-
-#resultsDetails {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-#resultsDetails img {
-    width: 25px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    border: 3px solid rgb(36, 36, 36);
-}
-
-#resultsControl {
-    display: flex;
-    gap: 5px;
-}
-
-#resultsControl button {
-    padding: 3px 5px;
-    border-radius: 5px;
-    color: rgb(36, 36, 36);
-    border: 2px solid rgb(36, 36, 36);
-    background-color: transparent;
-    font-size: 10px;
-    width: 60px;
-}
-
-
-
-
-
-
-#loadingBarInComment #loadingComment {
-    width: 30px;
-    height: 30px;
-    border: 5px solid white;
-    position: absolute;
-    top: 35%;
-    margin-left: 2.5%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border-bottom: 5px solid transparent;
-    animation: spinLoadingComment .5s linear infinite;
-
-}
-
-
-
-
-#searchLoadingMessage {
-    position: absolute;
-    height: calc(100% - 6%);
-    bottom: 0;
-    padding: 10px;
-    box-sizing: border-box;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-
-}
-
-
-
-
-
-
-
-
-
-#messageBody {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-#messageHeader {
-    background-color: var(--bg-color);
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 5px;
-    border-bottom: 1px solid var(--border-color);
-    box-sizing: border-box;
-    color: var(--primary-text-color);
-}
-
-#messageHeader button {
-
-    left: 5px;
-    background-color: transparent;
-    color: var(--primary-text-color);
-    border: none;
-
-}
-
-#messageRequestButtonBody {
-    background-color: var(--bg-color);
-    padding: 10px 10px 0px 10px;
-    display: flex;
-    gap: 5px;
-    box-sizing: border-box;
-
-}
-
-
-
-#messageRequestButtonBody button {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background-color: #4E73C2;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    border: none;
-    width: 100%;
-    position: relative;
-    color: white;
-}
-
-
-
-#messageRequestButtonBody button #reqmesIcon {
-    font-size: 25px;
-}
-
-#newMessReqIndicator {
-    position: absolute;
-    background-color: red;
-    font-size: 10px;
-    left: 25px;
-    top: 5px;
-    padding: 1px 5px;
-    border-radius: 5px;
-}
-
-
-#listOfconvoBody {
-    background-color: var(--bg-color);
-    max-height: 800px;
-    height: 100%;
-    overflow: auto;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-}
-
-#convoContent {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background-color: #eaeaea;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-}
-
-#convoContent img {
-    aspect-ratio: 1/1;
-    width: 40px;
-    border-radius: 50%;
-
-}
-
-
-#convoContent div {
-
-    display: flex;
-    flex-direction: column;
-}
-
-#convoContent div label:first-child {
-    font-size: 17px;
-    color: rgb(0, 0, 0);
-    font-weight: normal;
-}
-
-#convoContent div label:last-child {
-    font-size: 12px;
-    color: rgb(78, 78, 78);
-}
-
-
-
-
-
 
 
 
@@ -2299,7 +525,7 @@ body button {
 #informationAndMessagesLeft #textMessagesLeftImg {
     padding: 0;
     max-width: 50%;
-    
+
 
 }
 
@@ -2450,102 +676,6 @@ body button {
 
 
 
-
-#fileImageWantToSendPreview {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(0, 0, 0);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    justify-content: center;
-    z-index: 2;
-}
-
-#ImgPreview {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-}
-
-#ImgPreview img {
-    width: 100%;
-    max-height: 800px;
-}
-
-#ImgPreview video {
-    width: 100%;
-    max-height: 800px;
-}
-
-#fileImageWantToSendPreview label {
-    position: absolute;
-    top: 5px;
-}
-
-#fileImageWantToSendPreviewControls {
-    position: absolute;
-    bottom: 10px;
-    width: 50%;
-
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-#fileImageWantToSendPreviewControls button {
-    width: 100px;
-    padding: 5px;
-    border-radius: 5px;
-    border: none;
-}
-
-#fileImageWantToSendPreviewControls :last-child {
-    background-color: #007bff;
-    color: white;
-}
-
-
-
-
-
-#notificationBody {
-    position: absolute;
-    width: 100%;
-    background-color: var(--bg-color);
-    height: calc(100% - 54px);
-    color: var(--primary-text-color);
-}
-
-#notificationHeader {
-    border-bottom: 1px var(--border-color);
-    padding: 5px;
-    text-align: center;
-}
-
-#notificationHeader button {
-    position: absolute;
-    left: 3px;
-    background-color: transparent;
-    border: none;
-}
-
-#notificationContentBody {
-    padding: 10px;
-    gap: 6px;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color);
-    max-height: calc(100% - 8.5%);
-    overflow: auto;
-    color: black;
-}
-
 #notifContentDetails {
     display: flex;
     align-items: center;
@@ -2561,7 +691,7 @@ body button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 2px solid var(--primary-text-color);
+    border: 1px solid var(--primary-text-color);
 }
 
 #notifDetails {
@@ -2587,18 +717,12 @@ body button {
     right: 10%;
     border-radius: 5px;
     padding: 3px 5px;
-    border: 2px solid var(--primary-text-color);
+    border: 1px solid var(--primary-text-color);
     background-color: var(--primary-text-color);
     font-size: 12px;
 }
 
 
-#markAllReadBody {
-
-    padding: 5px 10px;
-    display: flex;
-    justify-content: end;
-}
 
 
 
@@ -2632,39 +756,6 @@ body button {
 
 
 
-#messageRequestBody {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
-    z-index: 1;
-}
-
-#messageRequestHeader {
-    padding: 10px;
-    border-bottom: 1px solid var(--border-color);
-    text-align: center;
-    position: relative;
-    color: var(--primary-text-color);
-}
-
-#messageRequestHeader #closeMessageRequest {
-    position: absolute;
-    left: 5px;
-    background-color: transparent;
-    border: none;
-    color: var(--primary-text-color);
-}
-
-#messageRequestContents {
-    background-color: var(--bg-color);
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-}
-
 #messageRequestDetails {
     display: flex;
     align-items: center;
@@ -2686,7 +777,7 @@ body button {
     width: 30px;
     border-radius: 50%;
     cursor: pointer;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 #messageRequestAcceptBtn {
@@ -2764,7 +855,7 @@ body button {
         align-items: left;
         text-align: left;
         color: var(--primary-text-color);
-        width: 20%;
+        width: 350px;
         height: 100%;
         border-right: 1px solid var(--border-color)
     }
@@ -2779,7 +870,7 @@ body button {
         font-size: 17px;
         cursor: pointer;
         margin: 0 8%;
-        font-family: 'Poppins';
+        font-family: 'Inter', sans-serif;
         position: relative;
     }
 
@@ -2805,582 +896,13 @@ body button {
         display: none;
     }
 
-    #userPost {
-        width: calc(100% - 20%);
-        right: 0;
-        height: calc(100%);
-        top: 0;
-        background-color: var(--bg-color);
-        padding: 0px 15%;
-
-
-    }
-
-    #postcontent {
-
-
-        background-color: var(--bg-color);
-        color: var(--primary-text-color);
-        padding-bottom: 15px;
-        border-left: 1px solid var(--border-color);
-        border-right: 1px solid var(--border-color);
-    }
-
-    #userProfilePost {
-
-        background-color: transparent;
-    }
-
-    #userProfilePost label {
-        color: var(--primary-text-color);
-    }
-
-    #postcontent div {
-        color: rgba(255, 255, 255, 0.692);
-    }
-
-
-
-    #userProfilePost img {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        border: 2px solid rgb(255, 255, 255);
-    }
-
-    #storyBody {
-        background-color: var(--bg-color);
-        top: 0;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 5px;
-        border-bottom: 1px solid var(--border-color);
-        border-top: 1px solid var(--border-color);
-
-        box-sizing: border-box;
-        gap: 0px;
-
-    }
-
-    #stories {
-        display: flex;
-        gap: 5px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-
-    }
-
-    #addStories {
-        cursor: pointer;
-        font-family: sans-serif;
-        border-radius: 10px;
-
-    }
-
-    .story-thumbnail {
-        position: relative;
-        width: 180px;
-        height: 280px;
-        overflow: hidden;
-        border: 2px solid var(--border-color);
-        transition: border-color 0.3s ease;
-        border-radius: 10px;
-    }
-
-    .story-thumbnail img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    #story-label {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: 8px 0;
-        background: rgba(57, 93, 211, 0.363);
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-
-
-
-    }
-
-    #story-label button {
-        border-radius: 50%;
-        aspect-ratio: 1/1;
-        width: 50px;
-        border: none;
-        text-align: center;
-        background-color: #007bff;
-        font-size: 15px;
-        font-weight: bold;
-        color: white;
-        transition: .2s;
-
-    }
-
-    #story-label button:hover {
-        transform: scale(1.1);
-    }
-
-    #addStories:hover .story-thumbnail {
-        border-color: #007bff;
-    }
-
-    #postlabel label {
-        color: rgb(255, 255, 255);
-        font-weight: bold;
-    }
-
-
-    #visitprofileBody {
-        background-color: var(--bg-color);
-
-        height: 100%;
-        width: calc(100% - 20%);
-        position: absolute;
-        right: 0;
-        border-left: 1px solid var(--border-color);
-    }
-
-    #visitprofileBody #visitheadProfile label {
-        color: var(--primary-text-color);
-    }
-
-    #visitprofileBody #visitheadProfile button {
-        color: var(--primary-text-color);
-        cursor: pointer;
-
-    }
-
-    #visitprofileiconBody label {
-        color: var(--primary-text-color);
-    }
-
-    #visitprofileDetails #visitpostBody label {
-        color: var(--primary-text-color);
-    }
-
-    #visitprofileDetails #visitfollowerBody {
-        cursor: pointer;
-    }
-
-    #visitprofileDetails #visitfollowerBody label {
-        color: var(--primary-text-color);
-        cursor: pointer;
-    }
-
-    #visitprofileDetails #visitfollowingBody {
-        cursor: pointer;
-    }
-
-    #visitprofileDetails #visitfollowingBody label {
-        color: var(--primary-text-color);
-        cursor: pointer;
-    }
-
-    #profileBody {
-        background-color: var(--bg-color);
-        z-index: 1;
-        height: 100%;
-        width: calc(100% - 20%);
-        position: absolute;
-        right: 0;
-        border-left: 1px solid var(--border-color);
-        color: var(--primary-text-color);
-    }
-
-    #profileBody #headProfile label {
-        color: var(--primary-text-color);
-    }
-
-    #profileBody #headProfile button {
-        color: var(--primary-text-color);
-        cursor: pointer;
-
-    }
-
-    #profileiconBody label {
-        color: var(--primary-text-color);
-    }
-
-    #profileDetails #postBody label {
-        color: var(--primary-text-color);
-    }
-
-    #profileDetails #followerBody {
-        cursor: pointer;
-    }
-
-    #profileDetails #followerBody label {
-        color: var(--primary-text-color);
-        cursor: pointer;
-    }
-
-    #profileDetails #followingBody {
-        cursor: pointer;
-    }
-
-    #profileDetails #followingBody label {
-        color: var(--primary-text-color);
-        cursor: pointer;
-    }
-
-
-
-
-
-    #profileContent {
-        padding: 5px;
-        color: var(--primary-text-color);
-    }
-
-    #profileContent #imgGrid {
-        gap: 5px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        color: var(--primary-text-color);
-    }
-
-    #profileContent #imgGrid div {
-        border: 1px solid var(--border-color);
-        border-radius: 5px;
-        box-sizing: border-box;
-        display: flex;
-        color: var(--primary-text-color);
-    }
-
-    #profileContent #imgGrid div img {
-        box-sizing: border-box;
-        width: 100%;
-        height: auto;
-        background-size: contain;
-        color: var(--primary-text-color);
-    }
-
-
-
-
-    #createPost {
-        background-color: var(--bg-color);
-        z-index: 1;
-        height: 100%;
-        width: calc(100% - 20%);
-        position: absolute;
-        right: 0;
-        border-left: 1px solid var(--border-color);
-    }
-
-    #createPost form {
-        background-color: var(--bg-color);
-        width: 600px;
-    }
-
-    #uploadForm h2 {
-        color: var(--primary-text-color);
-        font-weight: normal;
-
-    }
-
-    #createPost form #preview {
-        width: 100%;
-        margin: auto;
-        height: 100%;
-
-    }
-
-    #uploadNewFileForPost {
-        color: rgba(133, 133, 133, 0.842);
-        font-size: 100px;
-        cursor: pointer;
-    }
-
-    #createPost form #caption {
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid var(--border-color);
-    }
-
-
-    #updateProfilePic {
-        background-color: var(--bg-color);
-        z-index: 1;
-        height: 100%;
-        width: calc(100% - 20%);
-        position: absolute;
-        right: 0;
-        border-left: 1px solid var(--border-color);
-
-    }
-
-    #createPost #closeCreatePost {
-        color: var(--primary-text-color);
-        cursor: pointer;
-    }
-
-    #updateProfilePic #closeUpdateProfile {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: transparent;
-        border: none;
-        font-size: 20px;
-        font-weight: bold;
-        color: var(--primary-text-color);
-        cursor: pointer;
-
-    }
-
-    #updateProfilePic #updateProfilePicForm {
-        width: 600px;
-    }
-
-    #updateProfilePic #updateProfilePicForm input::-webkit-file-upload-button {
-        width: 100%;
-        padding: 10px;
-        color: var(--btn-text-color);
-        background-color: var(--btn-bg-color-secondary);
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    #updateProfilePic #updateProfilePicForm button {
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        font-weight: bold;
-        color: var(--btn-text-color);
-        background-color: var(--btn-bg-color-secondary);
-        cursor: pointer;
-    }
-
-
-
-
-
-    #createPostControl {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        width: 40%;
-        margin: 0 auto 10px auto;
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 0px 20px;
-        box-sizing: border-box;
-    }
-
-
-
-
-
-
-    #viewPostBody {
-        background-color: rgba(0, 0, 0, 0.418);
-        z-index: 1;
-        height: 100%;
-        width: calc(100% - 20%);
-        position: absolute;
-        right: 0;
-        border-left: 1px solid var(--border-color);
-        display: flex;
-        padding: 0 14%;
-
-    }
-
-    #commentsBody {
-        background-color: rgb(255, 255, 255);
-        position: absolute;
-        bottom: -75%;
-        width: 65%;
-        height: calc(100% - 30%);
-        border: 1px solid var(--border-color);
-        
-        animation: up .2s linear;
-
-
-
-    }
-
-    @keyframes up {
-        0% {
-            bottom: -75%;
-        }
-
-        100% {
-            bottom: 0%;
-        }
-    }
-
-    #commentHead {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 5px;
-        gap: 10px;
-        
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
-    #commentHead #closeComment {
-        border-radius: 5px;
-        width: 70px;
-        padding: 2px;
-    }
-
-    #likesAndControls {
-        display: flex;
-
-        width: 90%;
-        justify-content: space-between;
-
-    }
-
-    #likesAndControls button {
-        background-color: transparent;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    #commentsContents {
-
-        width: 100%;
-        height: 100%;
-        max-height: 80%;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        padding: 5px 10px;
-        gap: 10px;
-        overflow: auto;
-        
-        
-        margin-top: 2px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-
-    }
-
-    #commentsContents::-webkit-scrollbar {
-        display: none;
-    }
-
-    #commentsOnPost {
-        
-        display: flex;
-        gap: 10px;
-        align-items: top;
-    }
-
-    #commentsOnPost img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-    }
-
-    #commentDetails {
-        background-color: #00000033;
-        width: auto;
-        padding: 5px 10px;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    #commentDetails label {
-        word-break: break-all;
-    }
-
-    #commentDetails #userThatComment {
-        color: black;
-        font-weight: bold;
-    }
-
-    #addCommentToPost {
-
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: 10px 10px 20px 10px;
-        height: auto;
-        box-sizing: border-box;
-        
-
-    }
-
-    #addControl {
-        display: flex;
-        gap: 5px;
-        
-
-    }
-
-    #addControl input {
-        padding: 10px;
-        box-sizing: border-box;
-        border-radius: 5px;
-        width: 100%;
-        background-color: transparent;
-       
-    }
-
-    #addControl button {
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        color: white;
-        font-weight: bold;
-        background-color: var(--btn-bg-color-secondary);
-        font-size: 10px;
-        width: 60px;
-        cursor: pointer;
-    }
-
-    #addControl button i {
-        transform: rotate(20deg);
-    }
-
-    #userPostContent {
-        width: 100%;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-
-    }
-
-    #userPostContent video {
-        max-height: 600px;
-    }
-
-
-
-
-
-
-
 
 
     #showFollowersBody {
         position: absolute;
         top: 0;
         right: 0;
-        width: calc(100% - 20%);
+        width: calc(100% - 350px);
         height: 100%;
         background-color: var(--bg-color);
         box-sizing: border-box;
@@ -3443,7 +965,7 @@ body button {
 
     #followersContent label {
         color: var(--primary-text-color);
-        
+
     }
 
     #followersContent img {
@@ -3457,110 +979,11 @@ body button {
         padding: 5px 10px;
         border-radius: 5px;
         color: black;
-        border: 2px solid black;
+        border: 1px solid black;
     }
 
 
 
-
-
-
-
-
-
-    #addNewStory {
-        background-color: var(--bg-color);
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: calc(100% - 20%);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        border-left: 1px solid var(--border-color);
-    }
-
-    #addNewStoryBody {
-        width: 600px;
-        height: auto;
-        margin: auto;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-
-
-
-    }
-
-
-    #addNewStoryBody #storyControl #closeAddStory {
-        color: var(--primary-text-color);
-    }
-
-    #addNewStoryBody label {
-
-        padding: 5px;
-        font-family: 'Roboto', sans-serif;
-        font-weight: bold;
-        width: 100%;
-
-
-        color: var(--primary-text-color);
-        text-align: center;
-    }
-
-
-
-
-
-
-    #viewStoryBody {
-        background-color: var(--bg-color);
-        width: calc(100% - 20%);
-        height: 100%;
-        position: absolute;
-        top: 0;
-        right: 0;
-        display: flex;
-        border-left: 1px solid var(--border-color);
-    }
-
-    #previewOfStory {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 5px;
-        margin: auto;
-        width: 500px;
-        background-color: rgba(255, 255, 255, 0.507);
-        height: 800px;
-        border-radius: 10px;
-        color: var(--primary-text-color);
-
-    }
-
-    #previewOfStory #closeViewStory {
-        color: var(--primary-text-color);
-    }
-
-    #previewOfStory label {
-        font-weight: bold;
-        font-size: 20px;
-        padding: 10px;
-    }
-
-    #previewOfStory button {
-        font-weight: bold;
-        font-size: 15px;
-        padding: 10px;
-        color: var(--primary-text-color);
-        background-color: var(--btn-bg-color-secondary);
-        border: none;
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-    }
 
 
     #storyViewCount {
@@ -3574,383 +997,24 @@ body button {
         cursor: pointer;
     }
 
-    #footerInViewStory {
-        display: flex;
-        align-items: center;
-    }
 
 
 
-    #storyViewerList {
-        position: absolute;
-        width: calc(100% - 20%);
-        height: 100%;
-        top: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.336);
-        overflow: hidden;
-        display: flex;
 
-        justify-items: center;
-    }
 
 
-    #listOfViewer {
-        width: 500px;
-        position: absolute;
-        bottom: 0;
-        background-color: rgb(255, 255, 255);
-        height: 60%;
-        margin: auto;
-        justify-content: center;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
 
 
 
-    #reactionsPopupIconheart {
-        position: absolute;
-        top: 45%;
-        width: calc(100% - 20%);
-        top: 45%;
-        right: 0;
-        transform: translate(-50%, -45%);
-        display: flex;
-        animation: fadeOutheart .3s ease-in;
 
 
 
-    }
 
-    #reactionsPopupIconheart #heartReactPopup {
-        color: red;
-        margin: auto;
-        font-size: 40px;
 
-    }
 
 
-    #reactionsPopupIconhaha {
-        position: absolute;
-        top: 45%;
-        width: calc(100% - 20%);
-        top: 45%;
-        right: 0;
-        transform: translate(-50%, -45%);
-        display: flex;
-        animation: fadeOuthaha .3s ease-in;
 
 
-
-    }
-
-    #reactionsPopupIconhaha #hahaReactPopup {
-        color: #e2c12b;
-        margin: auto;
-        font-size: 40px;
-
-    }
-
-    #reactionsPopupIconlike {
-        position: absolute;
-        width: calc(100% - 20%);
-        top: 45%;
-        right: 0;
-        transform: translate(-50%, -45%);
-        display: flex;
-        animation: fadeOutlike .3s ease-in;
-
-
-
-    }
-
-    #reactionsPopupIconlike #likeReactPopup {
-        color: blue;
-        margin: auto;
-        font-size: 40px;
-
-    }
-
-
-
-
-
-
-
-
-
-    #editProfileInfo {
-        position: absolute;
-        width: calc(100% - 20%);
-        height: 100%;
-        background-color: var(--bg-color);
-        box-sizing: border-box;
-        z-index: 1;
-        right: 0;
-        color: var(--primary-text-color);
-    }
-
-    #headerInProfile {
-        width: 100%;
-        background-color: var(--bg-color);
-        padding: 10px;
-        text-align: center;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    #headerInProfile button {
-        position: absolute;
-        top: 10px;
-        left: 5px;
-        background-color: transparent;
-        border: none;
-    }
-
-    #contentOfprofileInfo {
-
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    #contentOfprofileInfo div {
-        display: flex;
-        gap: 5px;
-    }
-
-    #contentOfprofileInfo input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid white;
-    }
-
-    #contentOfprofileInfo button {
-        border-radius: 5px;
-        background-color: #1C6CFF;
-        color: white;
-        border: none;
-        padding: 5px 20px;
-    }
-
-    #bioDiv {
-        display: flex;
-        flex-direction: column;
-    }
-
-    #bioDiv textarea {
-        width: 100%;
-        height: 100px;
-    }
-
-    #bioDiv button {
-        width: 30%;
-        padding: 10px 20px;
-    }
-
-
-
-
-
-
-
-
-
-    #searchBody {
-        position: absolute;
-        width: calc(100% - 20%);
-        height: 100%;
-        background-color: var(--bg-color);
-        box-sizing: border-box;
-        z-index: 1;
-        right: 0;
-        color: var(--primary-text-color);
-        border-left: 1px solid var(--border-color);
-    }
-
-    #searchHeader {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        box-sizing: border-box;
-        border-bottom: 1px solid var(--border-color);
-        position: fixed;
-        width: 80%;
-        background-color: var(--bg-color);
-        height: 6%;
-        gap: 50%;
-
-    }
-
-    #searchContent {
-        display: flex;
-        gap: 5px;
-        width: 70%;
-    }
-
-    #searchContent input {
-        padding: 15px;
-        border-radius: 5px;
-        width: 100%;
-        background-color: transparent;
-        
-    }
-
-    #searchContent button {
-        padding: 15px;
-        border-radius: 5px;
-        border: 2px solid var(--primary-text-color);
-        background-color: transparent;
-        color: var(--primary-text-color);
-    }
-
-    #closeSearchWindow {
-        background-color: transparent;
-        color: var(--primary-text-color);
-        border: none;
-        font-size: 20px;
-    }
-
-
-
-    #searchResultsBody {
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        padding: 10px;
-        height: calc(100% - 6%);
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        overflow: auto;
-    }
-
-    #searchResultsBody::-webkit-scrollbar {
-        display: none;
-    }
-
-    #searchResults {
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    #contentsOfSearchResults {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #eaeaeab4;
-        position: relative;
-    }
-
-    #resultsDetails {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-
-    }
-
-    #resultsDetails img {
-        width: 50px;
-        aspect-ratio: 1/1;
-        border-radius: 50%;
-        border: 3px solid rgb(37, 37, 37);
-    }
-
-    #resultsControl {
-        display: flex;
-        gap: 10px;
-
-    }
-
-    #resultsControl button {
-        padding: 5px;
-        border-radius: 5px;
-        color: rgb(36, 36, 36);
-        border: 2px solid rgb(36, 36, 36);
-        background-color: transparent;
-        font-size: 12px;
-        width: 90px;
-    }
-
-
-
-
-
-
-
-
-    #messageBody {
-        position: absolute;
-        width: calc(100% - 20%);
-        height: 100%;
-        background-color: var(--bg-color);
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        right: 0;
-        border-left: 1px solid var(--border-color);
-    }
-
-    #messageHeader {
-        background-color: var(--bg-color);
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px;
-        border-bottom: 1px solid var(--border-color);
-        color: var(--primary-text-color);
-    }
-
-    #messageHeader button {
-
-        left: 5px;
-        background-color: transparent;
-        color: var(--primary-text-color);
-        border: none;
-
-    }
-
-   
-
-
-
-
-
-    #listOfconvoBody {
-        background-color: var(--bg-color);
-        max-height: 800px;
-        height: 100%;
-        overflow: auto;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-    }
-
-    #convoContent {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        background-color: var(--bg-color);
-        border-radius: 5px;
-        padding: 5px;
-        cursor: pointer;
-    }
-
-    #convoContent img {
-        aspect-ratio: 1/1;
-        width: 40px;
-        border-radius: 50%;
-
-    }
 
 
 
@@ -3959,7 +1023,7 @@ body button {
 
     #conversationBody {
         position: absolute;
-        width: calc(100% - 20%);
+        width: calc(100% - 350px);
         height: 100%;
         background-color: var(--bg-color);
         box-sizing: border-box;
@@ -3972,7 +1036,7 @@ body button {
     }
 
 
-    
+
 
     #conversations {
         box-sizing: border-box;
@@ -4004,7 +1068,7 @@ body button {
 
 
     #textMessagesLeft {
-         background-color: rgba(255, 255, 255, 0.596);
+        background-color: rgba(255, 255, 255, 0.596);
         padding: 5px;
         border-radius: 5px;
         max-width: 50%;
@@ -4044,99 +1108,6 @@ body button {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #loadingBarInComment #loadingComment {
-        width: 30px;
-        height: 30px;
-        border: 5px solid white;
-        position: absolute;
-        top: 35%;
-
-        margin-left: 2.5%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        border-bottom: 5px solid transparent;
-        animation: spinLoadingComment .5s linear infinite;
-
-    }
-
-
-
-
-    #searchLoadingMessage {
-        position: absolute;
-        height: calc(100% - 6%);
-        bottom: 0;
-        padding: 10px;
-        box-sizing: border-box;
-        width: 100%;
-        align-items: center;
-        text-align: center;
-    }
-
-
-
-
-
-
-
-
-
-
-    #notificationBody {
-        position: absolute;
-        width: calc(100% - 20.1%);
-        background-color: var(--bg-color);
-        height: 100%;
-        right: 0;
-    }
-
-    #notificationHeader {
-        border-bottom: 1px solid var(--border-color);
-        padding: 5px;
-        text-align: center;
-        color: var(--primary-text-color);
-    }
-
-    #notificationHeader button {
-        position: absolute;
-        left: 3px;
-        background-color: transparent;
-        border: none;
-    }
-
-    #notificationContentBody {
-        padding: 10px;
-        gap: 6px;
-        display: flex;
-        flex-direction: column;
-        background-color: var(--bg-color);
-        max-height: calc(100% - 8%);
-        overflow: auto;
-        color: black;
-    }
-
     #notifContentDetails {
         display: flex;
         align-items: center;
@@ -4152,7 +1123,7 @@ body button {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        border: 2px solid var(--primary-text-color);
+        border: 1px solid var(--primary-text-color);
     }
 
     #notifDetails {
@@ -4178,7 +1149,7 @@ body button {
         right: 10%;
         border-radius: 5px;
         padding: 3px 5px;
-        border: 2px solid var(--border-color);
+        border: 1px solid var(--border-color);
         background-color: white;
         font-size: 12px;
     }
@@ -4203,6 +1174,7 @@ body button {
     width: 100%;
     height: 100%;
     display: flex;
+    z-index: 999;
 }
 
 #loading {
@@ -4253,29 +1225,6 @@ body button {
 
 
 
-#loadingBarInComment {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.26);
-    width: 100%;
-    height: 100%;
-    top: 48px;
-    z-index: 1;
-}
-
-#loadingBarInComment #loadingComment {
-    width: 30px;
-    height: 30px;
-    border: 5px solid white;
-    position: absolute;
-    top: 35%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border-bottom: 5px solid transparent;
-    animation: spinLoadingComment .5s linear infinite;
-
-}
-
 @keyframes spinLoadingComment {
     0% {
         transform: rotate(0deg);
@@ -4291,4 +1240,3475 @@ emoji-picker {
     position: absolute;
     bottom: 60px;
     right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Create Post Overlay --- */
+#createPost {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    /* Dark overlay */
+    z-index: 9000;
+    display: none;
+    /* Toggled by JS */
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+
+#createPost[style*="flex"] {
+    display: flex !important;
+}
+
+/* Close Button (Top Right) */
+#closeCreatePost {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 9001;
+}
+
+/* --- The Modal Card --- */
+#uploadForm {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    /* Default Mobile Width */
+    max-height: 80vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: max-width 0.3s ease;
+}
+
+/* Header Section */
+.create-post-header {
+    height: 44px;
+    min-height: 44px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: #fff;
+    z-index: 10;
+}
+
+#uploadForm h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #262626;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* "Share" Button in Header */
+#headerShareBtn {
+    background: transparent;
+    border: none;
+    color: #0095f6;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#headerShareBtn:hover {
+    color: #00376b;
+}
+
+/* Body Container */
+.create-post-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* --- Image Upload Area --- */
+#createPostUploaded {
+    width: 100%;
+    aspect-ratio: 1/1;
+    /* Square */
+    background-color: #fafafa;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #dbdbdb;
+    overflow: hidden;
+}
+
+/* The Placeholder UI (Icon + Text) */
+.upload-placeholder {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    pointer-events: none;
+    /* Clicks go to parent if needed */
+}
+
+/* Specific ID styling for your icon */
+#uploadNewFileForPost {
+    font-size: 60px;
+    color: #262626;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.upload-placeholder p {
+    font-size: 20px;
+    font-weight: 300;
+    color: #262626;
+    margin: 0;
+}
+
+/* "Select from computer" button style */
+.select-btn {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    pointer-events: auto;
+    margin-top: 10px;
+}
+
+/* Preview Area */
+#preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    z-index: 5;
+}
+
+/* Make sure uploaded media fits */
+#preview img,
+#preview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* IMPORTANT: Hide preview when empty so placeholder shows */
+#preview:empty {
+    display: none;
+}
+
+/* Hide placeholder when preview has content */
+#preview:not(:empty)~.upload-placeholder {
+    display: none;
+}
+
+/* --- Caption Control Area --- */
+#createPostControl {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    flex: 1;
+}
+
+/* Input Styling */
+#caption {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    resize: none;
+    width: 100%;
+    font-family: inherit;
+    min-height: 40px;
+}
+
+#caption::placeholder {
+    color: #8e8e8e;
+}
+
+/* Faux User Skeleton for UI */
+.user-info-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.avatar-skeleton {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #dbdbdb;
+}
+
+.username-skeleton {
+    font-weight: 600;
+    font-size: 14px;
+    color: #262626;
+}
+
+.emoji-spacer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #8e8e8e;
+    font-size: 20px;
+    margin-top: auto;
+}
+
+/* Mobile Submit Button */
+#mobileSubmitBtn {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* --- Desktop Layout (Side-by-Side) --- */
+@media (min-width: 768px) {
+    #uploadForm {
+        max-width: 850px;
+        /* Wider modal */
+        height: 75vh;
+        max-height: 600px;
+        flex-direction: column;
+    }
+
+    .create-post-body {
+        flex-direction: row;
+        /* Side by side */
+        flex: 1;
+        overflow: hidden;
+    }
+
+    #createPostUploaded {
+        width: 60%;
+        /* Left side image */
+        height: 100%;
+        aspect-ratio: auto;
+        border-right: 1px solid #dbdbdb;
+        border-bottom: none;
+    }
+
+    #createPostControl {
+        width: 40%;
+        /* Right side caption */
+        height: 100%;
+        border-top: none;
+        padding: 20px 16px;
+    }
+
+    #mobileSubmitBtn {
+        display: none;
+    }
+
+    #headerShareBtn {
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    #headerShareBtn {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   1. STORY SECTION (Instagram Look)
+   ========================================= */
+
+/* Main Container for Stories */
+#storyBody {
+    background-color: #ffffff;
+    /* var(--bg-surface) */
+    border: 1px solid #dbdbdb;
+    /* var(--border-color) */
+    border-radius: 8px;
+
+    /* Push down from header */
+    padding: 10px 0;
+    width: 100%;
+    max-width: 470px;
+    /* var(--max-content-width) */
+    box-sizing: border-box;
+    position: relative;
+
+    /* Low Z-index so modals cover it */
+}
+
+/* Scrollable Horizontal List */
+#stories {
+    display: flex;
+    gap: 14px;
+    padding: 0 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE */
+    align-items: flex-start;
+}
+
+#stories::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+/* --- Story Item Wrappers --- */
+#addStoriess,
+#addStories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    min-width: 66px;
+    position: relative;
+}
+
+/* --- The Circular Thumbnail & Gradient Ring --- */
+.story-thumbnail {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    padding: 4px;
+    /* Space for the gradient ring */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Apply Gradient Ring to User Stories (Exclude 'Add Story') */
+#addStories .story-thumbnail {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+/* The Image/Video inside the circle */
+.story-thumbnail img,
+.story-thumbnail video {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    /* White gap between image and ring */
+    object-fit: cover;
+    display: block;
+    pointer-events: auto;
+    /* Ensure clicks are registered */
+}
+
+/* Username Text below story */
+#story-label {
+    font-size: 11px;
+    color: #262626;
+    /* var(--text-primary) */
+    text-align: center;
+    width: 74px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+/* --- "Create Story" Specific Styles --- */
+
+/* Remove gradient from the "Add Story" avatar container */
+#addStoriess .story-thumbnail {
+    background: transparent;
+    padding: 0;
+}
+
+/* The Blue Plus Badge */
+#createNewStory {
+    position: absolute;
+    bottom: 20px;
+    /* Aligns with bottom-right of avatar */
+    right: 0px;
+    bottom: 2px;
+    background-color: #0095f6;
+    /* var(--accent-color) */
+    color: white;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    padding: 0;
+
+    /* Lower than Modals (usually 1000+) */
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/* Ensure the icon inside doesn't block the click */
+#createNewStory i {
+    pointer-events: none;
+}
+
+/* Hide the duplicate "Create Story" text if JS injects a label inside #story-label */
+#addStoriess #story-label label {
+    font-size: 11px;
+    color: #8e8e8e;
+}
+
+/* Mobile Styling for Stories */
+@media (max-width: 600px) {
+    #storyBody {
+        border: none;
+        border-bottom: 1px solid #dbdbdb;
+        border-radius: 0;
+        background: transparent;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================
+   2. USER POST FEED (Instagram Style)
+   ========================================= */
+
+#userPost {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: calc(100% - 350px);
+    right: 0;
+    height: calc(100%);
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #eeeeee;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Space for bottom nav */
+}
+
+/* The Post Card */
+#postcontent {
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 470px;
+    /* Standard IG Web Feed Width */
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Post Header: User Info & Options */
+#userProfilePost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    height: 56px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #efefef;
+}
+
+#userProfilePost div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* User Avatar in Header */
+#userProfilePost img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+/* Username */
+#userThatPostLabel {
+    font-weight: 600;
+    font-size: 14px;
+    color: #262626;
+    cursor: pointer;
+}
+
+/* Follow Button (Small blue text) */
+#followBTN {
+    background: transparent;
+    border: none;
+    color: #0095f6;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 8px;
+}
+
+/* Option (Three dots) Button */
+#userProfilePost button:last-child {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: #262626;
+    cursor: pointer;
+}
+
+/* --- Media Content --- */
+#userPostContent {
+    width: 100%;
+    background-color: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#userPostContent img,
+#userPostContent video {
+    width: 100%;
+    height: auto;
+    max-height: 585px;
+    /* Maximum vertical height for IG standards */
+    object-fit: contain;
+    display: block;
+}
+
+/* --- Action Icons Row --- */
+#likecommentshare {
+    padding: 12px 12px 8px 12px;
+    display: flex;
+    gap: 16px;
+}
+
+#likecommentshare button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#likecommentshare i {
+    font-size: 24px;
+    color: #262626;
+    transition: transform 0.1s ease-in-out;
+    pointer-events: auto;
+    /* Important for JS click detection */
+}
+
+#likecommentshare i:active {
+    opacity: 0.6;
+    transform: scale(0.9);
+}
+
+/* Red Heart override */
+#likecommentshare .fa-solid.fa-heart {
+    color: #ed4956;
+    animation: heartBounce 0.3s ease-out;
+}
+
+@keyframes heartBounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* --- Likes & Caption Area --- */
+#valueoflikecommentshare {
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#likeCount {
+    font-weight: 600;
+    font-size: 14px;
+    color: #262626;
+    margin-bottom: 4px;
+    display: block;
+}
+
+#commentCount {
+    font-size: 14px;
+    color: #8e8e8e;
+    cursor: pointer;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+/* Caption Text */
+#postlabel {
+    padding: 0 12px 12px 12px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#postlabel label {
+    display: inline;
+}
+
+#userThatPost {
+    font-weight: 600;
+    margin-right: 5px;
+    color: #262626;
+    cursor: pointer;
+}
+
+#postlabel span {
+    font-weight: 400;
+    color: #262626;
+    word-break: break-word;
+}
+
+/* Mobile Styling for Posts */
+@media (max-width: 600px) {
+    #userPost {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        height: calc(100% - 15.5%);
+        box-sizing: border-box;
+        margin-bottom: 50px;
+        bottom: 0;
+        padding: 5px;
+        gap: 0;
+        background-color: white;
+        /* Space for bottom nav */
+    }
+
+    #postcontent {
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        max-width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Search Drawer / Page --- */
+#searchBody {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#searchBody[style*="block"] {
+    display: flex !important;
+}
+
+/* Header Area */
+#searchHeader {
+    padding: 24px 16px 24px 16px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    position: relative;
+}
+
+#searchHeader label {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+}
+
+/* The Search Input Pill */
+#searchContent {
+    display: flex;
+    align-items: center;
+    background-color: #efefef;
+    border-radius: 8px;
+    padding: 0 16px;
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#searchContent i {
+    color: #8e8e8e;
+    font-size: 16px;
+    margin-right: 12px;
+}
+
+#searchInput {
+    background: transparent;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+    color: #262626;
+}
+
+#searchInput::placeholder {
+    color: #8e8e8e;
+    font-weight: 300;
+}
+
+/* Close Button (Top Right) */
+#closeSearchWindow {
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #dbdbdb;
+    cursor: pointer;
+}
+
+#closeSearchWindow:hover {
+    color: #262626;
+}
+
+/* Loading State */
+#searchLoadingMessage {
+    padding: 20px;
+    text-align: center;
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+/* Results Container */
+#searchResultsBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+}
+
+#searchResults {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Search Result Row Item --- */
+#contentsOfSearchResults {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+#contentsOfSearchResults:hover {
+    background-color: #fafafa;
+}
+
+/* User Info (Left) */
+#resultsDetails {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#resultsDetails img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#resultsDetailsUsername {
+    font-weight: 600;
+    font-size: 14px;
+    color: #262626;
+}
+
+/* Action Buttons (Right) */
+#resultsControl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Follow/Message Buttons */
+#resultsControl button {
+    border: none;
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* "Message" or "Follow" (Primary) */
+#resultsControl button:not([data-userid]) {
+    /* Assuming Message button doesn't have userid in your logic, or logic varies. 
+       Styling generic primary button: */
+    background-color: #efefef;
+    color: #000;
+}
+
+/* "Follow" / "Unfollow" Logic styling relies on your JS text content, 
+   but we can style the base IDs */
+#followBtnInSearch {
+    background-color: #0095f6;
+    color: white;
+}
+
+/* If text is "unfollow", you might want a gray style. 
+   Since we can't select by text in CSS easily without :has(), 
+   we stick to a generic active style or rely on JS classes. 
+   For now, making them looks like standard IG buttons */
+
+/* Desktop Drawer Style */
+@media (min-width: 1000px) {
+    #searchBody {
+
+        /* collapsed sidebar width */
+        width: 350px;
+        /* Standard IG drawer width */
+        border-right: 1px solid var(--border-color);
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+
+    /* If your sidebar is wide (245px), adjust left: */
+    /* left: 245px; */
+}
+
+
+
+
+
+
+
+
+
+/* =========================================
+   MESSAGE INBOX (Instagram Direct Style)
+   ========================================= */
+
+#messageBody {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+    display: none;
+    flex-direction: column;
+}
+
+#messageBody[style*="flex"] {
+    display: flex !important;
+}
+
+/* Header */
+#messageHeader {
+    height: 60px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background-color: white;
+    flex-shrink: 0;
+}
+
+#messageHeader label {
+    font-weight: 700;
+    font-size: 18px;
+    color: #262626;
+}
+
+#messageHeader button {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: #262626;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Message Requests Row */
+#messageRequestButtonBody {
+    padding: 0 16px;
+    margin-top: 10px;
+    flex-shrink: 0;
+}
+
+#openMessageRequest {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0095f6;
+    /* IG Blue for requests */
+    cursor: pointer;
+}
+
+#newMessReqIndicator {
+    background-color: #ed4956;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* List Container */
+#listOfconvoBody {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 8px;
+}
+
+/* Conversation Row */
+#convoContent {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 14px;
+    cursor: pointer;
+    background-color: white;
+    /* Default background */
+    transition: background-color 0.1s;
+}
+
+#convoContent:hover {
+    background-color: #fafafa;
+}
+
+/* Active/Unread State (Background set by JS) */
+/* We override the harsh grey from JS with a nicer hover-like state */
+#convoContent[style*="rgba(128, 128, 128, 1)"] {
+    background-color: #efefef !important;
+    /* Lighter grey for active */
+}
+
+/* Profile Image */
+#convoContent img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Text Wrapper */
+#convoContent div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+    /* For text truncation */
+}
+
+/* Username */
+#convoContent div label:first-child {
+    font-size: 14px;
+    font-weight: 400;
+    /* Regular weight for username */
+    color: #262626;
+    margin-bottom: 2px;
+}
+
+/* Last Message */
+#latestMessageInHistory {
+    font-size: 13px;
+    color: #8e8e8e;
+    /* Secondary text color */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+}
+
+/* Bold text for unread messages (Logic handled by color change, but CSS helps) */
+#convoContent[style*="rgba"] #latestMessageInHistory {
+    font-weight: 600;
+    color: #262626;
+}
+
+/* Desktop Fix */
+@media (min-width: 1000px) {
+    #messageBody {
+        right: 0;
+        width: calc(100% - 350px);
+        border-left: 1px solid #dbdbdb;
+    }
+}
+
+
+
+
+
+
+
+
+/* =========================================
+   MESSAGE REQUESTS UI (Instagram Style)
+   ========================================= */
+
+/* Main Container */
+#messageRequestBody {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+    /* Above the Inbox (4000) */
+    display: none;
+    flex-direction: column;
+}
+
+#messageRequestBody[style*="block"] {
+    display: flex !important;
+}
+
+/* Header */
+#messageRequestHeader {
+    height: 44px;
+    min-height: 44px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    position: relative;
+    background-color: white;
+    flex-shrink: 0;
+}
+
+#messageRequestHeader label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #262626;
+}
+
+#closeMessageRequest {
+    position: absolute;
+    left: 16px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: #262626;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Content List Container */
+#messageRequestContents {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+/* Individual Request Item */
+#messageRequestDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: white;
+    /* Overrides inline background if any */
+    transition: background-color 0.1s;
+    border-bottom: none;
+    /* Clean look */
+}
+
+#messageRequestDetails:hover {
+    background-color: #fafafa;
+}
+
+/* User Info Section (Left) */
+#messageRequestUserInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#messageRequestProfileImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#messageRequestUsername {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+}
+
+/* Accept Button */
+#messageRequestAcceptBtn {
+    background-color: #0095f6;
+    /* Instagram Blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#messageRequestAcceptBtn:hover {
+    background-color: #1877f2;
+}
+
+/* --- Desktop Layout Fix --- */
+@media (min-width: 1000px) {
+    #messageRequestBody {
+        right: 0;
+        /* Aligns to right of sidebar */
+        width: calc(100% - 350px);
+        border-left: 1px solid #dbdbdb;
+    }
+}
+
+
+
+
+
+/* =========================================
+   NOTIFICATIONS UI (Instagram Style)
+   ========================================= */
+
+/* Main Container */
+#notificationBody {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+    display: none;
+    flex-direction: column;
+}
+
+#notificationBody[style*="block"] {
+    display: flex !important;
+}
+
+/* Header */
+#notificationHeader {
+    height: 44px;
+    min-height: 44px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    background-color: white;
+    position: relative;
+    flex-shrink: 0;
+}
+
+#notificationHeader label {
+    font-weight: 700;
+    font-size: 16px;
+    color: #262626;
+}
+
+#notificationHeader button {
+    position: absolute;
+    left: 16px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: #262626;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* "Read All" Bar */
+#markAllReadBody {
+    padding: 12px 16px;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    justify-content: flex-end;
+    background-color: white;
+    flex-shrink: 0;
+}
+
+#markAllRead {
+    background: transparent;
+    border: none;
+    color: #0095f6;
+    /* Instagram Blue */
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#markAllRead:hover {
+    color: #00376b;
+}
+
+/* Content List */
+#notificationContentBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* Notification Item Row */
+#notifContentDetails {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 14px;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+}
+
+/* Override JS inline styles for a cleaner look */
+/* Unread (was dark grey) -> Light Blue */
+#notifContentDetails[style*="rgb(182, 182, 182)"],
+#notifContentDetails[style*="#b6b6b6"] {
+    background-color: #ebf5fe !important;
+}
+
+/* Read (was light grey) -> White */
+#notifContentDetails[style*="#eaeaea"] {
+    background-color: #ffffff !important;
+}
+
+#notifContentDetails:hover {
+    background-color: #fafafa !important;
+}
+
+/* Avatar */
+#notifContentDetails img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Text Container */
+#notifDetails {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    gap: 2px;
+}
+
+#notificationUsernameLabel {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+}
+
+#notificationContentLabel {
+    font-size: 14px;
+    color: #262626;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* "Mark Read" Button (Styled as Secondary Action) */
+#markReadThisNotif {
+    background-color: #efefef;
+    color: #262626;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    position: static;
+    /* Remove absolute positioning */
+    margin-left: 8px;
+}
+
+#markReadThisNotif:disabled {
+    display: none;
+    /* Hide button if already read to clean up UI */
+}
+
+/* Menu Icon (Three dots) */
+#notificationMenu {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: #8e8e8e;
+    padding: 8px;
+    cursor: pointer;
+    position: static;
+    /* Remove absolute positioning */
+    margin-left: 4px;
+}
+
+/* Desktop Layout Fix */
+@media (min-width: 1000px) {
+    #notificationBody {
+        right: 0;
+        /* Sidebar width */
+        width: calc(100% - 350px);
+        border-left: 1px solid #dbdbdb;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================
+   STORY VIEWER UI (Instagram Style)
+   ========================================= */
+
+/* Full Screen Overlay */
+#viewStoryBody {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    /* Dark gray/black background */
+    z-index: 6000;
+    /* Highest priority */
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#viewStoryBody[style*="flex"] {
+    display: flex !important;
+}
+
+/* The "Phone Screen" Container */
+#previewOfStory {
+    width: 100%;
+    max-width: 420px;
+    /* Mobile width */
+    height: 100%;
+    max-height: 85vh;
+    /* vertical breathing room on desktop */
+    background-color: #000;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 12px;
+    /* Rounded corners like modern UI */
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile: Full screen */
+@media (max-width: 600px) {
+    #previewOfStory {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 0;
+    }
+}
+
+/* Top Gradient Overlay (for text visibility) */
+#previewOfStory::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Media (Image/Video) */
+#previewOfStory img,
+#previewOfStory video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Shows full content without cropping */
+    background-color: #262626;
+    /* Placeholder color */
+}
+
+/* Header: Username */
+#usernameOfStoryview {
+    position: absolute;
+    top: 20px;
+    left: 16px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    z-index: 10;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* Header: Close Button */
+#closeViewStory {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    z-index: 10;
+    cursor: pointer;
+    padding: 5px;
+    opacity: 0.8;
+}
+
+#closeViewStory:hover {
+    opacity: 1;
+}
+
+/* Footer Section */
+#footerInViewStory {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+/* View Count ("Seen by") */
+#storyViewCount {
+    display: flex;
+    /* Flex is set via JS, this ensures alignment */
+    align-items: center;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Reactions Container */
+#reactToStory {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Reaction Icons */
+#reactToStory i {
+    font-size: 28px;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+#reactToStory i:hover {
+    transform: scale(1.2);
+}
+
+/* Specific Colors for Icons */
+#heartReact {
+    color: #ff3040;
+}
+
+#hahaReact {
+    color: #f7b928;
+}
+
+#likeReact {
+    color: #0095f6;
+}
+
+
+
+
+
+
+
+
+
+/* =========================================
+   STORY VIEWER LIST (Seen By)
+   ========================================= */
+
+/* The Modal Overlay */
+#storyViewerList {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Dimmed background */
+    z-index: 6500;
+    /* Above Story Viewer (6000) */
+    display: none;
+    justify-content: center;
+    align-items: flex-end;
+    /* Bottom sheet on mobile */
+}
+
+#storyViewerList[style*="block"] {
+    display: flex !important;
+}
+
+/* The White Card */
+#listOfViewer {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    height: 70vh;
+    /* Covers 70% of screen */
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    animation: slideUpList 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+@keyframes slideUpList {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Header / Drag Handle */
+#controlStoryViewer {
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    flex-shrink: 0;
+}
+
+#closeStoryViewerList {
+    width: 36px;
+    height: 4px;
+    background-color: #dbdbdb;
+    border-radius: 2px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Scrollable List Container */
+#viewerContent {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* --- Individual Row Styling (Matches JS Update) --- */
+.viewer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid transparent;
+}
+
+.viewer-row:hover {
+    background-color: #fafafa;
+}
+
+/* Left Side: Avatar + Name */
+.viewer-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.viewer-info img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.viewer-info label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+    cursor: pointer;
+}
+
+/* Right Side: Reactions */
+.viewer-reactions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 20px;
+    /* Size of emojis */
+}
+
+/* Desktop Fix: Center the modal */
+@media (min-width: 1000px) {
+    #storyViewerList {
+        align-items: center;
+        /* Center vertically */
+    }
+
+    #listOfViewer {
+        height: 600px;
+        border-radius: 12px;
+        /* All corners rounded */
+    }
+}
+
+
+
+
+
+/* =========================================
+   COMMENTS SECTION UI (Instagram Style)
+   ========================================= */
+
+/* The Modal Overlay */
+#viewPostBody {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    /* Dimmed background */
+    z-index: 5000;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Bottom sheet style on mobile */
+}
+
+/* Force flex when JS toggles it */
+#viewPostBody[style*="block"] {
+    display: flex !important;
+}
+
+/* The White Card Container */
+#commentsBody {
+    background-color: #ffffff;
+    width: 100%;
+    height: 75vh;
+    /* Takes up 3/4 of screen */
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* Reset JS inline positioning */
+    bottom: auto !important;
+    top: auto !important;
+    animation: slideUpComment 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+@keyframes slideUpComment {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+#commentHead {
+    height: 50px;
+    min-height: 50px;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+#commentHead::after {
+    content: "Comments";
+    font-weight: 700;
+    font-size: 16px;
+    color: #262626;
+}
+
+/* Hide the old "Likes" count in header to match clean IG look */
+#likesAndControls {
+    display: none;
+}
+
+/* Close/Drag Handle */
+#commentHead button#closeComment {
+    width: 36px;
+    height: 4px;
+    background-color: #dbdbdb;
+    border-radius: 2px;
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Comments List Container */
+#commentsContents {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: white;
+}
+
+/* --- Individual Comment Row --- */
+#commentsOnPost {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+}
+
+#commentsOnPost img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Text Wrapper */
+#commentDetails {
+    display: flex;
+    flex-direction: row;
+    /* Username and text flow together */
+    flex-wrap: wrap;
+    align-items: baseline;
+    font-size: 14px;
+    line-height: 18px;
+    width: 100%;
+    background: transparent !important;
+    /* Override JS inline styles */
+    color: #262626 !important;
+    padding: 0;
+}
+
+/* Username */
+#userThatComment {
+    font-weight: 600;
+    margin-right: 6px;
+    color: #262626 !important;
+    /* Force black text */
+    font-size: 14px;
+}
+
+/* Comment Text */
+#commentDetails label:last-child {
+    font-weight: 400;
+    color: #262626;
+    word-break: break-word;
+}
+
+
+
+/* The Container at the bottom */
+#addCommentToPost {
+    border-top: 1px solid #efefef;
+    padding: 12px 16px;
+    background-color: white;
+    width: 100%;
+    /* Crucial: Prevents the input from being squashed by the comment list */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    /* Ensure enough height for touch targets */
+    box-sizing: border-box;
+    z-index: 20;
+}
+
+/* The Wrapper for Input + Button */
+#addControl {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 12px;
+    background-color: transparent;
+}
+
+/* The Text Input Field */
+#addControl input {
+    flex: 1;
+    /* Takes up all available space */
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 8px 0;
+    background: transparent;
+    color: #262626;
+    height: auto;
+}
+
+#addControl input::placeholder {
+    color: #8e8e8e;
+}
+
+/* The Send Button */
+#submitComment {
+    background: transparent;
+    color: #0095f6;
+    /* Instagram Blue */
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 4px 8px;
+    cursor: pointer;
+    width: auto;
+    opacity: 1;
+    display: block;
+    /* Ensure it's not hidden */
+    pointer-events: auto;
+    /* Ensure clickable */
+}
+
+#submitComment:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+/* Ensure any icons inside are hidden (since we use text "SEND") */
+#addControl button i {
+    display: none;
+}
+
+/* Loading Spinner override */
+#loadingBarInComment {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    display: none;
+    z-index: 5;
+}
+
+/* --- Desktop Layout --- */
+@media (min-width: 1000px) {
+    #viewPostBody {
+        align-items: center;
+        justify-content: center;
+    }
+
+    #commentsBody {
+        width: 500px;
+        height: 80vh;
+        border-radius: 12px;
+        border: 1px solid #dbdbdb;
+        bottom: auto !important;
+        /* Ensure it doesn't stick to bottom on desktop */
+    }
+
+    #commentHead button#closeComment {
+        width: auto;
+        height: auto;
+        background: transparent;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        left: auto;
+        transform: none;
+    }
+
+    #commentHead button#closeComment::before {
+        content: '\2715';
+        /* X symbol */
+        font-size: 20px;
+        color: #262626;
+    }
+}
+
+
+
+
+
+
+
+
+/* =========================================
+   CREATE STORY UI (Instagram Style)
+   ========================================= */
+
+/* Full Screen Modal Overlay */
+#addNewStory {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    /* Dark background behind the phone view */
+    z-index: 7000;
+    /* Highest priority */
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#addNewStory[style*="flex"] {
+    display: flex !important;
+}
+
+/* "Phone Screen" Container */
+#addNewStoryBody {
+    width: 100%;
+    max-width: 450px;
+    /* Standard mobile width */
+    height: 100%;
+    max-height: 90vh;
+    /* Floating look on desktop */
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Desktop Polish: Rounded corners */
+@media (min-width: 768px) {
+    #addNewStoryBody {
+        border-radius: 15px;
+        border: 1px solid #333;
+    }
+}
+
+/* Mobile: Full Screen */
+@media (max-width: 767px) {
+    #addNewStoryBody {
+        max-height: 100%;
+        border-radius: 0;
+    }
+}
+
+/* Header */
+.story-create-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+    box-sizing: border-box;
+}
+
+.story-create-header label {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Close Button */
+#closeAddStory {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    padding: 0;
+    cursor: pointer;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Preview Area */
+#storyPreview {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #262626;
+}
+
+/* Styling the injected Image/Video */
+#storyPreview img,
+#storyPreview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Fill the screen */
+    display: block;
+}
+
+/* Footer Controls */
+#storyControl {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    /* Button to the right */
+    box-sizing: border-box;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+    z-index: 10;
+}
+
+/* Share Button (White Pill) */
+#submitStory {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#submitStory:active {
+    transform: scale(0.95);
+    opacity: 0.9;
+}
+
+
+
+
+/* =========================================
+   POST MEDIA PREVIEW (Lightbox)
+   ========================================= */
+
+/* Full Screen Overlay */
+#previewofImageInPost {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    /* Deep black background */
+    z-index: 8000;
+    /* Very high z-index to cover everything */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    /* Subtle blur effect on background */
+}
+
+/* Force flex when JS sets display to flex/block */
+#previewofImageInPost[style*="flex"],
+#previewofImageInPost[style*="block"] {
+    display: flex !important;
+}
+
+/* Close Button (Top Right) */
+#closepreviewofImageInPost {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent circle */
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+#closepreviewofImageInPost:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Media Container */
+#previewOfPost {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* Spacing from edges */
+    box-sizing: border-box;
+}
+
+/* The Image or Video */
+#previewOfPost img,
+#previewOfPost video {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* Ensures the whole image is visible */
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+
+
+/* =========================================
+   STORY REACTION POPUPS (Visual Feedback)
+   ========================================= */
+
+/* Container for the popping icon */
+#reactionsPopupIconheart,
+#reactionsPopupIconhaha,
+#reactionsPopupIconlike {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Perfectly centered */
+    z-index: 9999;
+    /* Above everything */
+    pointer-events: none;
+    /* Click-through */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+}
+
+/* Force Flex layout when JS activates it */
+#reactionsPopupIconheart[style*="flex"],
+#reactionsPopupIconhaha[style*="flex"],
+#reactionsPopupIconlike[style*="flex"] {
+    display: flex !important;
+    animation: reactionPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Icon Styling */
+#heartReactPopup,
+#hahaReactPopup,
+#likeReactPopup {
+    font-size: 100px;
+    /* Big visual impact */
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* Specific Colors */
+#heartReactPopup {
+    color: #ff3040;
+}
+
+#hahaReactPopup {
+    color: #f7b928;
+}
+
+#likeReactPopup {
+    color: #0095f6;
+}
+
+/* The Pop Animation */
+@keyframes reactionPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+/* =========================================
+   SEND FILE PREVIEW (Chat Modal)
+   ========================================= */
+
+/* Full Screen Dark Overlay */
+#fileImageWantToSendPreview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    /* Deep black for media focus */
+    z-index: 8000;
+    /* High z-index to sit above chat */
+    display: none;
+    flex-direction: column;
+}
+
+/* Force Flex when JS sets display */
+#fileImageWantToSendPreview[style*="flex"] {
+    display: flex !important;
+}
+
+/* Header Label ("Preview") */
+#fileImageWantToSendPreview label {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+
+/* Media Container */
+#ImgPreview {
+    flex: 1;
+    /* Takes up all available vertical space */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* The Image or Video itself */
+#ImgPreview img,
+#ImgPreview video {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* Ensures entire image is visible without cropping */
+}
+
+/* Footer Controls */
+#fileImageWantToSendPreviewControls {
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    /* Spreads Cancel and Send apart */
+    align-items: center;
+    background-color: #000000;
+    box-sizing: border-box;
+    z-index: 10;
+    min-height: 80px;
+    /* Safe area for thumbs */
+}
+
+/* Cancel Button */
+#closePreviewInSendMessage {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+#closePreviewInSendMessage:hover {
+    opacity: 0.7;
+}
+
+/* Send Button (Blue Pill) */
+#sendThisFileMessage {
+    background-color: #0095f6;
+    /* Instagram Blue */
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#sendThisFileMessage:hover {
+    background-color: #1877f2;
+}
+
+
+
+
+
+/* =========================================
+   EDIT PROFILE INFO UI (Instagram Style)
+   ========================================= */
+
+/* Main Full-Screen Container */
+#editProfileInfo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    /* var(--bg-surface) */
+    z-index: 5000;
+    /* High enough to cover profile */
+    display: none;
+    flex-direction: column;
+}
+
+#editProfileInfo[style*="block"],
+#editProfileInfo[style*="flex"] {
+    display: flex !important;
+}
+
+/* Header */
+#headerInProfile {
+    height: 44px;
+    min-height: 44px;
+    border-bottom: 1px solid #dbdbdb;
+    /* var(--border-color) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    background-color: white;
+    position: relative;
+    flex-shrink: 0;
+}
+
+#headerInProfile label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #262626;
+    /* var(--text-primary) */
+}
+
+/* Back Button */
+#closeEditProfileInfo {
+    position: absolute;
+    left: 16px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #262626;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Content Container */
+#contentOfprofileInfo {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+    /* Constrain width on desktop */
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Labels */
+#contentOfprofileInfo>label {
+    font-size: 12px;
+    color: #8e8e8e;
+    /* var(--text-secondary) */
+    font-weight: 600;
+    margin-bottom: -10px;
+    /* Pull closer to input */
+    margin-left: 2px;
+}
+
+/* Input Wrappers */
+#usernameDiv,
+#emailDiv,
+#addressDiv,
+#ageDiv {
+    width: 100%;
+}
+
+/* Inputs */
+#contentOfprofileInfo input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+    background-color: #fafafa;
+    /* Slight gray bg like IG inputs */
+    color: #262626;
+    outline: none;
+}
+
+#contentOfprofileInfo input:focus {
+    border-color: #a8a8a8;
+}
+
+/* Bio Section */
+#bioDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Space between textarea and button */
+    width: 100%;
+}
+
+#bioDiv textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+    background-color: #fafafa;
+    color: #262626;
+    outline: none;
+    resize: none;
+    font-family: inherit;
+}
+
+#bioDiv textarea:focus {
+    border-color: #a8a8a8;
+}
+
+/* Submit Button */
+#changeProfileInfoBtn {
+    background-color: #0095f6;
+    /* Instagram Blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+#changeProfileInfoBtn:hover {
+    background-color: #1877f2;
+}
+
+/* Desktop Fix: Center the panel */
+@media (min-width: 1000px) {
+    #editProfileInfo {
+        right: 0;
+        /* Sidebar width */
+        width: calc(100% - 350px);
+        border-left: 1px solid #dbdbdb;
+    }
+
+    #headerInProfile button {
+        /* On desktop, maybe we want to hide back button or keep it depending on flow */
+        /* display: none; */
+    }
+}
+
+
+
+
+
+
+
+/* =========================================
+   UPDATE PROFILE PICTURE MODAL
+   ========================================= */
+
+/* Dark Overlay */
+#updateProfilePic {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    /* Dimmed background */
+    z-index: 9000;
+    /* High z-index */
+    display: none;
+    /* Toggled by JS */
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+
+#updateProfilePic[style*="flex"] {
+    display: flex !important;
+}
+
+/* Close Button (Top Right) */
+#closeUpdateProfile {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 9002;
+    padding: 0;
+}
+
+/* The Modal Card */
+#updateProfilePicForm {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+/* Header/Title */
+#updateProfilePicForm h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #262626;
+    margin: 0;
+    padding: 20px 0;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+/* Content Wrapper */
+#updateProfilePicForm>div {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* File Input (Hidden) */
+#profilefile {
+    display: none;
+}
+
+/* Preview Area (Circular) */
+#previewProfile {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #fafafa;
+    border: 1px solid #dbdbdb;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+/* Empty State / Placeholder for Preview */
+#previewProfile:empty::before {
+    content: 'Preview';
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+/* The Image inside Preview */
+#previewProfile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Upload Button */
+#updateProfilePicForm button[type="submit"] {
+    background-color: #0095f6;
+    /* Instagram Blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    width: 85%;
+    margin: 0 auto;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#updateProfilePicForm button[type="submit"]:hover {
+    background-color: #1877f2;
+}
+
+/* Optional: Clickable area to trigger file input if you want to enhance UX later
+   (Requires JS to trigger click on #profilefile when #previewProfile is clicked)
+*/
+#previewProfile {
+    cursor: pointer;
+}
+
+
+/* =========================================
+   PROFILE UI (Instagram Style)
+   ========================================= */
+
+/* Main Container */
+#profileBody {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 2000;
+    /* Above main feed */
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+}
+
+#profileBody[style*="block"],
+#profileBody[style*="flex"] {
+    display: flex !important;
+}
+
+/* --- Header --- */
+#headProfile {
+    height: 44px;
+    min-height: 44px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+}
+
+#headProfile label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #262626;
+}
+
+/* Header Buttons */
+#backBtnonProfile {
+    position: absolute;
+    left: 16px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: #262626;
+    padding: 0;
+    cursor: pointer;
+}
+
+#settingsInProfile {
+    position: absolute;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: #262626;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* --- Profile Info (Avatar + Name + Actions) --- */
+#profileiconBody {
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+/* Avatar Wrapper */
+#icon {
+    position: relative;
+    width: 77px;
+    height: 77px;
+    flex-shrink: 0;
+}
+
+/* Avatar Image */
+#changeProfile {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border-image: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+
+}
+
+
+/* Edit Icon (Little Plus) */
+#editProfilePic {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #0095f6;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Info Section (Name + Action Buttons) */
+#profileControl {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    overflow: hidden;
+}
+
+#profileName {
+    font-size: 20px;
+    font-weight: 300;
+    color: #262626;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Buttons Container */
+#profileControl div {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Action Buttons (Edit Profile / About) */
+#profileControl button {
+    flex: 1;
+    background-color: #efefef;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 0;
+    font-weight: 600;
+    font-size: 14px;
+    color: #262626;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+#profileControl button:hover {
+    background-color: #dbdbdb;
+}
+
+/* --- Bio Section --- */
+#bioBody {
+    padding: 0 16px 16px 16px;
+    font-size: 14px;
+    color: #262626;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+/* --- Stats Bar (Posts / Followers / Following) --- */
+#profileDetails {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    width: 100%;
+}
+
+#profileDetails div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    flex: 1;
+}
+
+#profileDetails label:first-child {
+    font-weight: 700;
+    font-size: 16px;
+    color: #262626;
+}
+
+#profileDetails label:last-child {
+    font-size: 14px;
+    color: #737373;
+    /* Muted text for labels */
+}
+
+/* --- Photo Grid --- */
+#profileContent {
+    flex: 1;
+    padding-bottom: 60px;
+    /* Space for bottom nav/footer */
+}
+
+#imgGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+}
+
+#imgGrid div {
+    aspect-ratio: 1/1;
+    position: relative;
+    background-color: #efefef;
+    cursor: pointer;
+}
+
+#imgGrid img,
+#imgGrid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- About Modal (Bottom Sheet Style) --- */
+#aboutUserInfoBody {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-radius: 16px 16px 0 0;
+    padding: 20px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 3000;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+#aboutUserInfoBody[style*="flex"] {
+    display: flex !important;
+}
+
+#aboutUserHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 12px;
+}
+
+#aboutUserHead label {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+#closeAboutUser {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    padding: 0;
+    cursor: pointer;
+}
+
+#aboutUserInfoBody label {
+    font-size: 14px;
+    color: #262626;
+}
+
+#aboutUserInfoBody span {
+    color: #737373;
+    margin-left: 5px;
+}
+
+/* =========================================
+   DESKTOP RESPONSIVE (1000px+)
+   ========================================= */
+@media (min-width: 1000px) {
+
+    /* Push content to the right of the sidebar */
+    #profileBody {
+        right: 0;
+        /* Matches Sidebar Width */
+        width: calc(100% - 350px);
+        border-left: 1px solid #dbdbdb;
+    }
+
+
+    /* Center Content Container */
+    #profileiconBody,
+    #bioBody,
+    #profileDetails {
+        max-width: 935px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Adjust Grid */
+    #imgGrid {
+        max-width: 935px;
+        margin: 30px auto 0 auto;
+        gap: 28px;
+        /* Larger gap on desktop */
+    }
+
+    /* Larger Avatar */
+    #icon {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* Spacing for Info */
+    #profileiconBody {
+        padding: 30px;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    #profileName {
+        font-size: 28px;
+        font-weight: 300;
+    }
+
+    #profileControl button {
+        padding: 5px 10px;
+        font-weight: 600;
+        border-radius: 4px;
+        border: 1px solid #dbdbdb;
+        background-color: transparent;
+    }
+
+    /* Stats styling for Desktop (Cleaner row) */
+    #profileDetails {
+        border: none;
+        justify-content: flex-start;
+        gap: 40px;
+        padding: 0 30px;
+        margin-bottom: 20px;
+    }
+
+    #profileDetails div {
+        flex-direction: row;
+        /* Horizontal text: "10 posts" */
+        gap: 5px;
+        flex: 0 0 auto;
+    }
+
+    #profileDetails label:first-child {
+        font-size: 16px;
+    }
+
+    #profileDetails label:last-child {
+        font-size: 16px;
+        color: #262626;
+    }
+
+    /* Center the About Modal */
+    #aboutUserInfoBody {
+        width: 400px;
+        left: 50%;
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+}
+
+
+
+
+
+
+/* =========================================
+   VISIT PROFILE UI (Other User)
+   ========================================= */
+
+/* Main Container */
+#visitprofileBody {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 2000;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+}
+
+#visitprofileBody[style*="block"],
+#visitprofileBody[style*="flex"] {
+    display: flex !important;
+}
+
+/* Header */
+#visitheadProfile {
+    height: 44px;
+    min-height: 44px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+}
+
+#visitheadProfile label {
+    font-weight: 700;
+    font-size: 16px;
+    color: #262626;
+}
+
+/* Back Button */
+#visitbackBtnonProfile {
+    position: absolute;
+    left: 16px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    padding: 0;
+    color: #262626;
+    cursor: pointer;
+}
+
+/* Profile Info Section */
+#visitprofileiconBody {
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Avatar Image */
+#visitchangeProfile {
+    width: 77px;
+    height: 77px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #dbdbdb;
+    flex-shrink: 0;
+}
+
+/* Info Wrapper (Name + Buttons) */
+#visitprofileControl {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    overflow: hidden;
+}
+
+#visitprofileName {
+    font-size: 20px;
+    font-weight: 300;
+    color: #262626;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Buttons Container */
+#visitprofileControl div {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Buttons (Message, Follow, About) */
+#visitprofileControl button {
+    flex: 1;
+    background-color: #efefef;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 0;
+    font-weight: 600;
+    font-size: 14px;
+    color: #262626;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+/* specific style for Follow button (blue) if you want to toggle classes later via JS */
+/* For now keeping uniform gray base */
+#visitprofileControl button:hover {
+    background-color: #dbdbdb;
+}
+
+/* Bio Section */
+#visitbioBody {
+    padding: 0 16px 16px 16px;
+    font-size: 14px;
+    color: #262626;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+#visitbioInProfile {
+    display: block;
+}
+
+/* Stats Row */
+#visitprofileDetails {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    width: 100%;
+}
+
+#visitprofileDetails div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    flex: 1;
+}
+
+#visitprofileDetails label:first-child {
+    font-weight: 700;
+    font-size: 16px;
+    color: #262626;
+}
+
+#visitprofileDetails label:last-child {
+    font-size: 14px;
+    color: #737373;
+}
+
+/* Photo Grid */
+#visitprofileContent {
+    flex: 1;
+    padding-bottom: 60px;
+}
+
+#visitimgGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+}
+
+#visitimgGrid div {
+    aspect-ratio: 1/1;
+    position: relative;
+    background-color: #efefef;
+    cursor: pointer;
+}
+
+#visitimgGrid img,
+#visitimgGrid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* About Modal (Bottom Sheet) */
+#visitaboutUserInfoBody {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-radius: 16px 16px 0 0;
+    padding: 20px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 3000;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+#visitaboutUserInfoBody[style*="flex"] {
+    display: flex !important;
+}
+
+#visitaboutUserHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 12px;
+}
+
+#visitaboutUserHead label {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+#visitcloseAboutUser {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    padding: 0;
+    cursor: pointer;
+}
+
+#visitaboutUserInfoBody label {
+    font-size: 14px;
+    color: #262626;
+}
+
+#visitaboutUserInfoBody span {
+    color: #737373;
+    margin-left: 5px;
+}
+
+/* --- Desktop Responsive --- */
+@media (min-width: 1000px) {
+    #visitprofileBody {
+        right: 0;
+        /* Sidebar width */
+        width: calc(100% - 350px);
+        border-left: 1px solid #dbdbdb;
+    }
+
+  
+
+    #visitprofileiconBody,
+    #visitbioBody,
+    #visitprofileDetails {
+        max-width: 935px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #visitimgGrid {
+        max-width: 935px;
+        margin: 30px auto 0 auto;
+        gap: 28px;
+    }
+
+    /* Larger Avatar */
+    #visitchangeProfile {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* Layout Shift */
+    #visitprofileiconBody {
+        padding: 30px;
+        gap: 40px;
+        margin-top: 20px;
+    }
+
+    #visitprofileName {
+        font-size: 28px;
+        font-weight: 300;
+    }
+
+    #visitprofileControl button {
+        padding: 5px 20px;
+        font-weight: 600;
+        border: 1px solid #dbdbdb;
+        background-color: transparent;
+    }
+
+    /* Clean Stats Row */
+    #visitprofileDetails {
+        border: none;
+        justify-content: flex-start;
+        gap: 40px;
+        padding: 0 30px;
+        margin-bottom: 20px;
+    }
+
+    #visitprofileDetails div {
+        flex-direction: row;
+        gap: 5px;
+        flex: 0 0 auto;
+    }
+
+    #visitprofileDetails label:first-child {
+        font-size: 16px;
+    }
+
+    #visitprofileDetails label:last-child {
+        font-size: 16px;
+        color: #262626;
+    }
+
+    /* Center About Modal */
+    #visitaboutUserInfoBody {
+        width: 400px;
+        left: 50%;
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
 }

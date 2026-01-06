@@ -7,4 +7,5 @@ export default function createPostNav() {
     document.getElementById('updateProfilePic').style.display = 'none'
     document.getElementById('visitprofileBody').style = 'display:none'
     document.getElementById('conversationBody').style.display = 'none'
+    document.getElementById('notificationBody').style.display = 'none'
 }

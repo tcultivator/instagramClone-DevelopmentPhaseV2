@@ -1,8 +1,19 @@
+:root {
+    --bg-color: #ffffff;
+    --primary-text-color: rgb(0, 0, 0);
+    --btn-text-color: white;
+    --btn-bg-color-secondary: #4E73C2;
+    --btntoggle-color: rgb(218, 173, 29);
+    --blackTextcolor: black;
+    --border-color: rgb(172, 172, 172);
+    --bg-secondary: rgb(29, 29, 29);
+}
+
 body {
     padding: 0;
     margin: 0;
     font-family: 'Righteous';
-    background-color: rgb(0, 0, 0);
+    background-color: var(--bg-color);
     overflow: hidden;
 
 }
@@ -10,7 +21,7 @@ body {
 #registerForm .logo {
     font-size: 60px;
     font-family: 'Sacramento';
-    color: rgb(255, 255, 255);
+    color: var(--primary-text-color);
     margin-bottom: 40px;
     padding: 0;
 }
@@ -47,7 +58,7 @@ body {
     font-size: 12px;
     cursor: text;
     transition: .1s;
-    color: rgba(255, 255, 255, 0.555);
+    color: var(--primary-text-color);
 }
 
 
@@ -57,11 +68,11 @@ body {
     padding: 20px 10px 10px 10px;
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid rgb(167, 167, 167);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     background-color: transparent;
     color: var(--primary-text-color);
-    color: rgb(255, 255, 255);
+    color: var(--primary-text-color);
 }
 
 #emailBody input:not(:placeholder-shown)~label,
@@ -110,7 +121,7 @@ body {
 }
 
 #haveAcc a {
-    color: rgba(255, 255, 255, 0.644);
+    color: rgb(141, 141, 141);
     font-size: 12px;
     cursor: pointer;
 }
@@ -483,5 +494,5 @@ body {
         width: 30px
     }
 
-   
+
 }
