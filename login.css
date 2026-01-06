@@ -1,9 +1,12 @@
 :root {
-    --bg-color: #FFFFFF;
-    --primary-text-color: rgb(70, 70, 70);
+    --bg-color: #ffffff;
+    --primary-text-color: rgb(0, 0, 0);
     --btn-text-color: white;
     --btn-bg-color-secondary: #4E73C2;
     --btntoggle-color: rgb(218, 173, 29);
+    --blackTextcolor: black;
+    --border-color: rgb(172, 172, 172);
+    --bg-secondary: rgb(29, 29, 29);
 }
 
 
@@ -12,7 +15,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: 'Righteous';
-    background-color: rgb(0, 0, 0);
+    background-color: var(--bg-color);
     overflow: hidden;
 
 }
@@ -35,12 +38,12 @@ body {
 #loginForm .logo {
     font-size: 60px;
     font-family: 'Sacramento';
-    color: rgb(255, 255, 255);
+    color: var(--primary-text-color);
 }
 
 #loginForm #useFB {
     padding: 40px 0px 0px 0px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.555);
+    border-bottom: 1px solid var(--border-color);
     align-items: center;
     justify-content: center;
     display: flex;
@@ -55,11 +58,11 @@ body {
 #loginForm #useFB label {
     bottom: 0;
     position: inherit;
-    background-color: rgb(0, 0, 0);
+    background-color: var(--bg-color);
     padding: 0px 5px;
     text-align: center;
     margin-bottom: -8px;
-    color: rgba(255, 255, 255, 0.555);
+    color: var(--border-color);
     font-size: 12px;
 
 }
@@ -83,7 +86,7 @@ body {
 
 #loginForm #useFB button i {
     color: var(--btn-bg-color-secondary);
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     width: 20px;
     height: 20px;
     font-size: 21px;
@@ -106,7 +109,7 @@ body {
     font-size: 12px;
     cursor: text;
     transition: .1s;
-    color: rgba(255, 255, 255, 0.603);
+    color: var(--primary-text-color);
 }
 
 #usernameBody input,
@@ -114,11 +117,11 @@ body {
     padding: 20px 10px 10px 10px;
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid rgb(167, 167, 167);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     background-color: transparent;
     color: var(--primary-text-color);
-    color: rgb(255, 255, 255);
+    color: var(--primary-text-color);
 }
 
 
@@ -137,12 +140,12 @@ body {
     text-align: right;
     margin: -15px auto auto auto;
     font-size: 13px;
-    
+
     cursor: pointer;
 }
 
 #forgotPassword a {
-    color: rgba(255, 255, 255, 0.644);
+    color: rgb(109, 109, 109);
 }
 
 #btnBody {
@@ -186,7 +189,7 @@ body {
 
 
 #goRegister a {
-    color: rgba(255, 255, 255, 0.644);
+    color: rgb(109, 109, 109);
     font-size: 14px;
 }
 
@@ -277,7 +280,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgb(0, 0, 0);
+    background-color: var(--bg-color);
     width: 100%;
     height: 100%;
     display: flex;
@@ -384,5 +387,5 @@ body {
         width: 30px
     }
 
-   
+
 }

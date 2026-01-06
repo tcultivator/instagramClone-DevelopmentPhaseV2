@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/2820820f6e.js" crossorigin="anonymous"></script>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <script defer src="app.js" type="module"></script>
     <link rel="stylesheet" href="app.css">
     <link href='https://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <title>InstagramClone</title>
 </head>
 
@@ -33,8 +34,7 @@
                     <div class="story-thumbnail">
                         <img id="imageOnaddStory" src="" alt="Your Story">
                         <div id="story-label">
-                            <button type="button" id="createNewStory"><i id="createNewStory"
-                                    class="fa-solid fa-plus"></i></button>
+                            <button type="button" id="createNewStory"><i id="" class="fa-solid fa-plus"></i></button>
                             <input id="inputnewStory" style="display: none;" type="file" accept="image/*,video/*">
                             <label for="">Create Story</label>
                         </div>
@@ -72,7 +72,7 @@
 
     <div id="profileBody" style="display: none;">
         <div id="headProfile">
-            <button type="button" id="backBtnonProfile"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" id="backBtnonProfile"><i class="fa-solid fa-circle-xmark"></i></button>
             <label>Profile</label>
             <button id="settingsInProfile"><i id="gearIcon" class="fa-solid fa-gear"></i></button>
         </div>
@@ -137,7 +137,7 @@
 
     <div id="visitprofileBody" style="display: none;">
         <div id="visitheadProfile">
-            <button type="button" id="visitbackBtnonProfile"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" id="visitbackBtnonProfile"><i class="fa-solid fa-circle-xmark"></i></button>
             <label>Profile</label>
         </div>
         <div id="visitprofileiconBody">
@@ -197,19 +197,46 @@
 
     <div id="createPost" style="display: none;">
         <button id="closeCreatePost"><i class="fa-solid fa-xmark"></i></button>
+
         <form id="uploadForm" enctype="multipart/form-data">
-            <h2>Create new Post</h2>
-            <div id="createPostUploaded">
-                <input style="display: none;" id="fileUp" type="file" name="media" accept="image/*,video/*" required>
-                <i id="uploadNewFileForPost" class="fa-solid fa-images"></i>
-                <div id="preview"></div>
+            <!-- Header -->
+            <div class="create-post-header">
+                <h2>Create new Post</h2>
+                <button type="submit" id="headerShareBtn">Share</button>
             </div>
 
-            <div id="createPostControl">
-                <input id="caption" type="text" placeholder="Enter caption">
-                <button type="submit">Upload</button>
-            </div>
+            <div class="create-post-body">
+                <!-- Left Side: Media -->
+                <div id="createPostUploaded">
+                    <input style="display: none;" id="fileUp" type="file" name="media" accept="image/*,video/*"
+                        required>
 
+                    <div class="upload-placeholder">
+                        <i id="uploadNewFileForPost" class="fa-regular fa-images"></i>
+                        <p>Drag photos and videos here</p>
+                        <button type="button" class="select-btn"
+                            onclick="document.getElementById('fileUp').click()">Select from computer</button>
+                    </div>
+
+                    <div id="preview"></div>
+                </div>
+
+                <!-- Right Side: Controls (Caption) -->
+                <div id="createPostControl">
+                    <div class="user-info-placeholder">
+                        <!-- You can inject the user's profile pic here via JS if you want, 
+                         for now we simulate the spacing -->
+                        <div class="avatar-skeleton"></div>
+                        <span class="username-skeleton">Caption</span>
+                    </div>
+                    <input id="caption" type="text" placeholder="Write a caption..." autocomplete="off">
+                    <div class="emoji-spacer"><i class="fa-regular fa-face-smile"></i></div>
+
+                    <!-- The original submit button is hidden visually but kept for form submission logic if needed, 
+                     or styled to look like the mobile bottom button -->
+                    <button type="submit" id="mobileSubmitBtn">Share</button>
+                </div>
+            </div>
         </form>
     </div>
 
@@ -269,7 +296,7 @@
 
     <div id="showFollowersBody" style="display: none;">
         <div id="showFollowersHead">
-            <button id="closeShowFollowers"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="closeShowFollowers"><i class="fa-solid fa-circle-xmark"></i></button>
             <label id="showFollowersBodyLabel">Followers</label>
         </div>
         <div id="showFollowersContent">
@@ -280,13 +307,20 @@
 
     <div id="addNewStory" style="display: none;">
         <div id="addNewStoryBody">
-            <label for="">Create New Story</label>
-            <div id="storyPreview"></div>
-            <div id="storyControl">
+            <!-- Header -->
+            <div class="story-create-header">
                 <button id="closeAddStory"><i class="fa-solid fa-xmark"></i></button>
-                <button id="submitStory">Share</button>
+                <label>New Story</label>
+                <div style="width: 32px;"></div> <!-- Spacer to center title -->
             </div>
 
+            <!-- Preview Area (Media injected here by JS) -->
+            <div id="storyPreview"></div>
+
+            <!-- Footer -->
+            <div id="storyControl">
+                <button id="submitStory">Share to Story</button>
+            </div>
         </div>
     </div>
 
@@ -361,7 +395,7 @@
 
     <div id="editProfileInfo" style="display: none;">
         <div id="headerInProfile">
-            <button id="closeEditProfileInfo"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="closeEditProfileInfo"><i class="fa-solid fa-circle-xmark"></i></button>
             <label for="">Edit Profile Info</label>
         </div>
         <div id="contentOfprofileInfo">
@@ -398,48 +432,58 @@
 
     <div id="searchBody" style="display: none;">
         <div id="searchHeader">
+            <label>Search</label>
             <div id="searchContent">
-                <input id="searchInput" type="text">
-                <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+                <!-- Icon is decorative here -->
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="searchInput" type="text" placeholder="Search" autocomplete="off">
+                <!-- Hidden button to keep JS working but rely on AutoSearch or Enter key -->
+                <button id="searchBtn" style="display: none;"></button>
             </div>
-            <button id="closeSearchWindow"><i class="fa-solid fa-xmark"></i></button>
+            <!-- Close button positioned absolute in CSS -->
+            <button id="closeSearchWindow"><i class="fa-solid fa-circle-xmark"></i></button>
         </div>
 
-        <div id="searchLoadingMessage" style="display: none;">Searching....
+        <div id="searchLoadingMessage" style="display: none;">
+            <div class="spinner"></div>
         </div>
 
         <div id="searchResultsBody">
             <div id="searchResults">
-
+                <!-- Results injected here -->
             </div>
         </div>
-
     </div>
 
 
 
     <div id="messageBody" style="display: none;">
+        <!-- Header -->
         <div id="messageHeader">
-            <button><i class="fa-solid fa-chevron-left" id="closeMessageBody"></i></button>
-            <label>Message</label>
-            <button id="submitMessageSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button id="closeMessageBody"><i class="fa-solid fa-circle-xmark"></i></button>
+            <label>Messages</label>
+            <button id="submitMessageSearch"><i class="fa-regular fa-pen-to-square"></i></button>
         </div>
 
+        <!-- Message Requests Link -->
         <div id="messageRequestButtonBody">
-            <button id="openMessageRequest"><i id="reqmesIcon" class="fa-regular fa-message"></i><sup
-                    id="newMessReqIndicator"></sup> Message
-                Requests</button>
+            <button id="openMessageRequest">
+                <span>Message Requests</span>
+                <sup id="newMessReqIndicator" style="display: none;"></sup>
+                <i id="reqmesIcon" class="fa-solid fa-chevron-right" style="font-size: 14px; color: #dbdbdb;"></i>
+            </button>
         </div>
+
+        <!-- Conversation List -->
         <div id="listOfconvoBody">
-
+            <!-- Content injected by JS -->
         </div>
-
     </div>
 
 
     <div id="conversationBody" style="display: none;">
         <div id="conversationHeader">
-            <button id="closeconversationBody"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="closeconversationBody"><i class="fa-solid fa-circle-xmark"></i></button>
             <label id="usernameInconversationHeader">Username</label>
             <button id="deleteConvo"><i class="fa-solid fa-trash"></i></button>
         </div>
@@ -467,6 +511,8 @@
         </div>
     </div>
 
+    
+
     <div id="fileImageWantToSendPreview" style="display: none;">
         <label for="">Preview</label>
         <div id="ImgPreview">
@@ -479,9 +525,11 @@
 
     </div>
 
+
+
     <div id="notificationBody" style="display: none;">
         <div id="notificationHeader">
-            <button id="closeNotification"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="closeNotification"><i class="fa-solid fa-circle-xmark"></i></button>
             <label for="">Notification</label>
         </div>
         <div id="markAllReadBody">
@@ -499,7 +547,7 @@
 
     <div id="messageRequestBody" style="display: none;">
         <div id="messageRequestHeader">
-            <button id="closeMessageRequest"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="closeMessageRequest"><i class="fa-solid fa-circle-xmark"></i></button>
             <label for="">Message Requests</label>
         </div>
         <div id="messageRequestContents">

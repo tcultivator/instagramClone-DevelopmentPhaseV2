@@ -174,6 +174,7 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', async (e) => {
     if (e.target.matches('#storyViewCount')) {
+        console.log('na click ung viewCount')
         displayAllStoryViewer()
     }
 })

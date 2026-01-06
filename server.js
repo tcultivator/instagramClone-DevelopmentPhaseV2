@@ -26,13 +26,13 @@ app.use(cors({
 app.use(cookieparser())
 let port = 8080
 const db = mysql.createConnection({
-     host: process.env.DB_HOST,
+    host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 })
-const secret = 'test'
+
 db.connect((err) => {
     if (err) {
         console.log('database is not connected')
@@ -44,8 +44,10 @@ db.connect((err) => {
 
 
 
+
+
 io.on('connection', (socket) => {
-   const tokenFromCookies = socket.handshake.headers.cookie;
+    const tokenFromCookies = socket.handshake.headers.cookie;
     let verifiedToken;
     if (tokenFromCookies) {
         const parsedCookies = require('cookie').parse(tokenFromCookies);
@@ -86,7 +88,7 @@ io.on('connection', (socket) => {
         })
     })
 
-   socket.on('seenThisMessage', ({ recieverId, loginUserId }) => {
+    socket.on('seenThisMessage', ({ recieverId, loginUserId }) => {
         console.log('eto ung sa seen galing sa emit')
         io.to(recieverId).emit('userSeenThisMessage', {
             testMessage: 'hahahahahaha',
@@ -94,7 +96,7 @@ io.on('connection', (socket) => {
             newLoginUserId: loginUserId
         })
     })
-     socket.on('sendRealTimeNotification', ({ recieverId }) => {
+    socket.on('sendRealTimeNotification', ({ recieverId }) => {
         io.to(recieverId).emit('sendRealtimeNotifFromServer', { recieverId })
     })
 });
@@ -102,44 +104,44 @@ io.on('connection', (socket) => {
 
 
 app.post('/loginReq', (req, res) => {
-  const { username, password } = req.body;
+    const { username, password } = req.body;
 
-  const query = 'SELECT * FROM accounts WHERE email = ? AND password = ?';
-  console.log('DEBUG: /loginReq called with:', username, password);
+    const query = 'SELECT * FROM accounts WHERE email = ? AND password = ?';
+    console.log('DEBUG: /loginReq called with:', username, password);
 
-  db.query(query, [username, password], (err, results) => {
-    console.log('DEBUG: db.query callback fired');
+    db.query(query, [username, password], (err, results) => {
+        console.log('DEBUG: db.query callback fired');
 
-    if (err) {
-      console.error('DB error on loginReq:', err);       // log database error
-      return res.status(500).json({ message: 'Server error' });
-    }
+        if (err) {
+            console.error('DB error on loginReq:', err);       // log database error
+            return res.status(500).json({ message: 'Server error' });
+        }
 
-    console.log('DEBUG: results =', results);
+        console.log('DEBUG: results =', results);
 
-    if (!Array.isArray(results) || results.length === 0) {
-      console.log('DEBUG: no user found or wrong credentials');
-      return res.status(401).json({ message: 'Error Login' });
-    }
+        if (!Array.isArray(results) || results.length === 0) {
+            console.log('DEBUG: no user found or wrong credentials');
+            return res.status(401).json({ message: 'Error Login' });
+        }
 
-    const user = results[0];
-    console.log('DEBUG: user found:', user);
+        const user = results[0];
+        console.log('DEBUG: user found:', user);
 
-    const token = jwt.sign(
-      { userID: user.id, username: user.username },
-      process.env.JWT_TOKEN_SECRET_KEY,
-      { expiresIn: '1h' }
-    );
+        const token = jwt.sign(
+            { userID: user.id, username: user.username },
+            process.env.JWT_TOKEN_SECRET_KEY,
+            { expiresIn: '1h' }
+        );
 
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none'
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        });
+
+        console.log('DEBUG: login success — token issued');
+        return res.status(200).json({ message: 'Success login' });
     });
-
-    console.log('DEBUG: login success — token issued');
-    return res.status(200).json({ message: 'Success login' });
-  });
 });
 
 
@@ -180,7 +182,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
             res.status(400).json({ message: 'error uploading' })
         } else {
             const query = 'INSERT INTO images (username,caption,secure_url,public_id,userId,likeCount,commentCount,userProfile) VALUES (?,?,?,?,?,?,?,?)'
-            db.query(query, [username, caption, result.secure_url, result.public_id, userId,0,0,userProfile], (err, result) => {
+            db.query(query, [username, caption, result.secure_url, result.public_id, userId, 0, 0, userProfile], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error uploading' })
                 } else {
@@ -507,7 +509,7 @@ app.post('/uploadStory', upload.single('image'), (req, res) => {
             const date = new Date()
             const formattedDate = date.toISOString().split('T')[0];
             const query = 'INSERT INTO story (userId,username,secure_url,datePosted,viewCount)VALUES(?,?,?,?,?)'
-            db.query(query, [userId, username, result.secure_url, formattedDate,0], (err, result) => {
+            db.query(query, [userId, username, result.secure_url, formattedDate, 0], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting to database' })
                 } else {
@@ -530,6 +532,10 @@ app.post('/getStories', (req, res) => {
         }
     })
 })
+
+
+
+
 
 app.post('/getStoryViewCount', (req, res) => {
     const storyId = req.body.idOfElemt;
@@ -638,7 +644,7 @@ app.post('/changeUserInfo', authenticate, (req, res) => {
     const age = req.body.age
     const bio = req.body.bio
     const query = 'UPDATE accounts SET username = ? , email = ? , address = ? , age = ? , bio = ? WHERE id = ?'
-    db.query(query, [username,email,address,age,bio, userId], (err, result) => {
+    db.query(query, [username, email, address, age, bio, userId], (err, result) => {
         console.log('eto 2')
         if (err) {
             res.status(400).json({ message: 'error update username' })
@@ -751,25 +757,24 @@ app.post('/submitPersonalInfo', (req, res) => {
 
 
 function sendMail(to, subject, htmlMessage) {
-  const msg = {
-    to: to,
-    from: process.env.NODEMAILER_USER, // this must be a verified sender in SendGrid
-    subject: subject,
-    html: htmlMessage,
-  };
+    const msg = {
+        to: to,
+        from: 'lpanahon06@gmail.com', // this must be a verified sender in SendGrid
+        subject: subject,
+        html: htmlMessage,
+    };
 
- sgMail
-  .send(msg)
-  .then(response => {
-    console.log('Email sent; status:', response[0].statusCode);
-  })
-  .catch(error => {
-    console.error('SendGrid send error:', error);
-    res.status(500).json({ message: 'Failed to send verification email', error });
-  });
+    sgMail
+        .send(msg)
+        .then(response => {
+            console.log('Email sent; status:', response[0].statusCode);
+        })
+        .catch(error => {
+            console.error('SendGrid send error:', error);
+            res.status(500).json({ message: 'Failed to send verification email', error });
+        });
 
 }
-
 
 
 app.post('/submitRegister', (req, res) => {
@@ -778,7 +783,7 @@ app.post('/submitRegister', (req, res) => {
     const password = req.body.postRegisterPassword;
     const defaultProfileImage = 'https://res.cloudinary.com/debbskjyl/image/upload/v1752751427/default_gulcfq.jpg';
     const query = 'INSERT INTO accounts (username,email,password,profileImage,address,age,bio,follower,following,userProfile) VALUES (?,?,?,?,?,?,?,?,?,?)'
-    db.query(query, [username, email, password,defaultProfileImage,'Not set',0,'Not set',0,0,'none'], (err, result) => {
+    db.query(query, [username, email, password, defaultProfileImage, 'Not set', 0, 'Not set', 0, 0, 'none'], (err, result) => {
         if (err) {
             res.status(400).json({ message: 'error registering' })
         } else {
@@ -953,7 +958,7 @@ app.post('/sendNewMessage', (req, res) => {
         } else {
             const recieverImage = result[0].profileImage
             const query2 = 'INSERT INTO messages (senderId,senderImage,senderUsername,recieverId,recieverImage,message,seen) VALUES (?,?,?,?,?,?,?)'
-            db.query(query2, [loginUserId, loginProfileimage, senderUsername, recieverId, recieverImage, message,false], (err, result) => {
+            db.query(query2, [loginUserId, loginProfileimage, senderUsername, recieverId, recieverImage, message, false], (err, result) => {
                 if (err) {
                     res.status(400).json({ message: 'error inserting message' })
                 } else {
@@ -1022,7 +1027,7 @@ app.post('/sendThisFileMessage', upload.single('image'), (req, res) => {
                     res.status(400).json({ message: 'error sending file message' })
                 } else {
                     const query2 = 'INSERT INTO messages (senderId,senderImage,senderUsername,recieverId,recieverImage,message,seen) VALUES (?,?,?,?,?,?,?)'
-                    db.query(query2, [loginUserId, loginProfileimage, loginUsername, recieverId, recieverImage, fileMessageUrl,false], (err, result) => {
+                    db.query(query2, [loginUserId, loginProfileimage, loginUsername, recieverId, recieverImage, fileMessageUrl, false], (err, result) => {
                         if (err) {
                             res.status(400).json({ message: 'cannot inserting your message!' })
                         } else {

@@ -9,4 +9,5 @@ export default function messageNav() {
     document.getElementById('viewPostBody').style.display = 'none'
     document.getElementById('searchBody').style.display = 'none'
     document.getElementById('conversationBody').style.display = 'none'
+    document.getElementById('notificationBody').style.display = 'none'
 }
