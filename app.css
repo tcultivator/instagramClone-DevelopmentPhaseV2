@@ -1583,7 +1583,7 @@ emoji-picker {
     /* Push down from header */
     padding: 10px 0;
     width: 100%;
-    max-width: 470px;
+    max-width: 700px;
     /* var(--max-content-width) */
     box-sizing: border-box;
     position: relative;
@@ -1753,7 +1753,7 @@ emoji-picker {
     border: 1px solid #dbdbdb;
     border-radius: 8px;
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     /* Standard IG Web Feed Width */
     margin-bottom: 16px;
     display: flex;
@@ -4713,3 +4713,4 @@ emoji-picker {
     }
 
 }
+
