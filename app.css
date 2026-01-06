@@ -1753,7 +1753,7 @@ emoji-picker {
     border: 1px solid #dbdbdb;
     border-radius: 8px;
     width: 100%;
-    max-width: 470px;
+    max-width: 600px;
     /* Standard IG Web Feed Width */
     margin-bottom: 16px;
     display: flex;
@@ -4711,4 +4711,5 @@ emoji-picker {
         border-radius: 12px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     }
+
 }
