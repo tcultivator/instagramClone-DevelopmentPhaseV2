@@ -34,3 +34,51 @@ The platform also supports real-time updates, notifications, and a personalized 
 - MySQL
 
 ---
+
+## 📸 Screenshots
+<p align="center">
+  <img src="/assets/instagang/wall.png" alt="" width="300" />
+  <br/>
+  <em>Instagang Home / Wall</em>
+</p>
+
+---
+
+<p align="center">
+  <img src="/assets/instagang/comments.png" alt="" width="300" />
+  <br/>
+  <em>Instagang Comments on Post</em>
+</p>
+
+---
+
+<p align="center">
+  <img src="/assets/instagang/stories.png" alt="" width="300" />
+  <br/>
+  <em>Instagang Stories</em>
+</p>
+
+---
+
+<p align="center">
+  <img src="/assets/instagang/messages.png" alt="s" width="300" />
+  <br/>
+  <em>Instagang Messages</em>
+</p>
+
+---
+
+<p align="center">
+  <img src="/assets/instagang/createPost.png" alt="" width="300" />
+  <br/>
+  <em>Instagang Create Post</em>
+</p>
+
+---
+
+<p align="center">
+  <img src="/assets/instagang/profile.png" alt="" width="300" />
+  <br/>
+  <em>Instagang Profile</em>
+</p>
+
